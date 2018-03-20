@@ -1,2 +1,1 @@
-<!--app/page/overview/overview.wxml-->
-<text>app/page/overview/overview.wxml</text>
+<navigator url="../my-store/my-store" hover-class="navigator-hover">点击：进入我的店铺</navigator>
