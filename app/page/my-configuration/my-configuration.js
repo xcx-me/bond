@@ -1,18 +1,15 @@
-// app/page/overview/overview.js
+// app/page/my-configuration/my-configuration.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    storeRegistered: false
+  
   },
-
-  registerStore: function () {
-    console.log('register...')
-    this.setData({
-      storeRegistered: true
-    })
+  
+  navigateBack: function () {
+    wx.navigateBack()
   },
 
   /**

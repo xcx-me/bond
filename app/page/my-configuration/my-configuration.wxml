@@ -1,0 +1,4 @@
+<view>
+  <text>我的信息</text>
+  <button type='primary' bindtap='navigateBack'>返回</button>
+</view>
