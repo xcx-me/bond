@@ -1,1 +1,13 @@
-/* app/page/overview/overview.wxss */
+.overview-page {
+  border: 1rpx solid red;
+}
+
+.overview-page .summary {
+  border: 1rpx solid blue;
+  height: 300rpx;
+}
+
+.overview-page .recent-notice {
+  border: 1rpx solid pink;
+  height: 400rpx;
+}
