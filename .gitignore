@@ -1,0 +1,14 @@
+public/
+node_modules/
+.idea/
+.vscode/
+npm-debug.log
+debug.log
+server-simulator-localhost/report.html
+coverage/
+complexity/
+package-lock.json
+.DS_Store
+.history/
+.cache/
+temp/
