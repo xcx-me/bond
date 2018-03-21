@@ -1,18 +1,21 @@
-// app/page/my-store/my-store.js
+// app/page/store/store.js
+var common = require('../../util/common.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    isMyStore: false,
+    sellerName: '销售名字'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+   
+    
   },
 
   /**
@@ -26,14 +29,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    common.sayHello('rita')
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    common.sayGoodbye('rita')
   },
 
   /**

@@ -3,7 +3,7 @@
     "app/page/overview/overview",
     "app/page/market/market",
     "app/page/administration/administration",
-    "app/page/my-store/my-store"
+    "app/page/store/store"
   ],
   "window": {
     "backgroundTextStyle": "light",
