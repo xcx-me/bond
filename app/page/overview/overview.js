@@ -5,7 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    storeRegistered: false
+  },
+
+  registerStore: function () {
+    console.log('register...')
+    this.setData({
+      storeRegistered: true
+    })
   },
 
   /**

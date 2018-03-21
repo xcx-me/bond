@@ -1,1 +1,15 @@
-<navigator url="../my-store/my-store" hover-class="navigator-hover">点击：进入我的店铺</navigator>
+<view>
+  <view class='summary'>
+    Summary Panel
+  </view>
+  <view class='recent-notice'>
+
+    <view wx:if='{{storeRegistered}}'>
+      <navigator url='../my-store/my-store'>进入我的店铺</navigator>
+    </view>
+
+    <view wx:else>
+      <button type='primary' bindtap='registerStore'>立马开店</button>
+    </view>
+  </view>
+</view>
