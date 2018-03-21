@@ -1,10 +1,14 @@
 .overview-page {
-  border: 1rpx solid red;
+  background-color: #F1F1F1;
+  padding: 20rpx 20rpx 0 20rpx;
+}
+
+.overview-page .pallet {
+  background: #FFFFFF;
 }
 
 .overview-page .summary {
-  border: 1rpx solid blue;
-  height: 300rpx;
+  padding: 10px;
 }
 
 .overview-page .summary .name-pallet .person-name {
@@ -15,7 +19,35 @@
   font-size: small;
 }
 
+.overview-page .summary .statistics-pallet {
+  border-top: 1rpx solid #CCCCCC;
+  overflow: auto;
+}
+
+.overview-page .summary .statistics-pallet .item {
+    width: 25%;
+    float: left;
+}
+
+.overview-page .summary .statistics-pallet .has-splite {
+	width: calc(25% - 1px);
+}
+
+.overview-page .summary .statistics-pallet .split-item {
+	border-left:1px solid #CCCCCC;
+	width:0;
+	height:60rpx;
+	background-color:#CCCCCC;
+	position: relative;
+	top: 20rpx;
+}
+
+.overview-page .summary .statistics-pallet .item text {
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+
 .overview-page .recent-notice {
-  border: 1rpx solid pink;
-  height: 400rpx;
+  margin-top: 20rpx;
 }
