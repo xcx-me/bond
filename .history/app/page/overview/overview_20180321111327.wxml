@@ -1,5 +1,2 @@
-<<<<<<< HEAD
-<navigator url="../store/store" hover-class="navigator-hover">点击：进入我的店铺</navigator>
-=======
 
->>>>>>> 1843196b04cdca00254da4a7bb589eecd0e6824d
+<navigator url="../store/store" hover-class="navigator-hover">点击：进入我的店铺</navigator>

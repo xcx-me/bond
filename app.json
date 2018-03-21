@@ -3,7 +3,8 @@
     "app/page/overview/overview",
     "app/page/market/market",
     "app/page/administration/administration",
-    "app/page/store/store"
+    "app/page/store/store",
+    "app/page/my-configuration/my-configuration"
   ],
   "window": {
     "backgroundTextStyle": "light",
