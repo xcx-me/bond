@@ -7,7 +7,7 @@ Page({
    */
   data: {
     isMyStore: false,
-    sellerName: '销售名字'
+    sellerName: '销售XX'
   },
 
   /**
