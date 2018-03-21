@@ -7,6 +7,14 @@
   height: 300rpx;
 }
 
+.overview-page .summary .name-pallet .person-name {
+  font-size: xx-large;
+}
+
+.overview-page .summary .name-pallet .agency-name {
+  font-size: small;
+}
+
 .overview-page .recent-notice {
   border: 1rpx solid pink;
   height: 400rpx;
