@@ -1,0 +1,3 @@
+<!--app/page/store/store.wxml-->
+<text wx:if="{{isMyStore}}">我的店铺</text>
+<text wx:else>{{sellerName}}的店铺</text>
