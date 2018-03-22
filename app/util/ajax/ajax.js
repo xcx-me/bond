@@ -1,13 +1,21 @@
 const Promise = require('./es6-promise').Promise
+const Environment = require('./environment')
 
 function request (config, data) {
-	return new Promise((resolve, reject, ajaxHandle) => {
+	let url = Environment.withDomain(config.url)
+	let appletreeKey = Environment.TARGET_SERVER.cookie
+
+	return new Promise((resolve, reject) => {
 		wx.request({
-			url: config.url,
+			url: url,
 			method: config.method,
 			data: data,
 			success: resolve,
-			fail: reject
+			fail: reject,
+			header: {
+				'content-type': 'application/json', // 默认值
+				'cookie': appletreeKey
+			},
 		})
 	})
 }
