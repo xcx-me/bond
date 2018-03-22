@@ -1,37 +1,38 @@
 {
-  "pages": [
-    "app/page/overview/overview",
-    "app/page/market/market",
-    "app/page/administration/administration",
-    "app/page/store/store",
-    "app/page/my-configuration/my-configuration"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "QTrade一级债",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "app/page/overview/overview",
-        "iconPath": "app/asset/image/icon_component.png",
-        "selectedIconPath": "app/asset/image/icon_component_HL.png",
-        "text": "概览"
-      },
-      {
-        "pagePath": "app/page/market/market",
-        "iconPath": "app/asset/image/icon_API.png",
-        "selectedIconPath": "app/asset/image/icon_API_HL.png",
-        "text": "市场"
-      },
-      {
-        "pagePath": "app/page/administration/administration",
-        "iconPath": "app/asset/image/icon_API.png",
-        "selectedIconPath": "app/asset/image/icon_API_HL.png",
-        "text": "管理"
-      }
-    ]
-  }
+	"pages": [
+		"app/page/overview/overview",
+		"app/page/market/market",
+		"app/page/administration/administration",
+		"app/page/my-store/my-store",
+		"app/page/my-configuration/my-configuration",
+		"app/page/quotation/quotation"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "QTrade一级债",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath": "app/page/overview/overview",
+				"iconPath": "app/asset/image/icon_component.png",
+				"selectedIconPath": "app/asset/image/icon_component_HL.png",
+				"text": "概览"
+			},
+			{
+				"pagePath": "app/page/market/market",
+				"iconPath": "app/asset/image/icon_API.png",
+				"selectedIconPath": "app/asset/image/icon_API_HL.png",
+				"text": "市场"
+			},
+			{
+				"pagePath": "app/page/administration/administration",
+				"iconPath": "app/asset/image/icon_API.png",
+				"selectedIconPath": "app/asset/image/icon_API_HL.png",
+				"text": "管理"
+			}
+		]
+	}
 }

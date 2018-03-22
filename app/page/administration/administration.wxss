@@ -1,1 +1,12 @@
 /* app/page/administration/administration.wxss */
+
+.bond-send-quote {
+	width:100rpx;
+	height:100rpx;
+	border-radius:50%;
+	position:absolute;
+	right:50rpx;
+	bottom:50rpx;
+	background-color: #2196F3;
+	color: #FFFFFF;
+}
