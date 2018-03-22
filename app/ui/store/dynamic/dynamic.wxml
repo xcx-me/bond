@@ -1,0 +1,11 @@
+<!--app/ui/store/dynamic/dynamic.wxml-->
+<view class='store-dynamic-component'>
+	<text class='title'>最新动态</text>
+	<view class='dynamic-list'>
+		<view wx:for="{{daynamicList}}" wx:for-index="index" wx:for-item="daynamic" wx:key="bond_id">
+			<text>{{index + 1}}、</text>
+			<navigator url='../../../page/detail/detail'>{{daynamic.bond_simple_name}}</navigator>
+			<text>有最新提问</text>
+		</view>
+	</view>
+</view>

@@ -8,8 +8,8 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.93",
-	"appid": "wx6f9484fb79cea2b2",
+	"libVersion": "1.9.91",
+	"appid": "touristappid",
 	"projectname": "bond",
 	"isGameTourist": false,
 	"condition": {

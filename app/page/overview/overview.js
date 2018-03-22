@@ -1,51 +1,74 @@
 // app/page/overview/overview.js
-const statisticsFieldsList = [
-  { name: 'history_bond', label: '历史债券', hasSplitLine: false},
-  { name: 'onsale_bond', label: '在售债券', hasSplitLine: true},
-  { name: 'click_num', label: '点击量', hasSplitLine: false},
-  { name: 'share_num', label: '已经分享', hasSplitLine: false }
-]
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    storeRegistered: false,
-    statisticsFieldsList: statisticsFieldsList,
-    storeDetail: { 
-      history_bond: "0", 
-      onsale_bond: "0", 
-      click_num: "0", 
-      share_num: "0"
-    }
+    storeRegistered: true,
+	checkboxItems: [{name: 'isAgreedQtrade', value: '1', checked: 'true'}],
+	isAgreedQtrade: true,
+	storeDetail:  { 
+		history_bond: "0", 
+		onsale_bond: "0", 
+		click_num: "0", 
+		share_num: "0"
+	},
+	daynamicList:  []
   },
 
-  registerStore: function () {
-    console.log('register...')
-    this.setData({
-      storeRegistered: true
-    })
-  },
+  doRequest: function () {
+	request(config.EXAMPLE.getSometing, {}).then((result) => {
+		wx.showToast({
+			title: '请求成功',
+			icon: 'success',
+			mask: true,
+			duration: 2000
+		})
+		console.log('request success', result)
+	}).catch((error) => {
+		// Do something...
+	})
+},
 
   getStoreDetail: function () {
     this.setData({
       storeDetail: {
-        history_bond: "25",
-        onsale_bond: "16",
-        click_num: "261",
-        share_num: "2"
+        history_bond: "251",
+        onsale_bond: "6666",
+        click_num: "8888",
+        share_num: "99999"
       }
     })
+  },
+
+  getStoreDynamics: function () {
+	this.setData({
+		daynamicList: [
+			{bond_simple_name: "22", bond_id: "2535a86e7b0225cb0345d1afd33e1483"},
+			{bond_simple_name: "22LKI", bond_id: "b1f3e6f3188feb7c5466070bc727e2a5"},
+			{bond_simple_name: "22i", bond_id: "8ce7a3977c1fafd128c1af75fdac8e72"},
+			{bond_simple_name: "债券简称1", bond_id: "36b5969fe0ef5a153a1121cb9e194908"}
+		]
+	})
+  },
+
+  checkboxChange: function (e) {
+	this.setData({
+		isAgreedQtrade: e.detail.value.length > 0
+	})
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log('onloading.....', options)
-    this.getStoreDetail()
+	this.getStoreDetail()
+	if (this.data.isAgreedQtrade) {
+		this.getStoreDynamics()
+	}
   },
 
   /**

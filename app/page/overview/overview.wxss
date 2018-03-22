@@ -1,8 +1,8 @@
 .overview-page {
-  background-color: #F1F1F1;
+  height: 100%;
   padding: 20rpx 20rpx 0 20rpx;
+  background-color: #F1F1F1;
 }
-
 .overview-page .pallet {
   background: #FFFFFF;
 }
@@ -15,36 +15,44 @@
 .overview-page .summary .name-pallet .agency-name {
   font-size: small;
 }
-
 .overview-page .summary .statistics-pallet {
   border-top: 1rpx solid #CCCCCC;
-  overflow: auto;
 }
-
-.overview-page .summary .statistics-pallet .item {
-    width: 25%;
-    float: left;
-}
-
-.overview-page .summary .statistics-pallet .has-splite {
-	width: calc(25% - 1px);
-}
-
-.overview-page .summary .statistics-pallet .split-item {
-	border-left:1px solid #CCCCCC;
-	width:0;
-	height:60rpx;
-	background-color:#CCCCCC;
-	position: relative;
-	top: 20rpx;
-}
-
-.overview-page .summary .statistics-pallet .item text {
-  width: 100%;
-  float: left;
-  text-align: center;
-}
-
 .overview-page .recent-notice {
   margin-top: 20rpx;
+}
+.overview-page .recent-notice .register-store {
+  padding: 10px;
+  text-align: center;
+}
+.overview-page .recent-notice .register-store .tips {
+  height: 200rpx;
+  position: relative;
+}
+.overview-page .recent-notice .register-store .tips text {
+  position: relative;
+  top: 40%;
+}
+.overview-page .recent-notice .shop-button {
+  background-color: #2196F3;
+}
+.overview-page .recent-notice .button-hover {
+  background-color: #1A7DD4;
+}
+.overview-page .recent-notice .protocol {
+  font-size: small;
+  position: relative;
+  margin-top: 20rpx;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.overview-page .recent-notice .protocol checkbox {
+  position: relative;
+  top: -2px;
+}
+.overview-page .recent-notice .protocol .to-qtrade-protocol {
+  color: #2196F3;
+  text-decoration: underline;
 }
