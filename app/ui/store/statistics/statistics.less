@@ -1,0 +1,35 @@
+.store-statistics-component {
+	padding: 10px 0;
+	overflow: hidden;
+
+	.item {
+		width: 25%;
+		float: left;
+
+		&.has-splite {
+			width: calc(~'25% - 1px');
+		}
+
+		&.split-item {
+			border-left:1px solid #CCCCCC;
+			width:0;
+			height:60rpx;
+			background-color:#CCCCCC;
+			position: relative;
+			top: 20rpx;
+		}
+
+		text {
+			width: 100%;
+			float: left;
+			text-align: center;
+		}
+
+		.overflow-ellipsis {
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+				white-space: nowrap;
+		}
+	}
+}
