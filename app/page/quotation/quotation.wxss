@@ -1,5 +1,5 @@
 
-.send-quote-form .checkbox {
+.send-quote-page .checkbox {
 	/* width: 100rpx; */
 }
 
