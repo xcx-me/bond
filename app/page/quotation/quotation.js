@@ -1,27 +1,34 @@
 // app/page/quotation/quotation.js
+
+const bondType = [
+	{name: '101', value: 'NCD'},
+	// {name: '102', value: '政金债', checked: 'true'},
+	{name: '103', value: '商行债'},
+	{name: '104', value: '次级债'},
+	{name: '105', value: '其他金融债'},
+	{name: '106', value: 'ABS'},
+	{name: '107', value: '公司债'},
+	{name: '108', value: '小公募'},
+	{name: '109', value: 'SCP'},
+]
+
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
-	 
-
 	data: {
-		items: [
-			{name: '101', value: 'NCD'},
-			// {name: '102', value: '政金债', checked: 'true'},
-			{name: '103', value: '商行债'},
-			{name: '104', value: '次级债'},
-			{name: '105', value: '其他金融债'},
-			{name: '106', value: 'ABS'},
-			{name: '107', value: '公司债'},
-			{name: '108', value: '小公募'},
-			{name: '109', value: 'SCP'},
-		],
+		isOpenMyShop: false,
+		items: bondType,
 		itemsCheckedValue: '',
-
 		casArray: ['利随本清', '固定利率', '浮动利率', '累积利率'],
 		casIndex: -1
+	},
+
+	openMyShop: function () {
+		this.setData({
+			isOpenMyShop: true
+		})
 	},
 
 	checkboxChange: function(e) {

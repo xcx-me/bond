@@ -1,29 +1,40 @@
-<view class="send-quote-form">
-	发布报价form
-	<view>
-		1111
-	</view>
-	<view>
-		222
-	</view>
-	<view>
-		<view class="bond-type">债券品种：{{itemsCheckedValue}}</view>
-		<checkbox-group bindchange="checkboxChange">
-			<view class="checkbox" wx:for="{{items}}">
-				<checkbox wx:key="" value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+<import src="../form-viewer-editor/form-viewer-editor"></import>
+
+<view class="send-quote-page">
+	<view class="quotation-form" wx:if="{{isOpenMyShop}}">
+
+		<template is="form-viewer-editor" />
+
+		<view>
+			111
+		</view>
+		<view>
+			222
+		</view>
+		<view>
+			<text class="bond-type">债券品种：{{itemsCheckedValue}}</text>
+			<checkbox-group bindchange="checkboxChange">
+				<view class="checkbox" wx:for="{{items}}">
+					<checkbox wx:key="" value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+				</view>
+			</checkbox-group>
+		</view>
+
+		<view class="row-wrap">
+			<text class="label">利率方式：</text>
+			<picker bindchange="bindCasPickerChange" value="{{casIndex1}}" range="{{casArray}}">
+				<view class="select-button">
+					<text>{{casArray[casIndex]}}</text>
+				</view>
+			</picker>
+			<view class="section {{reply?'on':'off'}}">
+				<input name="other" placeholder="请输入" type="text"/>
 			</view>
-		</checkbox-group>
+		</view>
 	</view>
 
-	<view class="row-wrap">
-		<view class="label">利率方式：</view>
-		<picker bindchange="bindCasPickerChange" value="{{casIndex1}}" range="{{casArray}}">
-			<view class="select-button">
-				<text>{{casArray[casIndex]}}</text>
-			</view>
-		</picker>
-		<view class="section {{reply?'on':'off'}}">
-			<input name="other" placeholder="请输入" type="text"/>
-		</view>
+	<view wx:else>
+		<text>欢迎来QTrade上开通店铺，并发布报价</text>
+		<button type='primary' bindtap='openMyShop'>立马开店</button>
 	</view>
 </view>
