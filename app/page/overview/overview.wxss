@@ -16,35 +16,7 @@
   font-size: small;
 }
 .overview-page .summary .statistics-pallet {
-  padding: 10px 0;
   border-top: 1rpx solid #CCCCCC;
-  overflow: hidden;
-}
-.overview-page .summary .statistics-pallet .item {
-  width: 25%;
-  float: left;
-}
-.overview-page .summary .statistics-pallet .item.has-splite {
-  width: calc(25% - 1px);
-}
-.overview-page .summary .statistics-pallet .item.split-item {
-  border-left: 1px solid #CCCCCC;
-  width: 0;
-  height: 60rpx;
-  background-color: #CCCCCC;
-  position: relative;
-  top: 20rpx;
-}
-.overview-page .summary .statistics-pallet .item text {
-  width: 100%;
-  float: left;
-  text-align: center;
-}
-.overview-page .summary .statistics-pallet .item .overflow-ellipsis {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .overview-page .recent-notice {
   margin-top: 20rpx;

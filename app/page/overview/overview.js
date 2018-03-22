@@ -1,27 +1,19 @@
 // app/page/overview/overview.js
-const statisticsFieldsList = [
-  { name: 'history_bond', label: '历史债券', hasSplitLine: false},
-  { name: 'onsale_bond', label: '在售债券', hasSplitLine: true},
-  { name: 'click_num', label: '点击量', hasSplitLine: false},
-  { name: 'share_num', label: '已经分享', hasSplitLine: false }
-]
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    storeRegistered: false,
-    statisticsFieldsList: statisticsFieldsList,
-    storeDetail: { 
-      history_bond: "0", 
-      onsale_bond: "0", 
-      click_num: "0", 
-      share_num: "0"
-	},
+    storeRegistered: true,
 	checkboxItems: [{name: 'isAgreedQtrade', value: '1', checked: 'true'}],
-	isAgreedQtrade: true
+	isAgreedQtrade: true,
+	storeDetail:  { 
+		history_bond: "0", 
+		onsale_bond: "0", 
+		click_num: "0", 
+		share_num: "0"
+	}
   },
 
   getStoreDetail: function () {
