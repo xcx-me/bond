@@ -1,4 +1,4 @@
-// app/page/my-store/my-store.js
+// app/page/my-configuration/my.js
 Page({
 
 	/**

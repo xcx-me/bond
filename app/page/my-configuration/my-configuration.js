@@ -1,4 +1,6 @@
-// app/page/my-configuration/my-configuration.js
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
+
 Page({
 
 	/**
@@ -10,6 +12,20 @@ Page({
 
 	navigateBack: function () {
 		wx.navigateBack()
+	},
+
+	doRequest: function () {
+		request(config.EXAMPLE.getSometing, {}).then((result) => {
+			wx.showToast({
+				title: '请求成功',
+				icon: 'success',
+				mask: true,
+				duration: 2000
+			})
+			console.log('request success', result)
+		}).catch((error) => {
+			// Do something...
+		})
 	},
 
 	/**
