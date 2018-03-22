@@ -1,0 +1,29 @@
+<view class="send-quote-form">
+	发布报价form
+	<view>
+		1111
+	</view>
+	<view>
+		222
+	</view>
+	<view>
+		<view class="bond-type">债券品种：{{itemsCheckedValue}}</view>
+		<checkbox-group bindchange="checkboxChange">
+			<view class="checkbox" wx:for="{{items}}">
+				<checkbox wx:key="" value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+			</view>
+		</checkbox-group>
+	</view>
+
+	<view class="row-wrap">
+		<view class="label">利率方式：</view>
+		<picker bindchange="bindCasPickerChange" value="{{casIndex1}}" range="{{casArray}}">
+			<view class="select-button">
+				<text>{{casArray[casIndex]}}</text>
+			</view>
+		</picker>
+		<view class="section {{reply?'on':'off'}}">
+			<input name="other" placeholder="请输入" type="text"/>
+		</view>
+	</view>
+</view>
