@@ -1,4 +1,5 @@
 <view>
     <text>我的信息</text>
     <button type='primary' bindtap='navigateBack'>返回</button>
+	<button type='primary' bindtap='doRequest'>请求</button>
 </view>

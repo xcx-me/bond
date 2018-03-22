@@ -7,14 +7,31 @@ Page({
    */
   data: {
     isMyStore: false,
-    sellerName: 'sellerName'
+	sellerName: 'sellerName',
+	storeDetail:  { 
+		history_bond: "0", 
+		onsale_bond: "0", 
+		click_num: "0", 
+		share_num: "0"
+	}
+  },
+
+  getStoreDetail: function () {
+    this.setData({
+		storeDetail: {
+        	history_bond: "2222",
+       	 	onsale_bond: "6",
+        	click_num: "88",
+        	share_num: "6666"
+      	}
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('onLoading....')
+    this.getStoreDetail()
   },
 
   /**
