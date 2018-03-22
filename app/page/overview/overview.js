@@ -19,32 +19,32 @@ Page({
       onsale_bond: "0", 
       click_num: "0", 
       share_num: "0"
-    }
-  },
-
-  registerStore: function () {
-    console.log('register...')
-    this.setData({
-      storeRegistered: true
-    })
+	},
+	checkboxItems: [{name: 'isAgreedQtrade', value: '1', checked: 'true'}],
+	isAgreedQtrade: true
   },
 
   getStoreDetail: function () {
     this.setData({
       storeDetail: {
-        history_bond: "25",
-        onsale_bond: "16",
-        click_num: "261",
-        share_num: "2"
+        history_bond: "251",
+        onsale_bond: "6666",
+        click_num: "8888",
+        share_num: "99999"
       }
     })
+  },
+
+  checkboxChange: function (e) {
+	this.setData({
+		isAgreedQtrade: e.detail.value.length > 0
+	})
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('onloading.....', options)
     this.getStoreDetail()
   },
 

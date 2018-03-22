@@ -4,13 +4,16 @@
     "app/page/market/market",
     "app/page/administration/administration",
     "app/page/store/store",
-    "app/page/my-configuration/my-configuration"
+	"app/page/my-configuration/my-configuration",
+	"app/page/protocol/protocol",
+	"app/page/register-store-complete/register-store-complete"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "QTrade一级债",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+	"backgroundColor": "#F1F1F1"
   },
   "tabBar": {
     "list": [
