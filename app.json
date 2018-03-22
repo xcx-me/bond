@@ -4,7 +4,8 @@
 		"app/page/market/market",
 		"app/page/administration/administration",
 		"app/page/my-store/my-store",
-		"app/page/my-configuration/my-configuration"
+		"app/page/my-configuration/my-configuration",
+		"app/page/quotation/quotation"
 	],
 	"window": {
 		"backgroundTextStyle": "light",
