@@ -12,7 +12,10 @@
     </view>
     <view class='recent-notice pallet'>
         <view wx:if='{{storeRegistered}}'>
-            <navigator url='../store/store'>进入我的店铺</navigator>
+            <navigator url='../store/store?uid=0'>进入我的店铺</navigator>
+			<view class="dynamic-pallet">
+				<StoreDynamic daynamicList='{{daynamicList}}'/>
+			</view>
         </view>
         <view class='register-store' wx:else>
 			<view class='tips'>

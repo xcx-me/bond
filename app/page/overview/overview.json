@@ -1,5 +1,6 @@
 {
 	"usingComponents": {
-		"StoreStatistics": "../../ui/store/statistics/statistics"
+		"StoreStatistics": "../../ui/store/statistics/statistics",
+		"StoreDynamic": "../../ui/store/dynamic/dynamic"
 	}
 }
