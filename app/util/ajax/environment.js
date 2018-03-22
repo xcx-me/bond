@@ -13,9 +13,9 @@ const SERVER = {
 // 	cookie: 'appletree_key=0d9a11bc036bac8e5fed95c672e933a5641c541b'
 // }
 
-function withDomain (path) {
+function withDomain (path, domain=SERVER.domain) {
 	if (path.indexOf('http://') === 0 || path.indexOf('https://') === 0) return path
-	return `${SERVER.domain}${path}`
+	return `${domain}${path}`
 }
 
 module.exports = {
