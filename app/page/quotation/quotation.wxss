@@ -1,7 +1,27 @@
 
-.send-quote-page .checkbox {
-	/* width: 100rpx; */
+.send-quote-page {
+	height: 100%;
+	padding: 20rpx 20rpx 0 20rpx;
+	background-color:#F1F1F1;
 }
+
+.quotation-form, .quotaion-open-shop {
+	height: 100%;
+	background-color: #FFFFFF;
+}
+
+.quotaion-open-shop .open-text {
+	display: flex;
+	height: 300rpx;
+	align-items: center;
+	justify-content:center;
+}
+
+.open-shop-btn-area {
+	display: flex;
+	justify-content:center;
+}
+
 
 .bond-type {
 	display: inline-block;
