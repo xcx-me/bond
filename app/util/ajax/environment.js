@@ -5,7 +5,7 @@
 
 const SERVER = {
 	domain: 'http://test.qtrade.com.cn',
-	cookie: 'appletree_key=87a0066f8bbb18ff73706fa085b5487b24240460'
+	cookie: 'appletree_key=e7deef6fbcef2b271e80edf7ba2dd8ac38c610d2'
 }
 
 // const SERVER = {

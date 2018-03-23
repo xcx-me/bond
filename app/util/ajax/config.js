@@ -7,6 +7,12 @@ module.exports = {
 			method: POST
 		}
 	},
+	AUTHENTICATION: {
+		getAppletreeKey: {
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		}
+	},
 	OTHER_SERVICE: {
 		
 	},
