@@ -1,4 +1,4 @@
-<import src="../form-viewer-editor/form-viewer-editor"></import>
+<import src="../../ui/form-viewer-editor/form-viewer-editor"></import>
 
 <view class="send-quote-page">
 	<view class="quotation-form" wx:if="{{isOpenMyShop}}">
@@ -33,8 +33,10 @@
 		</view>
 	</view>
 
-	<view wx:else>
-		<text>欢迎来QTrade上开通店铺，并发布报价</text>
-		<button type='primary' bindtap='openMyShop'>立马开店</button>
+	<view class="quotaion-open-shop" wx:else>
+		<view class="open-text">欢迎来QTrade上开通店铺，并发布报价</view>
+		<view class="open-shop-btn-area">
+			<button size="mini" type='primary' bindtap='openMyShop'>立马开店</button>
+		</view>
 	</view>
 </view>
