@@ -23,7 +23,7 @@ function ajax (configuration, data, cookie) {
 }
 
 function isValidAppletreeKey (appletreeKey) {
-	return appletreeKey.length === 32
+	return appletreeKey
 }
 
 function shortcut (appletreeKey, configuration, data, resolve, reject) {
