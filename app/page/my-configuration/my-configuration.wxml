@@ -1,5 +1,6 @@
 <view>
-    <text>我的信息</text>
+	<navigator url='../user-info/user-info'>修改资料</navigator>
+	<navigator url='../notice/notice'>系统消息</navigator>
     <button type='primary' bindtap='navigateBack'>返回</button>
 	<button type='primary' bindtap='doRequest'>请求</button>
 </view>

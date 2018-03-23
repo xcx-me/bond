@@ -1,0 +1,3 @@
+<view wx:for="{{notices}}">
+  {{index}}: {{item}}
+</view>
