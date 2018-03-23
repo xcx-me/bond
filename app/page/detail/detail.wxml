@@ -1,2 +1,3 @@
 <!--app/page/detail/detail.wxml-->
-<text>app/page/detail/detail.wxml</text>
+<text>bondid: {{bondId}}</text>
+<text>userid:{{userId}}</text>

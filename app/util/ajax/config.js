@@ -58,7 +58,7 @@ module.exports = {
 			method: POST
 		},
 		isStoreOpened: { // 店铺是否开通接口
-			url: '/qtrade_bond/api/newbond/is_myshop_opened.do', // /qtrade_bond/api/is_myshop_opened.do
+			url: '/qtrade_bond/api/newbond/is_myshop_opened.do',
 			method: POST
 		},
 		news: { // 我的店铺--查询最新动态
@@ -90,7 +90,7 @@ module.exports = {
 			method: POST
 		},
 		questionQuery: { // 问答区查询
-			url: '/qtrade_bond/api/newbond/query_asklist.do', // /qtrade_bond/api/query_asklist.do
+			url: '/qtrade_bond/api/newbond/query_asklist.do',
 			method: POST
 		},
 		askQuestion: { // 问问题

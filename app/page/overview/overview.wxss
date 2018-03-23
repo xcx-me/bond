@@ -4,25 +4,32 @@
   background-color: #F1F1F1;
 }
 .overview-page .pallet {
+  padding: 10px;
   background: #FFFFFF;
 }
-.overview-page .summary {
-  padding: 10px;
-}
-.overview-page .summary .name-pallet .person-name {
+.overview-page .name-pallet .person-name {
   font-size: xx-large;
 }
-.overview-page .summary .name-pallet .agency-name {
+.overview-page .name-pallet .agency-name {
   font-size: small;
 }
-.overview-page .summary .statistics-pallet {
+.overview-page .pallet-has-slite-line {
   border-top: 1rpx solid #CCCCCC;
+}
+.overview-page .mystore-pallet {
+  padding-bottom: 10rpx;
+}
+.overview-page .mystore-pallet navigator {
+  padding: 10rpx;
+  cursor: pointer;
+}
+.overview-page .dynamic-pallet {
+  padding-top: 20rpx;
 }
 .overview-page .recent-notice {
   margin-top: 20rpx;
 }
 .overview-page .recent-notice .register-store {
-  padding: 10px;
   text-align: center;
 }
 .overview-page .recent-notice .register-store .tips {
@@ -51,6 +58,10 @@
 .overview-page .recent-notice .protocol checkbox {
   position: relative;
   top: -2px;
+}
+.overview-page .recent-notice .protocol label {
+  width: 159px;
+  display: flex;
 }
 .overview-page .recent-notice .protocol .to-qtrade-protocol {
   color: #2196F3;

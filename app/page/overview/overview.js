@@ -3,9 +3,6 @@ const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     storeRegistered: true,
 	checkboxItems: [{name: 'isAgreedQtrade', value: '1', checked: 'true'}],
@@ -16,7 +13,18 @@ Page({
 		click_num: "0", 
 		share_num: "0"
 	},
-	daynamicList:  []
+	dynamicList:  []
+  },
+
+  isStoreOpened: function () {
+	request(config.NEW_BOND.isStoreOpened, {}).then((result) =>{
+		if (String(result.data.ret) === '0') {
+			result.data.retdata.is_myshop_opened = 0
+			this.setData({
+				storeRegistered: String(result.data.retdata.is_myshop_opened) === '1'
+			})
+		}
+	})
   },
 
   doRequest: function () {
@@ -46,7 +54,7 @@ Page({
 
   getStoreDynamics: function () {
 	this.setData({
-		daynamicList: [
+		dynamicList: [
 			{bond_simple_name: "22", bond_id: "2535a86e7b0225cb0345d1afd33e1483"},
 			{bond_simple_name: "22LKI", bond_id: "b1f3e6f3188feb7c5466070bc727e2a5"},
 			{bond_simple_name: "22i", bond_id: "8ce7a3977c1fafd128c1af75fdac8e72"},
@@ -65,6 +73,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+	this.isStoreOpened()
 	this.getStoreDetail()
 	if (this.data.isAgreedQtrade) {
 		this.getStoreDynamics()
