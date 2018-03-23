@@ -1,0 +1,4 @@
+<view>
+	<text>user info</text>
+	<notice-list></notice-list>
+</view>

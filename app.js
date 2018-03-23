@@ -8,7 +8,7 @@ App({
 				title: 'login success',
 				icon: 'success',
 				mask: true,
-				duration: 2000
+				duration: 500
 			})
 		})
 
@@ -29,7 +29,7 @@ App({
 								title: 'get user info success',
 								icon: 'success',
 								mask: true,
-								duration: 2000
+								duration: 500
 							})
 
 							if (this.userInfoReadyCallback) {
