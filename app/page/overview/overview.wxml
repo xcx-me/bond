@@ -6,15 +6,17 @@
                 <text class='agency-name'>苹果银行</text>
             </navigator>
         </view>
-        <view class='statistics-pallet' wx:if='{{storeRegistered}}'>
+        <view class='pallet-has-slite-line' wx:if='{{storeRegistered}}'>
             <StoreStatistics storeDetail='{{storeDetail}}'/> 
         </view>
     </view>
     <view class='recent-notice pallet'>
         <view wx:if='{{storeRegistered}}'>
-            <navigator url='../store/store?uid=0'>进入我的店铺</navigator>
-			<view class="dynamic-pallet">
-				<StoreDynamic daynamicList='{{daynamicList}}'/>
+			<view class='mystore-pallet'>
+				<navigator url='../store/store?uid=0'>进入我的店铺</navigator>
+			</view>
+			<view class="dynamic-pallet pallet-has-slite-line">
+				<StoreDynamic dynamicList='{{dynamicList}}' detailUrl='../detail/detail'/>
 			</view>
         </view>
         <view class='register-store' wx:else>

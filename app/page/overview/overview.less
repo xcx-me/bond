@@ -4,32 +4,41 @@
 	background-color: #F1F1F1;
 	
 	.pallet {
+		padding: 10px;
 		background: #FFFFFF;
 	}
 
-	.summary {
-		padding: 10px;
-
-		.name-pallet {
-			.person-name {
-				font-size: xx-large;
-			}
-
-			.agency-name {
-				font-size: small;
-			}
+	.name-pallet {
+		.person-name {
+			font-size: xx-large;
 		}
 
-		.statistics-pallet {
-			border-top: 1rpx solid #CCCCCC;
+		.agency-name {
+			font-size: small;
 		}
+	}
+
+	.pallet-has-slite-line {
+		border-top: 1rpx solid #CCCCCC;
+	}
+
+	.mystore-pallet {
+		padding-bottom: 10rpx;
+		
+		navigator {
+			padding: 10rpx;
+			cursor: pointer;
+		}
+	}
+
+	.dynamic-pallet {
+		padding-top: 20rpx;
 	}
 
 	.recent-notice {
 		margin-top: 20rpx;
 
 		.register-store {
-			padding: 10px;
 			text-align: center;
 
 			.tips {
@@ -64,7 +73,12 @@
 				position: relative;
 				top: -2px;
 			}
-			
+
+			label {
+				width: 159px;
+				display: flex;
+			}
+
 			.to-qtrade-protocol {
 				color: #2196F3;
 				text-decoration: underline;
