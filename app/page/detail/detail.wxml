@@ -1,3 +1,6 @@
 <!--app/page/detail/detail.wxml-->
 <text>bondid: {{bondId}}</text>
-<text>userid:{{userId}}</text>
+<view>
+	<text>userid:{{userId}}</text>
+</view>
+<StoreStatistics userId='{{userId}}'/> 

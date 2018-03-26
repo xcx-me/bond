@@ -7,19 +7,14 @@ Page({
     storeRegistered: true,
 	checkboxItems: [{name: 'isAgreedQtrade', value: '1', checked: 'true'}],
 	isAgreedQtrade: true,
-	storeDetail:  { 
-		history_bond: "0", 
-		onsale_bond: "0", 
-		click_num: "0", 
-		share_num: "0"
-	},
-	dynamicList:  []
+	dynamicList:  [],
+	userId: '0'
   },
 
   isStoreOpened: function () {
 	request(config.NEW_BOND.isStoreOpened, {}).then((result) =>{
 		if (String(result.data.ret) === '0') {
-			result.data.retdata.is_myshop_opened = 0
+			// result.data.retdata.is_myshop_opened = 0
 			this.setData({
 				storeRegistered: String(result.data.retdata.is_myshop_opened) === '1'
 			})
@@ -40,17 +35,6 @@ Page({
 		// Do something...
 	})
 },
-
-  getStoreDetail: function () {
-    this.setData({
-      storeDetail: {
-        history_bond: "251",
-        onsale_bond: "6666",
-        click_num: "8888",
-        share_num: "99999"
-      }
-    })
-  },
 
   getStoreDynamics: function () {
 	this.setData({
@@ -74,7 +58,6 @@ Page({
    */
   onLoad: function (options) {
 	this.isStoreOpened()
-	this.getStoreDetail()
 	if (this.data.isAgreedQtrade) {
 		this.getStoreDynamics()
 	}

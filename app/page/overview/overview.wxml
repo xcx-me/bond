@@ -7,7 +7,7 @@
             </navigator>
         </view>
         <view class='pallet-has-slite-line' wx:if='{{storeRegistered}}'>
-            <StoreStatistics storeDetail='{{storeDetail}}'/> 
+			<StoreStatistics userId='{{userId}}'/>
         </view>
     </view>
     <view class='recent-notice pallet'>

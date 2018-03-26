@@ -1,0 +1,17 @@
+.store-dynamic-component .dynamic-item {
+  padding: 10rpx 0 0;
+}
+.store-dynamic-component .overflow-ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.store-dynamic-component text {
+  float: left;
+}
+.store-dynamic-component navigator text {
+  margin-right: 6px;
+  color: #2196F3;
+  cursor: pointer;
+}

@@ -1,0 +1,7 @@
+<import src="../../template/data-item/data-item-template.wxml" />
+<view class='data-list-display-component {{displayClass}}'>
+	<block wx:for="{{fieldList}}" wx:for-item="fieldItem" wx:key="name">
+		<template is='dataItemTpl' data='{{hasSplitLine: fieldItem.hasSplitLine, value: dataList[fieldItem.name] , label: fieldItem.label, width: fieldItem.width}}'></template>
+	</block>
+</view>
+

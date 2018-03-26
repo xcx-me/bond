@@ -1,9 +1,3 @@
 <view class='store-statistics-component'>
-	<view wx:for="{{statisticsFieldsList}}" wx:for-item="fieldItem" wx:key="name">
-		<view class='{{fieldItem.hasSplitLine ? "has-splite" : "" }} item'>
-			<text class='value overflow-ellipsis'>{{storeDetail[fieldItem.name]}}</text>
-			<text class='label'>{{fieldItem.label}}</text>
-		</view>
-		<view class='item split-item' wx:if='{{fieldItem.hasSplitLine}}'></view>
-	</view>
+	<DataListDisplay fieldList='{{displayFieldList}}' dataList='{{storeDetail}}'/>
 </view>

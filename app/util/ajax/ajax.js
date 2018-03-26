@@ -13,7 +13,7 @@ function request (config, data) {
 			success: resolve,
 			fail: reject,
 			header: {
-				'content-type': 'application/json', // 默认值
+				'content-type':  "application/x-www-form-urlencoded", // 默认值
 				'cookie': appletreeKey
 			},
 		})

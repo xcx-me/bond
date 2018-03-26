@@ -2,5 +2,12 @@
 <text wx:if="{{isMyStore}}">我的店铺</text>
 <text wx:else>{{sellerName}}的店铺</text>
 <view>
-	<StoreStatistics storeDetail='{{storeDetail}}'/> 
+	<StoreStatistics userId='{{userId}}'/> 
+	<block wx:for='{{bondList}}' wx:for-item='bondItem' wx:key='bond_id'>
+		<view>
+			<navigator url='../detail/detail?bid={{bondItem.bond_id}}&uid={{userId}}'>
+				<text>{{bondItem.bond_simple_name}}</text>
+			</navigator>
+		</view>
+	</block>
 </view>

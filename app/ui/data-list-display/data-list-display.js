@@ -1,6 +1,4 @@
 // components/Dialog/dialog.js
-var detail =require('../../../util/store/detail.js')
-
 Component({
 	options: {
 	  multipleSlots: true // 在组件定义时的选项中启用多slot支持
@@ -10,14 +8,24 @@ Component({
 	 * 用于组件自定义设置
 	 */
 	properties: {
-		storeDetail: {
+		fieldList: {
+			type: Array,
+			value:  []
+		},
+
+		dataList: {
 			type: Object,
-			value: { 
-				history_bond: "0", 
-				onsale_bond: "0", 
-				click_num: "0", 
-				share_num: "0"
-			},
+			value: {}
+		},
+
+		itemWidth: {
+			type: String,
+			value: ''
+		},
+
+		displayClass: {
+			type: String,
+			value:''
 		}
 	},
   
@@ -26,7 +34,6 @@ Component({
 	 * 可用于模版渲染
 	 */
 	data: {
-		displayFieldList: detail.displayFieldList
 	},
   
 	/**

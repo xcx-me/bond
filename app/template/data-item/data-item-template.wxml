@@ -1,0 +1,10 @@
+
+<template name='dataItemTpl'>
+	<view class="data-item-template" style="width: {{width}}">
+		<view class='{{hasSplitLine ? "has-splite" : "" }} item'>
+			<text class='value overflow-ellipsis'>{{value}}</text>
+			<text class='label'>{{label}}</text>
+		</view>
+		<view class='item split-item' wx:if='{{hasSplitLine}}'></view>
+	</view>
+</template>
