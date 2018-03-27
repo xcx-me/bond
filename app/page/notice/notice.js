@@ -1,24 +1,29 @@
-// app/page/notice/notice.js
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
+
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		notices: ['a', 'b', 'c']
-	},
-
-	increase: function () {
-		this.setData({
-			notices: ['a', 'b', 'c', 'd']
-		})
+		notices: []
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-
+		request(config.SYSTEM.noticeList, {current_page: 1, page_size: 20}).then((result) => {
+			this.setData({
+				notices: result.data.system_msg_array
+			})
+			// this.setState({
+			// 	notices: data.system_msg_array,
+			// 	visiblePaginationControl: data.total > 0
+			// })
+			// this.total = data.total
+		})
 	},
 
 	/**
