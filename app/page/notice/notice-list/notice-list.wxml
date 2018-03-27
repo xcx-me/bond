@@ -1,0 +1,6 @@
+<import src='./new-bond-card.wxml'></import>
+<import src='./notice-card.wxml'></import>
+
+<view wx:for='{{notices}}' wx:key='id'>
+	<template is='{{item.type === 1 ? "new-bond-card" : "notice-card"}}' data='{{...item}}' />
+</view>
