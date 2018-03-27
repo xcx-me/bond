@@ -17,6 +17,10 @@ module.exports = {
 		noticeList: {
 			url: '/appletree/getsystemmsg.do',
 			method: POST
+		},
+		unreadList: {
+			url: '/appletree/unreadmsglist.do',
+			method: POST
 		}
 	},
 	OTHER_SERVICE: {
