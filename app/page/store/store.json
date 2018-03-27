@@ -1,5 +1,6 @@
 {
 	"usingComponents": {
-		"StoreStatistics": "../store/statistics/statistics"
+		"StoreDetail": "../store/detail/detail",
+		"BondList": "../../ui/list/bond-list/bond-list"
 	}
 }

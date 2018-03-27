@@ -1,13 +1,21 @@
 <!--app/ui/store/dynamic/dynamic.wxml-->
+<import src='../../../template/blank-signal/blank-signal.wxml'/>
+
 <view class='store-dynamic-component'>
 	<text class='title'>最新动态</text>
-	<view class='dynamic-list'>
+	<loading wx:if="{{showLoading}}">加载中</loading>
+	<view wx:if="{{!showLoading && !emptyData}}" class='dynamic-list'>
 		<view class='dynamic-item overflow-ellipsis' wx:for="{{dynamicList}}" wx:for-index="index" wx:for-item="dynamic" wx:key="bond_id">
 			<text>{{index + 1}}、</text>
+			<view bindtap='clearDynamicTip' data-name='{{dynamic.bond_simple_name}}'>
 			<navigator url='{{detailUrl}}?bid={{dynamic.bond_id}}&uid=0'>
 				<text>{{dynamic.bond_simple_name}}</text>
 			</navigator>
+			</view>
 			<text>有最新提问</text>
 		</view>
+	</view>
+	<view wx:elif="{{!showLoading && emptyData}}" class='no-dynamic-list'>
+		<template is='blankSignalTpl' data='{{prompt: "暂无动态"}}'></template>
 	</view>
 </view>

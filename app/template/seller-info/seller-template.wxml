@@ -1,0 +1,6 @@
+<template name='sellerInfoTpl'>
+	<navigator class='seller-info-tpl' url='{{url}}'>
+        <text class='user-name'>{{userName}}</text>
+        <text class='company-name'>{{companyName}}</text>
+    </navigator>
+</template>

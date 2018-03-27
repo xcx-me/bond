@@ -1,1 +1,7 @@
-/* app/page/store/store.wxss */
+.store-page .store-header {
+  height: 10%;
+  background: #FFFFFF;
+}
+.store-page .store-bond-list {
+  height: 90%;
+}

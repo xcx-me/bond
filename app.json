@@ -1,42 +1,43 @@
 {
-  "pages": [
-    "app/page/overview/overview",
-    "app/page/market/market",
-    "app/page/administration/administration",
-    "app/page/store/store",
-	"app/page/my-configuration/my-configuration",
-	"app/page/protocol/protocol",
-	"app/page/register-store-complete/register-store-complete",
-	"app/page/detail/detail",
-	"app/page/quotation/quotation"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "QTrade一级债",
-    "navigationBarTextStyle": "black",
-	"backgroundColor": "#F1F1F1"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "app/page/overview/overview",
-        "iconPath": "app/asset/image/icon_component.png",
-        "selectedIconPath": "app/asset/image/icon_component_HL.png",
-        "text": "概览"
-      },
-      {
-        "pagePath": "app/page/market/market",
-        "iconPath": "app/asset/image/icon_API.png",
-        "selectedIconPath": "app/asset/image/icon_API_HL.png",
-        "text": "市场"
-      },
-      {
-        "pagePath": "app/page/administration/administration",
-        "iconPath": "app/asset/image/icon_API.png",
-        "selectedIconPath": "app/asset/image/icon_API_HL.png",
-        "text": "管理"
-      }
-    ]
-  }
+    "pages": [
+        "app/page/overview/overview",
+        "app/page/market/market",
+        "app/page/administration/administration",
+        "app/page/store/store",
+        "app/page/my-configuration/my-configuration",
+        "app/page/protocol/protocol",
+        "app/page/register-store-complete/register-store-complete",
+        "app/page/bond-detail/bond-detail",
+        "app/page/quotation/quotation",
+        "app/page/notice/notice"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "QTrade一级债",
+        "navigationBarTextStyle": "black",
+        "backgroundColor": "#F1F1F1"
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "app/page/overview/overview",
+                "iconPath": "app/asset/image/icon_component.png",
+                "selectedIconPath": "app/asset/image/icon_component_HL.png",
+                "text": "概览"
+            },
+            {
+                "pagePath": "app/page/market/market",
+                "iconPath": "app/asset/image/icon_API.png",
+                "selectedIconPath": "app/asset/image/icon_API_HL.png",
+                "text": "市场"
+            },
+            {
+                "pagePath": "app/page/administration/administration",
+                "iconPath": "app/asset/image/icon_API.png",
+                "selectedIconPath": "app/asset/image/icon_API_HL.png",
+                "text": "管理"
+            }
+        ]
+    }
 }

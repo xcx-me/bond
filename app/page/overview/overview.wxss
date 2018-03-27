@@ -1,22 +1,21 @@
+.seller-info-tpl .user-name {
+  font-size: xx-large;
+}
+.seller-info-tpl .company-name {
+  font-size: small;
+}
 .overview-page {
   height: 100%;
-  padding: 20rpx 20rpx 0 20rpx;
-  background-color: #F1F1F1;
 }
 .overview-page .pallet {
   padding: 10px;
   background: #FFFFFF;
 }
-.overview-page .name-pallet .person-name {
-  font-size: xx-large;
-}
-.overview-page .name-pallet .agency-name {
-  font-size: small;
-}
 .overview-page .pallet-has-slite-line {
   border-top: 1rpx solid #CCCCCC;
 }
 .overview-page .mystore-pallet {
+  font-size: normal;
   padding-bottom: 10rpx;
 }
 .overview-page .mystore-pallet navigator {

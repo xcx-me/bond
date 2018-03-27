@@ -1,27 +1,29 @@
-<view class='overview-page'>
-    <view class='summary pallet'>
-        <view class='name-pallet'>
-            <navigator url='../my-configuration/my-configuration'>
-                <text class='person-name'>刘明</text>
-                <text class='agency-name'>苹果银行</text>
-            </navigator>
-        </view>
-        <view class='pallet-has-slite-line' wx:if='{{storeRegistered}}'>
-			<StoreStatistics userId='{{userId}}'/>
-        </view>
-    </view>
+<import src="../../template/seller-info/seller-template.wxml" />
+
+<view class='overview-page page-wrapper'>
+	<view class='pallet'>
+		<block wx:if='{{storeRegistered}}'>
+			<StoreDetail navigatorUrl='../my-configuration/my-configuration' userId='{{userId}}' needUpdate='{{needUpdate}}'/>
+		</block>
+		<block wx:else >
+		 	<view class='personal-info-pallet'>
+				 <template is='sellerInfoTpl' data='{{url: "../my-configuration/my-configuration", userName: userName, companyName: companyName}}'></template>
+            </view>
+		</block>
+	</view>
+	
     <view class='recent-notice pallet'>
         <view wx:if='{{storeRegistered}}'>
-			<view class='mystore-pallet'>
+			<view class='mystore-pallet' bindtap='toMyStore'>
 				<navigator url='../store/store?uid=0'>进入我的店铺</navigator>
 			</view>
 			<view class="dynamic-pallet pallet-has-slite-line">
-				<StoreDynamic dynamicList='{{dynamicList}}' detailUrl='../detail/detail'/>
+				<StoreDynamic detailUrl='../bond-detail/bond-detail' needUpdate='{{needUpdate}}'/>
 			</view>
         </view>
-        <view class='register-store' wx:else>
+        <view class='register-store' wx:elif='{{!showLoading}}'>
 			<view class='tips'>
-				<text>欢迎来QTrade开通店铺，并发布报价</text>
+				<text>欢迎来QTrade上开通店铺，并发布报价</text>
 			</view>
             <navigator url='../register-store-complete/register-store-complete'>
 				<button class='shop-button' hover-class='button-hover' disabled='{{!isAgreedQtrade}}'size='mini' type='primary'>立马开店</button>

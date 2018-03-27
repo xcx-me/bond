@@ -1,0 +1,5 @@
+<view>
+	<text>notice...</text>
+	<notice-list notices='{{notices}}'></notice-list>
+	<button bind:tap='increase'>Increase</button>
+</view>

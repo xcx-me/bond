@@ -2,20 +2,24 @@
 var common = require('../../util/common.js')
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
-
+var app = getApp()
 
 Page({
+	properties: {	
+		navigatorUrl: {
+			type: String,
+			value: ''
+		}
+	},
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-	isMyStore: false,
-	userId: '',
-	sellerName: 'sellerName',
-	bondList: []
-  },
-
+  	data: {
+		userId: '',
+		isMyStore: false,
+		sellerName: 'sellerName',
+		bondList: [],
+		scrollHeight: 0,
+		needUpdate: false
+  	},
 
   getBondList: function(userId) {
 	let offset = 0
@@ -39,32 +43,39 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-		let userId = options.uid
+		let userId = String(options.uid) === '0' ? getApp().globalData.store.userId : options.uid
 		this.setData({
 			userId: userId
 		})
-		this.getBondList(userId)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-	console.log('ready...', this.data.userId)
+	// console.log('ready...', this.data.userId)
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    common.sayHello('rita')
+	  let isMyStore = app.globalData.store.isMine
+	  this.setData({
+		  isMyStore: isMyStore,
+		  needUpdate: true
+	  })
+	  wx.setNavigationBarTitle({title: isMyStore ? '我的店铺': app.globalData.store.saleName + '的店铺'})
+	  this.getBondList(this.data.userId)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    common.sayGoodbye('rita')
+    this.setData({
+		needUpdate: false
+	})
   },
 
   /**

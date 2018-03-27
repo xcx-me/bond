@@ -1,3 +1,9 @@
+.blank-signal-tpl {
+  text-align: center;
+}
+.blank-signal-tpl .prompt {
+  font-size: x-small;
+}
 .store-dynamic-component .dynamic-item {
   padding: 10rpx 0 0;
 }
@@ -7,7 +13,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.store-dynamic-component text {
+.store-dynamic-component .dynamic-item text {
   float: left;
 }
 .store-dynamic-component navigator text {

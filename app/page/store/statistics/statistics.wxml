@@ -1,3 +1,0 @@
-<view class='store-statistics-component'>
-	<DataListDisplay displayClass='store-statistic' fieldList='{{displayFieldList}}' dataList='{{storeDetail}}' />
-</view>

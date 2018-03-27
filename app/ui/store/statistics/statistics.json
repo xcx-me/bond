@@ -1,6 +1,0 @@
-{
-	"component": true, 
-	"usingComponents": {
-		"DataListDisplay": "../../data-list-display/data-list-display"
-	}
-}

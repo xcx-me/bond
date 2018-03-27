@@ -1,0 +1,10 @@
+<!--app/ui/single-bond/single-bond.wxml-->
+<wxs src="./single-bond-util.wxs" module="singleBondUtil" />
+<view class='single-bond-component'>
+	<block wx:for='{{bondFieldList}}' wx:for-item='item' wx:key='name'>
+		<view class='item {{item.name}}'>
+			<text class='label'>{{item.label}}</text>
+			<text class='value'>{{singleBondUtil.parseValue(item.name, bondInfo)}}</text>
+		</view>
+	</block>
+</view>
