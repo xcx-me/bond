@@ -1,0 +1,8 @@
+<view>
+	<text class="bond-type">债券品种：{{itemsCheckedValue}}</text>
+	<checkbox-group bindchange="checkboxChange">
+		<view class="checkbox" wx:for="{{items}}" wx:key="key">
+			<checkbox wx:key="" value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+		</view>
+	</checkbox-group>
+</view>

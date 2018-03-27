@@ -1,1 +1,7 @@
-{}
+{
+	"usingComponents": {
+	  "FormViewerEditor": "../../ui/form-viewer-editor/form-viewer-editor",
+	  "toastedit": "../../ui/toastedit/toastedit",
+	  "dialog": "../../ui/dialog/dialog"
+	}
+}

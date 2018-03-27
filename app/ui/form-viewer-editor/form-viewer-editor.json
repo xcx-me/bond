@@ -1,1 +1,6 @@
-{}
+{
+	"component": true,
+	"usingComponents": {
+		"bondtype": "../../page/quotation/bond-type/bond-type"
+	  }
+}
