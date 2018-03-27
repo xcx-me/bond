@@ -1,0 +1,9 @@
+{
+	"navigationBarTitleText": "债券详情",
+	"usingComponents": {
+		"BondInfo": "./bond-info/bond-info",
+		"BondQuestion": "./bond-question/bond-question",
+		"OtherBonds": "./other-bonds/other-bonds",
+		"StoreDetail": "../store/detail/detail"
+	}
+}

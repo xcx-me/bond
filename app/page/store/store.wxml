@@ -1,6 +1,9 @@
 <!--app/page/store/store.wxml-->
-<text wx:if="{{isMyStore}}">我的店铺</text>
-<text wx:else>{{sellerName}}的店铺</text>
-<view>
-	<StoreStatistics storeDetail='{{storeDetail}}'/> 
+<view class='store-page page-wrapper'>
+	<view class='store-header'>
+		<StoreDetail navigatorUrl='' userId='{{userId}}' isHiddenSeller='{{isMyStore}}' needUpdate='{{needUpdate}}'/> 
+	</view>
+	<view class='store-bond-list'>
+		<BondList detailUrl='../bond-detail/bond-detail' bondList='{{bondList}}' userId='{{userId}}'/>
+	</view>
 </view>

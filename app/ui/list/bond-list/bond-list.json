@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+	"SingleBond": "../../single-bond/single-bond"
+  }
+}

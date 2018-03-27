@@ -23,6 +23,10 @@ module.exports = {
 		
 	},
 	NEW_BOND: { // 新债
+		cardInfo: {
+			url: '/appletree/cardinfo.do',
+			method: POST
+		},
 		// 发布报价相关
 		sendBond: { // 发布报价
 			url: '/qtrade_bond/api/newbond/quotation.do',

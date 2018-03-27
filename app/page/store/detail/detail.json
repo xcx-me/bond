@@ -1,0 +1,6 @@
+{
+	"component": true, 
+	"usingComponents": {
+		"DataListDisplay": "../../../ui/data-list-display/data-list-display"
+	}
+}

@@ -1,0 +1,5 @@
+<template name='blankSignalTpl'>
+	<view class='blank-signal-tpl'>
+		<text class="prompt">{{prompt}}</text>
+	</view>
+</template>

@@ -7,10 +7,9 @@
         "app/page/my-configuration/my-configuration",
         "app/page/protocol/protocol",
         "app/page/register-store-complete/register-store-complete",
-        "app/page/detail/detail",
+        "app/page/bond-detail/bond-detail",
         "app/page/quotation/quotation",
-        "app/page/notice/notice",
-        "app/page/user-info/user-info"
+        "app/page/notice/notice"
     ],
     "window": {
         "backgroundTextStyle": "light",

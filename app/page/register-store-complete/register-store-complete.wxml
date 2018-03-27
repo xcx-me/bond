@@ -1,2 +1,10 @@
 <!--app/page/register-store-complete/register-store-complete.wxml-->
-<text>app/page/register-store-complete/register-store-complete.wxml</text>
+<view class='register-store-complete'>
+ <view class='pallet-has-slite-line' wx:if='{{isFailed}}'>
+	<text>注册失败,请稍后再试</text>
+</view>
+<view wx:else>
+	<text>注册成功</text>
+	<button type='primary' bindtap='doNext'>继续</button>
+</view>
+</view>

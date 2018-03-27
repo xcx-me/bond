@@ -1,0 +1,12 @@
+.seller-info-tpl .user-name {
+  font-size: xx-large;
+}
+.seller-info-tpl .company-name {
+  font-size: small;
+}
+.store-header-component .store-statistics-component {
+  padding: 10px 0;
+}
+.store-header-component .personal-info-pallet + .store-statistics-component {
+  border-top: 1rpx solid #CCCCCC;
+}

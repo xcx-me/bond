@@ -1,0 +1,6 @@
+.seller-info-tpl .user-name {
+  font-size: xx-large;
+}
+.seller-info-tpl .company-name {
+  font-size: small;
+}

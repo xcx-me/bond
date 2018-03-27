@@ -1,71 +1,81 @@
 // app/page/store/store.js
 var common = require('../../util/common.js')
-var userId = null
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
+var app = getApp()
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    isMyStore: false,
-	sellerName: 'sellerName',
-	storeDetail:  { 
-		history_bond: "0", 
-		onsale_bond: "0", 
-		click_num: "0", 
-		share_num: "0"
+	properties: {	
+		navigatorUrl: {
+			type: String,
+			value: ''
+		}
 	},
-  },
 
-  getStoreDetail: function () {
-	  if (userId === '0') {
-		this.setData({
-			storeDetail: {
-				history_bond: "0111",
-				onsale_bond: "0222",
-				click_num: "0333",
-				share_num: "0444"
-			}
-		})
-	  } else {
-		this.setData({
-			storeDetail: {
-				history_bond: "888",
-				onsale_bond: "999",
-				click_num: "666",
-				share_num: "777"
-			}
-		})
-	  }
+  	data: {
+		userId: '',
+		isMyStore: false,
+		sellerName: 'sellerName',
+		bondList: [],
+		scrollHeight: 0,
+		needUpdate: false
+  	},
+
+  getBondList: function(userId) {
+	let offset = 0
+	let limit = 10
+	request(config.NEW_BOND.newBondList, {
+		bond_id: '0',
+		user_id: userId,
+		offset: offset,
+		limit: limit,
+		used_for_management: '0'
+	}).then((result) => {
+		if (String(result.data.ret) === '0') {
+			this.setData({
+				bondList: result.data.retdata.bond_list
+			})
+		}
+	})
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	  userId = options.uid
-      this.getStoreDetail(userId)
+		let userId = String(options.uid) === '0' ? getApp().globalData.store.userId : options.uid
+		this.setData({
+			userId: userId
+		})
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+	// console.log('ready...', this.data.userId)
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    common.sayHello('rita')
+	  let isMyStore = app.globalData.store.isMine
+	  this.setData({
+		  isMyStore: isMyStore,
+		  needUpdate: true
+	  })
+	  wx.setNavigationBarTitle({title: isMyStore ? '我的店铺': app.globalData.store.saleName + '的店铺'})
+	  this.getBondList(this.data.userId)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    common.sayGoodbye('rita')
+    this.setData({
+		needUpdate: false
+	})
   },
 
   /**

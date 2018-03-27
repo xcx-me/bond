@@ -1,0 +1,8 @@
+.single-bond-component {
+  background: #FFFFFF;
+  margin-top: 10rpx;
+  font-size: small;
+}
+.single-bond-component .item {
+  padding: 5rpx 0 ;
+}

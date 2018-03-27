@@ -1,27 +1,44 @@
 // app/page/overview/overview.js
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
+var app = getApp()
 
 Page({
   data: {
-    storeRegistered: true,
+    storeRegistered: false,
 	checkboxItems: [{name: 'isAgreedQtrade', value: '1', checked: 'true'}],
 	isAgreedQtrade: true,
-	storeDetail:  { 
-		history_bond: "0", 
-		onsale_bond: "0", 
-		click_num: "0", 
-		share_num: "0"
-	},
-	dynamicList:  []
+	dynamicList:  [],
+	userName: '',
+	companyName: '',
+	userId: '0',
+	showLoading: true,
+	needUpdate: false
   },
 
   isStoreOpened: function () {
 	request(config.NEW_BOND.isStoreOpened, {}).then((result) =>{
 		if (String(result.data.ret) === '0') {
-			result.data.retdata.is_myshop_opened = 0
+			// result.data.retdata.is_myshop_opened = 0
 			this.setData({
-				storeRegistered: String(result.data.retdata.is_myshop_opened) === '1'
+				storeRegistered: String(result.data.retdata.is_myshop_opened) === '1',
+				showLoading: false,
+				needUpdate: true
+			})
+		} else {
+			this.setData({
+				showLoading: false
+			})
+		}
+	})
+  },
+
+  getCardInfo: function () {
+	request(config.NEW_BOND.cardInfo, {}).then((result) =>{
+		if (String(result.data.ret) === '0') {
+			this.setData({
+				userName: result.data.realname,
+				companyName: result.data.company.simpleName
 			})
 		}
 	})
@@ -41,43 +58,26 @@ Page({
 	})
 },
 
-  getStoreDetail: function () {
-    this.setData({
-      storeDetail: {
-        history_bond: "251",
-        onsale_bond: "6666",
-        click_num: "8888",
-        share_num: "99999"
-      }
-    })
-  },
-
-  getStoreDynamics: function () {
-	this.setData({
-		dynamicList: [
-			{bond_simple_name: "22", bond_id: "2535a86e7b0225cb0345d1afd33e1483"},
-			{bond_simple_name: "22LKI", bond_id: "b1f3e6f3188feb7c5466070bc727e2a5"},
-			{bond_simple_name: "22i", bond_id: "8ce7a3977c1fafd128c1af75fdac8e72"},
-			{bond_simple_name: "债券简称1", bond_id: "36b5969fe0ef5a153a1121cb9e194908"}
-		]
-	})
-  },
-
   checkboxChange: function (e) {
 	this.setData({
 		isAgreedQtrade: e.detail.value.length > 0
 	})
   },
 
+  toMyStore: function () {
+	  getApp().globalData.store.isMine = true
+  },
+
+  initData: function() {
+	this.isStoreOpened()
+	this.getCardInfo()
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	this.isStoreOpened()
-	this.getStoreDetail()
-	if (this.data.isAgreedQtrade) {
-		this.getStoreDynamics()
-	}
+	// console.log('overview onLoad')
+	// this.initData()
   },
 
   /**
@@ -91,14 +91,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+	this.initData()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+	  this.setData({
+		needUpdate: false
+	  })
   },
 
   /**

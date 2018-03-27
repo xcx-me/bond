@@ -1,0 +1,6 @@
+.blank-signal-tpl {
+  text-align: center;
+}
+.blank-signal-tpl .prompt {
+  font-size: x-small;
+}
