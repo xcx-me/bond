@@ -1,0 +1,3 @@
+<template name='notice-card'>
+	<text>{{create_time}}: {{content}}</text>
+</template>

@@ -1,0 +1,13 @@
+<wxs module='jsonUtil'>
+	module.exports = {
+		parse: function (value) {
+			return JSON.parse(value)
+		}
+	}
+</wxs>
+
+<template name='new-bond-card'>
+	<text>{{create_time}}: {{jsonUtil.parse(content).shop_user_id}}</text>
+	您对一级债【{{jsonUtil.parse(content).bond_simple_name}}】的提问有新回复，
+	<navigator url='../my-configuration/my-configuration'>去查看</navigator>。
+</template>

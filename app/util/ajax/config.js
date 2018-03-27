@@ -13,6 +13,12 @@ module.exports = {
 			method: POST
 		}
 	},
+	SYSTEM: {
+		noticeList: {
+			url: '/appletree/getsystemmsg.do',
+			method: POST
+		}
+	},
 	OTHER_SERVICE: {
 		
 	},
