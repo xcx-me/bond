@@ -1,9 +1,8 @@
-<import src="../../ui/form-viewer-editor/form-viewer-editor"></import>
 
 <view class="send-quote-page">
 	<view class="quotation-form" wx:if="{{isOpenMyShop}}">
 
-		<template is="form-viewer-editor" />
+		<FormViewerEditor descriptors="{{descriptors}}" modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}"/>  
 
 		<view>
 			111
@@ -11,14 +10,14 @@
 		<view>
 			222
 		</view>
-		<view>
+		<!-- <view>
 			<text class="bond-type">债券品种：{{itemsCheckedValue}}</text>
 			<checkbox-group bindchange="checkboxChange">
-				<view class="checkbox" wx:for="{{items}}">
+				<view class="checkbox" wx:for="{{items}}" wx:key="key">
 					<checkbox wx:key="" value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
 				</view>
 			</checkbox-group>
-		</view>
+		</view> -->
 
 		<view class="row-wrap">
 			<text class="label">利率方式：</text>
@@ -30,6 +29,23 @@
 			<view class="section {{reply?'on':'off'}}">
 				<input name="other" placeholder="请输入" type="text"/>
 			</view>
+		</view>
+
+		<view>
+			<toastedit id='toastedit'>{{toastedit}}</toastedit>
+			<button type='primary' bindtap='handleShowToast'>click to showToast!</button>
+		</view>
+
+		<view class="dialog-container">
+			<dialog id='dialog'
+				title='我是标题'
+				content='确定要删除吗？？？'
+				cancelText='取消'
+				confirm='确认'
+				bind:cancelEvent="_cancelEvent"
+				bind:confirmEvent="_confirmEvent">
+			</dialog>
+			<button type="primary" bindtap="showDialog"> ClickMe! </button>
 		</view>
 	</view>
 

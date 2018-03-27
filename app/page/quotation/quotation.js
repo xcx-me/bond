@@ -13,12 +13,36 @@ const bondType = [
 ]
 
 Page({
-
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
+		descriptors: [
+			{
+				fieldName: 'text1',
+				uiType: 't1',
+				value: '',
+				change: ''
+			},
+			{
+				fieldName: 'text2',
+				uiType: 't2',
+				value: '',
+				change: ''
+			},
+			{
+				fieldName: 'text333',
+				uiType: 't333',
+				value: '',
+				change: ''
+			}
+		],
+
+		is_modal_Hidden: false,  
+		is_modal_Msg: '我是一个自定义组件',
+
 		isOpenMyShop: false,
+
 		items: bondType,
 		itemsCheckedValue: '',
 		casArray: ['利随本清', '固定利率', '浮动利率', '累积利率'],
@@ -31,18 +55,18 @@ Page({
 		})
 	},
 
-	checkboxChange: function(e) {
-		// console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-		let checkedValue = e.detail.value
-		let checkedItem = []
-		checkedValue.forEach((item, index) => {
-			checkedItem.push(this.data.items.find((items) => { return items.name === item}).value)
-		})
-		this.setData({
-			itemsCheckedValue: checkedItem.join('、')
-		})
-		console.log('债券品种：', checkedItem)
-	},
+	// checkboxChange: function(e) {
+	// 	// console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+	// 	let checkedValue = e.detail.value
+	// 	let checkedItem = []
+	// 	checkedValue.forEach((item, index) => {
+	// 		checkedItem.push(this.data.items.find((items) => { return items.name === item}).value)
+	// 	})
+	// 	this.setData({
+	// 		itemsCheckedValue: checkedItem.join('、')
+	// 	})
+	// 	console.log('债券品种：', checkedItem)
+	// },
 
 	bindCasPickerChange: function (e) {
 		console.log('----checked: ', this.data.casArray[e.detail.value])
@@ -54,6 +78,27 @@ Page({
 		this.setData({
 			casIndex: e.detail.value
 		})
+	},
+
+	handleShowToast: function () {
+		this.toastedit = this.selectComponent('#toastedit')
+		this.toastedit.showToast('显示这个哈哈哈哈哈', 2000)
+	},
+	showDialog() {
+		this.dialog = this.selectComponent('#dialog')
+		this.dialog.showDialog();
+	},
+	//取消事件
+	_cancelEvent() {
+		console.log('你点击了取消');
+		this.dialog = this.selectComponent('#dialog')
+		this.dialog.hideDialog();
+	},
+	//确认事件
+	_confirmEvent() {
+		console.log('你点击了确定');
+		this.dialog = this.selectComponent('#dialog')
+		this.dialog.hideDialog();
 	},
 
 	/**
@@ -69,7 +114,7 @@ Page({
 	onReady: function () {
 
 	},
-
+ 
 	/**
 	 * 生命周期函数--监听页面显示
 	 */

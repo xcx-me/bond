@@ -1,4 +1,36 @@
 
-<template name="form-viewer-editor">
-	<text>form viewer editor...</text>
-</template>
+<view class='form-viewer-editor' hidden='{{modalHidden}}'>
+
+	<wxs module='getFormItem'>
+		var getUi = function (descriptors) {
+			var mappingItem = {
+				t1:	'<bondtype />',
+				t2: 'tttt222'
+			}
+
+			return mappingItem[descriptors]
+		}
+
+		module.exports.getUi = getUi;
+	</wxs>
+
+	<view wx:for='{{descriptors}}' wx:key='id' wx:for-index='idx' wx:for-item='itemName'>
+		{{itemName.fieldName}} : 
+		<!-- {{m1.message}} -->
+		{{getFormItem.getUi(itemName.uiType)}}
+	</view>
+
+<bondtype />
+
+	<!-- <view class='mask_layer' bindtap='modal_click_Hidden' />  
+	<view class='modal_box'>  
+		<view class="title">提示</view>  
+		<view class='content'>  
+			<text class='modalMsg'>{{modalMsg}}</text>  
+		</view>  
+		<view class='btn'>  
+			<view bindtap='modal_click_Hidden' class='cancel'>取消</view>  
+			<view bindtap='Sure' class='Sure'>确定</view>  
+		</view>  
+	</view> -->
+</view> 

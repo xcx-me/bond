@@ -1,0 +1,39 @@
+.wx-dialog-container {
+	z-index: 99;
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	width: 100%;
+	height: 100%;
+
+	.wx-dialog-mask {
+		width: 100%;
+		height: 100%;
+		background-color: #000000;
+		opacity: 0.3;
+	}
+
+	.wx-dialog-main {
+		z-index: 999;
+		position:absolute;
+		left: 0;
+		right: 0;
+		top: 30%;
+		bottom: 0;
+		margin: 0 auto;
+		width: 450rpx;
+		height: 350rpx;
+		background-color: #FFFFFF;
+		border-radius: 4rpx;
+
+		.wx-dialog-btn {
+			float: left;
+			width: 96rpx;
+			height: 60rpx;
+			border: 1rpx solid #DDDDDD;
+			border-radius: 2rpx;
+		}
+	}
+}
