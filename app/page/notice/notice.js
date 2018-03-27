@@ -1,6 +1,8 @@
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 
+const PAGE_SIZE = 5
+
 Page({
 
 	/**
@@ -10,20 +12,13 @@ Page({
 		notices: []
 	},
 
+	currentPage: 0,
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		request(config.SYSTEM.noticeList, {current_page: 1, page_size: 20}).then((result) => {
-			this.setData({
-				notices: result.data.system_msg_array
-			})
-			// this.setState({
-			// 	notices: data.system_msg_array,
-			// 	visiblePaginationControl: data.total > 0
-			// })
-			// this.total = data.total
-		})
+		this.getNotices()
 	},
 
 	/**
@@ -58,14 +53,25 @@ Page({
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function () {
-
 	},
 
 	/**
 	 * 页面上拉触底事件的处理函数
 	 */
 	onReachBottom: function () {
+		this.getNotices()
+	},
 
+	getNotices: function () {
+		this.currentPage++
+		request(config.SYSTEM.noticeList, {current_page: this.currentPage, page_size: PAGE_SIZE}).then((result) => {
+			if (result.data.system_msg_array.length === 0) return
+			let notices = this.data.notices
+			notices = notices.concat(result.data.system_msg_array)
+			this.setData({
+				notices: notices
+			})
+		})
 	},
 
 	/**
