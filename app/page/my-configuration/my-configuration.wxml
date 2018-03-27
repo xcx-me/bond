@@ -1,6 +1,14 @@
 <view>
-	<navigator url='../user-info/user-info'>修改资料</navigator>
-	<navigator url='../notice/notice'>系统消息</navigator>
+	<view wx:for='{{configurations}}' wx:key='key'>
+		<block>
+			<navigator url='{{item.url}}'>
+				<text>{{item.label}}</text>
+				<text wx:if='{{item.detailText}}'>{{item.detailText}}</text>
+				<text wx:if='{{item.unreadNumber > 0}}'>{{item.unreadNumber}}</text>
+			</navigator>
+		</block>
+	</view>
     <button type='primary' bindtap='navigateBack'>返回</button>
-	<button type='primary' bindtap='doRequest'>请求</button>
+	<button type='primary' bindtap='doExampleRequest'>示例请求</button>
+	<button open-type='contact'>联系客服</button>
 </view>
