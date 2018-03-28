@@ -1,5 +1,5 @@
 // app/ui/single-bond/single-bond.js
-var bond =require('../../util/store/bond.js')
+const bond =require('../../util/store/bond.js')
 
 Component({
   /**
@@ -9,6 +9,13 @@ Component({
 	bondInfo: {
 		type: Object,
 		value: {}
+	},
+	bondId: {
+		type: String,
+		value: '',
+		observer: function (newVal, oldVal) {
+			// console.log('observer....', newVal, oldVal)
+		}
 	}
   },
 

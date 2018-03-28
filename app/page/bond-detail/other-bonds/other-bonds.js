@@ -11,6 +11,10 @@ Component({
 	userId: {
 		type: String,
 		value: ''
+	},
+	detailUrl: {
+		type: String,
+		value: ''
 	}
   },
 

@@ -1,2 +1,22 @@
 <!--app/page/bond-detail/bond-question/bond-question.wxml-->
-<text>app/page/bond-detail/bond-question/bond-question.wxml</text>
+<view class="bond-question">
+	<view class='header clearfix'>
+		<text class="title">该债券共有{{questionList.length}}个问题</text>
+		<button class='btn-ask' size='mini' type='primary'>去提问</button>
+	</view>
+	<view class='question-list'>
+		<block wx:for='{{questionList}}' wx:for-item='questionItem' wx:key='ask_id'>
+			<view class="question-item clearfix">
+				<view class='icon'><view /></view>
+				<view class='content'>
+					<text>问：{{questionItem.content}}</text>
+					<button class='btn-answer' plain size='mini' type='default'>去回答</button>
+					<view class='answer-list'>
+						<BondAnswer answerList='{{questionItem.ans_array}}' />
+					</view>
+				</view>
+			</view>
+		</block>
+	</view>
+</view>
+

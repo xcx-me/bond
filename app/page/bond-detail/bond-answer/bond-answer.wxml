@@ -1,0 +1,11 @@
+<!--app/page/bond-detail/bond-answer/bond-answer.wxml-->
+<view class='bond-answer-component'>
+	<block wx:for='{{answerList}}' wx:for-item='answerItem' wx:key='ans_id'>
+		<view class="answer-item clearfix">
+			<image src='{{answerItem.face_url}}'/>
+			<text>{{answerItem.content}}</text>
+			<icon type='success' />
+			<text>{{answerItem.thumb_num}}</text>
+		</view>
+	</block>
+</view>

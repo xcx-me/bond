@@ -18,6 +18,10 @@ Component({
 	userId: {
 		type: String,
 		value: ''
+	},
+	from: {
+		type: String,
+		value: ''
 	}
   },
 
@@ -35,6 +39,8 @@ Component({
 	doClickBond: function(e){
 		let bondSimpleName = e.currentTarget.dataset.name
 		let userId = e.currentTarget.dataset.uid
+		// var pages=getCurrentPages()
+		// console.log(this.data.from, pages)
 		request(config.NEW_BOND.accumulateClick, {user_id: userId, bond_simple_name: bondSimpleName})
 	}
   }

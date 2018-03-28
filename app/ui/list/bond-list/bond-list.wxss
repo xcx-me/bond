@@ -1,1 +1,3 @@
-/* app/ui/list/bond-list/bond-list.wxss */
+.bond-list .bond-item {
+  margin-bottom: 10rpx;
+}

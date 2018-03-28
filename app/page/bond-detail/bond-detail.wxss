@@ -1,3 +1,6 @@
+.bond-detail-page {
+  font-size: small;
+}
 .bond-detail-page .tab-bar {
   overflow: hidden;
 }
@@ -15,11 +18,15 @@
 .bond-detail-page .tab-bar .question-total {
   color: #2196F3;
 }
-.bond-detail-page .content {
+.bond-detail-page .content .content-item {
   background: #FFFFFF;
+  overflow: auto;
+}
+.bond-detail-page .content .other-bond-list {
+  margin-top: 10rpx;
 }
 .bond-detail-page .share {
-  position: absolute;
+  position: fixed;
   right: 40rpx;
   bottom: 160rpx;
 }

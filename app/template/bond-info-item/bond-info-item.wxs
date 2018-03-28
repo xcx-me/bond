@@ -1,0 +1,38 @@
+
+
+module.exports = {
+	parseValue: function(field, detailInfo) {
+		var emptyValue = '--'
+		switch (field) {
+			case 'benefit' : 
+				var isNotLeftEmpty = detailInfo['left_benefit'] || detailInfo['left_benefit'] === '0';
+				var isNotRightEmpty= detailInfo['right_benefit'] || detailInfo['right_benefit'] === '0'
+				var leftValue = isNotLeftEmpty ? detailInfo['left_benefit'] : emptyValue;
+				var rightValue = isNotRightEmpty ? detailInfo['right_benefit'] : emptyValue
+				var value = leftValue + '-' + rightValue
+				return value;
+			case 'rating':
+				var subjectRating = detailInfo['subject_rating'] || emptyValue
+				var facilityRating = detailInfo['facility_rating'] || emptyValue
+				return  subjectRating+ '/' + facilityRating;
+			case 'company_type':
+				var company_type = detailInfo[field] || emptyValue
+				var companyTypeMap = {'--': '--', '1': '中央国企', '2': '地方国企', '3': '公众企业','4': '民营企业','5': '三资企业'}
+				return companyTypeMap[company_type]
+			case 'bond_type': 
+				var bondType = detailInfo[field] || emptyValue
+				if (bondType === emptyValue){
+					return emptyValue
+				} 
+				var value = ''
+				var bondTypeList = bondType.split('|')
+				var bondTypeMap = { '0': '', '--': '--','101': 'NCD','102': '政金债','103': '商行债','104': '次级债','105': '其他金融债','106': '企业债','107': 'ABS','108': '公司债','109': '小公募','110': '私募债','111': 'SCP','112': 'CP','113': 'MTN','114': 'PPN'}
+				for (var i=0; i < bondTypeList.length; i++) {
+					var type = bondTypeList[i]
+					value += bondTypeMap[type] + ' '
+				}
+				return value;
+			default: return detailInfo[field] || '--'
+		}
+	}
+}

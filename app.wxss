@@ -23,4 +23,14 @@ page .page-wrapper {
 	height: 0;
 	color: transparent;
 }
-	
+
+.clearfix {
+	zoom: 1;
+}
+
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+	height: 0;
+}

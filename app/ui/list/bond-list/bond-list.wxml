@@ -1,10 +1,10 @@
 <!--app/ui/list/bond-list/bond-list.wxml-->
-<scroll-view scroll-y="true" class='bond-list'>
+<view class='bond-list'>
 	<block wx:for='{{bondList}}' wx:for-item='bondItem' wx:key='bond_id'>
-		<view bindtap='doClickBond' data-uid='{{userId}}' data-name='{{bondItem.bond_simple_name}}'>
-			<navigator url='{{detailUrl}}?bid={{bondItem.bond_id}}&uid={{userId}}'>
-				<SingleBond bondInfo='{{bondItem}}'/>
+		<view class='bond-item' bindtap='doClickBond' data-uid='{{userId}}' data-id='{{bondItem.bond_id}}' data-name='{{bondItem.bond_simple_name}}'>
+			<navigator open-type='{{from === "detail" ? "redirect": "navigate"}}' url='{{detailUrl}}?bid={{bondItem.bond_id}}&uid={{userId}}'>
+				<SingleBond bondInfo='{{bondItem}}' bondId='{{bondItem.bond_id}}'/>
 			</navigator>
 		</view>
 	</block>
-</scroll-view>
+</view>

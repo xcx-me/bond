@@ -1,2 +1,11 @@
 <!--app/page/bond-detail/bond-info/bond-info.wxml-->
-<text>app/page/bond-detail/bond-info/bond-info.wxml</text>
+<import src="../../../template/bond-info-item/bond-info-item.wxml" />
+<view class='bond-info-component'>
+	<block wx:for='{{bondInfoFieldList}}' wx:for-item='infoItem' wx:key='name'>
+		<view class='infoItem {{infoItem.name}}'>
+			<block wx:for='{{infoItem.value}}' wx:for-item='item' wx:key='name'>
+				<template is='bondInfoItem' data='{{item: item, bondInfo: bondInfo}}'></template>
+			</block>
+		</view>
+	</block>
+</view>

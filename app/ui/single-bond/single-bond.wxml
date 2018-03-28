@@ -1,10 +1,7 @@
 <!--app/ui/single-bond/single-bond.wxml-->
-<wxs src="./single-bond-util.wxs" module="singleBondUtil" />
+<import src="../../template/bond-info-item/bond-info-item.wxml" />
 <view class='single-bond-component'>
 	<block wx:for='{{bondFieldList}}' wx:for-item='item' wx:key='name'>
-		<view class='item {{item.name}}'>
-			<text class='label'>{{item.label}}</text>
-			<text class='value'>{{singleBondUtil.parseValue(item.name, bondInfo)}}</text>
-		</view>
+		<template is='bondInfoItem' data='{{item: item, bondInfo: bondInfo}}'></template>
 	</block>
 </view>

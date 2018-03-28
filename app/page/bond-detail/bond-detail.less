@@ -1,4 +1,6 @@
 .bond-detail-page {
+	font-size: small;
+
 	.tab-bar {
 		overflow: hidden;
 		view {
@@ -20,11 +22,18 @@
 	}	
 
 	.content {
-		background: #FFFFFF;
+		.content-item {
+			background: #FFFFFF;
+			overflow: auto;
+		}
+		
+		.other-bond-list {
+			margin-top: 10rpx;
+		}
 	}
 
 	.share {
-		position: absolute;
+		position: fixed;
 		right: 40rpx;
 		bottom: 160rpx;
 

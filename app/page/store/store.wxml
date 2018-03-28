@@ -4,6 +4,6 @@
 		<StoreDetail navigatorUrl='' userId='{{userId}}' isHiddenSeller='{{isMyStore}}' needUpdate='{{needUpdate}}'/> 
 	</view>
 	<view class='store-bond-list'>
-		<BondList detailUrl='../bond-detail/bond-detail' bondList='{{bondList}}' userId='{{userId}}'/>
+		<BondList detailUrl='../bond-detail/bond-detail' from='store' bondList='{{bondList}}' userId='{{userId}}'/>
 	</view>
 </view>

@@ -1,4 +1,4 @@
 <!--app/page/bond-detail/other-bonds/other-bonds.wxml-->
 <view class="other-bonds-component">
-	<BondList detailUrl='../../bond-detail/bond-detail' bondList='{{bondList}}' userId='{{userId}}'/>
+	<BondList detailUrl='{{detailUrl}}' from='detail' bondList='{{bondList}}' userId='{{userId}}'/>
 </view>

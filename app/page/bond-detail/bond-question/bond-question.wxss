@@ -1,1 +1,69 @@
-/* app/page/bond-detail/bond-question/bond-question.wxss */
+.bond-question {
+  padding: 10rpx 5rpx;
+}
+.bond-question .header {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10rpx;
+}
+.bond-question .header .title {
+  height: 42rpx;
+  line-height: 42rpx;
+  position: relative;
+  left: 8rpx;
+}
+.bond-question .header .btn-ask {
+  position: absolute;
+  top: 0;
+  right: 8rpx;
+  line-height: 36rpx;
+  padding: 3rpx 20rpx;
+  background: none;
+  border: 1px solid #2196F3;
+  color: #2196F3;
+}
+.bond-question .question-list {
+  padding-left: 14rpx;
+}
+.bond-question .question-list .question-item {
+  float: left;
+  width: 100%;
+  padding: 10rpx 0;
+  border-left: 1px solid #CCCCCC;
+}
+.bond-question .question-list .question-item .icon {
+  position: relative;
+  float: left;
+  top: 16rpx;
+  margin-right: 10rpx;
+  left: -8rpx;
+}
+.bond-question .question-list .question-item .icon view {
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 50%;
+  background: #CCCCCC;
+}
+.bond-question .question-list .question-item .content {
+  float: left;
+  width: calc(100% - 20px);
+  font-size: small;
+}
+.bond-question .question-list .question-item .content text {
+  line-height: 36rpx;
+}
+.bond-question .question-list .question-item .btn-answer {
+  position: relative;
+  top: 6rpx;
+  line-height: 36rpx;
+  padding-left: 10rpx;
+  padding-right: 0;
+  background: none;
+  border: none;
+  outline: none;
+  text-decoration: underline;
+  color: #2196F3;
+}
+.bond-question .answer-list {
+  margin-top: 10rpx;
+}
