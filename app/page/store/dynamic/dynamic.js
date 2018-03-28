@@ -57,7 +57,7 @@ Component({
 				} else {
 					clearInterval(timeId)
 				}
-			}, 1*1000)
+			}, 60*1000)
 		},
 
 		clearDynamicTip: function (e) {

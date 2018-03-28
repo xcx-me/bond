@@ -1,26 +1,26 @@
 <!--app/page/detail/detail.wxml-->
-<view class="bond-detail-page page-wrapper">
+<view class='bond-detail-page page-wrapper'>
 	<view class='tab-bar'>
 		<view class='{{selectBarName === "info" ? "select": ""}}' bindtap='doChangeTab' data-name='info'><text>债券信息</text></view>
 		<view class='{{selectBarName === "question" ? "select": ""}}' bindtap='doChangeTab' data-name='question'><text>问答</text><text class="question-total">({{questionTotal}})</text></view>
 		<view class='{{selectBarName === "store" ? "select": ""}}' bindtap='doChangeTab' data-name='store'><text>店铺信息</text></view>
 	</view>
 	<view class='content'>
-		<scroll-view wx:if='{{selectBarName === "question"}}' class='question' >
-			<BondQuestion />
-		</scroll-view>
-		<scroll-view wx:elif='{{selectBarName === "store"}}' class='store'>
+		<view class='content-item' wx:if='{{selectBarName === "question"}}'>
+			<BondQuestion bondId='{{bondId}}'/>
+		</view>
+		<view class='content-item' wx:elif='{{selectBarName === "store"}}'>
 			<StoreDetail userId='{{userId}}' needUpdate='{{needUpdate}}'/> 
-		</scroll-view>
-		<scroll-view wx:else class='info'>
-			<BondInfo />
-		</scroll-view>
-	</view>
-	<view class='other-bond-list'>
-		<OtherBonds bondId='{{bondId}}' userId='{{userId}}'/>
+		</view>
+		<view class='content-item' wx:else class='info'>
+			<BondInfo bondId='{{bondId}}'/>
+		</view>
+		<view class='other-bond-list'>
+			<OtherBonds detailUrl='../bond-detail/bond-detail' bondId='{{bondId}}' userId='{{userId}}'/>
+		</view>
 	</view>
 	<view class='share'>
-		<button class='btn-share' id="shareBtn" open-type="share" type="primary" hover-class="other-button-hover">分享</button>
+		<button class='btn-share' id='shareBtn' open-type='share' type='primary' hover-class='other-button-hover'>分享</button>
 	</view>
 </view>
 

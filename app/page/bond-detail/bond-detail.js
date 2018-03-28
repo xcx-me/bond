@@ -1,39 +1,20 @@
 // app/page/detail/detail.js
 Page({
-  data: {
-	bondId: '',
-	userId: '',
-	selectBarName: 'info',
-	questionTotal: '0'
-  },
-
-  doChangeTab: function (e) {
-	this.setData({
-		selectBarName: e.currentTarget.dataset.name
-	})
-  },
-
-  onShareAppMessage: function (ops) {
-	if (ops.from === 'button') {
-	  // 来自页面内转发按钮
-	  console.log(ops.target)
-	  console.log('buttton')
-	} else {
-		console.log('onShareAppMessage.......')
-	}
-	return {
-	  title: 'Qtrade一级债小程序',
-	  desc: 'desc....',
-	  path: '/app/page/bond-detail/bond-detail?bid=' + this.data.bondId +'&uid=' + this.data.uid + '&bname=' + this.data.selectBarName,
-	  success: function (res) {
-		// 转发成功
-		console.log("转发成功:" + JSON.stringify(res));
+	options: {
+		multipleSlots: true // 在组件定义时的选项中启用多slot支持
 	  },
-	  fail: function (res) {
-		// 转发失败
-		console.log("转发失败:" + JSON.stringify(res));
-	  }
-	}
+
+	data: {
+		bondId: '',
+		userId: '',
+		selectBarName: 'info',
+		questionTotal: '0'
+	},
+
+	doChangeTab: function (e) {
+		this.setData({
+			selectBarName: e.currentTarget.dataset.name
+		})
   },
 
   /**
@@ -60,8 +41,9 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function (options) {
+  	console.log('onShow...', options)
+  	console.log(this.data.bondId)
   },
 
   /**
@@ -95,7 +77,26 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function (ops) {
+	if (ops.from === 'button') {
+		// 来自页面内转发按钮
+		console.log(ops.target)
+		console.log('buttton')
+	  } else {
+		  console.log('onShareAppMessage.......')
+	  }
+	  return {
+		title: 'Qtrade一级债小程序',
+		desc: 'desc....',
+		path: '/app/page/bond-detail/bond-detail?bid=' + this.data.bondId +'&uid=' + this.data.uid + '&bname=' + this.data.selectBarName,
+		success: function (res) {
+		  // 转发成功
+		  console.log("转发成功:" + JSON.stringify(res));
+		},
+		fail: function (res) {
+		  // 转发失败
+		  console.log("转发失败:" + JSON.stringify(res));
+		}
+	  }
   }
 })

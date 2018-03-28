@@ -1,0 +1,7 @@
+<wxs src="./bond-info-item.wxs" module="bondInfoItemUtil" />
+<template name='bondInfoItem'>
+	<view class='item {{item.name}}'>
+		<text class='label'>{{item.label}}</text>
+		<text class='value'>{{bondInfoItemUtil.parseValue(item.name, bondInfo)}}</text>
+	</view>
+</template>

@@ -1,1 +1,4 @@
-/* app/page/bond-detail/bond-info/bond-info.wxss */
+.bond-info-component .infoItem {
+  background: #FFFFFF;
+  margin-top: 10rpx;
+}

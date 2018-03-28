@@ -26,7 +26,7 @@
 				<text>欢迎来QTrade上开通店铺，并发布报价</text>
 			</view>
             <navigator url='../register-store-complete/register-store-complete'>
-				<button class='shop-button' hover-class='button-hover' disabled='{{!isAgreedQtrade}}'size='mini' type='primary'>立马开店</button>
+				<button class='shop-button' hover-class='button-hover' disabled='{{!isAgreedQtrade}}' size='mini' type='primary'>立马开店</button>
 			</navigator>
 			<view class='protocol'>
 				<checkbox-group bindchange="checkboxChange">
