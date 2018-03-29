@@ -1,9 +1,74 @@
+@import '../../template/bond-info-item/bond-info-item.less';
+@import '../../template/seller-info/seller-template.less';
+
 .single-bond-component {
 	background: #FFFFFF;
 	margin-top: 10rpx;
+	padding: 10rpx 20rpx;
 	font-size: small;
 
-	.item {
-		padding: 5rpx 0 ;
+	.pallet {
+		&.content {
+			margin: 10rpx 0;
+			padding: 10rpx 0;
+			border-top: 1rpx solid #D8D8D8;
+			border-bottom: 1rpx solid #D8D8D8;
+		}
 	}
+	.bond-info-item-tpl {
+		float: left;
+		
+		&.bond_simple_name {
+			width: 60%;
+		}
+
+		&.benefit {
+			float: right;
+			width: 40%;
+			text-align: right;
+		}
+
+		&.rating,
+		{
+			width: 33.33333%;
+		}
+
+		&.deadline {
+			width: 33.33333%;
+			text-align: center;
+		}
+
+		&.issue_total {
+			width: 33.33333%;
+			text-align: right;
+		}
+
+		&.bond_type {
+			width: 100%;
+		}
+
+		&.issue_time {
+			width: 100%;
+		}
+
+		&.click_num,
+		&.share_num {
+			width: 45%;
+		}
+
+		&.icon-delete {
+			width: 10%;
+		}
+	}
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+	height: 0;
 }

@@ -1,12 +1,23 @@
 module.exports = {
 	bondFieldList: [
-		{name: 'bond_simple_name', label:''},
-		{name: 'benefit', label: ''},
-		{name: 'rating', label: ''},
-		{name: 'deadline', label: ''},
-		{name: 'issue_total', label: ''},
-		{name: 'bond_type', label: '债券品种：'},
-		{name: 'issue_time', label: '发行时间：'}
+		{
+			name: 'header',
+			value: [
+				{name: 'bond_simple_name', label:''},
+				{name: 'benefit', label: ''},
+			]
+		},
+
+		{
+			name: 'content',
+			value: [
+				{name: 'rating', label: ''},
+				{name: 'deadline', label: ''},
+				{name: 'issue_total', label: ''},
+				{name: 'bond_type', label: '债券品种：'},
+				{name: 'issue_time', label: '发行时间：'}
+			]
+		}
 	],
 
 	bondInfoFieldList: [
@@ -16,7 +27,7 @@ module.exports = {
 				{name: 'bond_simple_name', label:''},
 				{name: 'benefit', label: '参考收益(%)：'},
 				{name: 'rating', label: '主/债评级：'},
-				{name: 'issue_total', label: '发行量(亿)'},
+				{name: 'issue_total', label: '发行量(亿)：'},
 				{name: 'deadline', label: '发行期限：'},
 				{name: 'issue_time', label: '发行时间：'},
 				{name: 'bid_end', label: '截标时间：'},
@@ -28,7 +39,7 @@ module.exports = {
 			]
 		}, 
 		{
-			name: 'seller',
+			name: 'saleInfo',
 			value: [
 				{name: 'little_range', label: '小区间：'},
 				{name: 'early_end', label: '提前截标：'},
@@ -36,7 +47,7 @@ module.exports = {
 			]
 		},
 		{
-			name: 'saleInfo',
+			name: 'saleDetail',
 			value: [
 				{name: 'cal_freq', label: '计息频率：'},
 				{name: 'pay_freq', label: '付息频率：'},
@@ -44,8 +55,7 @@ module.exports = {
 				{name: 'specific_items', label: '特殊条款：'},
 				{name: 'credit_guarantee', label: '增信担保：'},
 				{name: 'zhu_cheng', label: '主承：'},
-				{name: 'bond_full_name', label: '债券全称：'},
-				{name: 'attached', label: '附件：'},
+				{name: 'bond_full_name', label: '债券全称：'}
 			]
 		}
 	],

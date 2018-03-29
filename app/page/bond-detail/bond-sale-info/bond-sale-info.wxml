@@ -1,0 +1,17 @@
+<!--app/page/bond-detail/bond-sale-info/bond-sale-info.wxml-->
+<import src='../../../template/bond-info-item/bond-info-item.wxml' />
+<view class='bond-sale-info'>
+	<block wx:for='{{bondSaleInfo}}' wx:for-item='saleInfo' wx:key='index'>
+		<view class='item'>
+			<text class="title">销售信息</text>
+			<view>
+				<image src='{{saleInfo.face_url}}'/>
+				<icon class='v-user' wx:if='{{saleInfo.v_user}}' style='background: transparent url("{{vUrl}}") no-repeat 0 -800px;'/>
+				<text>{{saleInfo.sale_name}}_{{saleInfo.company_name}}</text>
+			</view>
+			<block wx:for='{{fieldList}}' wx:for-item='item' wx:key='name'>
+				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: saleInfo}}'></template>
+			</block>
+		</view>
+	</block>
+</view>

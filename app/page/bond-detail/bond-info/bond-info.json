@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+	  "BondSaleInfo": "../bond-sale-info/bond-sale-info",
+	  "BondAttached": "../bond-attached/bond-attached"
+  }
 }

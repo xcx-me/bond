@@ -6,22 +6,31 @@
 		<view class='{{selectBarName === "store" ? "select": ""}}' bindtap='doChangeTab' data-name='store'><text>店铺信息</text></view>
 	</view>
 	<view class='content'>
+		<view class='content-item' wx:if='{{selectBarName === "info"}}' class='info'>
+			<BondInfo vUrl='{{vUrl}}' bondId='{{bondId}}'/>
+		</view>
 		<view class='content-item' wx:if='{{selectBarName === "question"}}'>
 			<BondQuestion bondId='{{bondId}}'/>
 		</view>
-		<view class='content-item' wx:elif='{{selectBarName === "store"}}'>
-			<StoreDetail userId='{{userId}}' needUpdate='{{needUpdate}}'/> 
-		</view>
-		<view class='content-item' wx:else class='info'>
-			<BondInfo bondId='{{bondId}}'/>
+		<view class='content-item' hidden='{{selectBarName !== "store"}}'>
+			<StoreDetail
+				vUrl='{{vUrl}}'
+				needNavigatorIndex
+				userId='{{uid}}'
+				needUpdate='{{needUpdate}}'
+				bindevent='onUpdateStoreDetail'/> 
 		</view>
 		<view class='other-bond-list'>
-			<OtherBonds detailUrl='../bond-detail/bond-detail' bondId='{{bondId}}' userId='{{userId}}'/>
+			<OtherBonds
+				detailUrl='../bond-detail/bond-detail'
+				isMyStore='{{isMyStore}}'
+				bondId='{{bondId}}'
+				uid='{{uid}}'
+				userId='{{userId}}'
+			/>
 		</view>
 	</view>
-	<view class='share'>
-		<button class='btn-share' id='shareBtn' open-type='share' type='primary' hover-class='other-button-hover'>分享</button>
-	</view>
+	<ShareButton />
 </view>
 
 

@@ -4,6 +4,7 @@
 		"BondInfo": "./bond-info/bond-info",
 		"BondQuestion": "./bond-question/bond-question",
 		"OtherBonds": "./other-bonds/other-bonds",
-		"StoreDetail": "../store/detail/detail"
+		"StoreDetail": "../store/detail/detail",
+		"ShareButton": "../../ui/share-button/share-button"
 	}
 }

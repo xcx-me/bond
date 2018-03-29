@@ -10,7 +10,7 @@
 				<view class='icon'><view /></view>
 				<view class='content'>
 					<text>问：{{questionItem.content}}</text>
-					<button class='btn-answer' plain size='mini' type='default'>去回答</button>
+					<button class='btn-answer btn-no-border' plain size='mini' type='default'>去回答</button>
 					<view class='answer-list'>
 						<BondAnswer answerList='{{questionItem.ans_array}}' />
 					</view>

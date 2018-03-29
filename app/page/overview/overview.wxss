@@ -1,5 +1,21 @@
+.seller-info-tpl .face-url {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 100%;
+}
+.seller-info-tpl .v-user {
+  position: relative;
+  top: 12rpx;
+  left: -20rpx;
+  padding: 18rpx;
+  background-size: 90rpx;
+}
+.seller-info-tpl .v-user.big {
+  background-size: 90rpx;
+  background-position: 0 -1120px;
+}
 .seller-info-tpl .user-name {
-  font-size: xx-large;
+  font-size: x-large;
 }
 .seller-info-tpl .company-name {
   font-size: small;
@@ -8,7 +24,7 @@
   height: 100%;
 }
 .overview-page .pallet {
-  padding: 10px;
+  padding: 10rpx;
   background: #FFFFFF;
 }
 .overview-page .pallet-has-slite-line {

@@ -4,34 +4,75 @@ module.exports = {
 	parseValue: function(field, detailInfo) {
 		var emptyValue = '--'
 		switch (field) {
+			case 'little_range':
 			case 'benefit' : 
-				var isNotLeftEmpty = detailInfo['left_benefit'] || detailInfo['left_benefit'] === '0';
-				var isNotRightEmpty= detailInfo['right_benefit'] || detailInfo['right_benefit'] === '0'
-				var leftValue = isNotLeftEmpty ? detailInfo['left_benefit'] : emptyValue;
-				var rightValue = isNotRightEmpty ? detailInfo['right_benefit'] : emptyValue
+				var orginLeft ='' 
+				var orginRight = ''
+				if (field === 'benefit') {
+					orginLeft = detailInfo['left_benefit']
+					orginRight = detailInfo['right_benefit']
+				} else if (field === 'little_range') {
+					orginLeft = detailInfo['little_left']
+					orginRight = detailInfo['little_right']
+				}
+				var isNotLeftEmpty = orginLeft || orginLeft === '0';
+				var isNotRightEmpty= orginRight || orginRight === '0'
+				var leftValue = isNotLeftEmpty ? orginLeft : emptyValue;
+				var rightValue = isNotRightEmpty ? orginRight : emptyValue
 				var value = leftValue + '-' + rightValue
 				return value;
 			case 'rating':
 				var subjectRating = detailInfo['subject_rating'] || emptyValue
 				var facilityRating = detailInfo['facility_rating'] || emptyValue
 				return  subjectRating+ '/' + facilityRating;
+			case 'early_end':
+				var origValue = detailInfo[field] || emptyValue
+				var value = origValue
+				if (origValue === emptyValue){
+					value = '0';
+				}
+				return value + '分钟';
 			case 'company_type':
-				var company_type = detailInfo[field] || emptyValue
-				var companyTypeMap = {'--': '--', '1': '中央国企', '2': '地方国企', '3': '公众企业','4': '民营企业','5': '三资企业'}
-				return companyTypeMap[company_type]
-			case 'bond_type': 
-				var bondType = detailInfo[field] || emptyValue
-				if (bondType === emptyValue){
-					return emptyValue
+			case 'bond_type': 	
+			case 'public_place':
+			case 'specific_items':
+			case 'rate_way':
+			case 'issue_way':
+			case 'sale_type':
+				var origValue = detailInfo[field] || emptyValue
+				if (origValue === emptyValue){
+					return emptyValue;
 				} 
 				var value = ''
-				var bondTypeList = bondType.split('|')
-				var bondTypeMap = { '0': '', '--': '--','101': 'NCD','102': '政金债','103': '商行债','104': '次级债','105': '其他金融债','106': '企业债','107': 'ABS','108': '公司债','109': '小公募','110': '私募债','111': 'SCP','112': 'CP','113': 'MTN','114': 'PPN'}
-				for (var i=0; i < bondTypeList.length; i++) {
-					var type = bondTypeList[i]
-					value += bondTypeMap[type] + ' '
+				var valueList = origValue.split('|')
+				var allMap = {
+					'company_type':  {'1': '中央国企', '2': '地方国企', '3': '公众企业','4': '民营企业','5': '三资企业'}
+					'bond_type': { '0': '','101': 'NCD','102': '政金债','103': '商行债','104': '次级债','105': '其他金融债','106': '企业债','107': 'ABS','108': '公司债','109': '小公募','110': '私募债','111': 'SCP','112': 'CP','113': 'MTN','114': 'PPN'},
+					'public_place': {'1': '银行间','2': '上交所','3': '深交所','4': '其他'},
+					'specific_items': {'1': '调整票面','2': '赎回','3': '延期','4': '交叉违约'},
+					'rate_way': {'1': '利随本清','2': '固定利率','3': '浮动利率','4': '累积利率'},
+					'issue_way': {'1': '簿记建档','2': '荷兰式','3': '混合式'},
+					'sale_type': {	'1': '分销','2': '上市'}
+				}
+				var valueMap = allMap[field]
+				for (var i=0; i < valueList.length; i++) {
+					var type = valueList[i]
+					value += valueMap[type] + ' '
 				}
 				return value;
+			case 'hot':
+				var origValue = detailInfo['click_num'] || emptyValue
+				if (origValue === emptyValue){
+					value = 0;
+				}
+				value = parseInt(origValue)
+				if (value <= 10) {
+					return 'info';
+				} else if (value > 10 && value <= 50){
+					return 'warn';
+				} else {
+					return 'search';
+				}
 			default: return detailInfo[field] || '--'
 		}
 	}

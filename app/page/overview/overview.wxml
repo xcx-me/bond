@@ -1,16 +1,14 @@
 <import src="../../template/seller-info/seller-template.wxml" />
 
 <view class='overview-page page-wrapper'>
-	<view class='pallet'>
-		<block wx:if='{{storeRegistered}}'>
-			<StoreDetail navigatorUrl='../my-configuration/my-configuration' userId='{{userId}}' needUpdate='{{needUpdate}}'/>
-		</block>
-		<block wx:else >
-		 	<view class='personal-info-pallet'>
-				 <template is='sellerInfoTpl' data='{{url: "../my-configuration/my-configuration", userName: userName, companyName: companyName}}'></template>
-            </view>
-		</block>
-	</view>
+	<block wx:if='{{storeRegistered}}'>
+		<StoreDetail navigatorUrl='../my-configuration/my-configuration' vUrl='../../asset/image/qtrade/sprites_01.png' userId='{{userId}}' needUpdate='{{needUpdate}}'/>
+	</block>
+	<block wx:else >
+		<view class='personal-info-pallet pallet' hidden='{{showLoading}}'>
+			<template is='sellerInfoTpl' data='{{...userInfo}}'></template>
+        </view>
+	</block>
 	
     <view class='recent-notice pallet'>
         <view wx:if='{{storeRegistered}}'>
@@ -25,9 +23,10 @@
 			<view class='tips'>
 				<text>欢迎来QTrade上开通店铺，并发布报价</text>
 			</view>
-            <navigator url='../register-store-complete/register-store-complete'>
+			<button class='shop-button' hover-class='button-hover' disabled='{{!isAgreedQtrade}}' size='mini' type='primary' bindtap="doOpenStore">立马开店</button>
+            <!-- <navigator url='../register-store-complete/register-store-complete'>
 				<button class='shop-button' hover-class='button-hover' disabled='{{!isAgreedQtrade}}' size='mini' type='primary'>立马开店</button>
-			</navigator>
+			</navigator> -->
 			<view class='protocol'>
 				<checkbox-group bindchange="checkboxChange">
 					<label wx:for="{{checkboxItems}}" wx:key="value">

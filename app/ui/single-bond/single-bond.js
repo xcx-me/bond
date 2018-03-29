@@ -16,6 +16,14 @@ Component({
 		observer: function (newVal, oldVal) {
 			// console.log('observer....', newVal, oldVal)
 		}
+	},
+	isMine: {
+		type: Boolean,
+		value: ''
+	},
+	from: {
+		type: String,
+		value: ''
 	}
   },
 
@@ -27,7 +35,7 @@ Component({
   },
 
   ready: function () {
-	//   console.log(this.data.bondInfo)
+	console.log('ready...', this.data.bondInfo)
   },
 
   /**

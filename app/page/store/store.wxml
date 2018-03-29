@@ -1,9 +1,24 @@
 <!--app/page/store/store.wxml-->
-<view class='store-page page-wrapper'>
+<view class='store-page page-wrapper {{isQtrade? "qtrade-store" : ""}}'>
 	<view class='store-header'>
-		<StoreDetail navigatorUrl='' userId='{{userId}}' isHiddenSeller='{{isMyStore}}' needUpdate='{{needUpdate}}'/> 
+		<StoreDetail 
+		navigatorUrl=''
+		vUrl='{{vUrl}}'
+		userId='{{uid}}'
+		isHiddenSeller='{{isMyStore}}'
+		needUpdate='{{needUpdate}}'
+		needNavigatorIndex='{{from === "share"}}'
+		bindevent='onUpdateStoreDetail'/> 
 	</view>
-	<view class='store-bond-list'>
-		<BondList detailUrl='../bond-detail/bond-detail' from='store' bondList='{{bondList}}' userId='{{userId}}'/>
+	<!-- <loading wx:if="{{showLoading}}">加载中</loading> -->
+	<view class='store-bond-list' hidden='{{showLoading}}'>
+		<BondList
+			detailUrl='../bond-detail/bond-detail'
+			from='store'
+			isMine='{{isMyStore}}'
+			bondList='{{bondList}}'
+			uid='{{uid}}'
+			userId='{{userId}}'/>
 	</view>
+	<ShareButton hidden='{{showLoading}}'/>
 </view>
