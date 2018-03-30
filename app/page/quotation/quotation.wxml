@@ -2,14 +2,8 @@
 <view class="send-quote-page">
 	<view class="quotation-form" wx:if="{{isOpenMyShop}}">
 
-		<FormViewerEditor descriptors="{{descriptors}}" modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}"/>  
+		<BondFormEditor descriptors="{{descriptors}}" modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}"/>  
 
-		<view>
-			111
-		</view>
-		<view>
-			222
-		</view>
 		<!-- <view>
 			<text class="bond-type">债券品种：{{itemsCheckedValue}}</text>
 			<checkbox-group bindchange="checkboxChange">
@@ -19,7 +13,7 @@
 			</checkbox-group>
 		</view> -->
 
-		<view class="row-wrap">
+		<!-- <view class="row-wrap">
 			<text class="label">利率方式：</text>
 			<picker bindchange="bindCasPickerChange" value="{{casIndex1}}" range="{{casArray}}">
 				<view class="select-button">
@@ -29,7 +23,7 @@
 			<view class="section {{reply?'on':'off'}}">
 				<input name="other" placeholder="请输入" type="text"/>
 			</view>
-		</view>
+		</view> -->
 
 		<view>
 			<toastedit id='toastedit'>{{toastedit}}</toastedit>

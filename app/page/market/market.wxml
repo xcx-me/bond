@@ -1,3 +1,22 @@
-<view>
-    市场页
+<view class='market-page'>
+	<!-- 市场页 -->
+	<view class='market-tab'>
+		<view class="market-tab-list {{currentTab == 0 ? 'on' : ''}}" data-current='0' bindtap='swichNav'>询量</view>
+		<view class="market-tab-list {{currentTab == 1 ? 'on' : ''}}" data-current='1' bindtap='swichNav'>公告</view>
+		<view class="market-tab-list {{currentTab == 2 ? 'on' : ''}}" data-current='2' bindtap='swichNav'>发行</view>
+	</view>
+
+	<swiper current='{{currentTab}}' class='swaiper-tab-box' duration='300' style='height: {{winHeight}}px' bindchange='bindChangeTab'>
+		<swiper-item>
+			<view>这是询量。</view>
+		</swiper-item>
+		<swiper-item>
+			<view>
+				这是公告。。
+			</view>
+		</swiper-item>
+		<swiper-item>
+			<view>这是发行。。。</view>
+		</swiper-item>
+	</swiper>
 </view>

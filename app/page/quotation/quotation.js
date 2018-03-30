@@ -31,7 +31,7 @@ Page({
 				change: ''
 			},
 			{
-				fieldName: 'text333',
+				fieldName: 'text3',
 				uiType: 't333',
 				value: '',
 				change: ''
@@ -45,8 +45,6 @@ Page({
 
 		items: bondType,
 		itemsCheckedValue: '',
-		casArray: ['利随本清', '固定利率', '浮动利率', '累积利率'],
-		casIndex: -1
 	},
 
 	openMyShop: function () {
@@ -67,18 +65,6 @@ Page({
 	// 	})
 	// 	console.log('债券品种：', checkedItem)
 	// },
-
-	bindCasPickerChange: function (e) {
-		console.log('----checked: ', this.data.casArray[e.detail.value])
-		if (e.detail.value == 2) {
-			this.setData({ reply: true })
-		} else {
-			this.setData({ reply: false })
-		}
-		this.setData({
-			casIndex: e.detail.value
-		})
-	},
 
 	handleShowToast: function () {
 		this.toastedit = this.selectComponent('#toastedit')

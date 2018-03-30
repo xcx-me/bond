@@ -1,0 +1,53 @@
+.bond-form-editor {
+  /* -------------- */
+}
+.bond-form-editor input {
+  border: 1px solid #DDDDDD;
+}
+.bond-form-editor .label-area {
+  width: 30%;
+  display: flex;
+}
+.bond-form-editor .editor-area {
+  width: 60%;
+  display: flex;
+}
+.bond-form-editor .editor-input {
+  border: 1px solid #DDDDDD;
+}
+.bond-form-editor .bond-type {
+  display: inline-block;
+}
+.bond-form-editor .rate-method {
+  border: 1rpx solid #DDDDDD;
+}
+.bond-form-editor .rate-method .label {
+  display: inline-block;
+}
+.bond-form-editor .rate-method picker {
+  display: inline-block;
+  padding: 2rpx;
+  background-color: #f1f1f1;
+}
+.bond-form-editor .rate-method picker .select-button {
+  display: inline-block;
+  width: 200rpx;
+  height: 35rpx;
+}
+.bond-form-editor .section {
+  display: inline-block;
+  vertical-align: top;
+  width: 100rpx;
+  font-size: 28rpx;
+  margin-left: 10rpx;
+  margin-top: 5rpx;
+}
+.bond-form-editor .section input {
+  border: 1rpx solid #DDDDDD;
+}
+.bond-form-editor .on {
+  visibility: show;
+}
+.bond-form-editor .off {
+  visibility: hidden;
+}
