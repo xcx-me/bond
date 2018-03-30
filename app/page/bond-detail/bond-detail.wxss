@@ -6,8 +6,10 @@
 }
 .bond-detail-page .tab-bar view {
   float: left;
+  font-size: 30rpx;
   width: 33.3%;
-  padding: 10rpx 0;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
 }
 .bond-detail-page .tab-bar view.active {

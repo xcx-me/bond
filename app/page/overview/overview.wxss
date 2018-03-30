@@ -35,11 +35,13 @@
   padding-bottom: 10rpx;
 }
 .overview-page .mystore-pallet navigator {
-  padding: 10rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 20rpx;
   cursor: pointer;
 }
 .overview-page .dynamic-pallet {
-  padding-top: 20rpx;
+  padding: 20rpx;
 }
 .overview-page .recent-notice {
   margin-top: 20rpx;

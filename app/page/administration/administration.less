@@ -1,0 +1,60 @@
+.administration-page {
+	padding: 20rpx;
+	height: calc(~'100% - 40rpx');
+
+	.bond-list-pallet {
+		width: calc(~'100% - 40rpx');
+		height: calc(~'100% - 40rpx');
+		padding: 20rpx;
+		background: #FFFFFF;
+
+		.item {
+			float: left;
+			width: 30%;
+
+			&.operator {
+				width: 40%;
+			}
+		}
+
+		.header {
+			height: 80rpx;
+			line-height: 80rpx;
+			border-bottom: 1px solid #D8D8D8;
+		}
+
+		.content {
+			font-size: 30rpx;
+
+			.item {
+				height: 80rpx;
+				line-height: 80rpx;
+
+				&.operator {
+					button {
+						position: relative;
+						top: 10rpx;
+					}
+					
+					.btn-more {
+						margin-left: 20rpx;
+					}
+				}
+			}
+		}
+	}
+	
+	.bond-send-quote {
+		width:100rpx;
+		height:100rpx;
+		line-height: 100rpx;
+		text-align: center;
+		border-radius:50%;
+		position:absolute;
+		right:50rpx;
+		bottom:50rpx;
+		background-color: #2196F3;
+		color: #FFFFFF;
+	}
+	
+}
