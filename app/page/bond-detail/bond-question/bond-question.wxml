@@ -1,7 +1,7 @@
 <!--app/page/bond-detail/bond-question/bond-question.wxml-->
 <view class="bond-question">
-	<view class='header clearfix'>
-		<text class="title">该债券共有{{questionList.length}}个问题</text>
+	<view class='header'>
+		<text class="title">该债券共有{{questionTotal}}个问题</text>
 		<button class='btn-ask' size='mini' type='primary'>去提问</button>
 	</view>
 	<view class='question-list'>

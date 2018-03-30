@@ -12,32 +12,28 @@ Page({
 		userId: '',
 		isMyStore: false,
 		isQtrade: false,
-		selectBarName: 'info',
+		needUpdate: false,
+		currentTabId: 'detail',
 		questionTotal: '0',
-		needUpdate: true,
-		vUrl: '../../asset/image/qtrade/sprites_01.png'
+		vUrl: '../../asset/image/qtrade/sprites_01.png',
+		winHeight: 0,
+		tabIdList:['detail', 'question', 'store']
 	},
 
-	doChangeTab: function (e) {
-		if (e.currentTarget.dataset.name === 'question') {
-			this.getQuestionTotal()
-		}
+	onSwitchTab: function (e) {
+		let tabId = e.currentTarget.dataset.tid
+		// if (tabId === 'question') {
+		// 	this.getQuestionTotal()
+		// }
 
-		if (e.currentTarget.dataset.name === 'store') {
-			this.setData({
-				selectBarName: e.currentTarget.dataset.name,
-				needUpdate: true,
-			})
-		} else {
-			this.setData({
-				selectBarName: e.currentTarget.dataset.name,
-				needUpdate: false
-			})
-		}	
+		this.setData({
+			currentTabId: tabId,
+			needUpdate: true,
+		})
   	},
 
   	getQuestionTotal: function () { 
-		request(/*config.NEW_BOND.questionTotalQuery*/ config.NEW_BOND.questionQuery, {
+		request(config.NEW_BOND.questionTotalQuery, {
 			bond_id: this.data.bondId
 		}).then((result) => {
 			if (String(result.data.ret) === '0') {
@@ -59,6 +55,9 @@ Page({
 		})
   },
 
+  bindChangeTab: function (e) {
+	  console.log('bind', e)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -67,9 +66,22 @@ Page({
 		bondId: options.bid,
 		uid: options.uid,
 		userId: options.uid,
-		selectBarName: options.bname ? options.bname : 'info'
+		currentTabId: options.tid ? options.tid : 'detail'
 	})
 	this.getQuestionTotal()
+
+	var that = this;
+
+		/** 
+		 * 获取系统信息 
+		 */  
+		wx.getSystemInfo({
+			success: function(res) {
+				that.setData({
+					winHeight: res.windowHeight - (res.windowWidth / 750 * 80)
+				})
+			}
+		})
   },
 
   /**
@@ -90,7 +102,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+	console.log('onShow...', this.data.userId)
   },
 
   /**
@@ -126,7 +138,7 @@ Page({
 		  console.log('onShareAppMessage.......')
 	  }
 
-	  let path = '/app/page/bond-detail/bond-detail?from=share&bid=' + this.data.bondId +'&uid=' + this.data.userId + '&bname=' + this.data.selectBarName
+	  let path = '/app/page/bond-detail/bond-detail?from=share&bid=' + this.data.bondId +'&uid=' + this.data.userId + '&tid=' + this.data.currentTabId
 	  console.log(path) 
 	  return {
 		title: 'Qtrade一级债小程序',

@@ -11,11 +11,21 @@ Component({
 		bondId: {
 			type: String,
 			value: ''
-		}
+		},
+		needUpdate: {
+			type: Boolean,
+			value: false,
+			observer: function(newVal, oldVal){
+				if (newVal) {
+					this.getQuestionList()
+				}
+			}
+		},
   	},
 
   	data: {
-		questionList: []
+		questionList: [],
+		questionTotal: 0,
   	},
 
   	ready: function () {
@@ -29,7 +39,8 @@ Component({
 			}).then((result) => {
 				if (String(result.data.ret) === '0') {
 					this.setData({
-						questionList: result.data.retdata.ask_array
+						questionList: result.data.retdata.ask_array,
+						questionTotal: result.data.retdata.ask_array.length
 					})
 				}
 			})
