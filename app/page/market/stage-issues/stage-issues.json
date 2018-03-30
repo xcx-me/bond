@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+	"Filter": "../filter/filter",
+	"DateBar": "../date-bar/date-bar"
+  }
+}

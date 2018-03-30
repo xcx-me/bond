@@ -30,6 +30,9 @@
 .administration-page .bond-list-pallet .content .item.operator button {
   position: relative;
   top: 10rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 26rpx;
 }
 .administration-page .bond-list-pallet .content .item.operator .btn-more {
   margin-left: 20rpx;

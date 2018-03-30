@@ -38,10 +38,14 @@ Component({
 				bond_id: this.data.bondId
 			}).then((result) => {
 				if (String(result.data.ret) === '0') {
+					let questionList = result.data.retdata.ask_array
+					let questionTotal = questionList.length
 					this.setData({
-						questionList: result.data.retdata.ask_array,
-						questionTotal: result.data.retdata.ask_array.length
+						questionList: questionList,
+						questionTotal: questionTotal
 					})
+
+					this.triggerEvent('updateTotalEvent', questionTotal)
 				}
 			})
 		}

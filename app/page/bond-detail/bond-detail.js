@@ -12,7 +12,6 @@ Page({
 		userId: '',
 		isMyStore: false,
 		isQtrade: false,
-		needUpdate: false,
 		currentTabId: 'detail',
 		questionTotal: '0',
 		vUrl: '../../asset/image/qtrade/sprites_01.png',
@@ -22,13 +21,8 @@ Page({
 
 	onSwitchTab: function (e) {
 		let tabId = e.currentTarget.dataset.tid
-		// if (tabId === 'question') {
-		// 	this.getQuestionTotal()
-		// }
-
 		this.setData({
-			currentTabId: tabId,
-			needUpdate: true,
+			currentTabId: tabId
 		})
   	},
 
@@ -41,6 +35,13 @@ Page({
 					questionTotal: result.data.retdata.ask_array.length
 				})
 			}
+		})
+	},
+
+	_updateQuestionTotalEvent: function (e) {
+		let questionTotal =  e.detail
+		this.setData({
+			questionTotal: questionTotal
 		})
 	},
 
