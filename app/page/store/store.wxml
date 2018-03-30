@@ -18,7 +18,8 @@
 			isMine='{{isMyStore}}'
 			bondList='{{bondList}}'
 			uid='{{uid}}'
-			userId='{{userId}}'/>
+			userId='{{userId}}'
+			bind:deleteBondEvent='_deleteBondEvent'/>
 	</view>
 	<ShareButton hidden='{{showLoading}}'/>
 </view>

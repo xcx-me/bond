@@ -5,21 +5,21 @@
 		<view class='{{selectBarName === "question" ? "select": ""}}' bindtap='doChangeTab' data-name='question'><text>问答</text><text class="question-total">({{questionTotal}})</text></view>
 		<view class='{{selectBarName === "store" ? "select": ""}}' bindtap='doChangeTab' data-name='store'><text>店铺信息</text></view>
 	</view>
-	<view class='content'>
-		<view class='content-item' wx:if='{{selectBarName === "info"}}' class='info'>
+	<swiper class='content'>
+		<swiper-item class='content-item' wx:if='{{selectBarName === "info"}}' class='info'>
 			<BondInfo vUrl='{{vUrl}}' bondId='{{bondId}}'/>
-		</view>
-		<view class='content-item' wx:if='{{selectBarName === "question"}}'>
+		</swiper-item>
+		<swiper-item class='content-item' wx:if='{{selectBarName === "question"}}'>
 			<BondQuestion bondId='{{bondId}}'/>
-		</view>
-		<view class='content-item' hidden='{{selectBarName !== "store"}}'>
+		</swiper-item>
+		<swiper-item class='content-item' hidden='{{selectBarName !== "store"}}'>
 			<StoreDetail
 				vUrl='{{vUrl}}'
 				needNavigatorIndex
 				userId='{{uid}}'
 				needUpdate='{{needUpdate}}'
 				bindevent='onUpdateStoreDetail'/> 
-		</view>
+		</swiper-item>
 		<view class='other-bond-list'>
 			<OtherBonds
 				detailUrl='../bond-detail/bond-detail'
@@ -29,7 +29,7 @@
 				userId='{{userId}}'
 			/>
 		</view>
-	</view>
+	</swiper>
 	<ShareButton />
 </view>
 

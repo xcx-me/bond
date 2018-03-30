@@ -37,7 +37,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+	
   },
 
   /**
@@ -47,10 +47,22 @@ Component({
 	doClickBond: function(e){
 		let bondSimpleName = e.currentTarget.dataset.name
 		let userId = e.currentTarget.dataset.uid
-		console.log('accu...', userId)
-		// var pages=getCurrentPages()
-		// console.log(this.data.from, pages)
 		request(config.NEW_BOND.accumulateClick, {user_id: userId, bond_simple_name: bondSimpleName})
+	},
+
+	_deleteBondEvent: function (e) {
+		this.deleteBondName = e.detail
+		this.dialog = this.selectComponent('#dialog')
+		this.dialog.showDialog()
+	},
+  
+	_cancelEvent: function () {
+		this.dialog.hideDialog();
+	},
+  
+	_confirmEvent: function () {
+		this.triggerEvent('deleteBondEvent', this.deleteBondName)
+		this.dialog.hideDialog();
 	}
   }
 })

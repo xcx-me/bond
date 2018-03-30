@@ -2,7 +2,6 @@
 var common = require('../../util/common.js')
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
-var app = getApp()
 
 Page({
 	properties: {	
@@ -24,9 +23,9 @@ Page({
 		from: ''
   	},
 
-  getBondList: function(userId) {
+  getBondList: function(userId, len = 10) {
 	let offset = 0
-	let limit = 10
+	let limit = len < 10 ? 10: len
 	request(config.NEW_BOND.newBondList, {
 		bond_id: '0',
 		user_id: userId,
@@ -62,9 +61,17 @@ Page({
 		wx.setNavigationBarTitle({title: isMyStore ? '我的店铺': detail.sale_name + '的店铺'})
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  	_deleteBondEvent: function (e) {
+		let bname = e.detail
+		request(config.NEW_BOND.deleteBond, {
+			bond_simple_name: bname
+		}).then((result) => {
+			if (String(result.data.ret) === '0') {
+				this.getBondList(this.data.uid, this.data.bondList.length)
+			}
+		})
+  	},
+
   	onLoad: function (options) {
 		let uid = options.uid
 		this.setData({
@@ -77,6 +84,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+	this.dialog = this.selectComponent('#dialog')
 	// console.log('ready...', this.data.userId)
   },
 
@@ -88,7 +96,7 @@ Page({
 			needUpdate: true
 		})
 		if (this.data.uid) {
-			this.getBondList(this.data.uid)
+			this.getBondList(this.data.uid, 10)
 		}
   	},
 
