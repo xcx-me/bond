@@ -1,5 +1,6 @@
 .bond-question {
   padding: 10rpx 5rpx;
+  background: #FFFFFF;
 }
 .bond-question .header {
   position: relative;
@@ -23,6 +24,7 @@
   color: #2196F3;
 }
 .bond-question .question-list {
+  overflow: auto;
   padding-left: 14rpx;
 }
 .bond-question .question-list .question-item {

@@ -36,7 +36,6 @@ Component({
 
   methods: {
 	getBondList: function () {
-		console.log('other-bond......', this.data.uid, this.data)
 		request(config.NEW_BOND.newBondList, {
 			bond_id: this.data.bondId,
 			user_id: this.data.userId,

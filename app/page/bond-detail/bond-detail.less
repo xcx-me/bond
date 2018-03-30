@@ -9,7 +9,7 @@
 			padding: 10rpx 0;
 			text-align: center;
 			
-			&.select {
+			&.active {
 				background: #FFFFFF;
 				border-top-left-radius: 10rpx;
 				border-top-right-radius: 10rpx;
@@ -22,11 +22,10 @@
 	}	
 
 	.content {
-		.content-item {
-			background: #FFFFFF;
-			overflow: auto;
+		scroll-view {
+			height: 100%;
 		}
-		
+
 		.other-bond-list {
 			margin-top: 10rpx;
 		}

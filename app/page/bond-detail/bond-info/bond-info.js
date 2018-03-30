@@ -12,7 +12,16 @@ Component({
 		vUrl: {
 			type: String,
 			value: ''
-		}
+		},
+		needUpdate: {
+			type: Boolean,
+			value: false,
+			observer: function(newVal, oldVal){
+				if (newVal) {
+					this.getBondDetail()
+				}
+			}
+		},
 	},
 
 	data: {
