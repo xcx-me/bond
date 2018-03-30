@@ -1,4 +1,5 @@
 // app/page/overview/overview.js
+const common = require('../../util/common.js')
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 var app = getApp()
@@ -9,8 +10,14 @@ Page({
 		checkboxItems: [{ name: 'isAgreedQtrade', value: '1', checked: 'true' }],
 		isAgreedQtrade: true,
 		dynamicList: [],
-		userName: '',
-		companyName: '',
+		userInfo: {
+			faceUrl: '',
+			userName: '',
+			companyName: '',
+			url: '',
+			vUrl: ''
+		},
+		vUrl: '../../asset/image/qtrade/sprites_01.png',
 		userId: '0',
 		showLoading: true,
 		needUpdate: false
@@ -37,8 +44,14 @@ Page({
 		request(config.NEW_BOND.cardInfo, {}).then((result) => {
 			if (String(result.data.ret) === '0') {
 				this.setData({
-					userName: result.data.realname,
-					companyName: result.data.company.simpleName
+					userInfo: {
+						faceUrl: result.data.faceurl || '../../asset/image/qtrade/icon-default.png',
+						isVUser: result.data.iscomfirmed,
+						userName: result.data.realname,
+						companyName: result.data.company.simpleName,
+						url: '../my-configuration/my-configuration',
+						vUrl: this.data.vUrl
+					}
 				})
 			}
 		})
@@ -51,8 +64,21 @@ Page({
 	},
 
 	toMyStore: function () {
-		getApp().globalData.store.isMine = true
 	},
+
+	doOpenStore: function() {
+		request(config.NEW_BOND.openMyShop, {}).then((result) => {
+			if(String(result.data.ret) === '0') {
+				wx.navigateTo({
+					url: '../register-store-complete/register-store-complete'
+				})
+			} else {
+				common.showFailedToast()
+			}
+		}).catch(() => {
+			common.showFailedToast()
+		})
+  	},
 
 	initData: function () {
 		this.isStoreOpened()

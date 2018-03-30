@@ -42,12 +42,7 @@ App({
 		})
 	},
 	globalData: {
-		userInfo: null,
-		store: {
-			isMine: false,
-			saleName: '',
-			userId: ''
-		}
+		userInfo: null
 	},
 	isLocalhost: true
 })

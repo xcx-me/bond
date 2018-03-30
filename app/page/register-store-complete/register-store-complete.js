@@ -3,29 +3,6 @@ const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
-  data: {
-	isFailed: false
-  },
-
-  doOpenStore: function() {
-		request(config.NEW_BOND.openMyShop, {}).then((result) => {
-			if(String(result.data.ret) !== '0') {
-				this.setData({
-					isFailed: true
-				})
-			}
-		}).catch(() => {
-			this.setData({
-				isFailed: true
-			})
-		})
-  },
-
-  
   	doNext: function () {
 		wx.navigateBack()
 	},
@@ -34,7 +11,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	this.doOpenStore()
   },
 
   /**

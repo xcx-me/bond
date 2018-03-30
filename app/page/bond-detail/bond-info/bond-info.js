@@ -8,12 +8,17 @@ Component({
 		bondId: {
 			type: String,
 			value: ''
+		},
+		vUrl: {
+			type: String,
+			value: ''
 		}
 	},
 
 	data: {
 		bondInfoFieldList: bond.bondInfoFieldList,
-		bondInfo: {}
+		bondInfo: {},
+		attached: 'gag34|gare3'
 	},
 
   ready: function () {
@@ -27,7 +32,6 @@ Component({
 	getBondDetail: function () {
 		request(config.NEW_BOND.newBondDetail, {bond_id: this.data.bondId}).then((result) => {
 			if (String(result.data.ret) === '0') {
-				console.log(result)
 				this.setData({
 					bondInfo: result.data.retdata
 				})

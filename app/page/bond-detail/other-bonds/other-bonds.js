@@ -8,6 +8,10 @@ Component({
 		type: String,
 		value: ''
 	},
+	uid: {
+		type: String,
+		value: ''
+	},
 	userId: {
 		type: String,
 		value: ''
@@ -15,6 +19,10 @@ Component({
 	detailUrl: {
 		type: String,
 		value: ''
+	},
+	isMyStore: {
+		type: Boolean,
+		value: false
 	}
   },
 
@@ -28,6 +36,7 @@ Component({
 
   methods: {
 	getBondList: function () {
+		console.log('other-bond......', this.data.uid, this.data)
 		request(config.NEW_BOND.newBondList, {
 			bond_id: this.data.bondId,
 			user_id: this.data.userId,

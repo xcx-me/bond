@@ -1,0 +1,6 @@
+.bond-info-item-tpl {
+  padding: 8rpx 0;
+}
+.bond-info-item-tpl .label {
+  color: #999999;
+}
