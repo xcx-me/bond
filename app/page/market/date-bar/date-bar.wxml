@@ -1,0 +1,8 @@
+<!--app/page/market/date-bar/date-bar.wxml-->
+<view class='date-bar-component clearfix'>
+	<!-- <text class='label'>日期：</text> -->
+	<block wx:for='{{dateList}}' wx:for-item="dateItem" wx:key='index'>
+		<text class='date-item {{currentDate === dateItem.originalDate ? "active" : ""}}' wx:if='{{index > 0 && index < 5}}'>{{dateItem.date}}({{dateItem.getDay}})</text>
+		<text class='split-line' wx:if='{{index > 0 && index < 5}}'></text>
+	</block>
+</view>

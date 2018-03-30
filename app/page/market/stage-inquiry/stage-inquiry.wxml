@@ -1,0 +1,5 @@
+<!--app/page/market/stage-inquiry/stage-inquiry.wxml-->
+<view class='stage-inquiry'>
+	<Filter />
+	询量	
+</view>

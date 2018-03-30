@@ -1,0 +1,21 @@
+<!--app/page/market/filter/filter.wxml-->
+<view class="filter-component clearfix">
+	<!-- <view class='filter-item label'><text>筛选：</text></view> -->
+	<block wx:for='{{defaultFilterConfig}}' wx:for-item='item' wx:key='index' >
+		<picker class='filter-item' bindchange='bindPickerChange' value='0' range='{{item.values}}' range-key='title'>
+			<text>{{item.title}}</text>
+		</picker>
+	</block>
+	<!-- <picker class='filter-item' bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+		<text>债券品种</text>
+    	<text class="picker">>{{array[index]}}</text>
+	</picker>
+	<picker class='filter-item' bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+		<text>发行期限</text>
+    	<text class="picker">>{{array[index]}}</text>
+	</picker>
+	<picker class='filter-item' bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+		<text>主体评级</text>
+    	<text class="picker">>{{array[index]}}</text>
+	</picker> -->
+</view>

@@ -9,13 +9,12 @@
 		<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
 			<swiper-item item-id='{{tabId}}'>
 			<scroll-view class='{{tabId}}-pallet' scroll-y>
-				<BondInfo wx:if='{{tabId === "detail"}}' vUrl='{{vUrl}}' bondId='{{bondId}}' needUpdate='{{needUpdate && currentTabId === tabId}}'/>
-				<BondQuestion wx:if='{{tabId === "question"}}' bondId='{{bondId}}' needUpdate='{{needUpdate && currentTabId === tabId}}'/>
-				<StoreDetail wx:if='{{tabId === "store"}}'
+				<BondInfo wx:if='{{tabId === currentTabId && currentTabId === "detail"}}' vUrl='{{vUrl}}' bondId='{{bondId}}' />
+				<BondQuestion wx:if='{{tabId === currentTabId && currentTabId === "question"}}' bondId='{{bondId}}' bind:updateTotalEvent='_updateQuestionTotalEvent'/>
+				<StoreDetail wx:if='{{tabId === currentTabId && currentTabId === "store"}}'
 					vUrl='{{vUrl}}'
 					needNavigatorIndex
 					userId='{{uid}}'
-					needUpdate='{{needUpdate && currentTabId === tabId}}'
 					bindevent='onUpdateStoreDetail'/> 
 				<OtherBonds wx:if='{{tabId === currentTabId}}' detailUrl='../bond-detail/bond-detail' isMyStore='{{isMyStore}}' bondId='{{bondId}}' uid='{{uid}}' userId='{{userId}}'/>
 			</scroll-view>

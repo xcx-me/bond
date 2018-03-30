@@ -1,0 +1,11 @@
+<!--app/page/market/stage-issues/stage-issues.wxml-->
+<view class='stage-issues'>
+	<view class='date-wrapper'>
+		<DateBar />
+	</view>
+	<view class='filter-wrapper'>
+		<Filter />
+	</view>
+	发行
+</view>
+
