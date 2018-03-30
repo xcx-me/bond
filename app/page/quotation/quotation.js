@@ -17,31 +17,12 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-		descriptors: [
-			{
-				fieldName: 'text1',
-				uiType: 't1',
-				value: '',
-				change: ''
-			},
-			{
-				fieldName: 'text2',
-				uiType: 't2',
-				value: '',
-				change: ''
-			},
-			{
-				fieldName: 'text3',
-				uiType: 't333',
-				value: '',
-				change: ''
-			}
-		],
+		// is_modal_Hidden: false,  
+		// is_modal_Msg: '我是一个自定义组件',
 
-		is_modal_Hidden: false,  
-		is_modal_Msg: '我是一个自定义组件',
-
-		isOpenMyShop: false,
+		isOpenMyShop: false, // 是否开店
+		editorFlag: false, // 是否是债券编辑入口
+		sendQuoteData: {}, // 发布报价参数
 
 		items: bondType,
 		itemsCheckedValue: '',
@@ -65,6 +46,23 @@ Page({
 	// 	})
 	// 	console.log('债券品种：', checkedItem)
 	// },
+
+	handleSendQuote () { // 发布报价
+
+		console.log(this.data.sendQuoteData)
+		wx.showToast({
+			title: '发布报价成功！',
+			icon: 'success',
+			duration: 2000
+		})
+	},
+
+	_changeValue: function (e) { // 获取发布报价参数
+		this.setData({
+			sendQuoteData: e.detail
+		})
+		// console.log('_changeValue....', e.detail)
+	},
 
 	handleShowToast: function () {
 		this.toastedit = this.selectComponent('#toastedit')

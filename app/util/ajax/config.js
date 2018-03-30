@@ -113,6 +113,10 @@ module.exports = {
 			url: '/qtrade_bond/api/newbond/query_asklist.do',
 			method: POST
 		},
+		questionTotalQuery: {
+			url: '/qtrade_bond/api/newbond/query_ask_num.do',
+			method: POST
+		},
 		askQuestion: { // 问问题
 			url: '/qtrade_bond/api/newbond/ask.do',
 			method: POST

@@ -2,28 +2,9 @@
 <view class="send-quote-page">
 	<view class="quotation-form" wx:if="{{isOpenMyShop}}">
 
-		<BondFormEditor descriptors="{{descriptors}}" modal-hidden="{{is_modal_Hidden}}" modal-msg="{{is_modal_Msg}}"/>  
+		<BondFormEditor editorFlag='{{editorFlag}}' bind:changeValueEvent='_changeValue'/>  
 
-		<!-- <view>
-			<text class="bond-type">债券品种：{{itemsCheckedValue}}</text>
-			<checkbox-group bindchange="checkboxChange">
-				<view class="checkbox" wx:for="{{items}}" wx:key="key">
-					<checkbox wx:key="" value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-				</view>
-			</checkbox-group>
-		</view> -->
-
-		<!-- <view class="row-wrap">
-			<text class="label">利率方式：</text>
-			<picker bindchange="bindCasPickerChange" value="{{casIndex1}}" range="{{casArray}}">
-				<view class="select-button">
-					<text>{{casArray[casIndex]}}</text>
-				</view>
-			</picker>
-			<view class="section {{reply?'on':'off'}}">
-				<input name="other" placeholder="请输入" type="text"/>
-			</view>
-		</view> -->
+		<button class='' type='primary' bindtap='handleSendQuote'>发布报价</button>
 
 		<view>
 			<toastedit id='toastedit'>{{toastedit}}</toastedit>

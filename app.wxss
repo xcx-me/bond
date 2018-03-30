@@ -34,3 +34,11 @@ page .page-wrapper {
 	clear: both;
 	height: 0;
 }
+
+.btn-no-border {
+	background: none;
+	border: none;
+	outline: none;
+	text-decoration: underline;
+	color: #2196F3;
+}

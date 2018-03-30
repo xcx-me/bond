@@ -1,11 +1,26 @@
 <!--app/page/bond-detail/bond-info/bond-info.wxml-->
-<import src="../../../template/bond-info-item/bond-info-item.wxml" />
+<import src='../../../template/bond-info-item/bond-info-item.wxml' />
+<!-- <import src='../../../template/bond-sale-info/bond-sale-info.wxml' /> -->
+<wxs module='bondInfoUtil'>
+	module.exports = {
+		parse: function (value, splitChar) {
+			return value && value !== 'undefined' ? value.split(splitChar) : []
+		}
+	}
+</wxs>
+
 <view class='bond-info-component'>
 	<block wx:for='{{bondInfoFieldList}}' wx:for-item='infoItem' wx:key='name'>
-		<view class='infoItem {{infoItem.name}}'>
+		<view wx:if='{{infoItem.name !== "saleInfo"}}' class='infoItem {{infoItem.name}}'>
 			<block wx:for='{{infoItem.value}}' wx:for-item='item' wx:key='name'>
-				<template is='bondInfoItem' data='{{item: item, bondInfo: bondInfo}}'></template>
+				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo}}'></template>
 			</block>
+			<view class='attached' wx:if='{{infoItem.name === "saleDetail"}}'>
+				<BondAttached nameList='{{bondInfoUtil.parse(bondInfo.attached_names, "|")}}' urlList='{{bondInfoUtil.parse(bondInfo.attached_urls, "|")}}'/>
+			</view>
+		</view>
+		<view wx:if='{{infoItem.name === "saleInfo"}}' class='infoItem {{infoItem.name}}'>
+			<BondSaleInfo vUrl='{{vUrl}}' bondSaleInfo='{{bondInfo.sale_info}}' fieldList='{{infoItem.value}}'/>
 		</view>
 	</block>
 </view>

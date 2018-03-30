@@ -1,7 +1,27 @@
 <!--app/ui/single-bond/single-bond.wxml-->
 <import src="../../template/bond-info-item/bond-info-item.wxml" />
+<import src="../../template/seller-info/seller-template.wxml" />
 <view class='single-bond-component'>
-	<block wx:for='{{bondFieldList}}' wx:for-item='item' wx:key='name'>
-		<template is='bondInfoItem' data='{{item: item, bondInfo: bondInfo}}'></template>
+	<block wx:for='{{bondFieldList}}' wx:for-item='bondItem' wx:key='name'>
+		<view class='pallet clearfix {{bondItem.name}}'>
+			<block wx:for='{{bondItem.value}}' wx:for-item='item' wx:key='name'>
+				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo}}'></template>
+			</block>
+		</view>
 	</block>
+	<view class='pallet clearfix footer'>
+		<view wx:if='{{from === "store" || from === "detail"}}'>
+			<block wx:for='{{[{name:"click_num", label:"点击量："}, {name:"share_num", label:"被分享："}]}}' wx:for-item='item' wx:key='name'>
+				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo}}'></template>
+			</block>
+			<icon class='icon-delete' size='20' wx:if='{{isMine}}' type='success' catchtap='onDeleteBond' data-bname='{{bondInfo.bond_simple_name}}' />	
+		</view>
+		<view wx:else >
+			<block wx:for='{{[{bond_id:"73e79b955a8947a3b9892eea89a835b7",user_id:"qtrade",sale_name:"",company_name:"深圳华润元大资管",face_url:"",is_zhu_cheng:"2"}]}}' wx:for-item='item' wx:key='index'>
+				<view class='sale-info' catchtap='doNavigator' data-bid='{{item.bond_id}}' data-uid='{{item.user_id}}'>
+					<template is='sellerInfoTpl' data='{{url: "", vUrl: "../../asset/image/qtrade/sprites_01.png", faceUrl: item.face_url || "../../asset/image/qtrade/icon-default.png", isVUser:true, userName: item.sale_name, companyName: item.company_name}}'></template>
+				</view>
+			</block>
+		</view>
+	</view>
 </view>

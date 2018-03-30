@@ -57,7 +57,7 @@
   top: 6rpx;
   line-height: 36rpx;
   padding-left: 10rpx;
-  padding-right: 0;
+  padding-right: 10rpx;
   background: none;
   border: none;
   outline: none;

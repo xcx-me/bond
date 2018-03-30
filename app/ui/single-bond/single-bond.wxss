@@ -1,8 +1,84 @@
+.bond-info-item-tpl {
+  padding: 8rpx 0;
+}
+.bond-info-item-tpl .label {
+  color: #999999;
+}
+.seller-info-tpl .face-url {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 100%;
+}
+.seller-info-tpl .v-user {
+  position: relative;
+  top: 12rpx;
+  left: -20rpx;
+  padding: 18rpx;
+  background-size: 90rpx;
+}
+.seller-info-tpl .v-user.big {
+  background-size: 90rpx;
+  background-position: 0 -1120px;
+}
+.seller-info-tpl .user-name {
+  font-size: x-large;
+}
+.seller-info-tpl .company-name {
+  font-size: small;
+}
 .single-bond-component {
   background: #FFFFFF;
   margin-top: 10rpx;
+  padding: 10rpx 20rpx;
   font-size: small;
 }
-.single-bond-component .item {
-  padding: 5rpx 0 ;
+.single-bond-component .pallet.content {
+  margin: 10rpx 0;
+  padding: 10rpx 0;
+  border-top: 1rpx solid #D8D8D8;
+  border-bottom: 1rpx solid #D8D8D8;
+}
+.single-bond-component .bond-info-item-tpl {
+  float: left;
+}
+.single-bond-component .bond-info-item-tpl.bond_simple_name {
+  width: 60%;
+}
+.single-bond-component .bond-info-item-tpl.benefit {
+  float: right;
+  width: 40%;
+  text-align: right;
+}
+.single-bond-component .bond-info-item-tpl.rating {
+  width: 33.33333%;
+}
+.single-bond-component .bond-info-item-tpl.deadline {
+  width: 33.33333%;
+  text-align: center;
+}
+.single-bond-component .bond-info-item-tpl.issue_total {
+  width: 33.33333%;
+  text-align: right;
+}
+.single-bond-component .bond-info-item-tpl.bond_type {
+  width: 100%;
+}
+.single-bond-component .bond-info-item-tpl.issue_time {
+  width: 100%;
+}
+.single-bond-component .bond-info-item-tpl.click_num,
+.single-bond-component .bond-info-item-tpl.share_num {
+  width: 45%;
+}
+.single-bond-component .bond-info-item-tpl.icon-delete {
+  width: 10%;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
 }

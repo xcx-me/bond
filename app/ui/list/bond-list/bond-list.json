@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-	"SingleBond": "../../single-bond/single-bond"
+	"SingleBond": "../../single-bond/single-bond",
+	"Dialog": "../../../ui/dialog/dialog"
   }
 }

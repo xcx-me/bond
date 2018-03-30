@@ -23,8 +23,9 @@ Component({
 			type: Boolean,
 			value: false,
 			observer: function(newVal, oldVal){
-				// console.log('need Update detail')
-				this.getStoreDetail(this.data.userId)
+				if (newVal) {
+					this.getStoreDetail(this.data.userId)
+				}
 			}
 		},
 		
@@ -32,8 +33,18 @@ Component({
 			type: String,
 			value: ''
 		},
-
+	
+		vUrl: {
+			type: String,
+			value: ''
+		},
+		
 		isHiddenSeller: {
+			type: Boolean,
+			value: false
+		},
+
+		needNavigatorIndex: {
 			type: Boolean,
 			value: false
 		}
@@ -61,8 +72,8 @@ Component({
 					this.setData({
 						storeDetail: detail
 					})
-					app.globalData.store.saleName = detail.sale_name
-					app.globalData.store.userId = detail.user_id
+					console.log('getStoreDetail....', userId)
+					this.triggerEvent('event', detail)
 				}
 			})
 		}

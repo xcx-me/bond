@@ -1,37 +1,31 @@
 Component({
 	properties: {
-		// modalHidden: {
-		// 	type: Boolean,
-		// 	value: true
-		// }, //这里定义了modalHidden属性，属性值可以在组件使用时指定.写法为modal-hidden
-		// modalMsg: {
-		// 	type: String,
-		// 	value: ' ',
-		// },
+		editorFlag: { // 是否是编辑债券的入口
+			type: Boolean,
+			value: false
+		},
 
-		descriptors: { // 这里定义当组件调用时，需要传入的descriotors的数组
-			type: Array,
-			value: []
-		}
 	},
 
 	data: {
 		formData: {
-			bondName: '债券简称',
-			subjectRate: 'aa',
-			facilityRate: 'AAA',
+			bondName: '',
+			subjectRate: '',
+			facilityRate: '',
 			rateMethod: '',
-			benchMark: 'haha',
-			circulation: '100'
+			benchMark: '',
+			circulation: '',
+			releaseTime: ''
 		},
+		// date: '',
 
 		// 这里是一些组件内部数据
 		text: "text",
 
 		//  利率方式
-		casArray: ['利随本清', '固定利率', '浮动利率', '累积利率'],
-		casIndex: -1,
-		reply: false
+		rateWayArray: ['利随本清', '固定利率', '浮动利率', '累积利率'],
+		rateWayIndex: -1,
+		rateReply: false
 	},
 
 	methods: {
@@ -41,27 +35,36 @@ Component({
 			this.setData({
 				formData: formData
 			})
+			this.triggerEvent('changeValueEvent', formData)
 		},
 
+		// bindDateChange: function(e) {
+		// 	console.log('picker发送选择改变，携带值为', e.detail.value)
+		// 	// let formData = this.data.formData
+		// 	// formData[e.currentTarget.dataset.inputName] = e.detail.value
+		// 	this.setData({
+		// 		date: e.detail.value
+		// 	})
+		// },
+
 		handleDropdownRateWay: function (e) {
-			console.log('----checked: ', this.data.casArray[e.detail.value])
+			console.log('----checked: ', this.data.rateWayArray[e.detail.value])
 			// wx.showToast({
 			// 	title: 'this is blank。。。',
 			// 	icon: 'success',
 			// 	duration: 800
 			// })
 			if (e.detail.value == 2) {
-				this.setData({ reply: true })
+				this.setData({ rateReply: true })
 			} else {
-				this.setData({ reply: false })
+				this.setData({ rateReply: false })
 			}
 			let formData = this.data.formData
-			formData.rateMethod = this.data.casArray[e.detail.value]
+			formData.rateMethod = this.data.rateWayArray[e.detail.value]
 			this.setData({
-				casIndex: e.detail.value,
+				rateWayIndex: e.detail.value,
 				formData: formData
 			})
-			console.log(this.data.formData)
 		}
 	}
 })
