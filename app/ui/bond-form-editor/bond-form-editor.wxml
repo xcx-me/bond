@@ -1,0 +1,56 @@
+
+<view class='bond-form-editor' hidden='{{modalHidden}}'>
+
+	<!-- 债券简称 -->
+	<view class='bond-simple-name'>
+		<view class='label-area'>债券简称:</view>
+		<view class='editor-area'>
+			<input class='editor-input' type='text' bindinput='changeValue' data-input-name='bondName' value='{{formData.bondName}}'></input>
+		</view>
+	</view>
+	<!-- 主/债评级 -->
+	<view class='bond-rate'>
+		<view class='label-area'>主/债评级：</view>
+		<view class='editor-area'>
+			<input type='text' bindinput='changeValue' data-input-name='subjectRate' value='{{formData.subjectRate}}'></input>
+			<input type='text' bindinput='changeValue' data-input-name='facilityRate' value='{{formData.facilityRate}}'></input>
+		</view>
+	</view>
+	<!-- 发行量 -->
+	<view class='bond-circulation'>
+		<view class='label-area'>主/债评级：</view>
+		<view class='editor-area'>
+			<input class='editor-input' type='text' bindinput='changeValue' data-input-name='circulation' value='{{formData.circulation}}'></input>
+		</view>
+	</view>
+
+	<!-- 利率方式 -->
+	<view class='rate-method'>
+		<view class='label'>利率方式：</view>
+		<view class='editor-area'>
+			<picker bindchange="handleDropdownRateWay" value="{{casIndex1}}" range="{{casArray}}">
+				<view class="select-button">
+					<text>{{casArray[casIndex]}}</text>
+				</view>
+			</picker>
+			<view class="section {{reply ? 'on' : 'off'}}">
+				<input name='floatingRate' type='text' placeholder='请输入' />
+			</view>
+		</view>
+	</view>
+
+	<!-- 债券品种 -->
+	<bondtype />
+
+	<!-- <view class='mask_layer' bindtap='modal_click_Hidden' />  
+	<view class='modal_box'>  
+		<view class="title">提示</view>  
+		<view class='content'>  
+			<text class='modalMsg'>{{modalMsg}}</text>  
+		</view>  
+		<view class='btn'>  
+			<view bindtap='modal_click_Hidden' class='cancel'>取消</view>  
+			<view bindtap='Sure' class='Sure'>确定</view>  
+		</view>  
+	</view> -->
+</view> 
