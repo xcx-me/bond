@@ -7,13 +7,11 @@
 .bond-form-editor .label-area {
   width: 30%;
   display: flex;
+  float: left;
 }
 .bond-form-editor .editor-area {
   width: 60%;
   display: flex;
-}
-.bond-form-editor .editor-input {
-  border: 1px solid #DDDDDD;
 }
 .bond-form-editor .bond-type {
   display: inline-block;

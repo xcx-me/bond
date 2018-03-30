@@ -5,22 +5,24 @@
 	<view class='bond-simple-name'>
 		<view class='label-area'>债券简称:</view>
 		<view class='editor-area'>
-			<input class='editor-input' type='text' bindinput='changeValue' data-input-name='bondName' value='{{formData.bondName}}'></input>
+			<input class='' type='text' bindinput='changeValue' data-input-name='bondName' value='{{formData.bondName}}'
+				disabled='{{editorFlag}}' style='background-color: {{editorFlag ? "#DDDDDD" : ""}}; color: {{editorFlag ? "#999999" : "" }}'
+			/>
 		</view>
 	</view>
 	<!-- 主/债评级 -->
 	<view class='bond-rate'>
 		<view class='label-area'>主/债评级：</view>
 		<view class='editor-area'>
-			<input type='text' bindinput='changeValue' data-input-name='subjectRate' value='{{formData.subjectRate}}'></input>
-			<input type='text' bindinput='changeValue' data-input-name='facilityRate' value='{{formData.facilityRate}}'></input>
+			<input type='text' bindinput='changeValue' data-input-name='subjectRate' value='{{formData.subjectRate}}' />
+			<input type='text' bindinput='changeValue' data-input-name='facilityRate' value='{{formData.facilityRate}}' />
 		</view>
 	</view>
 	<!-- 发行量 -->
 	<view class='bond-circulation'>
-		<view class='label-area'>主/债评级：</view>
+		<view class='label-area'>发行量：</view>
 		<view class='editor-area'>
-			<input class='editor-input' type='text' bindinput='changeValue' data-input-name='circulation' value='{{formData.circulation}}'></input>
+			<input class='' type='text' bindinput='changeValue' data-input-name='circulation' value='{{formData.circulation}}' />
 		</view>
 	</view>
 
@@ -28,19 +30,29 @@
 	<view class='rate-method'>
 		<view class='label'>利率方式：</view>
 		<view class='editor-area'>
-			<picker bindchange="handleDropdownRateWay" value="{{casIndex1}}" range="{{casArray}}">
+			<picker bindchange="handleDropdownRateWay" value="{{rateWayIndex1}}" range="{{rateWayArray}}">
 				<view class="select-button">
-					<text>{{casArray[casIndex]}}</text>
+					<text>{{rateWayArray[rateWayIndex]}}</text>
 				</view>
 			</picker>
-			<view class="section {{reply ? 'on' : 'off'}}">
-				<input name='floatingRate' type='text' placeholder='请输入' />
+			<view class="section {{rateReply ? 'on' : 'off'}}">
+				<input type='text' bindinput='changeValue' data-input-name='benchMark' />
 			</view>
 		</view>
 	</view>
 
 	<!-- 债券品种 -->
 	<bondtype />
+
+	<!-- 发行时间 -->
+	<view class='release-time'>
+		<view class="label-area">发行时间：</view>
+		<picker mode="date" value="{{formData.releaseTime}}" start='2000-01-01' end='' bindchange='changeValue' data-input-name='releaseTime'>
+			<view class="picker">
+				当前选择: {{formData.releaseTime}}
+			</view>
+		</picker>
+	</view>
 
 	<!-- <view class='mask_layer' bindtap='modal_click_Hidden' />  
 	<view class='modal_box'>  
