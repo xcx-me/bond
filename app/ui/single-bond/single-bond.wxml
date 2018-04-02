@@ -9,7 +9,7 @@
 			</block>
 		</view>
 	</block>
-	<view class='pallet clearfix footer'>
+	<view class='pallet clearfix footer'>	
 		<view wx:if='{{from === "store" || from === "detail"}}'>
 			<block wx:for='{{[{name:"click_num", label:"点击量："}, {name:"share_num", label:"被分享："}]}}' wx:for-item='item' wx:key='name'>
 				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo}}'></template>

@@ -6,13 +6,15 @@
 		<view class="market-tab-list {{currentTab == 2 ? 'on' : ''}}" data-current='2' bindtap='swichNav'>发行</view>
 	</view>
 
+	<Filter />
+	<DateBar wx:if='{{currentTab === "2"}}'/>
 	<swiper current='{{currentTab}}' class='swiper-tab-box' duration='300' style='height: {{winHeight}}px' bindchange='bindChangeTab'>
-		<block wx:for='{{[0, 1, 2]}}' wx:for-item='tabId' wx:key='index'>
+		<block wx:for='{{["0", "1", "2"]}}' wx:for-item='tabId' wx:key='index'>
 			<swiper-item>
 				<scroll-view class='stage-pallet' scroll-y>
-					<StageInquiry wx:if='{{currentTab == 0 && tabId === currentTab}}' />
-					<StageBulletin wx:if='{{currentTab == 1 && tabId === currentTab}}' />
-					<StageIssues wx:if='{{currentTab == 2 && tabId === currentTab}}' />
+					<Consultation wx:if='{{currentTab === "0" && tabId === currentTab}}' needUpdate='{{needUpdate}}' bondList='{{bondList}}'/>
+					<Announcement wx:if='{{currentTab === "1" && tabId === currentTab}}' needUpdate='{{needUpdate}}' bondList='{{bondList}}'/>
+					<Issues wx:if='{{currentTab === "2" && tabId === currentTab}}' needUpdate='{{needUpdate}}' bondList='{{bondList}}'/>
 				</scroll-view>
 			</swiper-item>
 		</block>

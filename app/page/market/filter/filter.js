@@ -96,6 +96,8 @@ Component({
 			curSelectList: [],
 			filterValue: filterValue
 		})
+
+		this.triggerEvent('onFilterEvent', filterValue)
 	}
   }
 })

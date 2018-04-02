@@ -5,6 +5,7 @@
 			<text class='item'>小区间(%)</text>
 			<text class='item operator'>操作</text>
 		</view>
+		<loading wx:if="{{loading}}">加载中</loading>
 		<view class='content clearfix'>
 			<block wx:for='{{bondList}}' wx:for-item='bondItem' wx:for-index='index' wx:key='index'>
 				<view class='item'><text>{{bondItem.bond_simple_name}}</text></view>

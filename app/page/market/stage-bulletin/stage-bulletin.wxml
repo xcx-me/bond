@@ -1,6 +1,0 @@
-<!--app/page/market/stage-bulletin/stage-bulletin.wxml-->
-<view class='stage-bulletin'>
-	<Filter />
-	公告
-</view>
-
