@@ -1,8 +1,8 @@
-.bond-form-editor {
-  /* -------------- */
-}
 .bond-form-editor input {
   border: 1px solid #DDDDDD;
+}
+.bond-form-editor .row-item {
+  margin-bottom: 10rpx;
 }
 .bond-form-editor .label-area {
   width: 30%;
@@ -13,24 +13,26 @@
   width: 60%;
   display: flex;
 }
-.bond-form-editor .bond-type {
-  display: inline-block;
+.bond-form-editor .checkbox-list {
+  width: 100%;
 }
-.bond-form-editor .rate-method {
+.bond-form-editor .time-select-picker {
+  display: flex;
   border: 1rpx solid #DDDDDD;
 }
-.bond-form-editor .rate-method .label {
-  display: inline-block;
-}
-.bond-form-editor .rate-method picker {
+.bond-form-editor .dropdown-btn {
   display: inline-block;
   padding: 2rpx;
+  border: 1rpx solid #DDDDDD;
   background-color: #f1f1f1;
 }
-.bond-form-editor .rate-method picker .select-button {
+.bond-form-editor .dropdown-btn .select-button {
   display: inline-block;
   width: 200rpx;
   height: 35rpx;
+}
+.bond-form-editor .rate-method .label {
+  display: inline-block;
 }
 .bond-form-editor .section {
   display: inline-block;
