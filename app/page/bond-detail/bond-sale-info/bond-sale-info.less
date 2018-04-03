@@ -1,17 +1,30 @@
 @import '../../../template/bond-info-item/bond-info-item.less';
+@import '../../../template/seller-info/seller-template.less';
 .bond-sale-info {
 	.item {
-		image {
-			width: 24px;
-			height: 24px;
-			border-radius: 100%;
-		}
+		float: left;
+		width: 100%;
 
-		.v-user {
-			position: relative;
-			top:6px;
-			left:-6px;
-			padding: 12px 10px 12px 5px;	
-		}
+		.seller-info-tpl {
+			image {
+				width: 40rpx;
+				height: 40rpx;	
+			}
+			.name {
+				position: relative;
+				top: 8rpx;
+				.user-name {
+					font-size: small;
+				}
+
+				.under-line {
+					font-size: small;
+				}
+			}
+		} 
+	}
+
+	.sale-list {
+		overflow: auto;
 	}
 }

@@ -1,7 +1,7 @@
 // app/page/market/date-bar/date-bar.js
 const { request } = require('../../../util/ajax/ajax')
 const config = require('../../../util/ajax/config')
-
+const common = require('../../../util/common')
 Component({
   /**
    * 组件的属性列表
@@ -34,17 +34,11 @@ Component({
 				let currentDate = ''
 				let sevenDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
 				result.data.retdata.workdays.split(',').map((item, index) => {
-					let getMonth = new Date(item).getMonth() + 1
-					getMonth = getMonth < 10 ? '0' + getMonth : getMonth
-					let getDate = new Date(item).getDate()
-					getDate = getDate < 10 ? '0' + getDate : getDate
-					let getDay = sevenDays[new Date(item).getDay()]
-					let isToday = new Date(item).toDateString() === new Date().toDateString()
-					getDay = isToday ? '今天' : getDay
-					if (isToday) {
+					let formatDate = common.formateFilterDate(item)
+					if(formatDate.isToday) {
 						currentDate = item
 					}
-					dateList.push({'originalDate': item, 'date': getMonth + '-' + getDate, 'getDay': getDay})
+					dateList.push(common.formateFilterDate(item))
 				})
 				this.setData({
 					dateList: dateList,
@@ -52,6 +46,15 @@ Component({
 				})
 			}
 		})
+	  },
+
+	  changeDate: function (e) {
+		  let index = e.currentTarget.dataset.index
+		  let currentDate = this.data.dateList[index].originalDate
+		  this.setData({
+			currentDate: currentDate
+		  })
+		  this.triggerEvent('onFilterEvent', {date:currentDate} )
 	  }
   }
 })

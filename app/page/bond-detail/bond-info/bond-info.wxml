@@ -20,7 +20,7 @@
 			</view>
 		</view>
 		<view wx:if='{{infoItem.name === "saleInfo"}}' class='infoItem {{infoItem.name}}'>
-			<BondSaleInfo vUrl='{{vUrl}}' bondSaleInfo='{{bondInfo.sale_info}}' fieldList='{{infoItem.value}}'/>
+			<BondSaleInfo vUrl='{{vUrl}}' bondSaleInfo='{{bondInfo.sale_info}}' isQtrade='{{bondInfo.is_qtrade === "1"}}' fieldList='{{infoItem.value}}'/>
 		</view>
 	</block>
 </view>

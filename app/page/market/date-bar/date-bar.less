@@ -1,7 +1,7 @@
 .date-bar-component {
 	height: 80rpx;
 	line-height: 80rpx;
-	padding-left: 5rpx;
+	padding-left: 15rpx;
 	background: #FFFFFF;
 	font-size: 30rpx;
 
@@ -13,29 +13,26 @@
 		color: #999999;
 	}
 
+	.date-bar-item {
+		float: left;
+		width: 25%;
+	}
+
 	.date-item {
-		display: inline-block;
 		height: 50rpx;
 		line-height: 50rpx;
 		text-align: center;
-		width: calc(~'25% - 2rpx');
+		width: calc(~'100% - 2rpx');
 
 		&.active {
-			// background-color: #2196f3;
 			color: #2196f3;
 		}
 	}
 
 	.split-line {
-		display: inline-block;
-		background-color: #D8D8D8;
+		color: #D8D8D8;
 		width: 1rpx;
 		height: 40rpx;
-		position: relative;
-		top: 10rpx;
-
-		&:last-child {
-			width: 0;	
-		}
+		margin-left: 5rpx;
 	}
 }

@@ -1,18 +1,32 @@
+.seller-info-tpl {
+  overflow: hidden;
+}
+.seller-info-tpl view {
+  float: left;
+  overflow: hidden;
+}
 .seller-info-tpl .face-url {
   width: 60rpx;
   height: 60rpx;
   border-radius: 100%;
+  position: relative;
+  left: 20rpx;
+  border: 1px solid #fff;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 .seller-info-tpl .v-user {
   position: relative;
   top: 12rpx;
-  left: -20rpx;
+  left: -2rpx;
   padding: 18rpx;
   background-size: 90rpx;
 }
 .seller-info-tpl .v-user.big {
   background-size: 90rpx;
   background-position: 0 -1120px;
+}
+.seller-info-tpl .under-line {
+  font-size: 0;
 }
 .seller-info-tpl .user-name {
   font-size: x-large;

@@ -13,7 +13,6 @@
 	<loading wx:if="{{showLoading}}">加载中</loading>
 	<view class='store-bond-list' hidden='{{showLoading}}'>
 		<BondList
-			detailUrl='../bond-detail/bond-detail'
 			from='store'
 			isMine='{{isMyStore}}'
 			bondList='{{bondList}}'

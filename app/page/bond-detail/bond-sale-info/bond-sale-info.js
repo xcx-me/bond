@@ -6,9 +6,17 @@ Component({
   properties: {
 	bondSaleInfo: {
 		type: Array,
-		value: []
+		value: [],
+		observer: function (newVal, oldVal) {
+			console.log('ob..', newVal, oldVal)
+		}
 	},
 	
+	isQtrade: {
+		type: Boolean,
+		value: false,
+	},
+
 	fieldList: {
 		type: Array,
 		value: []
@@ -25,6 +33,10 @@ Component({
    */
   data: {
 	
+  },
+
+  ready: function () {
+	console.log('ready....', this.data.bondSaleInfo)
   },
 
   /**

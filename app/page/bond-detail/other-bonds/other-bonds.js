@@ -16,10 +16,6 @@ Component({
 		type: String,
 		value: ''
 	},
-	detailUrl: {
-		type: String,
-		value: ''
-	},
 	isMyStore: {
 		type: Boolean,
 		value: false

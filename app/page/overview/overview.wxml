@@ -17,7 +17,7 @@
 				<navigator url='../store/store?uid=0'>进入我的店铺</navigator>
 			</view>
 			<view class="dynamic-pallet pallet-has-slite-line">
-				<StoreDynamic detailUrl='../bond-detail/bond-detail' needUpdate='{{needUpdate}}'/>
+				<StoreDynamic needUpdate='{{needUpdate}}'/>
 			</view>
         </view>
         <view class='register-store' wx:elif='{{!loading}}'>

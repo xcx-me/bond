@@ -1,7 +1,7 @@
 // app/page/market/market.js
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
-
+const common = require('../../util/common')
 Page({
 	/**
 	 * 页面的初始数据
@@ -9,54 +9,50 @@ Page({
 	data: {
 		winWidth: 0,
 		winHeight: 0,
-		currentTab: 0,
-		filterValue: {},
+		currentTab: '0',
+		filterValue: {
+			bond_type: 0,
+			deadline: 0,
+			subject_rating: 0,
+			date: common.formatDate(new Date()),
+			key: ''
+		},
 		bondList: [],
 		loading: true,
-		needUpdate: false
+		needUpdate: true
 	},
 
 	_onFilter: function (e) {
-		let filterValue = e.detail
+		console.log('_onFilter...', e.detail)
+		let filterValue = Object.assign(this.data.filterValue, e.detail)
 		this.setData({
 			filterValue: filterValue
 		})
+		this.getBondList(this.data.currentTab, 1)
 	},
 
 	
 	getBondList (currentTab, page) { // 询量
 		let bondStatus =  '1'
 		if (currentTab === '1') {
-		   bondStatus = '2'
-	   } else if (currentTab === '2') {
-		   bondStatus = '3'
-	   }
+			bondStatus = '2'
+		} else if (currentTab === '2') {
+			bondStatus = '3'
+		}
 
-	//    if (String(page) === '1') {
-	// 	   console.log('loading.....')
-	// 	   this.setData({
-	// 		   loading: true
-	// 	   })
-	//    }
-
-		request(config.NEW_BOND.quotationBoard, {
+		let postData = {
 			bond_status: bondStatus,
-			date: '2019-04-02',
-			key: '',
-		    bond_type: this.data.filterValue.bond_type || 0,
-			deadline: this.data.filterValue.deadline || 0,
-			subject_rating: this.data.filterValue.subject_rating || 0,
 			current_page: page || 1,
-			page_size: 25,
-		}).then((result) => {
+			page_size: 25
+		}	
+	   
+		request(config.NEW_BOND.quotationBoard, Object.assign(postData, this.data.filterValue)).then((result) => {
 			if (String(result.data.ret) === '0') {
 				this.setData({
 					bondList: result.data.retdata.bond_array,
 					loading: false
 				})
 			}
-		}).catch(() => {
-
 		})
 	},
 
@@ -65,9 +61,8 @@ Page({
 	 */
 	onLoad: function (options) {
 		this.getBondList(this.data.currentTab, 1)
-
 		var that = this;
-
+		console.log('onLoad....')
 		/** 
 		 * 获取系统信息 
 		 */  

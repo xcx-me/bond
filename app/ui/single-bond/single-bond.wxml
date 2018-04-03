@@ -17,9 +17,9 @@
 			<icon class='icon-delete' size='20' wx:if='{{isMine}}' type='success' catchtap='onDeleteBond' data-bname='{{bondInfo.bond_simple_name}}' />	
 		</view>
 		<view wx:else >
-			<block wx:for='{{[{bond_id:"73e79b955a8947a3b9892eea89a835b7",user_id:"qtrade",sale_name:"",company_name:"深圳华润元大资管",face_url:"",is_zhu_cheng:"2"}]}}' wx:for-item='item' wx:key='index'>
-				<view class='sale-info' catchtap='doNavigator' data-bid='{{item.bond_id}}' data-uid='{{item.user_id}}'>
-					<template is='sellerInfoTpl' data='{{url: "", vUrl: "../../asset/image/qtrade/sprites_01.png", faceUrl: item.face_url || "../../asset/image/qtrade/icon-default.png", isVUser:true, userName: item.sale_name, companyName: item.company_name}}'></template>
+			<block wx:for='{{bondInfo.sale_array}}' wx:for-item='sale' wx:key='index'>
+				<view class='sale-info' catchtap='doNavigator' data-bid='{{sale.bond_id}}' data-uid='{{sale.user_id}}' data-bname='{{bondInfo.bond_simple_name}}'>
+					<template is='sellerInfoTpl' data='{{url: "", vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: sale.face_url, isVUser:"1", userName: bondInfo.sale_array.length > 1 ? "" : sale.sale_name, companyName: bondInfo.sale_array.length > 1 ? "" : sale.company_name}}'></template>
 				</view>
 			</block>
 		</view>
