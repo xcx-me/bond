@@ -4,14 +4,63 @@
 .bond-info-item-tpl .label {
   color: #999999;
 }
-.bond-sale-info .item image {
-  width: 24px;
-  height: 24px;
-  border-radius: 100%;
+.seller-info-tpl {
+  overflow: hidden;
 }
-.bond-sale-info .item .v-user {
+.seller-info-tpl view {
+  float: left;
+  overflow: hidden;
+}
+.seller-info-tpl view.image {
+  width: 80rpx;
+}
+.seller-info-tpl .face-url {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 100%;
   position: relative;
-  top: 6px;
-  left: -6px;
-  padding: 12px 10px 12px 5px;
+  left: 20rpx;
+  border: 1px solid #fff;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+.seller-info-tpl .v-user {
+  position: relative;
+  top: 12rpx;
+  left: -2rpx;
+  padding: 18rpx;
+  background-size: 90rpx;
+}
+.seller-info-tpl .v-user.big {
+  background-size: 90rpx;
+  background-position: 0 -1120px;
+}
+.seller-info-tpl .under-line {
+  font-size: 0;
+}
+.seller-info-tpl .user-name {
+  font-size: x-large;
+}
+.seller-info-tpl .company-name {
+  font-size: small;
+}
+.bond-sale-info .item {
+  float: left;
+  width: 100%;
+}
+.bond-sale-info .item .seller-info-tpl image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.bond-sale-info .item .seller-info-tpl .name {
+  position: relative;
+  top: 8rpx;
+}
+.bond-sale-info .item .seller-info-tpl .name .user-name {
+  font-size: small;
+}
+.bond-sale-info .item .seller-info-tpl .name .under-line {
+  font-size: small;
+}
+.bond-sale-info .sale-list {
+  overflow: auto;
 }
