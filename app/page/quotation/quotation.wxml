@@ -4,9 +4,9 @@
 
 		<BondFormEditor editorFlag='{{editorFlag}}' bind:changeValueEvent='_changeValue'/>  
 
-		<button class='' type='primary' bindtap='handleSendQuote'>发布报价</button>
+		<button class='margin-bottom' type='primary' bindtap='handleSendQuote'>发布报价</button>
 
-		<view>
+		<view class='margin-bottom'>
 			<toastedit id='toastedit'>{{toastedit}}</toastedit>
 			<button type='primary' bindtap='handleShowToast'>click to showToast!</button>
 		</view>
@@ -20,7 +20,7 @@
 				bind:cancelEvent="_cancelEvent"
 				bind:confirmEvent="_confirmEvent">
 			</dialog>
-			<button type="primary" bindtap="showDialog"> ClickMe! </button>
+			<button class='margin-bottom' type="primary" bindtap="showDialog"> ClickMe! </button>
 		</view>
 	</view>
 

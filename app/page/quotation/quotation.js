@@ -1,31 +1,12 @@
 // app/page/quotation/quotation.js
-
-const bondType = [
-	{name: '101', value: 'NCD'},
-	// {name: '102', value: '政金债', checked: 'true'},
-	{name: '103', value: '商行债'},
-	{name: '104', value: '次级债'},
-	{name: '105', value: '其他金融债'},
-	{name: '106', value: 'ABS'},
-	{name: '107', value: '公司债'},
-	{name: '108', value: '小公募'},
-	{name: '109', value: 'SCP'},
-]
-
 Page({
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		// is_modal_Hidden: false,  
-		// is_modal_Msg: '我是一个自定义组件',
-
 		isOpenMyShop: false, // 是否开店
 		editorFlag: false, // 是否是债券编辑入口
 		sendQuoteData: {}, // 发布报价参数
-
-		items: bondType,
-		itemsCheckedValue: '',
 	},
 
 	openMyShop: function () {
@@ -33,19 +14,6 @@ Page({
 			isOpenMyShop: true
 		})
 	},
-
-	// checkboxChange: function(e) {
-	// 	// console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-	// 	let checkedValue = e.detail.value
-	// 	let checkedItem = []
-	// 	checkedValue.forEach((item, index) => {
-	// 		checkedItem.push(this.data.items.find((items) => { return items.name === item}).value)
-	// 	})
-	// 	this.setData({
-	// 		itemsCheckedValue: checkedItem.join('、')
-	// 	})
-	// 	console.log('债券品种：', checkedItem)
-	// },
 
 	handleSendQuote () { // 发布报价
 
