@@ -1,0 +1,84 @@
+ // @import '../dialog.less';
+@import '../../../template/seller-info/seller-template.less';
+
+.sale-dialog-container {
+	z-index: 99;
+	position: fixed;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	width: 100%;
+	height: 100%;
+
+	.wx-dialog-mask {
+		width: 100%;
+		height: 100%;
+		background-color: #000000;
+		opacity: 0.3;
+	}
+
+	.wx-dialog-main {
+		z-index: 999;
+		position: absolute;
+		width: 450rpx;
+		top: 10%;
+		left: 50%;
+		margin-left: -225rpx;
+		background-color: #FFFFFF;
+		border-radius: 4rpx;
+
+		.wx-dialog-title {
+    		overflow: hidden;
+    		padding: 5rpx 15rpx;
+    		background-color: #f2f6fd;
+		}
+
+		.wx-dialog-content {
+			max-height: 400rpx;
+			overflow: auto;
+			width: 450rpx;
+
+			.item {
+				float: left;
+				padding: 10rpx 0;
+				width: 450rpx;
+				overflow: hidden;
+				position: relative;
+
+				.seller-info-tpl {
+					float: left;
+
+					.face-url {
+						width: 40rpx;
+						height: 40rpx;
+						position: relative;
+						left: 20rpx;
+					}
+
+					.user-name,
+					.under-line {
+						font-size: small;
+					}
+				}
+
+				radio {
+					position: absolute;
+					right: 20rpx;
+				}
+			}
+		}
+
+		.wx-dialog-footer {
+			text-align: center;
+
+			.wx-dialog-btn {
+				float: left;
+				height: 60rpx;
+				border: 1rpx solid #DDDDDD;
+				border-radius: 2rpx;
+				
+			}
+		}
+	}
+}

@@ -1,0 +1,25 @@
+<!--app/ui/dialog/sale-dialog/sale-dialog.wxml-->
+<import src="../../../template/seller-info/seller-template.wxml" />
+<view class='wx-dialog-container sale-dialog-container' hidden="{{!isShow}}">
+	<view class='wx-dialog-mask'></view>
+	<view class='wx-dialog-main'>
+		<view class='wx-dialog-title'>{{ title }}</view>
+		<view class='wx-dialog-content'>
+			<radio-group class="sale-group" bindchange="saleChange">
+  				<label class="radio" wx:for='{{saleList}}' wx:for-item='sale'  wx:for-index='index' wx:key='bond_id'>
+					<view class='item'>
+						<template is='sellerInfoTpl' data='{{url:"", vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: sale.face_url, isVUser:"1", userName: sale.sale_name, companyName: sale.company_name}}'></template>
+						<radio value="{{index}}" checked="{{sale.checked}}"/>
+					</view>
+  				</label>
+			</radio-group>
+			<!-- <block wx:for='{{saleList}}' wx:for-item='sale' wx:key='bond_id'>
+				
+			</block> -->
+		</view>
+		<view class='wx-dialog-footer'>
+			<button class='wx-dialog-btn' size='mini' type='primary' catchtap='_cancelEvent'>{{ cancelText }}</button>
+			<button class='wx-dialog-btn' size='mini' type='primary' catchtap='_confirmEvent'>{{ confirmText }}</button>
+		</view>
+	</view>
+</view>

@@ -8,7 +8,7 @@
 		<view class='dynamic-item overflow-ellipsis' wx:for="{{dynamicList}}" wx:for-index="index" wx:for-item="dynamic" wx:key="bond_id">
 			<text>{{index + 1}}、</text>
 			<view bindtap='clearDynamicTip' data-name='{{dynamic.bond_simple_name}}'>
-			<navigator url='{{detailUrl}}?bid={{dynamic.bond_id}}&uid=0'>
+			<navigator url='/app/page/bond-detail/bond-detail?bid={{dynamic.bond_id}}&uid=0'>
 				<text>{{dynamic.bond_simple_name}}</text>
 			</navigator>
 			</view>

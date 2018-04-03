@@ -16,7 +16,7 @@
 					needNavigatorIndex
 					userId='{{uid}}'
 					bindevent='onUpdateStoreDetail'/> 
-				<OtherBonds wx:if='{{tabId === currentTabId}}' detailUrl='../bond-detail/bond-detail' isMyStore='{{isMyStore}}' bondId='{{bondId}}' uid='{{uid}}' userId='{{userId}}'/>
+				<OtherBonds wx:if='{{tabId === currentTabId}}' isMyStore='{{isMyStore}}' bondId='{{bondId}}' uid='{{uid}}' userId='{{userId}}'/>
 			</scroll-view>
 		</swiper-item>
 		</block>

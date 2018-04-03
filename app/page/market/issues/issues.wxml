@@ -1,11 +1,11 @@
 <!--app/page/market/stage-issues/stage-issues.wxml-->
 <view class='stage-issues'>
-	<view class='bond-list'>
-		<block wx:for='{{bondList}}' wx:for-item='bondItem' wx:key='bond_id'>
-		<view class='bond-item' bindtap='doClickBond' data-id='{{bondItem.bond_id}}' data-name='{{bondItem.bond_simple_name}}'>
-			<SingleBond isMine='{{false}}' from='board' bondInfo='{{bondItem}}' bondId='' bind:deleteBondEvent='_deleteBondEvent'/>
-		</view>
-		</block>
-	</view>
+	<BondList
+		from='board'
+		isMine='false'
+		bondList='{{bondList}}'
+		uid=''
+		userId=''
+	/>
 </view>
 

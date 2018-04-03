@@ -2,7 +2,9 @@
 <view class='date-bar-component clearfix'>
 	<!-- <text class='label'>日期：</text> -->
 	<block wx:for='{{dateList}}' wx:for-item="dateItem" wx:key='index'>
-		<text class='date-item {{currentDate === dateItem.originalDate ? "active" : ""}}' wx:if='{{index > 0 && index < 5}}'>{{dateItem.date}}({{dateItem.getDay}})</text>
-		<text class='split-line' wx:if='{{index > 0 && index < 5}}'></text>
+		<view class='date-bar-item' wx:if='{{index > 0 && index < 5}}'>
+			<text class='date-item {{currentDate === dateItem.originalDate ? "active" : ""}}' bindtap='changeDate' data-index='{{index}}'>{{dateItem.date}}({{dateItem.weekDay}})</text>
+			<text class='split-line' hidden='{{index === 4}}'>|</text>
+		</view>
 	</block>
 </view>

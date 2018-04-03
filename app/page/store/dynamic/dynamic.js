@@ -5,10 +5,6 @@ let timeId = null
 
 Component({
  	properties: {
-		detailUrl: {
-			type: String,
-			value: ''
-		},
 		needUpdate: {
 			type: Boolean,
 			value: false,

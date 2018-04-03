@@ -1,7 +1,6 @@
 <!--app/page/bond-detail/other-bonds/other-bonds.wxml-->
 <view class="other-bonds-component">
 	<BondList
-		detailUrl='{{detailUrl}}'
 		isMine='{{isMyStore}}'
 		from='detail'
 		bondList='{{bondList}}'

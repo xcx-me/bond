@@ -1,8 +1,13 @@
 <template name='sellerInfoTpl'>
 	<navigator class='seller-info-tpl' url='{{url}}'>
-		<image class='face-url' src='{{faceUrl}}' />
-		<icon class='v-user' wx:if='{{isVUser === "1"}}' style='background: transparent url("{{vUrl}}") no-repeat 0 0;background-size: 100rpx;'/>
-        <text class='user-name'>{{userName}}</text>
-        <text class='company-name'>{{companyName}}</text>
+		<view>
+			<image class='face-url' src='{{faceUrl || "/app/asset/image/qtrade/icon-default.png"}}' />
+			<icon class='v-user' wx:if='{{isVUser === "1"}}' style='background: transparent url("{{vUrl}}") no-repeat 0 0;background-size: 100rpx;'/>
+		</view>
+		<view>
+			<text class='user-name'>{{userName}}</text>
+			<text class='under-line'>_</text>
+       	 	<text class='company-name'>{{companyName}}</text>
+		</view>
     </navigator>
 </template>
