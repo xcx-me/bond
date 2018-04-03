@@ -19,7 +19,7 @@ Page({
 		},
 		vUrl: '../../asset/image/qtrade/sprites_01.png',
 		userId: '0',
-		showLoading: true,
+		loading: true,
 		needUpdate: false
 	},
 
@@ -29,12 +29,8 @@ Page({
 				// result.data.retdata.is_myshop_opened = 0
 				this.setData({
 					storeRegistered: String(result.data.retdata.is_myshop_opened) === '1',
-					showLoading: false,
+					loading: false,
 					needUpdate: true
-				})
-			} else {
-				this.setData({
-					showLoading: false
 				})
 			}
 		})

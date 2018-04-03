@@ -54,50 +54,39 @@ module.exports = {
 		},
 		// ==========
 
-		getWorkdaysInfo: { // 发行面板上工作日列表返回
+		getWorkdaysInfo: { 
 			url: '/qtrade_bond/api/newbond/get_workdays_info.do',
 			method: POST
 		},
-		consultation: { // 询量
-			// url: '/appletree/unreadmsglist.do',
+		quotationBoard: { 
 			url: '/qtrade_bond/api/newbond/quotation_board.do',
 			method: POST
 		},
-		announcement: { // 公告
-			// url: '/appletree/unreadmsglist.do',
-			url: '/qtrade_bond/api/newbond/quotation_board.do',
-			method: POST
-		},
-		issue: { // 发行
-			// url: '/appletree/unreadmsglist.do',
-			url: '/qtrade_bond/api/newbond/quotation_board.do',
-			method: POST
-		},
-		accumulateClick: { // 点击次数累加
+		accumulateClick: {
 			url: '/qtrade_bond/api/newbond/accumulate_click.do',
 			method: POST
 		},
-		isStoreOpened: { // 店铺是否开通接口
+		isStoreOpened: {
 			url: '/qtrade_bond/api/newbond/is_myshop_opened.do',
 			method: POST
 		},
-		news: { // 我的店铺--查询最新动态
+		news: {
 			url: '/qtrade_bond/api/newbond/get_dynamic_tips.do',
 			method: POST
 		},
-		deleteNews: { // 我的店铺--点击最新动态
+		deleteNews: {
 			url: '/qtrade_bond/api/newbond/delete_dynamic_tip.do',
 			method: POST
 		},
-		newBondList: { // 债券列表
+		newBondList: {
 			url: '/qtrade_bond/api/newbond/get_bond_list.do',
 			method: POST
 		},
-		deleteBond: { // 删除债券
+		deleteBond: {
 			url: '/qtrade_bond/api/newbond/delete_bond.do',
 			method: POST
 		},
-		storeDetail: { // 店铺详情
+		storeDetail: {
 			url: '/qtrade_bond/api/newbond/get_shop_detail.do',
 			method: POST
 		},
@@ -105,11 +94,11 @@ module.exports = {
 			url: '/qtrade_bond/api/newbond/mod_quotation.do',
 			method: POST
 		},
-		newBondDetail: { // 债券详情
+		newBondDetail: {
 			url: '/qtrade_bond/api/newbond/get_bond_detail.do',
 			method: POST
 		},
-		questionQuery: { // 问答区查询
+		questionQuery: {
 			url: '/qtrade_bond/api/newbond/query_asklist.do',
 			method: POST
 		},
@@ -117,15 +106,15 @@ module.exports = {
 			url: '/qtrade_bond/api/newbond/query_ask_num.do',
 			method: POST
 		},
-		askQuestion: { // 问问题
+		askQuestion: {
 			url: '/qtrade_bond/api/newbond/ask.do',
 			method: POST
 		},
-		answerQuestion: { // 回答问题
+		answerQuestion: {
 			url: '/qtrade_bond/api/newbond/ans.do',
 			method: POST
 		},
-		thumbQuestion: { // 点赞
+		thumbQuestion: {
 			url: '/qtrade_bond/api/newbond/thumb.do',
 			method: POST
 		}

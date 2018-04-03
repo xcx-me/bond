@@ -1,7 +1,9 @@
 {
 	"usingComponents": {
-		"StageInquiry": "./stage-inquiry/stage-inquiry",
-		"StageBulletin": "./stage-bulletin/stage-bulletin",
-		"StageIssues": "./stage-issues/stage-issues"
+		"Filter": "./filter/filter",
+		"DateBar": "./date-bar/date-bar",
+		"Consultation": "./consultation/consultation",
+		"Announcement": "./announcement/announcement",
+		"Issues": "./issues/issues"
 	}
 }

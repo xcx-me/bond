@@ -7,7 +7,8 @@ Page({
 		page: 0,
 		pageSize: 15,
 		winHeight: 0,
-		bondList: []
+		bondList: [],
+		loading: true
 	},
 
 	getBondList: function (page, len) {
@@ -22,7 +23,8 @@ Page({
 		}).then((result) => {
 			console.log(result)
 			this.setData({
-				bondList: result.data.retdata.bond_list
+				bondList: result.data.retdata.bond_list,
+				loading: false
 			})
 		})
 	},

@@ -1,21 +1,31 @@
 <!--app/page/market/filter/filter.wxml-->
 <view class="filter-component clearfix">
+	<view class='wrapper'>
+		<view class='label'><text>已选：</text></view>
+		<block wx:for='{{filterValue}}' wx:for-item='value' wx:key='index'>
+			<view class='value' hidden='{{value === "0"}}'>
+				{{value}}
+			</view>
+		</block>
+	</view>
+	<view class="wrapper">
 	<!-- <view class='filter-item label'><text>筛选：</text></view> -->
-	<block wx:for='{{defaultFilterConfig}}' wx:for-item='item' wx:key='index' >
-		<picker class='filter-item' bindchange='bindPickerChange' value='0' range='{{item.values}}' range-key='title'>
-			<text>{{item.title}}</text>
-		</picker>
+	<block wx:for='{{filterConfig}}' wx:for-item='filterItem' wx:for-index='index' wx:key='name' >
+		<view class='filter-item {{filterItem.name}}'>
+			<view  bindtap='onShowFilter' data-index='{{index}}'>
+				<text class='label'>{{filterItem.title}}</text>
+				<i class='icon-down-arrow'></i>
+			</view>
+			<view class='filter-pallet' hidden='{{!filterItem.isShow}}'>
+				<checkbox-group bindchange="checkboxChange" data-index='{{index}}'>
+					<view class="checkbox" wx:for="{{filterItem.values}}" wx:for-item='item' wx:for-index='index' wx:key="index">
+						<checkbox wx:key="" value="{{index}}" checked="{{item.isSelected}}"/>{{item.title}}
+					</view>
+				</checkbox-group>
+				<button class='btn-reset' size='mini' type='primary' bindtap='onReset' data-index='{{index}}'>重置</button>
+				<button class='btn-confirm' size='mini' type='primary'  bindtap='onConfirm' data-index='{{index}}'>确定</button>
+			</view>
+		</view>
 	</block>
-	<!-- <picker class='filter-item' bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-		<text>债券品种</text>
-    	<text class="picker">>{{array[index]}}</text>
-	</picker>
-	<picker class='filter-item' bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-		<text>发行期限</text>
-    	<text class="picker">>{{array[index]}}</text>
-	</picker>
-	<picker class='filter-item' bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-		<text>主体评级</text>
-    	<text class="picker">>{{array[index]}}</text>
-	</picker> -->
+	</view>
 </view>

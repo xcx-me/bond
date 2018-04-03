@@ -2,6 +2,6 @@
   "component": true,
   "usingComponents": {
 	"Filter": "../filter/filter",
-	"DateBar": "../date-bar/date-bar"
+	"SingleBond": "../../../ui/single-bond/single-bond"
   }
 }

@@ -1,0 +1,10 @@
+<!--app/page/market/consultation/consultation.wxml-->
+<view class='consultation-component'>
+	<view class='bond-list'>
+		<block wx:for='{{bondList}}' wx:for-item='bondItem' wx:key='bond_id'>
+		<view class='bond-item' bindtap='doClickBond' data-id='{{bondItem.bond_id}}' data-name='{{bondItem.bond_simple_name}}'>
+			<SingleBond isMine='{{false}}' from='board' bondInfo='{{bondItem}}' bondId='' bind:deleteBondEvent='_deleteBondEvent'/>
+		</view>
+		</block>
+	</view>
+</view>

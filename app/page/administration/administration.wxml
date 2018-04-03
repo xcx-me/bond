@@ -1,5 +1,6 @@
 <view class='administration-page'>
-	<scroll-view class='bond-list-pallet' scroll-y scroll-x="{{false}}">
+	<loading wx:if='{{loading}}'>加载中</loading>
+	<scroll-view hidden='{{loading}}' class='bond-list-pallet' scroll-y scroll-x="{{false}}">
 		<view class='header clearfix'>
 			<text class='item'>债券简称</text>
 			<text class='item'>小区间(%)</text>
