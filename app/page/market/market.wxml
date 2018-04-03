@@ -6,6 +6,8 @@
 		<view class="market-tab-list {{currentTab == 2 ? 'on' : ''}}" data-current='2' bindtap='swichNav'>发行</view>
 	</view>
 
+	<loading wx:if='{{loading}}'>加载中</loading>
+	<view hidden='{{loading}}' >
 	<Filter />
 	<DateBar wx:if='{{currentTab === "2"}}'/>
 	<swiper current='{{currentTab}}' class='swiper-tab-box' duration='300' style='height: {{winHeight}}px' bindchange='bindChangeTab'>
@@ -19,4 +21,5 @@
 			</swiper-item>
 		</block>
 	</swiper>
+	</view>
 </view>
