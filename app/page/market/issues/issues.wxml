@@ -2,7 +2,7 @@
 <view class='stage-issues'>
 	<BondList
 		from='board'
-		isMine='false'
+		isMine='{{false}}'
 		bondList='{{bondList}}'
 		uid=''
 		userId=''

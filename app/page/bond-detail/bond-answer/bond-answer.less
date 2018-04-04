@@ -1,8 +1,12 @@
+@import '../../../template/seller-info/seller-template.less';
+
 .bond-answer-component {
 	background: #F6FAFF;
-	padding: 0 8px 0 10px;
+	padding: 0;
 
 	.answer-item {
+		float: left;
+		width: 100%;
 		background: #F6FAFF;
 		padding: 10rpx 0;
 		margin: 0;
@@ -15,10 +19,28 @@
 		&:last-child {
 			border-bottom: none;
 		}
+
+		.content {
+			float: left;
+			.seller-info-tpl {
+				display: inline-block;
+
+				.image {
+					.face-url {
+						width: 48rpx;
+						height: 48rpx;
+					}
+				}
+			}
+		}
+
+		.thumb {
+			float: right;
+		}
 	}
 
-	image {
-		width: 18px;
-		height: 18px;
-	}
+	// image {
+	// 	width: 18px;
+	// 	height: 18px;
+	// }
 }

@@ -2,28 +2,23 @@
   overflow: hidden;
 }
 .seller-info-tpl view {
+  position: relative;
   float: left;
-  overflow: hidden;
+}
+.seller-info-tpl view.image {
+  margin-right: 20rpx;
 }
 .seller-info-tpl .face-url {
   width: 60rpx;
   height: 60rpx;
   border-radius: 100%;
   position: relative;
-  left: 20rpx;
-  border: 1px solid #fff;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 .seller-info-tpl .v-user {
-  position: relative;
-  top: 12rpx;
-  left: -2rpx;
+  position: absolute;
+  bottom: 0;
+  right: -16rpx;
   padding: 18rpx;
-  background-size: 90rpx;
-}
-.seller-info-tpl .v-user.big {
-  background-size: 90rpx;
-  background-position: 0 -1120px;
 }
 .seller-info-tpl .under-line {
   font-size: 0;
@@ -57,6 +52,7 @@
   top: 10%;
   left: 50%;
   margin-left: -225rpx;
+  padding: 20rpx;
   background-color: #FFFFFF;
   border-radius: 4rpx;
 }
@@ -79,12 +75,6 @@
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .item .seller-info-tpl {
   float: left;
-}
-.sale-dialog-container .wx-dialog-main .wx-dialog-content .item .seller-info-tpl .face-url {
-  width: 40rpx;
-  height: 40rpx;
-  position: relative;
-  left: 20rpx;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .item .seller-info-tpl .user-name,
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .item .seller-info-tpl .under-line {

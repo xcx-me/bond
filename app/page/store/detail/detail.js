@@ -29,6 +29,11 @@ Component({
 			}
 		},
 		
+		isQtrade: {
+			type: Boolean,
+			value: false
+		},
+		
 		navigatorUrl: {
 			type: String,
 			value: ''
@@ -72,7 +77,6 @@ Component({
 					this.setData({
 						storeDetail: detail
 					})
-					console.log('getStoreDetail....', userId)
 					this.triggerEvent('event', detail)
 				}
 			})

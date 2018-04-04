@@ -1,8 +1,41 @@
+.seller-info-tpl {
+  overflow: hidden;
+}
+.seller-info-tpl view {
+  position: relative;
+  float: left;
+}
+.seller-info-tpl view.image {
+  margin-right: 20rpx;
+}
+.seller-info-tpl .face-url {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 100%;
+  position: relative;
+}
+.seller-info-tpl .v-user {
+  position: absolute;
+  bottom: 0;
+  right: -16rpx;
+  padding: 18rpx;
+}
+.seller-info-tpl .under-line {
+  font-size: 0;
+}
+.seller-info-tpl .user-name {
+  font-size: x-large;
+}
+.seller-info-tpl .company-name {
+  font-size: small;
+}
 .bond-answer-component {
   background: #F6FAFF;
-  padding: 0 8px 0 10px;
+  padding: 0;
 }
 .bond-answer-component .answer-item {
+  float: left;
+  width: 100%;
   background: #F6FAFF;
   padding: 10rpx 0;
   margin: 0;
@@ -15,7 +48,16 @@
 .bond-answer-component .answer-item:last-child {
   border-bottom: none;
 }
-.bond-answer-component image {
-  width: 18px;
-  height: 18px;
+.bond-answer-component .answer-item .content {
+  float: left;
+}
+.bond-answer-component .answer-item .content .seller-info-tpl {
+  display: inline-block;
+}
+.bond-answer-component .answer-item .content .seller-info-tpl .image .face-url {
+  width: 48rpx;
+  height: 48rpx;
+}
+.bond-answer-component .answer-item .thumb {
+  float: right;
 }

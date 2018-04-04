@@ -73,7 +73,8 @@ Component({
 
 	toDetail: function (from, uid, bondId, bondSimpleName) {
 		request(config.NEW_BOND.accumulateClick, {user_id: uid, bond_simple_name: bondSimpleName})
-		let url = '/app/page/bond-detail/bond-detail?bid=' + bondId +'&uid=' + uid
+		let virtualUid = this.data.isMine ? '0' : uid
+		let url = '/app/page/bond-detail/bond-detail?bid=' + bondId +'&uid=' + virtualUid
 		from === 'detail' ? wx.redirectTo({url: url}) : wx.navigateTo({url: url})
 	},
 

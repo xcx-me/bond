@@ -1,7 +1,5 @@
 // app/page/bond-detail/other-bonds/other-bonds.js
-const { request } = require('../../../util/ajax/ajax')
-const config = require('../../../util/ajax/config')
-
+const service = require('../../../util/service/service')
 Component({
   properties: {
 	bondId: {
@@ -19,7 +17,16 @@ Component({
 	isMyStore: {
 		type: Boolean,
 		value: false
-	}
+	},
+	needUpdate: {
+		type: Boolean,
+		value: false,
+		observer: function(newVal, oldVal){
+			if (newVal) {
+				this.getBondList()
+			}
+		}
+	},
   },
 
   data: {
@@ -32,19 +39,16 @@ Component({
 
   methods: {
 	getBondList: function () {
-		console.log('other-bond......', this.data.uid, this.data)
-		request(config.NEW_BOND.newBondList, {
+		service.getBondList({
 			bond_id: this.data.bondId,
 			user_id: this.data.userId,
 			offset: 0,
 			limit: 3,
 			used_for_management: '0'
-		}).then((result) => {
-			if (String(result.data.ret) === '0') {
-				this.setData({
-					bondList: result.data.retdata.bond_list
-				})
-			}
+		}, (result) => {
+			this.setData({
+				bondList: result.data.retdata.bond_list
+			})
 		})
 	}
   }

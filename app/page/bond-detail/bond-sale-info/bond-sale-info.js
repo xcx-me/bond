@@ -11,7 +11,11 @@ Component({
 			console.log('ob..', newVal, oldVal)
 		}
 	},
-	
+	isMyStore: {
+		type: Boolean,
+		value: false,
+	},
+
 	isQtrade: {
 		type: Boolean,
 		value: false,
@@ -36,15 +40,15 @@ Component({
   },
 
   ready: function () {
-	console.log('ready....', this.data.bondSaleInfo)
+	console.log('ready....', this.data.bondSaleInfo, this.data.isMyStore)
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-	onEditBond: function (){
-		
+	onEditSaleInfo: function (){
+		console.log('edit...', this.data.bondSaleInfo)
 	}
   }
 })

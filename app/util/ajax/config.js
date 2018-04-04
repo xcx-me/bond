@@ -44,7 +44,7 @@ module.exports = {
 			url: '/qtrade_bond/api/newbond/associate.do',
 			method: POST
 		},
-		judgeShopOpen: { // 是否开通店铺
+		isStoreOpened: {
 			url: '/qtrade_bond/api/newbond/is_myshop_opened.do',
 			method: POST
 		},
@@ -64,10 +64,6 @@ module.exports = {
 		},
 		accumulateClick: {
 			url: '/qtrade_bond/api/newbond/accumulate_click.do',
-			method: POST
-		},
-		isStoreOpened: {
-			url: '/qtrade_bond/api/newbond/is_myshop_opened.do',
 			method: POST
 		},
 		news: {
