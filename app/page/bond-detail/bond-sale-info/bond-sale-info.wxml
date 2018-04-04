@@ -2,7 +2,10 @@
 <import src='../../../template/bond-info-item/bond-info-item.wxml' />
 <import src="../../../template/seller-info/seller-template.wxml" />
 <view class='bond-sale-info'>
-	<view><text class="title">销售信息{{bondSaleInfo.length}}</text></view>
+	<view class="header">
+		<text class="title">销售信息{{bondSaleInfo.length}}</text>
+		<button class='btn-edit' size='mini' type='primary' bindtap='onEditBond'>编辑</button>
+	</view>
 	<view class='sale-list'>
 	<block wx:if='{{isQtrade}}'>
 		<block wx:for='{{bondSaleInfo}}' wx:for-item='saleInfo' wx:key='index'>
