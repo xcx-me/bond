@@ -1,0 +1,4 @@
+<!--app/page/ask/ask.wxml-->
+<view class='ask-question-page'>
+ 	<AskAnswerQuestion bondId='{{bondId}}' userId='{{userId}}' bondSimpleName='{{bondSimpleName}}' isAsk/>
+</view>

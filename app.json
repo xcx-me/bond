@@ -10,7 +10,10 @@
         "app/page/bond-detail/bond-detail",
         "app/page/quotation/quotation",
         "app/page/notice/notice",
-        "app/page/user-info/user-info"
+        "app/page/user-info/user-info",
+		"app/page/ask/ask",
+		"app/page/answer/answer",
+		"app/page/edit-sale-info/edit-sale-info"
     ],
     "window": {
         "backgroundTextStyle": "light",

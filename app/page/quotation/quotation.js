@@ -4,6 +4,7 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
+		bondSimpleName: '',
 		isOpenMyShop: false, // 是否开店
 		editorFlag: false, // 是否是债券编辑入口
 		sendQuoteData: {}, // 发布报价参数
@@ -57,7 +58,10 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-
+		// 获取点击编辑时传过来的债券简称，后续工作由孙庆完成
+		this.setData({
+			bondSimpleName: options.bname
+		})
 	},
 
 	/**

@@ -8,31 +8,23 @@
   overflow: hidden;
 }
 .seller-info-tpl view {
+  position: relative;
   float: left;
-  overflow: hidden;
 }
 .seller-info-tpl view.image {
-  width: 80rpx;
+  margin-right: 20rpx;
 }
 .seller-info-tpl .face-url {
   width: 60rpx;
   height: 60rpx;
   border-radius: 100%;
   position: relative;
-  left: 20rpx;
-  border: 1px solid #fff;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 .seller-info-tpl .v-user {
-  position: relative;
-  top: 12rpx;
-  left: -2rpx;
+  position: absolute;
+  bottom: 0;
+  right: -16rpx;
   padding: 18rpx;
-  background-size: 90rpx;
-}
-.seller-info-tpl .v-user.big {
-  background-size: 90rpx;
-  background-position: 0 -1120px;
 }
 .seller-info-tpl .under-line {
   font-size: 0;
@@ -43,13 +35,37 @@
 .seller-info-tpl .company-name {
   font-size: small;
 }
+.bond-sale-info .header {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10rpx;
+}
+.bond-sale-info .header .title {
+  height: 42rpx;
+  line-height: 42rpx;
+  position: relative;
+  left: 8rpx;
+}
+.bond-sale-info .header .btn-edit {
+  position: absolute;
+  top: 0;
+  right: 8rpx;
+  line-height: 36rpx;
+  padding: 3rpx 20rpx;
+  background: none;
+  border: 1px solid #2196F3;
+  color: #2196F3;
+}
 .bond-sale-info .item {
   float: left;
   width: 100%;
 }
-.bond-sale-info .item .seller-info-tpl image {
-  width: 40rpx;
-  height: 40rpx;
+.bond-sale-info .item .seller-info-tpl .image .face-url {
+  width: 48rpx;
+  height: 48rpx;
+}
+.bond-sale-info .item .seller-info-tpl .image .v-user {
+  padding: 16rpx;
 }
 .bond-sale-info .item .seller-info-tpl .name {
   position: relative;

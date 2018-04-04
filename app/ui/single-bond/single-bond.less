@@ -65,10 +65,15 @@
 		float: left;
 
 		.seller-info-tpl {
-			image {
-				width: 48rpx;
-				height: 48rpx;	
+			.image {
+				.face-url{
+					width: 68rpx;
+					height: 68rpx;	
+					border: 1px solid #fff;
+					box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+				}
 			}
+			
 			.name {
 				position: relative;
 				top: 8rpx;
@@ -81,6 +86,16 @@
 				}
 			}
 		} 
+	}
+
+	.overflow-data {
+		background-color: #666666;
+		border-radius: 10px;
+		color: #FFFFFF;
+		padding: 2px 5px;
+		margin-top: 3px;
+		box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+		border: 1px solid #FFFFFF;
 	}
 }
 

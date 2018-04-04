@@ -2,11 +2,11 @@
 	overflow: hidden;
 
 	view {
+		position: relative;
 		float: left;
-		overflow: hidden;
 
 		&.image {
-			width: 80rpx;
+			margin-right: 20rpx;
 		}
 	}
 
@@ -15,22 +15,13 @@
 		height: 60rpx;
 		border-radius: 100%;
 		position: relative;
-		left: 20rpx;
-    	border: 1px solid #fff;
-    	box-shadow: 1px 1px 1px rgba(0,0,0,.3);
 	}
 
 	.v-user {
-		position: relative;
-		top: 12rpx;
-		left: -2rpx;
-		padding: 18rpx;
-		background-size: 90rpx;
-
-		&.big {
-			background-size: 90rpx;
-			background-position: 0 -1120px;
-		}
+		position:absolute;
+		bottom:	0;
+		right:-16rpx;
+		padding:18rpx;
 	}
 
 	.under-line {

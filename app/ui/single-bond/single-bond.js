@@ -46,10 +46,11 @@ Component({
   methods: {
 	doNavigator: function (e) {
 		let bid = e.currentTarget.dataset.bid
-		let uid = e.currentTarget.dataset.uid
+		let uid = this.data.isMine ? '0' : e.currentTarget.dataset.uid
 		let bname = e.currentTarget.dataset.bname
 		request(config.NEW_BOND.accumulateClick, {user_id: uid, bond_simple_name: bname})
 		let url = '/app/page/bond-detail/bond-detail?bid=' + bid + '&uid=' + uid
+		console.log('single-bond:', url)
 		wx.navigateTo({
 			url: url
 		})

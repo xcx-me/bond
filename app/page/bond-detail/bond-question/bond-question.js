@@ -1,7 +1,5 @@
 // app/page/bond-detail/bond-question/bond-question.js
-const { request } = require('../../../util/ajax/ajax')
-const config = require('../../../util/ajax/config')
-
+const service = require('../../../util/service/service')
 Component({
 	options: {
 		multipleSlots: true // 在组件定义时的选项中启用多slot支持
@@ -9,6 +7,10 @@ Component({
 
   	properties: {
 		bondId: {
+			type: String,
+			value: ''
+		},
+		userId: {
 			type: String,
 			value: ''
 		},
@@ -25,7 +27,7 @@ Component({
 
   	data: {
 		questionList: [],
-		questionTotal: 0,
+		bondSimpleName: ''
   	},
 
   	ready: function () {
@@ -34,20 +36,31 @@ Component({
 
   	methods: {
 		getQuestionList: function () {
-			request(config.NEW_BOND.questionQuery, {
-				bond_id: this.data.bondId
-			}).then((result) => {
-				if (String(result.data.ret) === '0') {
-					let questionList = result.data.retdata.ask_array
-					let questionTotal = questionList.length
-					this.setData({
-						questionList: questionList,
-						questionTotal: questionTotal
-					})
-
-					this.triggerEvent('updateTotalEvent', questionTotal)
-				}
+			service.getQuestionList(this.data.bondId, (result)=> {
+				let questionList = result.data.retdata.ask_array
+				let questionTotal = questionList.length
+				this.setData({
+					questionList: questionList,
+					bondSimpleName: result.data.retdata.bond_simple_name
+				})
+				this.triggerEvent('updateTotalEvent', questionTotal)
 			})
+		},
+		onAsk: function () {
+			let url = '/app/page/ask/ask?bid=' + this.data.bondId +'&bname=' + this.data.bondSimpleName +'&uid=' + this.data.userId
+			wx.navigateTo({
+				url: url
+			})
+		},
+		onAnswer: function (e) {
+			let askId = e.currentTarget.dataset.id
+			let url = '/app/page/answer/answer?bid=' + this.data.bondId +'&askid=' + askId +'&uid=' + this.data.userId
+			wx.navigateTo({
+				url: url
+			})
+		},
+		_onThumbEvent: function () {
+			this.getQuestionList()
 		}
 	}
 })

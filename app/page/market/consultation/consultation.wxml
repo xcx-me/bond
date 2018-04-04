@@ -2,7 +2,7 @@
 <view class='consultation-component'>
 	<BondList
 		from='board'
-		isMine='false'
+		isMine='{{false}}'
 		bondList='{{bondList}}'
 		uid=''
 		userId=''

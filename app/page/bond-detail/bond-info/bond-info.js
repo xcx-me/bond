@@ -4,6 +4,10 @@ const config = require('../../../util/ajax/config')
 const bond =require('../../../util/store/bond.js')
 
 Component({
+	options: {
+		multipleSlots: true // 在组件定义时的选项中启用多slot支持
+	  },
+
 	properties: {
 		bondId: {
 			type: String,
@@ -12,6 +16,10 @@ Component({
 		vUrl: {
 			type: String,
 			value: ''
+		},
+		isMyStore: {
+			type: Boolean,
+			value: false,
 		},
 		needUpdate: {
 			type: Boolean,
@@ -30,9 +38,10 @@ Component({
 		attached: 'gag34|gare3'
 	},
 
-  ready: function () {
-	this.getBondDetail()
-  },
+  	ready: function () {
+	  	console.log('bond-info', this.data.isMyStore)
+		this.getBondDetail()
+  	},
 
   /**
    * 组件的方法列表
@@ -45,6 +54,12 @@ Component({
 					bondInfo: result.data.retdata
 				})
 			}
+		})
+	},
+
+	onEditBond: function () {
+		wx.navigateTo({
+			url: '/app/page/quotation/quotation?bname=' + this.data.bondInfo.bond_simple_name
 		})
 	}
   }

@@ -4,6 +4,19 @@
 .bond-info-item-tpl .label {
   color: #999999;
 }
+.bond-info-component {
+  position: relative;
+}
+.bond-info-component .btn-edit {
+  position: absolute;
+  top: 10rpx;
+  right: 8rpx;
+  line-height: 36rpx;
+  padding: 3rpx 20rpx;
+  background: none;
+  border: 1px solid #2196F3;
+  color: #2196F3;
+}
 .bond-info-component .infoItem {
   background: #FFFFFF;
   margin-bottom: 20rpx;

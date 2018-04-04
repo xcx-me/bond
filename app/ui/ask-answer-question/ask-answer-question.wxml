@@ -1,0 +1,14 @@
+<!--app/ui/ask-answer-question/ask-answer-question.wxml-->
+<view class='ask-answer-component'>
+ 	<form bindsubmit="bindFormSubmit">
+		<textarea bindfocus='bindFocus' bindblur='bindTextAreaBlur' auto-focus auto-height placeholder='{{isAsk ? "向主承及其他销售经理提问，50字以内" : "请输入您的回答，50字以内"}}' maxlength='50' value='{{content}}'/>
+		<view hidden='{{errTips.length === 0}}'>
+			<icon type='warn' />
+			<text>{{errTips}}</text>
+		</view>
+		<view>
+			<button class='btn-cancel' size='mini' type='primary' bindtap='onCancel'>取消</button>
+			<button class='btn-confirm' size='mini' type='primary' formType='submit'>确定</button>
+		</view>
+	</form>
+</view>

@@ -5,6 +5,7 @@
 		navigatorUrl=''
 		vUrl='{{vUrl}}'
 		userId='{{uid}}'
+		isQtrade='{{isQtrade}}'
 		isHiddenSeller='{{isMyStore}}'
 		needUpdate='{{needUpdate}}'
 		needNavigatorIndex='{{from === "share"}}'

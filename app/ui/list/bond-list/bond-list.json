@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
 	"SingleBond": "../../single-bond/single-bond",
-	"SaleDialog": "../../../ui/dialog/sale-dialog/sale-dialog"
+	"Dialog": "../../../ui/dialog/dialog",
+	"SaleDialog": "../../../ui/sale-dialog/sale-dialog"
   }
 }
