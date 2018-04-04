@@ -9,7 +9,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.91",
-	"appid": "wx6f9484fb79cea2b2",
+	"appid": "touristappid",
 	"projectname": "bond",
 	"isGameTourist": false,
 	"condition": {

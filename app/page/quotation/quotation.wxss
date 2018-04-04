@@ -1,7 +1,6 @@
 
 .send-quote-page {
-	height: 100%;
-	padding: 20rpx 20rpx 0 20rpx;
+	padding: 20rpx 20rpx;
 	background-color:#F1F1F1;
 }
 
@@ -20,4 +19,8 @@
 .open-shop-btn-area {
 	display: flex;
 	justify-content:center;
+}
+
+.margin-bottom {
+	margin-bottom: 20rpx;
 }
