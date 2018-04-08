@@ -8,6 +8,15 @@ module.exports = {
 		})
 	},
 
+	showToast: function (text, iconType, showTime) { // icon 只支持'success' 和 'loading'
+		wx.showToast({
+			title: text,
+			icon: iconType,
+			duration: showTime
+		})
+	},
+
+
 	formatDate: function (date) {  
 		var year = date.getFullYear()  
 		var month = date.getMonth() + 1  

@@ -69,6 +69,19 @@ Component({
 	},
 
 	methods: {
+
+		simpleNameChange: function (e) {
+			let formData = this.data.formData
+			formData.bond_simple_name = e.detail.value
+
+			console.log(formData.bond_simple_name)
+
+			this.setData({
+				formData: formData
+			})
+			this.triggerEvent('changeValueEvent', formData)
+		},
+
 		changeValue (e) { // 改变各input的value
 			let formData = this.data.formData
 			formData[e.currentTarget.dataset.inputName] = e.detail.value
@@ -85,25 +98,19 @@ Component({
 			this.setData({
 				dateTime: e.detail.value
 			});
+			this.triggerEvent('changeValueEvent', formData)
 			// console.log(this.data.formData.closingTime)
 		},
 
-		// 多选下拉框
-		checkboxChange: function (e) {
-			let checkedValue = e.detail.value
-			let checkedItem = []
-			let checkedName = []
-			checkedValue.forEach((item, index) => {
-				checkedItem.push(this.data.listingSpotItems.find((items) => { return items.name === item}).value)
-				checkedName.push(item)
-			})
-
+		// 上市地点
+		changeListingspot: function (e) {
 			let formData = this.data.formData
-			formData[e.currentTarget.dataset.listingSpot] = checkedName.join('|')
+			formData[e.currentTarget.dataset.listingSpot] = this.saveCheckedValue(e.detail.value, this.data.listingSpotItems).checkedParams.join('|')
 			this.setData({
-				listingSpotValue: checkedItem.join('、'),
+				listingSpotValue: this.saveCheckedValue(e.detail.value, this.data.listingSpotItems).checkedItem.join('、'),
 				formData: formData
 			})
+			this.triggerEvent('changeValueEvent', formData)
 		},
 
 		// 企业性质
@@ -114,24 +121,18 @@ Component({
 			this.setData({
 				enterpriseIndex: e.detail.value
 			})
+			this.triggerEvent('changeValueEvent', formData)
 		},
 
 		// 债券品种
 		changeBondType: function (e) {
-			let checkedValue = e.detail.value
-			let checkedItem = []
-			let checkedName = []
-			checkedValue.forEach((item, index) => {
-				checkedItem.push(this.data.bondType.find((items) => { return items.name === item}).value)
-				checkedName.push(item)
-			})
-
 			let formData = this.data.formData
-			formData[e.currentTarget.dataset.bondType] = checkedName.join('|')
+			formData[e.currentTarget.dataset.bondType] = this.saveCheckedValue(e.detail.value, this.data.bondType).checkedParams.join('|')
 			this.setData({
-				bondTypeValue: checkedItem.join('、'),
+				bondTypeValue: this.saveCheckedValue(e.detail.value, this.data.bondType).checkedItem.join('、'),
 				formData: formData
 			})
+			this.triggerEvent('changeValueEvent', formData)
 		},
 
 		// 发行方式
@@ -142,6 +143,7 @@ Component({
 				issuanceMethodIndex: e.detail.value,
 				formData: formData
 			})
+			this.triggerEvent('changeValueEvent', formData)
 		},
 
 		// 利率方式
@@ -163,24 +165,32 @@ Component({
 				rateWayIndex: e.detail.value,
 				formData: formData
 			})
+			this.triggerEvent('changeValueEvent', formData)
 		},
 
 		// 特殊条款
 		changeSpecificItems: function (e) {
-			let checkedValue = e.detail.value
-			let checkedItem = []
-			let checkedName = []
-			checkedValue.forEach((item, index) => {
-				checkedItem.push(this.data.specificItems.find((items) => { return items.name === item}).value)
-				checkedName.push(item)
-			})
-
 			let formData = this.data.formData
-			formData[e.currentTarget.dataset.specificItems] = checkedName.join('|')
+			formData[e.currentTarget.dataset.specificItems] = this.saveCheckedValue(e.detail.value, this.data.specificItems).checkedParams.join('|')
 			this.setData({
-				specificitemsValue: checkedItem.join('、'),
+				specificitemsValue: this.saveCheckedValue(e.detail.value, this.data.specificItems).checkedItem.join('、'),
 				formData: formData
 			})
+			this.triggerEvent('changeValueEvent', formData)
+		},
+
+		saveCheckedValue: function (targetValue, dataArray) {
+			let checkedItem = []
+			let checkedParams = []
+			targetValue.forEach((item, index) => {
+				checkedItem.push(dataArray.find((items) => { return items.name === item}).value)
+				checkedParams.push(item)
+			})
+
+			return {
+				checkedItem: checkedItem,
+				checkedParams: checkedParams
+			}
 		},
 	}
 })
