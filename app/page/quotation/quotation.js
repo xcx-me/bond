@@ -1,4 +1,9 @@
 // app/page/quotation/quotation.js
+
+const common = require('../../util/common.js')
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
+
 Page({
 	/**
 	 * 页面的初始数据
@@ -19,10 +24,35 @@ Page({
 	handleSendQuote () { // 发布报价
 
 		console.log(this.data.sendQuoteData)
-		wx.showToast({
-			title: '发布报价成功！',
-			icon: 'success',
-			duration: 2000
+
+		if (JSON.stringify(this.data.sendQuoteData) !== '{}') {
+			if (this.data.sendQuoteData.bond_simple_name === '') {
+				common.showToast('请输入债券简称', 'none', 2000)
+				return
+			}
+
+			if (this.data.sendQuoteData.left_benefit === '' && this.data.sendQuoteData.right_benefit === '') {
+				common.showToast('请输入参考收益', 'none', 2000)
+				return
+			}
+
+			// ...
+
+			this.sendQuoteRequest(this.data.sendQuoteData)
+		} else {
+			common.showToast('数据没有填写完毕，请完善', 'none', 2000)
+		}
+	},
+
+	sendQuoteRequest: function (params) {
+		request(config.NEW_BOND.sendBond, params).then((result) => {
+			if(String(result.data.ret) === '0') {
+				common.showToast('发布报价成功！', 'success', 2000)
+			} else {
+				common.showToast(result.data.retmsg, 'none', 2000)
+			}
+		}).catch(() => {
+			common.showToast('请求错误', 'none', 2000)
 		})
 	},
 
@@ -33,10 +63,10 @@ Page({
 		// console.log('_changeValue....', e.detail)
 	},
 
-	handleShowToast: function () {
-		this.toastedit = this.selectComponent('#toastedit')
-		this.toastedit.showToast('显示这个哈哈哈哈哈', 2000)
-	},
+	// handleShowToast: function () {
+	// 	this.toastedit = this.selectComponent('#toastedit')
+	// 	this.toastedit.showToast('显示这个哈哈哈哈哈', 2000)
+	// },
 	showDialog() {
 		this.dialog = this.selectComponent('#dialog')
 		this.dialog.showDialog();
@@ -59,9 +89,9 @@ Page({
 	 */
 	onLoad: function (options) {
 		// 获取点击编辑时传过来的债券简称，后续工作由孙庆完成
-		this.setData({
-			bondSimpleName: options.bname
-		})
+		// this.setData({
+		// 	bondSimpleName: options.bname
+		// })
 	},
 
 	/**
