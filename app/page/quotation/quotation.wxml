@@ -6,10 +6,12 @@
 
 		<button class='margin-bottom' type='primary' bindtap='handleSendQuote'>发布报价</button>
 
-		<view class='margin-bottom'>
+		<button  class='margin-bottom' type='primary'>获取债券详情</button>
+
+		<!-- <view class='margin-bottom'>
 			<toastedit id='toastedit'>{{toastedit}}</toastedit>
 			<button type='primary' bindtap='handleShowToast'>click to showToast!</button>
-		</view>
+		</view> -->
 
 		<view class="dialog-container">
 			<dialog id='dialog'

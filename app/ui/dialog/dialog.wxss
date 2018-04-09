@@ -17,19 +17,27 @@
 .wx-dialog-container .wx-dialog-main {
   z-index: 999;
   position: absolute;
-  left: 0;
+  left: 50%;
   right: 0;
   top: 30%;
-  bottom: 0;
-  margin: 0 auto;
   width: 450rpx;
+  margin-left: -225rpx;
   background-color: #FFFFFF;
   border-radius: 4rpx;
 }
-.wx-dialog-container .wx-dialog-main .wx-dialog-btn {
-  float: left;
-  width: 96rpx;
-  height: 60rpx;
-  border: 1rpx solid #DDDDDD;
-  border-radius: 2rpx;
+.wx-dialog-container .wx-dialog-main .wx-dialog-title {
+  padding: 10rpx;
+  border-bottom: 1rpx solid #DDDDDD;
+}
+.wx-dialog-container .wx-dialog-main .wx-dialog-content {
+  padding: 30rpx 20rpx;
+  max-height: 200rpx;
+  text-align: center;
+}
+.wx-dialog-container .wx-dialog-main .wx-dialog-footer {
+  margin-bottom: 10rpx;
+  text-align: center;
+}
+.wx-dialog-container .wx-dialog-main .wx-dialog-footer .cancel-btn {
+  margin-right: 15rpx;
 }

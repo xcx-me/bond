@@ -4,7 +4,7 @@
 	<view class='bond-simple-name row-item'>
 		<view class='label-area'>债券简称:</view>
 		<view class='editor-area'>
-			<input class='' type='text' bindinput='changeValue' data-input-name='bond_simple_name' value='{{formData.bond_simple_name}}'
+			<input class='' type='text' bindinput='simpleNameChange' data-input-name='bond_simple_name' value='{{formData.bond_simple_name}}'
 				disabled='{{editorFlag}}' style='background-color: {{editorFlag ? "#DDDDDD" : ""}}; color: {{editorFlag ? "#999999" : "" }}'
 			/>
 		</view>
@@ -48,7 +48,7 @@
 	<view class='listing-spot row-item'>
 		<view class='label-area'>上市地点：</view>
 		<view class='editor-area'>
-			<checkbox-group class='checkbox-list' bindchange="checkboxChange" data-listing-spot='public_place'>
+			<checkbox-group class='checkbox-list' bindchange="changeListingspot" data-listing-spot='public_place'>
 				<view class="checkbox" wx:for="{{listingSpotItems}}" wx:key="key">
 					<checkbox wx:key="" value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
 				</view>
@@ -188,6 +188,11 @@
 		<view class='editor-area'>
 			<input class='' type='text' bindinput='changeValue' data-input-name='bond_full_name' value='{{formData.bond_full_name}}' />
 		</view>
+	</view>
+
+	<!-- 上传附件 -->
+	<view class='upload-fiel'>
+
 	</view>
 
 	<!-- <view class='mask_layer' bindtap='modal_click_Hidden' />  
