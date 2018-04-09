@@ -46,13 +46,35 @@ Page({
 
 	sendQuoteRequest: function (params) {
 		request(config.NEW_BOND.sendBond, params).then((result) => {
-			if(String(result.data.ret) === '0') {
+			if (String(result.data.ret) === '0') {
 				common.showToast('发布报价成功！', 'success', 2000)
 			} else {
 				common.showToast(result.data.retmsg, 'none', 2000)
 			}
 		}).catch(() => {
 			common.showToast('请求错误', 'none', 2000)
+		})
+	},
+
+	// 获取债券详情。。。。。。。。。。
+	associateBondDetails: function () {
+		console.log('bondDetailsName： ', this.data.sendQuoteData.bond_simple_name)
+
+		request(config.NEW_BOND.associateBond, {bond_simple_name: this.data.sendQuoteData.bond_simple_name}).then((result) => {
+			if (String(result.data.ret) === '0') {
+				console.log(result.data.retdata)
+				let resultData = result.data.retdata
+				let formData = this.data.sendQuoteData
+				formData.left_benefit = resultData.left_benefit
+				formData.right_benefit = resultData.right_benefit
+
+				this._setNewQuoteData(formData)
+				console.log(this.data.sendQuoteData)
+			} else {
+				common.showToast(result.data.retmsg, 'none', 2000)
+			}
+		}).catch(() => {
+			common.showToast('请求错误222', 'none', 2000)
 		})
 	},
 
@@ -67,6 +89,7 @@ Page({
 	// 	this.toastedit = this.selectComponent('#toastedit')
 	// 	this.toastedit.showToast('显示这个哈哈哈哈哈', 2000)
 	// },
+
 	showDialog() {
 		this.dialog = this.selectComponent('#dialog')
 		this.dialog.showDialog();

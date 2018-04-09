@@ -18,6 +18,8 @@
 		</view>
 	</scroll-view>
 	<view>
-		 <navigator class='bond-send-quote' url='../quotation/quotation'>+</navigator>
+		 <navigator class='bond-send-quote' url='../quotation/quotation'>
+		 	<span class='iconfont icon-plus-with-circle'></span>
+		 </navigator>
 	</view>
 </view>

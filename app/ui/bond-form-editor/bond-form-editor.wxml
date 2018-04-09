@@ -1,5 +1,5 @@
 
-<view class='bond-form-editor' hidden='{{modalHidden}}'>
+<view class='bond-form-editor' >
 	<!-- 债券简称 -->
 	<view class='bond-simple-name row-item'>
 		<view class='label-area'>债券简称:</view>
@@ -192,7 +192,10 @@
 
 	<!-- 上传附件 -->
 	<view class='upload-fiel'>
-
+		<span class='iconfont icon-mobile' ></span>
+		<!-- <span class='iconfont icon-share-it'></span> -->
+		<span class='iconfont icon-book'></span>
+		<span class='iconfont icon-share-it' ></span>
 	</view>
 
 	<!-- <view class='mask_layer' bindtap='modal_click_Hidden' />  
