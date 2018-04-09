@@ -8,11 +8,13 @@
 		</view>
 		<view class='content clearfix'>
 			<block wx:for='{{bondList}}' wx:for-item='bondItem' wx:for-index='index' wx:key='index'>
-				<view class='item'><text>{{bondItem.bond_simple_name}}</text></view>
-				<view class='item'><text>{{bondItem.little_left}}~{{bondItem.little_right}}</text></view>
-				<view class='item operator'>
-					<button class='btn-modify' size='mini' type='primary' bindtap='onModifyBond' data-index='{{index}}'>修改</button>
-					<button class='btn-more' size='mini' type='primary'  bindtap='onSeeMore' data-index='{{index}}'>更多</button>
+				<view class='bond-content'>
+					<view class='item name'><text>{{bondItem.bond_simple_name}}</text></view>
+					<view class='item little-range'><text>{{bondItem.little_left}}~{{bondItem.little_right}}</text></view>
+					<view class='item operator'>
+						<button class='btn-modify' size='mini' type='primary' bindtap='onModifyBond' data-index='{{index}}'>修改</button>
+						<button class='btn-more' size='mini' type='primary'  bindtap='onSeeMore' data-index='{{index}}'>更多</button>
+					</view>
 				</view>
 			</block>
 		</view>

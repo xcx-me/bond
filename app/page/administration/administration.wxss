@@ -354,6 +354,12 @@
   height: 80rpx;
   line-height: 80rpx;
 }
+.administration-page .bond-list-pallet .content .item.name {
+  width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .administration-page .bond-list-pallet .content .item.operator button {
   position: relative;
   top: 10rpx;
