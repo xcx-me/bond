@@ -69,7 +69,6 @@ Component({
 	},
 
 	methods: {
-
 		simpleNameChange: function (e) {
 			let formData = this.data.formData
 			formData.bond_simple_name = e.detail.value
