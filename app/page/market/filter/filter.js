@@ -78,7 +78,7 @@ Component({
 	},
 
 	onConfirm: function (e) {
-		let {filterConfig, curSelectList,filterValue} = this.data
+		let {filterConfig, curSelectList, filterValue} = this.data
 		let index = e.currentTarget.dataset.index
 		filterConfig[index].isShow = false
 		filter.defaultConfig.map ((item, itemIndex) => {

@@ -6,16 +6,15 @@
 	.wrapper {
 		width: 100%;
 		line-height: 60rpx;
-		padding: 0 10rpx;
 		background: #FFFFFF;
 		overflow: hidden;
-		margin-top: 10rpx;
 	}
 
 	.filter-item {
 		float: left;
+		width: 33.33%;
 		font-size: 30rpx;
-		width: 200rpx;
+		text-align: center;
 
 		&.label {
 			width: 100rpx;
@@ -49,57 +48,75 @@
 
 		.filter-pallet {
 			position:absolute;
-			width: 340rpx;
-			padding: 10rpx;
-			z-index: 10;
+			width: 100%;
+			z-index: 99;
 			background: #FFFFFF;
 			border: 1rpx solid #EEEEEE;
 			border-radius: 2rpx;
 			box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.175);
 
-			checkbox-group {
-				.checkbox {
-					float: left;
-					width: 50%;
+			.filter-pallet-checkbox {
+				display: flex;
+
+				checkbox-group {
+					.checkbox {
+						float: left;
+						width: 50%;
+					}
+				}
+			}
+
+			.filter-pallet-btn {
+				display: flex;
+
+				.btn-reset {
+					background-color: #FFFFFF;
+					color: #2196F3;
+				}
+
+				.btn-confirm {
+					background-color: #2196F3;
+					color: #FFFFFF;
 				}
 			}
 		}
 
-		
-
 		&.bond_type {
 			.filter-pallet {
-			checkbox-group {
-				.checkbox {
-					&:last-child {
-						width: 100%;
+				left: 0;
+
+				checkbox-group {
+					.checkbox {
+						&:last-child {
+							width: 100%;
+						}
 					}
-				}
-			}	
-		}
+				}	
+			}
 		}
 
 		&.deadline {
 			.filter-pallet {
-			checkbox-group {
-				width: 280rpx;
+				left: 0;
 
-				.checkbox {
-					&:last-child {
-						width: 100%;
+				checkbox-group {
+					.checkbox {
+						&:last-child {
+							width: 100%;
+						}
 					}
 				}
 			}
 		}
-		}
 
 		&.subject_rating {
 			.filter-pallet {
-				right: 0;
-			checkbox-group {
-				width: 300rpx;
+				left: 0;
+
+				checkbox-group {
+					width: 300rpx;
+				}
 			}
-		}
 		}
 	}
 }

@@ -31,7 +31,7 @@ Page({
 		this.getBondList(this.data.currentTab, 1)
 	},
 
-	
+
 	getBondList (currentTab, page) { // 询量
 		let bondStatus =  '1'
 		if (currentTab === '1') {
@@ -45,7 +45,7 @@ Page({
 			current_page: page || 1,
 			page_size: 25
 		}	
-	   
+
 		request(config.NEW_BOND.quotationBoard, Object.assign(postData, this.data.filterValue)).then((result) => {
 			if (String(result.data.ret) === '0') {
 				this.setData({

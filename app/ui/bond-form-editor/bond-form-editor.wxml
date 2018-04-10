@@ -194,7 +194,7 @@
 	<view class='upload-fiel'>
 		<span class='iconfont icon-mobile' ></span>
 		<!-- <span class='iconfont icon-share-it'></span> -->
-		<span class='iconfont icon-book'></span>
+		<span class=' test-icon'></span>
 		<span class='iconfont icon-share-it' ></span>
 	</view>
 

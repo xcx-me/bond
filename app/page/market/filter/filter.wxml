@@ -1,13 +1,13 @@
 <!--app/page/market/filter/filter.wxml-->
 <view class="filter-component clearfix">
-	<view class='wrapper'>
+	<!-- <view class='wrapper'>
 		<view class='label'><text>已选：</text></view>
 		<block wx:for='{{filterValue}}' wx:for-item='value' wx:key='index'>
 			<view class='value' hidden='{{value === "0"}}'>
 				{{value}}
 			</view>
 		</block>
-	</view>
+	</view> -->
 	<view class="wrapper">
 	<!-- <view class='filter-item label'><text>筛选：</text></view> -->
 	<block wx:for='{{filterConfig}}' wx:for-item='filterItem' wx:for-index='index' wx:key='name' >
@@ -17,13 +17,17 @@
 				<i class='icon-down-arrow'></i>
 			</view>
 			<view class='filter-pallet' hidden='{{!filterItem.isShow}}'>
-				<checkbox-group bindchange="checkboxChange" data-index='{{index}}'>
-					<view class="checkbox" wx:for="{{filterItem.values}}" wx:for-item='item' wx:for-index='index' wx:key="index">
-						<checkbox wx:key="" value="{{index}}" checked="{{item.isSelected}}"/>{{item.title}}
-					</view>
-				</checkbox-group>
-				<button class='btn-reset' size='mini' type='primary' bindtap='onReset' data-index='{{index}}'>重置</button>
-				<button class='btn-confirm' size='mini' type='primary'  bindtap='onConfirm' data-index='{{index}}'>确定</button>
+				<view class='filter-pallet-checkbox'>
+					<checkbox-group bindchange="checkboxChange" data-index='{{index}}'>
+						<view class="checkbox" wx:for="{{filterItem.values}}" wx:for-item='item' wx:for-index='index' wx:key="index">
+							<checkbox wx:key="" value="{{index}}" checked="{{item.isSelected}}"/>{{item.title}}
+						</view>
+					</checkbox-group>
+				</view>
+				<view class='filter-pallet-btn'>
+					<button class='btn-reset' size='mini' type='primary' bindtap='onReset' data-index='{{index}}'>重置</button>
+					<button class='btn-confirm' size='mini' type='primary'  bindtap='onConfirm' data-index='{{index}}'>确定</button>
+				</view>
 			</view>
 		</view>
 	</block>

@@ -1,9 +1,15 @@
 <view class='market-page'>
 	<!-- 市场页 -->
 	<view class='market-tab'>
-		<view class="market-tab-list {{currentTab === '0' ? 'on' : ''}}" data-current='0' bindtap='swichNav'>询量</view>
-		<view class="market-tab-list {{currentTab === '1' ? 'on' : ''}}" data-current='1' bindtap='swichNav'>公告</view>
-		<view class="market-tab-list {{currentTab === '2' ? 'on' : ''}}" data-current='2' bindtap='swichNav'>发行</view>
+		<view class='market-tab-list' data-current='0' catchtap='swichNav'>
+			<view class="{{currentTab === '0' ? 'on' : ''}}" data-current='0'>询量</view>
+		</view>
+		<view class="market-tab-list" data-current='1' catchtap='swichNav'>
+			<view class="{{currentTab === '1' ? 'on' : ''}}" data-current='1'>公告</view>
+		</view>
+		<view class="market-tab-list" data-current='2' catchtap='swichNav'>
+			<view class="{{currentTab === '2' ? 'on' : ''}}" data-current='2'>发行</view>
+		</view>
 	</view>
 
 	<loading wx:if='{{loading}}'>加载中</loading>

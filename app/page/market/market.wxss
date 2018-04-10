@@ -1,19 +1,21 @@
 /* app/page/market/market.wxss */
 .market-tab {
   width: 100%;
-  border-bottom: 2rpx solid #777777;
+  border-bottom: 2rpx solid #D8D8D8;
   text-align: center;
   line-height: 80rpx;
+  background-color: #FFFFFF;
 }
 .market-tab-list {
   font-size: 30rpx;
   display: inline-block;
-  width: 33.33%;
-  color: #777777;
+  width: 13.33%;
+  padding: 0 10%;
+  color: #000000;
 }
 .on {
-  color: #da7c0c;
-  border-bottom: 5rpx solid #da7c0c;
+  color: #2196F3;
+  border-bottom: 5rpx solid #2196F3;
 }
 .swiper-tab-box {
   display: block;
