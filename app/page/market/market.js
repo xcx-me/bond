@@ -9,7 +9,7 @@ Page({
 	data: {
 		winWidth: 0,
 		winHeight: 0,
-		currentTab: '0',
+		currentTab: 0,
 		filterValue: {
 			bond_type: 0,
 			deadline: 0,
@@ -18,12 +18,10 @@ Page({
 			key: ''
 		},
 		bondList: [],
-		loading: true,
-		needUpdate: true
+		loading: true
 	},
 
 	_onFilter: function (e) {
-		console.log('_onFilter...', e.detail)
 		let filterValue = Object.assign(this.data.filterValue, e.detail)
 		this.setData({
 			filterValue: filterValue
@@ -34,12 +32,12 @@ Page({
 
 	getBondList (currentTab, page) { // 询量
 		let bondStatus =  '1'
-		if (currentTab === '1') {
+		if (currentTab === 1) {
 			bondStatus = '2'
-		} else if (currentTab === '2') {
+		} else if (currentTab === 2) {
 			bondStatus = '3'
 		}
-
+		
 		let postData = {
 			bond_status: bondStatus,
 			current_page: page || 1,
@@ -60,9 +58,19 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		let to = options.to 
+		if (to === 'store') {
+			wx.navigateTo({
+				url: '/app/page/store/store?from=share&uid=' + options.uid
+			})
+		} else if (to === 'bond-detail') {
+			wx.navigateTo({
+				url: '/app/page/bond-detail/bond-detail?from=share&bid=' + options.bid +'&uid=' + options.uid + '&tid=' + options.tid
+			})
+		}
+
 		this.getBondList(this.data.currentTab, 1)
 		var that = this;
-		console.log('onLoad....')
 		/** 
 		 * 获取系统信息 
 		 */  
@@ -80,24 +88,22 @@ Page({
      * 滑动切换tab
      */
 	bindChangeTab: function (e) {
-		// let currentTab = e.detail.current
-		// console.log('bindChangeTab...', currentTab)
-		// this.setData({currentTab: currentTab});
+		let currentTab = e.detail.current
+		this.setData({currentTab: currentTab});
+		this.getBondList(currentTab, 1)
 	},
+
 	/** 
 	 * 点击tab切换 
 	 */  
-	swichNav: function (e) {
+	switchNav: function (e) {
 		var that = this;
-		if( this.data.currentTab === e.target.dataset.current ) {
+		if(this.data.currentTab === e.target.dataset.current) {
 			return false;
 		} else {
-			let currentTab = e.target.dataset.current
 			that.setData({
-				currentTab: currentTab,
-				needUpdate: true
+				currentTab: e.target.dataset.current
 			})
-			this.getBondList(currentTab, 1)
 		}
 	},
 

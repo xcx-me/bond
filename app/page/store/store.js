@@ -31,7 +31,7 @@ Page({
 		user_id: userId,
 		offset: offset,
 		limit: limit,
-		used_for_management: '0'
+		type: this.data.isMyStore && this.data.uid === '0' ? 2 : 5 // 2 我的店铺 5他人店铺
 	}).then((result) => {
 		if (String(result.data.ret) === '0') {
 			this.setData({
@@ -134,25 +134,22 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (ops) {
-	if (ops.from === 'button') {
-		// 来自页面内转发按钮
-		console.log(ops.target)
-		console.log('buttton')
+	  if (ops.from === 'button') {
+		//
 	  } else {
-		  console.log('onShareAppMessage.......')
+		//
 	  }
-	  console.log('/app/page/store/store?from=share&uid=' + this.data.userId)
+
+	  let path = '/app/page/market/market?to=store&uid=' + this.data.userId
 	  return {
 		title: 'Qtrade一级债小程序',
 		desc: 'desc....',
-		path: '/app/page/store/store?from=share&uid=' + this.data.userId,
+		path: path,
 		success: function (res) {
 		  // 转发成功
-		  console.log("转发成功:" + JSON.stringify(res));
 		},
 		fail: function (res) {
 		  // 转发失败
-		  console.log("转发失败:" + JSON.stringify(res));
 		}
 	  }
   }

@@ -44,7 +44,7 @@ Component({
 			user_id: this.data.userId,
 			offset: 0,
 			limit: 3,
-			used_for_management: '0'
+			type: this.data.isMyStore && this.data.uid === '0' ? 3 : 4
 		}, (result) => {
 			this.setData({
 				bondList: result.data.retdata.bond_list

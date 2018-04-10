@@ -3,9 +3,6 @@
 <view class='store-header-component'>
 	<view class='personal-info-pallet {{isQtrade ? "is-qtrade" : ""}}' wx:if='{{!isHiddenSeller}}'>
 		<template is='sellerInfoTpl' data='{{url: navigatorUrl, vUrl: vUrl, faceUrl: storeDetail.face_url, isVUser:storeDetail.v_user, userName: storeDetail.sale_name, companyName: storeDetail.company_simple_name}}'></template>
-		<navigator wx:if='{{needNavigatorIndex}}' open-type='switchTab' url='/app/page/overview/overview'>
-			<button class='btn-to-index' size='mini' type='primary'>前往主页</button>
-		</navigator>
 	</view>
 	<view class='store-statistics-component'>
 		<DataListDisplay displayClass='store-statistic' fieldList='{{displayFieldList}}' dataList='{{storeDetail}}' />

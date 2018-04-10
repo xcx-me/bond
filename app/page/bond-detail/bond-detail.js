@@ -20,6 +20,13 @@ Page({
 		needUpdate: false
 	},
 
+	bindChangeTab: function (e) {
+		let currentTabId = e.detail.currentItemId
+		this.setData({
+			currentTabId: currentTabId
+		})
+	},
+
 	onSwitchTab: function (e) {
 		let tabId = e.currentTarget.dataset.tid
 		this.setData({
@@ -52,6 +59,8 @@ Page({
 			questionTotal: questionTotal
 		})
 	},
+
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -135,7 +144,8 @@ Page({
 		  //console.log('onShareAppMessage.......')
 	  }
 
-	  let path = '/app/page/bond-detail/bond-detail?from=share&bid=' + this.data.bondId +'&uid=' + this.data.userId + '&tid=' + this.data.currentTabId
+	  // let path = '/app/page/bond-detail/bond-detail?from=share&bid=' + this.data.bondId +'&uid=' + this.data.userId + '&tid=' + this.data.currentTabId
+	  let path = '/app/page/market/market?to=bond-detail&bid=' + this.data.bondId +'&uid=' + this.data.userId + '&tid=' + this.data.currentTabId
 	  return {
 		title: 'Qtrade一级债小程序',
 		desc: 'desc....',
