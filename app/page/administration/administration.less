@@ -1,6 +1,4 @@
 
-@import "../../asset/icomoon/icon-common";
-
 .administration-page {
 	padding: 20rpx;
 	height: calc(~'100% - 40rpx');
@@ -60,17 +58,21 @@
 	.bond-send-quote {
 		width:100rpx;
 		height:100rpx;
-		line-height: 100rpx;
-		text-align: center;
 		border-radius:50%;
 		position:absolute;
 		right:50rpx;
 		bottom:50rpx;
 		background-color: #2196F3;
-		color: #FFFFFF;
 
-		span {
-			font-size: 100rpx;
+		.iconfont {
+			display: inline-block;
+			width: 100rpx;
+			height: 100rpx;
+		}
+	
+		.icon-plus-with-circle {
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23FFFFFF' height='24' viewBox='0 0 24 24' width='24'%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z'/%3E %3C/svg%3E");
+			background-size: cover;
 		}
 	}
 }

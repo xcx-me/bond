@@ -17,12 +17,312 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-complete:before {
+  content: "\e914";
+  color: #2196f3;
+}
+.icon-info-connection:before {
+  content: "\e948";
+  color: #2196f3;
+}
 .icon-mobile:before {
   content: "\e949";
   color: #2196f3;
 }
 .icon-share-it:before {
   content: "\e94a";
+  color: #2196f3;
+}
+.icon-book:before {
+  content: "\e94b";
+  color: #2196f3;
+}
+.icon-calendar:before {
+  content: "\e934";
+  color: #fff;
+}
+.icon-hand-shake:before {
+  content: "\e935";
+  color: #fff;
+}
+.icon-line-chart:before {
+  content: "\e936";
+  color: #fff;
+}
+.icon-clock:before {
+  content: "\e937";
+  color: #fff;
+}
+.icon-detail:before {
+  content: "\e938";
+  color: #fff;
+}
+.icon-logo-of-q .path1:before {
+  content: "\e910";
+  color: #2196f3;
+}
+.icon-logo-of-q .path2:before {
+  content: "\e911";
+  margin-left: -0.93359375em;
+  color: #eea023;
+}
+.icon-administration-delete:before {
+  content: "\e93a";
+  color: #999;
+}
+.icon-basic-calendar:before {
+  content: "\e93e";
+  color: #666;
+}
+.icon-answer-it:before {
+  content: "\e93c";
+  color: #666;
+}
+.icon-back-arrow:before {
+  content: "\e93d";
+  color: #2196f3;
+}
+.icon-contact-tim:before {
+  content: "\e93f";
+  color: #01a3fe;
+}
+.icon-edit-it:before {
+  content: "\e940";
+  color: #666;
+}
+.icon-hot:before {
+  content: "\e941";
+  color: #ea4335;
+}
+.icon-hotter:before {
+  content: "\e942";
+  color: #f4523b;
+}
+.icon-hottest:before {
+  content: "\e943";
+  color: #ea4335;
+}
+.icon-said-good:before {
+  content: "\e944";
+  color: #999;
+}
+.icon-share-to:before {
+  content: "\e945";
+  color: #666;
+}
+.icon-store:before {
+  content: "\e946";
+  color: #2196f3;
+}
+.icon-to-say-good:before {
+  content: "\e947";
+  color: #666;
+}
+.icon-up-arrow:before {
+  content: "\e93b";
+  color: #666;
+}
+.icon-management-intention:before {
+  content: "\e939";
+  color: #fff;
+}
+.icon-qq-shape:before {
+  content: "\e90f";
+}
+.icon-plus-with-circle:before {
+  content: "\e91c";
+  color: #666;
+}
+.icon-pending-deal:before {
+  content: "\e92e";
+  color: #666;
+}
+.icon-less-than:before {
+  content: "\e900";
+  color: #ccc;
+}
+.icon-great-than:before {
+  content: "\e901";
+  color: #ccc;
+}
+.icon-excalmatory:before {
+  content: "\e902";
+  color: #faa61a;
+}
+.icon-download:before {
+  content: "\e903";
+  color: #666;
+}
+.icon-detail-text:before {
+  content: "\e904";
+  color: #666;
+}
+.icon-up-rectangle:before {
+  content: "\e905";
+  color: #999;
+}
+.icon-down-rectangle:before {
+  content: "\e906";
+  color: #999;
+}
+.icon-original-text:before {
+  content: "\e907";
+  color: #666;
+}
+.icon-collapse:before {
+  content: "\e908";
+  color: #666;
+}
+.icon-expand:before {
+  content: "\e909";
+  color: #666;
+}
+.icon-maximize:before {
+  content: "\e90a";
+  color: #666;
+}
+.icon-minimize:before {
+  content: "\e90b";
+  color: #666;
+}
+.icon-correct:before {
+  content: "\e90c";
+  color: #4da231;
+}
+.icon-show-more:before {
+  content: "\e90d";
+  color: #faa61a;
+}
+.icon-sort:before {
+  content: "\e90e";
+  color: #666;
+}
+.icon-search:before {
+  content: "\e912";
+  color: #999;
+}
+.icon-export:before {
+  content: "\e913";
+  color: #666;
+}
+.icon-logo-with-square .path1:before {
+  content: "\e915";
+  color: #2196f3;
+}
+.icon-logo-with-square .path2:before {
+  content: "\e92f";
+  margin-left: -1em;
+  color: #eea023;
+}
+.icon-activity:before {
+  content: "\e916";
+  color: #ae282c;
+}
+.icon-question-medium:before {
+  content: "\e917";
+  color: #666;
+}
+.icon-system-notification:before {
+  content: "\e918";
+  color: #666;
+}
+.icon-contact-book:before {
+  content: "\e919";
+  color: #666;
+}
+.icon-attachment:before {
+  content: "\e91a";
+  color: #666;
+}
+.icon-delete:before {
+  content: "\e91b";
+  color: #666;
+}
+.icon-right-arrow:before {
+  content: "\e91d";
+  color: #666;
+}
+.icon-down-arrow:before {
+  content: "\e91e";
+  color: #666;
+}
+.icon-checkout-0:before {
+  content: "\e91f";
+  color: #666;
+}
+.icon-checkout-2:before {
+  content: "\e920";
+  color: #2196f3;
+}
+.icon-checkout-1:before {
+  content: "\e921";
+  color: #2196f3;
+}
+.icon-person-individual .path1:before {
+  content: "\e922";
+  color: #df8514;
+}
+.icon-person-individual .path2:before {
+  content: "\e923";
+  margin-left: -1em;
+  color: #2196f3;
+}
+.icon-person-individual .path3:before {
+  content: "\e924";
+  margin-left: -1em;
+  color: #2196f3;
+}
+.icon-people-group .path1:before {
+  content: "\e925";
+  color: #2196f3;
+}
+.icon-people-group .path2:before {
+  content: "\e926";
+  margin-left: -1em;
+  color: #df8514;
+}
+.icon-question-small:before {
+  content: "\e927";
+  color: #666;
+}
+.icon-conversation-delete:before {
+  content: "\e928";
+  color: #666;
+}
+.icon-history-record:before {
+  content: "\e929";
+  color: #666;
+}
+.icon-unchecked-radio:before {
+  content: "\e92a";
+  color: #666;
+}
+.icon-checked-radio:before {
+  content: "\e92b";
+  color: #2196f3;
+}
+.icon-chat-mode:before {
+  content: "\e92c";
+  color: #666;
+}
+.icon-close:before {
+  content: "\e92d";
+  color: #666;
+}
+.icon-on-sell:before {
+  content: "\e930";
+  color: #faa61a;
+}
+.icon-direction-in:before {
+  content: "\e931";
+  color: #2196f3;
+}
+.icon-direction-out:before {
+  content: "\e932";
+  color: #faa61a;
+}
+.icon-chat-message:before {
+  content: "\e933";
   color: #2196f3;
 }
 .bond-form-editor input {
@@ -77,4 +377,11 @@
 }
 .bond-form-editor .off {
   visibility: hidden;
+}
+.test-icon {
+  display: inline-block;
+  width: 50rpx;
+  height: 50rpx;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' height='24' viewBox='0 0 24 24' width='24'%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3Cpath d='M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z'/%3E %3C/svg%3E");
+  background-size: cover;
 }

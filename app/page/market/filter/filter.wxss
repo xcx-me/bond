@@ -4,15 +4,14 @@
 .filter-component .wrapper {
   width: 100%;
   line-height: 60rpx;
-  padding: 0 10rpx;
   background: #FFFFFF;
   overflow: hidden;
-  margin-top: 10rpx;
 }
 .filter-component .filter-item {
   float: left;
+  width: 33.33%;
   font-size: 30rpx;
-  width: 200rpx;
+  text-align: center;
 }
 .filter-component .filter-item.label {
   width: 100rpx;
@@ -41,29 +40,45 @@
 }
 .filter-component .filter-item .filter-pallet {
   position: absolute;
-  width: 340rpx;
-  padding: 10rpx;
-  z-index: 10;
+  width: 100%;
+  z-index: 99;
   background: #FFFFFF;
   border: 1rpx solid #EEEEEE;
   border-radius: 2rpx;
   box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.175);
 }
-.filter-component .filter-item .filter-pallet checkbox-group .checkbox {
+.filter-component .filter-item .filter-pallet .filter-pallet-checkbox {
+  display: flex;
+}
+.filter-component .filter-item .filter-pallet .filter-pallet-checkbox checkbox-group .checkbox {
   float: left;
   width: 50%;
+}
+.filter-component .filter-item .filter-pallet .filter-pallet-btn {
+  display: flex;
+}
+.filter-component .filter-item .filter-pallet .filter-pallet-btn .btn-reset {
+  background-color: #FFFFFF;
+  color: #2196F3;
+}
+.filter-component .filter-item .filter-pallet .filter-pallet-btn .btn-confirm {
+  background-color: #2196F3;
+  color: #FFFFFF;
+}
+.filter-component .filter-item.bond_type .filter-pallet {
+  left: 0;
 }
 .filter-component .filter-item.bond_type .filter-pallet checkbox-group .checkbox:last-child {
   width: 100%;
 }
-.filter-component .filter-item.deadline .filter-pallet checkbox-group {
-  width: 280rpx;
+.filter-component .filter-item.deadline .filter-pallet {
+  left: 0;
 }
 .filter-component .filter-item.deadline .filter-pallet checkbox-group .checkbox:last-child {
   width: 100%;
 }
 .filter-component .filter-item.subject_rating .filter-pallet {
-  right: 0;
+  left: 0;
 }
 .filter-component .filter-item.subject_rating .filter-pallet checkbox-group {
   width: 300rpx;

@@ -1,7 +1,7 @@
 {
     "pages": [
-        "app/page/overview/overview",
         "app/page/market/market",
+        "app/page/overview/overview",
         "app/page/administration/administration",
         "app/page/store/store",
         "app/page/my-configuration/my-configuration",
@@ -17,24 +17,24 @@
     ],
     "window": {
         "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
+        "navigationBarBackgroundColor": "#108EE9",
         "navigationBarTitleText": "QTrade一级债",
-        "navigationBarTextStyle": "black",
+        "navigationBarTextStyle": "white",
         "backgroundColor": "#F1F1F1"
     },
     "tabBar": {
         "list": [
+			{
+                "pagePath": "app/page/market/market",
+                "iconPath": "app/asset/image/icon_API.png",
+                "selectedIconPath": "app/asset/image/icon_API_HL.png",
+                "text": "市场"
+            },
             {
                 "pagePath": "app/page/overview/overview",
                 "iconPath": "app/asset/image/icon_component.png",
                 "selectedIconPath": "app/asset/image/icon_component_HL.png",
                 "text": "概览"
-            },
-            {
-                "pagePath": "app/page/market/market",
-                "iconPath": "app/asset/image/icon_API.png",
-                "selectedIconPath": "app/asset/image/icon_API_HL.png",
-                "text": "市场"
             },
             {
                 "pagePath": "app/page/administration/administration",
