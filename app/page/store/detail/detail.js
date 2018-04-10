@@ -47,11 +47,6 @@ Component({
 		isHiddenSeller: {
 			type: Boolean,
 			value: false
-		},
-
-		needNavigatorIndex: {
-			type: Boolean,
-			value: false
 		}
 	},
   

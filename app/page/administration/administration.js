@@ -19,7 +19,7 @@ Page({
 			user_id: '0',
 			offset: offset,
 			limit: limit,
-			used_for_management: '1'
+			type: 1
 		}).then((result) => {
 			console.log(result)
 			this.setData({
