@@ -3,7 +3,7 @@
 	<view wx:if='{{item.name === "bond_simple_name" && bondInfo.hot.length > 0}}' class='bond-info-item-tpl {{item.name}}'>
 		<text class='label'>{{item.label}}</text>
 		<text class='value'>{{bondInfoItemUtil.parseValue(item.name, bondInfo)}}</text>
-		<icon class='icon-hot' size='16' type='{{bondInfoItemUtil.parseValue("hot", bondInfo)}}'/>
+		<!-- <icon class='icon-hot' size='16' type='{{bondInfoItemUtil.parseValue("hot", bondInfo)}}'/> -->
 	</view>
 	<view wx:else class='bond-info-item-tpl {{item.name}}'>
 		<text class='label'>{{item.label}}</text>
