@@ -55,8 +55,13 @@
 }
 .single-bond-component .bond-info-item-tpl.benefit {
   float: right;
-  width: 40%;
-  text-align: right;
+  width: 35%;
+  border: 1rpx solid #2196F3;
+  border-radius: 50rpx;
+  text-align: center;
+}
+.single-bond-component .bond-info-item-tpl.benefit .value {
+  color: #2196F3;
 }
 .single-bond-component .bond-info-item-tpl.rating {
   width: 33.33333%;

@@ -22,7 +22,7 @@
 					<template is='sellerInfoTpl' data='{{url: "", vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: sale.face_url, isVUser:"1", userName: bondInfo.sale_array.length > 1 ? "" : sale.sale_name, companyName: bondInfo.sale_array.length > 1 ? "" : sale.company_name}}'></template>
 				</view>
 			</block>
-			<text class='overflow-data' wx:if='{{bondInfo.sale_array.length > 7}}'>+{{bondInfo.sale_array.length - 7}}</text>
+			<text class='overflow-data' wx:if='{{bondInfo.sale_array.length > 3}}'>+{{bondInfo.sale_array.length - 3}}</text>
 		</view>
 	</view>
 </view>
