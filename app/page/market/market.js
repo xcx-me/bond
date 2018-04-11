@@ -89,7 +89,10 @@ Page({
      */
 	bindChangeTab: function (e) {
 		let currentTab = e.detail.current
-		this.setData({currentTab: currentTab});
+		this.setData({
+			currentTab: currentTab,
+			loading: true
+		});
 		this.getBondList(currentTab, 1)
 	},
 
@@ -102,7 +105,7 @@ Page({
 			return false;
 		} else {
 			that.setData({
-				currentTab: e.target.dataset.current
+				currentTab: e.target.dataset.current,
 			})
 		}
 	},

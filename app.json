@@ -20,7 +20,7 @@
         "navigationBarBackgroundColor": "#108EE9",
         "navigationBarTitleText": "QTrade一级债",
         "navigationBarTextStyle": "white",
-        "backgroundColor": "#F1F1F1"
+        "backgroundColor": "#EFEFF4"
     },
     "tabBar": {
         "list": [

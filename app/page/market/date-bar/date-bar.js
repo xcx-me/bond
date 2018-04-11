@@ -32,7 +32,6 @@ Component({
 			if (String(result.data.ret) === '0') {
 				let dateList = []
 				let currentDate = ''
-				let sevenDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
 				result.data.retdata.workdays.split(',').map((item, index) => {
 					let formatDate = common.formateFilterDate(item)
 					if(formatDate.isToday) {

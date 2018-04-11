@@ -4,7 +4,7 @@
 	<block wx:for='{{answerList}}' wx:for-item='answerItem' wx:key='ans_id'>
 		<view class="answer-item clearfix">
 			<view class='content'>
-				<template is='sellerInfoTpl' data='{{url: "", vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: answerItem.face_url, isVUser:answerItem.v_user}}'></template>
+				<template is='sellerInfoTpl' data='{{vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: answerItem.face_url, isVUser:answerItem.v_user}}'></template>
 				<text>{{answerItem.content}}</text>
 			</view>
 			<view class='thumb'>

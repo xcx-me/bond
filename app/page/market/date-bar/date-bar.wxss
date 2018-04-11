@@ -1,5 +1,5 @@
 .date-bar-component {
-  height: 80rpx;
+  height: 160rpx;
   line-height: 80rpx;
   padding-left: 15rpx;
   background: #FFFFFF;
@@ -13,7 +13,8 @@
 }
 .date-bar-component .date-bar-item {
   float: left;
-  width: 25%;
+  width: 14.28%;
+  text-align: center;
 }
 .date-bar-component .date-item {
   height: 50rpx;
@@ -21,8 +22,22 @@
   text-align: center;
   width: calc(100% - 2rpx);
 }
+.date-bar-component .date-item.is-today {
+  color: 888888;
+  display: inline-block;
+  width: 50rpx;
+  height: 50rpx;
+  background: #2196F3;
+  opacity: 0.3;
+  border-radius: 100%;
+}
 .date-bar-component .date-item.active {
-  color: #2196f3;
+  color: #FFFFFF;
+  display: inline-block;
+  width: 50rpx;
+  height: 50rpx;
+  background: #2196F3;
+  border-radius: 100%;
 }
 .date-bar-component .split-line {
   color: #D8D8D8;
