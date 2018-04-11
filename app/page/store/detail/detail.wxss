@@ -20,6 +20,15 @@
   right: -16rpx;
   padding: 18rpx;
 }
+.seller-info-tpl .zhucheng {
+  position: absolute;
+  bottom: 5rpx;
+  right: -3rpx;
+  width: 26rpx;
+  height: 26rpx;
+  background: red;
+  border-radius: 100%;
+}
 .seller-info-tpl .under-line {
   font-size: 0;
 }

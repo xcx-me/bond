@@ -18,7 +18,7 @@ Component({
   },
 
   ready: function () {
-	console.log('ready...', this.data.filterConfig)
+	// console.log('ready...', this.data.filterConfig)
   },
 
   /**

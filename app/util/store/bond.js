@@ -15,7 +15,8 @@ module.exports = {
 				{name: 'deadline', label: ''},
 				{name: 'issue_total', label: ''},
 				{name: 'bond_type', label: '债券品种：'},
-				{name: 'issue_time', label: '发行时间：'}
+				{name: 'issue_time', label: '发行时间：'},
+				{name: 'bid_end', label: '截标时间：'}
 			]
 		}
 	],

@@ -5,7 +5,7 @@
 	<block wx:for='{{bondFieldList}}' wx:for-item='bondItem' wx:key='name'>
 		<view class='pallet clearfix {{bondItem.name}}'>
 			<block wx:for='{{bondItem.value}}' wx:for-item='item' wx:key='name'>
-				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo}}'></template>
+				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from}}'></template>
 			</block>
 		</view>
 	</block>
@@ -18,11 +18,11 @@
 		</view>
 		<view wx:else >
 			<block wx:for='{{bondInfo.sale_array}}' wx:for-item='sale' wx:key='index'>
-				<view hidden='{{index > 6}}' class='sale-info' catchtap='doNavigator' data-bid='{{sale.bond_id}}' data-uid='{{sale.user_id}}' data-bname='{{bondInfo.bond_simple_name}}'>
-					<template is='sellerInfoTpl' data='{{url: "", vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: sale.face_url, isVUser:"1", userName: bondInfo.sale_array.length > 1 ? "" : sale.sale_name, companyName: bondInfo.sale_array.length > 1 ? "" : sale.company_name}}'></template>
+				<view hidden='{{index >= maxSeller}}' class='sale-info'>
+					<template is='sellerInfoTpl' data='{{vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: sale.face_url, isZhuCheng: sale.is_zhu_cheng, isVUser:"1", userName: bondInfo.sale_array.length > 1 ? "" : sale.sale_name, companyName: bondInfo.sale_array.length > 1 ? "" : sale.company_name}}'></template>
 				</view>
 			</block>
-			<text class='overflow-data' wx:if='{{bondInfo.sale_array.length > 3}}'>+{{bondInfo.sale_array.length - 3}}</text>
+			<text class='overflow-data' wx:if='{{bondInfo.sale_array.length > maxSeller}}'>+{{bondInfo.sale_array.length - maxSeller}}</text>
 		</view>
 	</view>
 </view>
