@@ -12,13 +12,13 @@
 		</view>
 	</view>
 
-	<loading wx:if='{{loading}}'>加载中</loading>
+	<loading wx:if='{{loading}}'>数据加载中</loading>
 	<view hidden='{{loading}}' >
 		<swiper current='{{currentTab}}' class='swiper-tab-box' duration='300' style='height: {{winHeight}}px' bindchange='bindChangeTab'>
 			<block wx:for='{{[0, 1, 2]}}' wx:for-item='tabId' wx:key='index'>
 				<swiper-item>
-					<DateBar wx:if='{{tabId === currentTab && tabId === 2}}' bind:onFilterEvent='_onFilter' />
 					<Filter wx:if='{{tabId === currentTab}}' bind:onFilterEvent='_onFilter' />
+					<DateBar wx:if='{{tabId === currentTab && tabId === 2}}' bind:onFilterEvent='_onFilter' />
 					<scroll-view class='stage-pallet' scroll-y>
 						<Consultation wx:if='{{currentTab === 0 && tabId === currentTab}}' bondList='{{bondList}}' />
 						<Announcement wx:if='{{currentTab === 1 && tabId === currentTab}}' bondList='{{bondList}}' />

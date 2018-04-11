@@ -41,8 +41,8 @@ module.exports = {
 		let date = this.formatNumber(newDate.getDate())
 		let day = newDate.getDay()
 		let isToday = newDate.toDateString() === new Date().toDateString()
-		let sevenDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
-		let weekDay = isToday ? '今天' : sevenDays[day]
-		return {'originalDate': originDate, 'date': month + '-' + date, 'weekDay': weekDay, isToday: isToday}
+		let sevenDays = ['日', '一', '二', '三', '四', '五', '六']
+		let weekDay = sevenDays[day]
+		return {'originalDate': originDate, 'date': date, 'weekDay': weekDay, isToday: isToday}
 	}
 }

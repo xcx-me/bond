@@ -1,7 +1,7 @@
 
 
 module.exports = {
-	parseValue: function(field, detailInfo) {
+	parseValue: function(field, detailInfo, from) {
 		var emptyValue = '--'
 		switch (field) {
 			case 'little_range':
@@ -20,7 +20,17 @@ module.exports = {
 				var leftValue = isNotLeftEmpty ? orginLeft : emptyValue;
 				var rightValue = isNotRightEmpty ? orginRight : emptyValue
 				var value = leftValue + '-' + rightValue
+				if (from === 'board') {
+					value = leftValue + '%-' + rightValue +'%' 
+				}
 				return value;
+			case 'issue_total':
+				var value = detailInfo[field] || '--'
+				if (from === 'board' && value !== '--') {
+					return value + '亿';
+				} else {
+					return value;
+				}
 			case 'rating':
 				var subjectRating = detailInfo['subject_rating'] || emptyValue
 				var facilityRating = detailInfo['facility_rating'] || emptyValue

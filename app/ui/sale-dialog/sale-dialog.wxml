@@ -8,7 +8,7 @@
 			<radio-group class="sale-group" bindchange="saleChange">
   				<label class="radio" wx:for='{{saleList}}' wx:for-item='sale'  wx:for-index='index' wx:key='bond_id'>
 					<view class='item'>
-						<template is='sellerInfoTpl' data='{{url:"", vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: sale.face_url, isVUser:"1", userName: sale.sale_name, companyName: sale.company_name}}'></template>
+						<template is='sellerInfoTpl' data='{{vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: sale.face_url, isVUser:"1", userName: sale.sale_name, companyName: sale.company_name}}'></template>
 						<radio value="{{index}}" checked="{{sale.checked}}"/>
 					</view>
   				</label>
