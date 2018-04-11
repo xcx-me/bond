@@ -10,7 +10,7 @@ Page({
 	 */
 	data: {
 		bondSimpleName: '',
-		isOpenMyShop: false, // 是否开店
+		isOpenMyShop: true, // 是否开店
 		editorFlag: false, // 是否是债券编辑入口
 		sendQuoteData: {}, // 发布报价参数
 	},

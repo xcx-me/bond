@@ -1,8 +1,9 @@
 
 <view class='bond-form-editor' >
+	<view class='form-editor-top'>加<span class='star-span'>*</span>的选项为必填项</view>
 	<!-- 债券简称 -->
 	<view class='bond-simple-name row-item'>
-		<view class='label-area'>债券简称:</view>
+		<view class='label-area'><span class='star-span'>*</span>债券简称:</view>
 		<view class='editor-area'>
 			<input class='' type='text' bindinput='simpleNameChange' data-input-name='bond_simple_name' value='{{formData.bond_simple_name}}'
 				disabled='{{editorFlag}}' style='background-color: {{editorFlag ? "#DDDDDD" : ""}}; color: {{editorFlag ? "#999999" : "" }}'

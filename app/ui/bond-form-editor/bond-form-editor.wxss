@@ -325,26 +325,35 @@
   content: "\e933";
   color: #2196f3;
 }
+.bond-form-editor view {
+  display: flex;
+}
+.bond-form-editor .form-editor-top {
+  background-color: #F1F1F1;
+}
+.bond-form-editor .star-span {
+  padding-top: 8rpx;
+  color: #E64340;
+  margin: 0 2rpx;
+}
 .bond-form-editor input {
   border: 1px solid #DDDDDD;
 }
 .bond-form-editor .row-item {
-  margin-bottom: 10rpx;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #E5E5E5;
 }
 .bond-form-editor .label-area {
   width: 30%;
-  display: flex;
   float: left;
 }
 .bond-form-editor .editor-area {
   width: 60%;
-  display: flex;
 }
 .bond-form-editor .checkbox-list {
   width: 100%;
 }
 .bond-form-editor .time-select-picker {
-  display: flex;
   border: 1rpx solid #DDDDDD;
 }
 .bond-form-editor .dropdown-btn {

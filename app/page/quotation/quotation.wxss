@@ -1,6 +1,6 @@
 
 .send-quote-page {
-	padding: 20rpx 20rpx;
+	/* padding: 20rpx 20rpx; */
 	background-color:#F1F1F1;
 }
 
