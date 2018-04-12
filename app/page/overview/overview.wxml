@@ -2,23 +2,25 @@
 
 <view class='overview-page page-wrapper'>
 	<loading wx:if="{{loading}}">加载中</loading>
-	<block wx:if='{{storeRegistered}}'>
-		<StoreDetail navigatorUrl='../my-configuration/my-configuration' vUrl='../../asset/image/qtrade/sprites_01.png' userId='{{userId}}' needUpdate='{{needUpdate}}'/>
-	</block>
-	<block wx:else >
-		<view class='personal-info-pallet pallet' hidden='{{loading}}'>
-			<template is='sellerInfoTpl' data='{{...userInfo}}'></template>
-        </view>
+	<block hidden="{{loading}}">
+		<block wx:if='{{storeRegistered}}'>
+			<StoreDetail navigatorUrl='../my-configuration/my-configuration' 
+			vUrl='../../asset/image/qtrade/sprites_01.png' 
+			userId='{{uid}}' 
+			needUpdate='{{needUpdate}}' 
+			bindevent='onUpdateStoreDetail'
+			/>
+		</block>
+		<block wx:else >
+			<view class='personal-info-pallet pallet' hidden='{{loading}}'>
+				<template is='sellerInfoTpl' data='{{...userInfo}}'></template>
+			</view>
+		</block>
 	</block>
 	
-    <view class='recent-notice pallet' hidden='{{loading}}'>
+    <view class='store-pallet pallet' hidden='{{loading}}'>
         <view wx:if='{{storeRegistered}}'>
-			<view class='mystore-pallet' bindtap='toMyStore'>
-				<navigator url='../store/store?uid=0'>进入我的店铺</navigator>
-			</view>
-			<view class="dynamic-pallet pallet-has-slite-line">
-				<StoreDynamic needUpdate='{{needUpdate}}'/>
-			</view>
+			<MyStore uid='{{uid}}' userId='{{userId}}' isQtrade='{{isQtrade}}'/>
         </view>
         <view class='register-store' wx:elif='{{!loading}}'>
 			<view class='tips'>

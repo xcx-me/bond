@@ -1,8 +1,9 @@
 
 <import src="../../../template/seller-info/seller-template.wxml" />
 <view class='store-header-component'>
-	<view class='personal-info-pallet {{isQtrade ? "is-qtrade" : ""}}' wx:if='{{!isHiddenSeller}}'>
+	<view class='personal-info-pallet {{isQtrade ? "is-qtrade" : ""}}' wx:if='{{!isHiddenSeller}}' bindtap='doClick'>
 		<template is='sellerInfoTpl' data='{{url: navigatorUrl, vUrl: vUrl, faceUrl: storeDetail.face_url, isVUser:storeDetail.v_user, userName: storeDetail.sale_name, companyName: storeDetail.company_simple_name}}'></template>
+		<i class='icon-right-arrow'></i>
 	</view>
 	<view class='store-statistics-component'>
 		<DataListDisplay displayClass='store-statistic' fieldList='{{displayFieldList}}' dataList='{{storeDetail}}' />

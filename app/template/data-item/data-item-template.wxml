@@ -5,6 +5,6 @@
 			<text class='value overflow-ellipsis'>{{value}}</text>
 			<text class='label'>{{label}}</text>
 		</view>
-		<view class='item split-item' wx:if='{{hasSplitLine}}'></view>
+		<!-- <view class='item split-item' wx:if='{{hasSplitLine}}'></view> -->
 	</view>
 </template>

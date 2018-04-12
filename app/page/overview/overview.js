@@ -18,7 +18,9 @@ Page({
 			vUrl: ''
 		},
 		vUrl: '../../asset/image/qtrade/sprites_01.png',
+		uid: '0',
 		userId: '0',
+		isQtrade: false,
 		loading: true,
 		needUpdate: false
 	},
@@ -75,6 +77,17 @@ Page({
 			common.showFailedToast()
 		})
   	},
+
+	  onUpdateStoreDetail: function (e) {
+		  console.log('overview onUpdateStoreDetail...', e)
+		let detail = e.detail
+		let isMyStore = String(detail.is_myself) === '1' && String(this.data.uid) === '0'
+		this.setData({
+			isMyStore: isMyStore,
+			isQtrade: String(detail.is_qtrade) === '1',
+			userId: detail.user_id
+		})
+  },
 
 	initData: function () {
 		this.isStoreOpened()

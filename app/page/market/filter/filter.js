@@ -12,8 +12,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-	filterConfig:  filter.defaultConfig,
-	curSelectList: [],
+	filterConfig: JSON.parse(JSON.stringify(filter.defaultConfig)),
 	filterValue: {}
   },
 
@@ -31,37 +30,57 @@ Component({
 		filterConfig.map((filter, index) => {
 			filter.isShow = String(index) === String(selectIndex)
 		})
-		let curSelectList = []
-		filterConfig[selectIndex].values.map ((item,index) => {
-			if (item.isSelected) {
-				curSelectList.push(index)
-			}
-		})
+	
 		this.setData({
 			filterConfig: filterConfig,
-			curSelectList: curSelectList
 		})
 	},
 
 	checkboxChange: function (e) {
+		// let index = e.currentTarget.dataset.index
+		// let filterConfig = this.data.filterConfig
+		// filterConfig[index].values.map((item) => {
+		// 	item.isSelected = false
+		// })
+
+		// let valueList = e.detail.value
+		// let len = valueList.length
+		// if (len === 0 || valueList[len - 1] === '0') {
+		// 	filterConfig[index].values[0].isSelected = true
+		// } else {
+		// 	valueList.map((value) => {
+		// 		filterConfig[index].values[parseInt(value)].isSelected = value !== '0'
+		// 	})
+		// }
+				
+		// this.setData({
+		// 	curSelectList: valueList,
+		// 	filterConfig: filterConfig
+		// })
+	},
+
+	clickFilterOption: function (e) {
 		let index = e.currentTarget.dataset.index
+		let optionIndex = e.currentTarget.dataset.optionindex
 		let filterConfig = this.data.filterConfig
-		filterConfig[index].values.map((item) => {
+		let values = filterConfig[index].values
+		let selectList = []
+		values.map((item, valueIndex) => {
+			if ((item.isSelected && valueIndex !== optionIndex) ||(!item.isSelected && valueIndex === optionIndex) ) {
+				selectList.push(valueIndex)
+			}
 			item.isSelected = false
 		})
-
-		let valueList = e.detail.value
-		let len = valueList.length
-		if (len === 0 || valueList[len - 1] === '0') {
-			filterConfig[index].values[0].isSelected = true
+	
+		if ((optionIndex === 0 && selectList.length > 0 )|| selectList.length === 0) { // 选中"不限"
+			values[0].isSelected = true
 		} else {
-			valueList.map((value) => {
-				filterConfig[index].values[parseInt(value)].isSelected = value !== '0'
+			selectList.map((value) => {
+				values[value].isSelected = value !== 0
 			})
 		}
-				
+		
 		this.setData({
-			curSelectList: valueList,
 			filterConfig: filterConfig
 		})
 	},
@@ -69,20 +88,21 @@ Component({
 	onReset: function (e) {
 		let filterIndex = e.currentTarget.dataset.index
 		let filterConfig = this.data.filterConfig
-		filterConfig[filterIndex] = filter.defaultConfig[filterIndex]
+		let defaultConfig = JSON.parse(JSON.stringify(filter.defaultConfig))
+		filterConfig[filterIndex] = defaultConfig[filterIndex]
 		filterConfig[filterIndex].isShow = true
 		this.setData({
-			filterConfig:  filterConfig,
-			curSelectList: []
+			filterConfig:  filterConfig
 		})
 	},
 
 	onConfirm: function (e) {
-		let {filterConfig, curSelectList, filterValue} = this.data
+		let {filterConfig, filterValue} = this.data
 		let index = e.currentTarget.dataset.index
 		filterConfig[index].isShow = false
-		filter.defaultConfig.map ((item, itemIndex) => {
-			let filterName = filter.defaultConfig[itemIndex].name
+		const defaultConfig = filter.defaultConfig
+		defaultConfig.map ((defaultItem, itemIndex) => {
+			let filterName = defaultItem.name
 			let valueList = []
 			filterConfig[itemIndex].values.map ((item) => {
 				if (item.isSelected) {
@@ -91,9 +111,9 @@ Component({
 			})
 			filterValue[filterName] = valueList.join('|')
 		})
+		console.log(filterConfig,filterValue)
 		this.setData({
 			filterConfig: filterConfig,
-			curSelectList: [],
 			filterValue: filterValue
 		})
 
