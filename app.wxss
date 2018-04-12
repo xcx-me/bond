@@ -14,10 +14,6 @@ page {
 	background-color:#EFEFF4;
 }
 
-page .page-wrapper {
-	padding: 20rpx 20rpx 0 20rpx;
-}
-
 ::-webkit-scrollbar {
 	width: 0;
 	height: 0;

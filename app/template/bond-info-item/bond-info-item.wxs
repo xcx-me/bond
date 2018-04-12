@@ -20,13 +20,13 @@ module.exports = {
 				var leftValue = isNotLeftEmpty ? orginLeft : emptyValue;
 				var rightValue = isNotRightEmpty ? orginRight : emptyValue
 				var value = leftValue + '-' + rightValue
-				if (from === 'board') {
+				if (from === 'board' || from === 'store') {
 					value = leftValue + '%-' + rightValue +'%' 
 				}
 				return value;
 			case 'issue_total':
 				var value = detailInfo[field] || '--'
-				if (from === 'board' && value !== '--') {
+				if ((from === 'board' || from === 'store' )&& value !== '--') {
 					return value + '亿';
 				} else {
 					return value;

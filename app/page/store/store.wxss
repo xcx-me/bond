@@ -1,12 +1,9 @@
-.store-page .store-header {
-  height: 10%;
-}
-.store-page .store-bond-list {
-  height: 90%;
+.store-page {
+  padding-top: 30rpx;
 }
 .store-page.qtrade-store .store-header image {
-  width: 60rpx;
-  height: 50rpx;
+  width: 160rpx;
+  height: 150rpx;
   border-radius: 0;
 }
 .store-page .share {

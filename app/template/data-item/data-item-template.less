@@ -2,17 +2,19 @@
 	float: left;
 
 	.item {
+		width:100%;
 		float: left;
 
 		&.has-splite {
-			width: calc(~'100% - 1px');
+			// width: calc(~'100% - 1px');
+			border-right: 1px solid #E5E5E5;
 		}
 
 		&.split-item {
-			border-left:1px solid #CCCCCC;
+			border-left:1px solid #E5E5E5;
 			width:0;
 			height:60rpx;
-			background-color:#CCCCCC;
+			background-color:#E5E5E5;
 			position: relative;
 			top: 20rpx;
 		}

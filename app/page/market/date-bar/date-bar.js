@@ -28,10 +28,10 @@ Component({
   methods: {
 	getDateList: function () {
 		request(config.NEW_BOND.getWorkdaysInfo, {}).then((result) => {
-			console.log(result)
 			if (String(result.data.ret) === '0') {
 				let dateList = []
 				let currentDate = ''
+				let sevenDays = ['日', '一', '二', '三', '四', '五', '六']
 				result.data.retdata.workdays.split(',').map((item, index) => {
 					let formatDate = common.formateFilterDate(item)
 					if(formatDate.isToday) {

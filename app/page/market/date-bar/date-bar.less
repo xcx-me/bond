@@ -17,32 +17,43 @@
 		float: left;
 		width: 14.28%;
 		text-align: center;
-	}
 
-	.date-item {
-		height: 50rpx;
-		line-height: 50rpx;
-		text-align: center;
-		width: calc(~'100% - 2rpx');
+		.weekday {
+			color: #B2B2B2;
+		}
+		
+		.date {
+			color: #888888;
+		}
 
-		&.is-today {
-			color: 888888;
+		.normal {
+			width: calc(~'100% - 2rpx');
+		}
+
+		.today {
 			display: inline-block;
 			width: 50rpx;
 			height: 50rpx; 
+			line-height: 50rpx;
+			color: #000000;
 			background:#2196F3;
 			opacity:0.3; 
 			border-radius: 100%;
 		}
 
-		&.active {
+		.active {
 			color: #FFFFFF;
 			display: inline-block;
 			width: 50rpx;
+			line-height: 50rpx;
 			height: 50rpx; 
 			background:#2196F3;
 			border-radius: 100%;
 		}
+	}
+
+	.test {
+		background: red !important;
 	}
 
 	.split-line {
