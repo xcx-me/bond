@@ -1,98 +1,50 @@
 // app/page/overview/overview.js
-const common = require('../../util/common.js')
-const { request } = require('../../util/ajax/ajax')
-const config = require('../../util/ajax/config')
+const service = require('../../util/service/service')
 var app = getApp()
 
 Page({
 	data: {
-		storeRegistered: false,
-		checkboxItems: [{ name: 'isAgreedQtrade', value: '1', checked: 'true' }],
-		isAgreedQtrade: true,
-		dynamicList: [],
-		userInfo: {
-			faceUrl: '',
-			userName: '',
-			companyName: '',
-			url: '',
-			vUrl: ''
-		},
+		storeRegistered: false, // 是否开店
 		vUrl: '../../asset/image/qtrade/sprites_01.png',
 		uid: '0',
 		userId: '0',
+		userName: '',
 		isQtrade: false,
 		loading: true,
 		needUpdate: false
 	},
 
 	isStoreOpened: function () {
-		request(config.NEW_BOND.isStoreOpened, {}).then((result) => {
-			if (String(result.data.ret) === '0') {
-				// result.data.retdata.is_myshop_opened = 0
-				this.setData({
-					storeRegistered: String(result.data.retdata.is_myshop_opened) === '1',
-					loading: false,
-					needUpdate: true
-				})
-			}
+		service.isStoreOpened((result) => {
+			// result.data.retdata.is_myshop_opened = 0 // for debug
+			this.setData({
+				storeRegistered: String(result.data.retdata.is_myshop_opened) === '1',
+				loading: false,
+				needUpdate: true
+			})
 		})
 	},
 
-	getCardInfo: function () {
-		request(config.NEW_BOND.cardInfo, {}).then((result) => {
-			if (String(result.data.ret) === '0') {
-				this.setData({
-					userInfo: {
-						faceUrl: result.data.faceurl || '../../asset/image/qtrade/icon-default.png',
-						isVUser: result.data.iscomfirmed,
-						userName: result.data.realname,
-						companyName: result.data.company.simpleName,
-						url: '../my-configuration/my-configuration',
-						vUrl: this.data.vUrl
-					}
-				})
-			}
-		})
-	},
-
-	checkboxChange: function (e) {
-		this.setData({
-			isAgreedQtrade: e.detail.value.length > 0
-		})
-	},
-
-	toMyStore: function () {
-	},
-
-	doOpenStore: function() {
-		request(config.NEW_BOND.openMyShop, {}).then((result) => {
-			if(String(result.data.ret) === '0') {
-				wx.navigateTo({
-					url: '../register-store-complete/register-store-complete'
-				})
-			} else {
-				common.showFailedToast()
-			}
-		}).catch(() => {
-			common.showFailedToast()
-		})
-  	},
-
-	  onUpdateStoreDetail: function (e) {
-		  console.log('overview onUpdateStoreDetail...', e)
+	onUpdateStoreDetail: function (e) {
+		console.log('overview onUpdateStoreDetail...', e)
 		let detail = e.detail
 		let isMyStore = String(detail.is_myself) === '1' && String(this.data.uid) === '0'
 		this.setData({
 			isMyStore: isMyStore,
 			isQtrade: String(detail.is_qtrade) === '1',
-			userId: detail.user_id
+			userId: detail.user_id,
+			userName: detail.sale_name
 		})
-  },
+	},
 
 	initData: function () {
 		this.isStoreOpened()
-		this.getCardInfo()
 	},
+
+	doShareStore: function (userId) {
+		service.doShareStore(userId, '', () => {}, () => {})
+	},
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
@@ -117,6 +69,7 @@ Page({
 	 * 生命周期函数--监听页面隐藏
 	 */
 	onHide: function () {
+		console.log('overview needUpdate....')
 		this.setData({
 			needUpdate: false
 		})
@@ -133,20 +86,39 @@ Page({
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function () {
-
+		console.log('onPullDownRefresh....')
 	},
 
 	/**
 	 * 页面上拉触底事件的处理函数
 	 */
 	onReachBottom: function () {
-
+		console.log('onReachBottom....')
 	},
 
 	/**
 	 * 用户点击右上角分享
 	 */
-	onShareAppMessage: function () {
+	onShareAppMessage: function (ops) {
+		if (ops.from === 'button') {
+			//
+			// console.log('button')
+		} else {
+			//
+		}
 
+		let userId = this.data.userId
+		let path = '/app/page/market/market?to=store&uid=' + userId
+		let that = this
+		return {
+			title: `${this.data.userName}的店铺`,
+			desc: '介绍一个基于QQ的同业报价工具给你哦！事不宜迟，现在加入QTrade吧。',
+			path: path,
+			success: function (res) { // 确定
+				that.doShareStore(userId)
+			},
+			fail: function (res) { // 取消
+			}
+		}
 	}
 })

@@ -5,12 +5,18 @@
 		position: relative;
 		width: 100%;
 		margin-bottom: 10rpx;
+		padding: 22rpx 0;	
+		border-bottom: 1px solid #E5E5E5;
 
 		.title {
-			height: 42rpx;
-			line-height: 42rpx;
+			height: 45rpx;
+			line-height:45rpx;
 			position: relative;
 			left: 8rpx;
+			font-size:32rpx;
+			font-family:PingFangSC-Regular;
+			color:rgba(0,0,0,1);
+			
 		}
 
 		.btn-edit {
@@ -28,8 +34,8 @@
 	.item {
 		float: left;
 		width: 100%;
-
-		.seller-info-tpl {
+		
+		.seller-info-tpl {	
 			.image {
 				.face-url {
 					width: 48rpx;
@@ -55,5 +61,30 @@
 
 	.sale-list {
 		overflow: auto;
+		font-size:28rpx;
+
+		.label {
+			color: #888888;
+			width: 140rpx;
+			float: left;
+		}
+
+		.value {
+			float: left;
+			font-size:28rpx;
+			font-family:PingFangSC-Regular;
+			color:rgba(0,0,0,1);
+		}
+
+		.bond-info-item-tpl {
+			&.little_range,
+			&.early_end {
+				height: 70rpx;
+				line-height: 70rpx;
+				padding-top: 0;
+				padding-bottom: 0;
+				border-bottom: 1rpx solid #E5E5E5;
+			}
+		}
 	}
 }

@@ -1,9 +1,21 @@
 <!--app/page/detail/detail.wxml-->
 <view class='bond-detail-page page-wrapper'>
 	<view class='tab-bar'>
-		<view class='{{currentTabId === "detail" ? "active": ""}}' bindtap='onSwitchTab' data-tid='detail'><text>债券信息</text></view>
-		<view class='{{currentTabId === "question" ? "active": ""}}' bindtap='onSwitchTab' data-tid='question'><text>问答</text><text class="question-total">({{questionTotal}})</text></view>
-		<view class='{{currentTabId === "store" ? "active": ""}}' bindtap='onSwitchTab' data-tid='store'><text>店铺信息</text></view>
+		<view class='tab-bar-item' bindtap='onSwitchTab' data-tid='detail'>
+			<view class='{{currentTabId === "detail" ? "active": ""}}'>
+				<text>债券信息</text>
+			</view>
+		</view>
+		<view class='tab-bar-item' bindtap='onSwitchTab' data-tid='question'>
+			<view class='{{currentTabId === "question" ? "active": ""}}'>
+				<text>问答</text><text class="question-total">({{questionTotal}})</text>
+			</view>
+		</view>
+		<view class='tab-bar-item' bindtap='onSwitchTab' data-tid='store'>
+			<view class='{{currentTabId === "store" ? "active": ""}}'>
+				<text>店铺信息</text>
+			</view>
+		</view>
 	</view>
 	<swiper current-item-id='{{currentTabId}}' class='content' duration='300' style='height: {{winHeight}}px' bindchange="bindChangeTab">
 		<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
@@ -14,6 +26,7 @@
 					<StoreDetail wx:if='{{tabId === currentTabId && currentTabId === "store"}}'
 						vUrl='{{vUrl}}'
 						userId='{{uid}}'
+						isRegistered='{{true}}'
 						isQtrade='{{isQtrade}}'/> 
 					<OtherBonds wx:if='{{tabId === currentTabId}}' isMyStore='{{isMyStore}}' bondId='{{bondId}}' uid='{{uid}}' userId='{{userId}}' needUpdate='{{needUpdate}}' />
 				</scroll-view>

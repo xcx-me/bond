@@ -1,8 +1,5 @@
 // app/page/store/store.js
-var common = require('../../util/common.js')
-const { request } = require('../../util/ajax/ajax')
-const config = require('../../util/ajax/config')
-
+const service = require('../../util/service/service')
 Page({
 	properties: {	
 		navigatorUrl: {
@@ -14,63 +11,24 @@ Page({
   	data: {
 		uid: '',
 		userId: '',
+		userName: '',
 		isMyStore: false,
 		isQtrade: false,
-		bondList: [],
 		needUpdate: false,
 		vUrl: '../../asset/image/qtrade/sprites_01.png',
-		showLoading: true,
 		from: ''
   	},
 
-  getBondList: function(userId, len = 10) {
-	let offset = 0
-	let limit = len < 10 ? 10: len
-	request(config.NEW_BOND.newBondList, {
-		bond_id: '0',
-		user_id: userId,
-		offset: offset,
-		limit: limit,
-		type: this.data.isMyStore && this.data.uid === '0' ? 2 : 5 // 2 我的店铺 5他人店铺
-	}).then((result) => {
-		if (String(result.data.ret) === '0') {
-			this.setData({
-				bondList: result.data.retdata.bond_list,
-				showLoading: false
-			})
-		} else {
-			this.setData({
-				showLoading: false
-			})
-		}
-	}).catch(()=>{
-		this.setData({
-			showLoading: false
-		})
-	})
-  },
-
-  onUpdateStoreDetail: function (e) {
+	onUpdateStoreDetail: function (e) {
 		let detail = e.detail
 		let isMyStore = String(detail.is_myself) === '1' && String(this.data.uid) === '0'
 		this.setData({
 			isMyStore: isMyStore,
 			isQtrade: String(detail.is_qtrade) === '1',
-			userId: detail.user_id
+			userId: detail.user_id,
+			userName: detail.sale_name
 		})
-		wx.setNavigationBarTitle({title: isMyStore ? '我的店铺': detail.sale_name + '的店铺'})
-  },
-
-  	_deleteBondEvent: function (e) {
-		let bname = e.detail
-		request(config.NEW_BOND.deleteBond, {
-			bond_simple_name: bname
-		}).then((result) => {
-			if (String(result.data.ret) === '0') {
-				this.getBondList(this.data.uid, this.data.bondList.length)
-			}
-		})
-  	},
+	},
 
   	onLoad: function (options) {
 		let uid = options.uid
@@ -84,7 +42,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-	this.dialog = this.selectComponent('#dialog')
 	// console.log('ready...', this.data.userId)
   },
 
@@ -95,9 +52,7 @@ Page({
 		this.setData({
 			needUpdate: true
 		})
-		if (this.data.uid) {
-			this.getBondList(this.data.uid, 10)
-		}
+
   	},
 
   /**
@@ -126,31 +81,35 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+	onReachBottom: function () {
   
-  },
+	},
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function (ops) {
-	  if (ops.from === 'button') {
-		//
-	  } else {
-		//
-	  }
-
-	  let path = '/app/page/market/market?to=store&uid=' + this.data.userId
-	  return {
-		title: 'Qtrade一级债小程序',
-		desc: 'desc....',
-		path: path,
-		success: function (res) {
-		  // 转发成功
-		},
-		fail: function (res) {
-		  // 转发失败
+	doShareStore: function (userId) {
+		service.doShareStore(userId, '', () => {}, () => {})
+	},
+  	/**
+   	* 用户点击右上角分享
+   	*/
+  	onShareAppMessage: function (ops) {
+		if (ops.from === 'button') {
+			//
+		} else {
+			//
 		}
-	  }
-  }
+
+		let userId = this.data.userId
+		let path = '/app/page/market/market?to=store&uid=' + userId
+		let that = this
+		return {
+			title: `${this.data.userName}的店铺`,
+			desc: '介绍一个基于QQ的同业报价工具给你哦！事不宜迟，现在加入QTrade吧。',
+			path: path,
+			success: function (res) { // 确定
+				that.doShareStore(userId)
+			},
+			fail: function (res) { // 取消
+			}
+		}
+	}
 })

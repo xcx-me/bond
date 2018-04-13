@@ -1,8 +1,8 @@
 <template name='sellerInfoTpl'>
 	<view class='seller-info-tpl'>
 		<view class='image'>
-			<image class='face-url' src='{{faceUrl || "/app/asset/image/qtrade/icon-default.png"}}' />
-			<!-- <icon class='v-user' wx:if='{{isVUser === "1"}}' style='background: transparent url("{{vUrl}}") no-repeat 0 0; background-size: 100rpx;'/> -->
+			<image class='face-url' src='{{faceUrl === "loading" ? "" : faceUrl || "/app/asset/image/qtrade/icon-default.png"}}' />
+			<icon hidden class='v-user' wx:if='{{isVUser === "1"}}' style='background: transparent url("{{vUrl}}") no-repeat 0 0; background-size: 100rpx;'/>
 			<icon class='zhucheng' wx:if='{{isZhuCheng === "2"}}' />
 		</view>
 		<view class='name'>

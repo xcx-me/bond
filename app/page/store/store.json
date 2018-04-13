@@ -1,7 +1,8 @@
 {
+	"navigationBarTitleText": "店铺详情",
 	"usingComponents": {
-		"StoreDetail": "../store/detail/detail",
-		"BondList": "../../ui/list/bond-list/bond-list",
+		"StoreDetail": "./detail/detail",
+		"StoreBondList": "./bond-list/bond-list",
 		"ShareButton": "../../ui/share-button/share-button"
 	}
 }

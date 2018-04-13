@@ -42,60 +42,9 @@
   padding-top: 30rpx;
   height: 100%;
 }
-.overview-page .pallet-has-slite-line {
-  border-top: 1rpx solid #CCCCCC;
-}
-.overview-page .mystore-pallet {
-  font-size: normal;
-  padding-bottom: 10rpx;
-}
-.overview-page .mystore-pallet navigator {
-  height: 80rpx;
-  line-height: 80rpx;
-  padding: 0 20rpx;
-  cursor: pointer;
-}
-.overview-page .dynamic-pallet {
-  padding: 20rpx;
+.overview-page .content {
+  height: 100%;
 }
 .overview-page .store-pallet {
   border-top: 1px solid #E5E5E5;
-}
-.overview-page .store-pallet .register-store {
-  text-align: center;
-}
-.overview-page .store-pallet .register-store .tips {
-  height: 200rpx;
-  position: relative;
-}
-.overview-page .store-pallet .register-store .tips text {
-  position: relative;
-  top: 40%;
-}
-.overview-page .store-pallet .shop-button {
-  background-color: #2196F3;
-}
-.overview-page .store-pallet .button-hover {
-  background-color: #1A7DD4;
-}
-.overview-page .store-pallet .protocol {
-  font-size: small;
-  position: relative;
-  margin-top: 20rpx;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.overview-page .store-pallet .protocol checkbox {
-  position: relative;
-  top: -2px;
-}
-.overview-page .store-pallet .protocol label {
-  width: 159px;
-  display: flex;
-}
-.overview-page .store-pallet .protocol .to-qtrade-protocol {
-  color: #2196F3;
-  text-decoration: underline;
 }

@@ -1,6 +1,26 @@
 .blank-signal-tpl {
+  background: #EFEFF4;
+  margin-top: 140rpx;
   text-align: center;
 }
+.blank-signal-tpl .blank-signal-tpl-line:before {
+  content: '';
+  display: block;
+  height: 1rpx;
+  width: 80%;
+  background-color: #D8D8D8;
+  /*颜色需与主题大背景色一致*/
+  position: relative;
+  top: 25rpx;
+  /*调节线高*/
+  left: 10%;
+}
 .blank-signal-tpl .prompt {
-  font-size: x-small;
+  display: inline-block;
+  background: #EFEFF4;
+  padding: 0 30rpx;
+  position: relative;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  color: #888888;
 }

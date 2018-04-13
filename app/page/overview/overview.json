@@ -1,6 +1,8 @@
 {
 	"usingComponents": {
 		"StoreDetail": "../store/detail/detail",
-		"MyStore": "../store/my-store/my-store"
-	}
+		"MyStore": "../store/my-store/my-store",
+		"ShareButton": "../../ui/share-button/share-button"
+	},
+	"enablePullDownRefresh": true
 }

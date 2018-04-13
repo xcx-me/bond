@@ -20,7 +20,16 @@ Component({
 	isQtrade: {
 		type: Boolean,
 		value: false	
-	}
+	},
+	needUpdate: {
+		type: Boolean,
+		value: false,
+		observer: function(newVal, oldVal){
+			if (newVal) {
+				this.getBondList(this.data.uid, 10)
+			}
+		}
+	},
   },
 
   /**
@@ -32,7 +41,7 @@ Component({
   },
 
   ready: function () {
-	this.getBondList(this.data.uid, 10)
+	// this.getBondList(this.data.uid, 10)
   },
 
   /**
@@ -66,6 +75,6 @@ Component({
 				this.getBondList(this.data.uid, this.data.bondList.length)
 			}
 		})
-  	},
+	  }	
   }
 })

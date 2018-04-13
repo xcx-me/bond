@@ -1,40 +1,17 @@
-<import src="../../template/seller-info/seller-template.wxml" />
 
 <view class='overview-page page-wrapper'>
 	<loading wx:if="{{loading}}">加载中</loading>
 	<block hidden="{{loading}}">
-		<block wx:if='{{storeRegistered}}'>
-			<StoreDetail navigatorUrl='../my-configuration/my-configuration' 
+		<StoreDetail navigatorUrl='../my-configuration/my-configuration' 
 			vUrl='../../asset/image/qtrade/sprites_01.png' 
-			userId='{{uid}}' 
+			userId='{{uid}}'
+			isRegistered='{{storeRegistered}}'
 			needUpdate='{{needUpdate}}' 
 			bindevent='onUpdateStoreDetail'
-			/>
-		</block>
-		<block wx:else >
-			<view class='personal-info-pallet pallet' hidden='{{loading}}'>
-				<template is='sellerInfoTpl' data='{{...userInfo}}'></template>
-			</view>
-		</block>
+		/>
+		<view class='store-pallet'>
+			<MyStore isRegistered='{{storeRegistered}}' uid='{{uid}}' userId='{{userId}}' isQtrade='{{isQtrade}}' needUpdate='{{needUpdate}}' />
+		</view>
 	</block>
-	
-    <view class='store-pallet pallet' hidden='{{loading}}'>
-        <view wx:if='{{storeRegistered}}'>
-			<MyStore uid='{{uid}}' userId='{{userId}}' isQtrade='{{isQtrade}}'/>
-        </view>
-        <view class='register-store' wx:elif='{{!loading}}'>
-			<view class='tips'>
-				<text>欢迎来QTrade上开通店铺，并发布报价</text>
-			</view>
-			<button class='shop-button' hover-class='button-hover' disabled='{{!isAgreedQtrade}}' size='mini' type='primary' bindtap="doOpenStore">立马开店</button>
-			<view class='protocol'>
-				<checkbox-group bindchange="checkboxChange">
-					<label wx:for="{{checkboxItems}}" wx:key="value">
-						<checkbox value="{{item.value}}" checked="{{item.checked}}"/>点击立马开店表示同意
-					</label>
-				</checkbox-group>
-				<navigator class='to-qtrade-protocol' url='../protocol/protocol' hover-class="navigator-hover">《QTrade服务协议》</navigator>
-			</view>
-        </view>
-    </view>
+	<ShareButton wx:if='{{storeRegistered}}'/>
 </view>

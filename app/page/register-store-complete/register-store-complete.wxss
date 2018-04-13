@@ -1,1 +1,24 @@
-/* app/page/register-store-complete/register-store-complete.wxss */
+.register-store-complete {
+  text-align: center;
+}
+.register-store-complete .icon-pallet {
+  margin: 100rpx 0 50rpx;
+}
+.register-store-complete text {
+  font-size: 40rpx;
+  font-family: PingFangSC-Regular;
+  color: #000000;
+}
+.register-store-complete button {
+  width: 760rpx;
+  height: 94rpx;
+  line-height: 94rpx;
+  margin-top: 60rpx;
+  text-align: center;
+  background: #2196f3;
+  box-shadow: 0rpx 1rpx 10rpx 0px rgba(26, 125, 212, 0.6), 0rpx 1rpx 6rpx 0rpx rgba(87, 107, 149, 0.5);
+  border-radius: 6rpx;
+}
+.register-store-complete button:hover {
+  background-color: #1A7DD4;
+}
