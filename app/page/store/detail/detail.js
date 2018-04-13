@@ -1,7 +1,6 @@
 // components/Dialog/dialog.js
 var detail =require('../../../util/store/detail.js')
-const { request } = require('../../../util/ajax/ajax')
-const config = require('../../../util/ajax/config')
+const service = require('../../../util/service/service')
 var app = getApp()
 
 Component({
@@ -29,6 +28,11 @@ Component({
 				}
 			}
 		},
+
+		isRegistered: {
+			type: Boolean,
+			value: false
+		},
 		
 		isQtrade: {
 			type: Boolean,
@@ -53,6 +57,7 @@ Component({
   
 	data: {
 		storeDetail: {
+			face_url: 'loading',
 			history_bond: "0",
         	onsale_bond: "0",
        	 	click_num: "0",
@@ -66,16 +71,55 @@ Component({
 	},
 
 	methods: {
-		getStoreDetail: function (userId) {
-			request(config.NEW_BOND.storeDetail, {user_id: userId}).then((result) => {
-				if (String(result.data.ret) === '0') {
-					let detail = result.data.retdata
-					this.setData({
-						storeDetail: detail
-					})
-					this.triggerEvent('event', detail)
-				}
+		updateStoreDetail: function(detail) {
+			this.setData({
+				storeDetail: detail,
 			})
+			this.triggerEvent('event', detail)
+		},
+
+		getStoreDetail: function (userId) {
+			if (this.data.isRegistered) { // 已开店
+				service.getStoreDetail(userId, (result) => {
+					this.updateStoreDetail(result.data.retdata)
+				})
+			} else { // 未开店
+				service.getCardInfo((result) => {
+					let detail = {
+						is_myself: '1',
+						is_qtrade: '2',
+						face_url: result.data.faceurl,
+						v_user: result.data.iscomfirmed,
+						share_num: '0',
+						click_num: '0',
+						onsale_bond: '0',
+						history_bond: '0',
+						user_id: '0',
+						url: this.data.navigatorUrl,
+						vUrl: this.data.vUrl,
+						sale_name: result.data.realname,
+						company_simple_name: result.data.company.simpleName
+					}
+					// result.data.iscomfirmed = 2 // for debug
+					if (result.data.iscomfirmed === '1') { //已认证
+						this.updateStoreDetail(detail)
+					} else {  // 未认证，获取微信昵称和头像
+						let that = this
+						wx.getUserInfo({  
+							success: function(res){  
+								let userInfo = res.userInfo
+								detail.sale_name = userInfo.nickName
+								detail.face_url = userInfo.avatarUrl
+								detail.company_simple_name = '机构：--'
+								that.updateStoreDetail(detail)
+							},
+							fail: function (res){
+								that.updateStoreDetail(detail)
+							}
+						})  
+					}
+				})
+			}
 		},
 
 		doClick () {

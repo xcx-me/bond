@@ -3,7 +3,6 @@ const config = require('../ajax/config')
 module.exports = {
 	doService: function(configure, data, sucFunc, errFunc) {
 		request(configure, data).then((result) => {
-			console.log(configure, result)
 			if (String(result.data.ret) === '0') {
 				sucFunc && sucFunc(result)
 			} else {
@@ -11,6 +10,7 @@ module.exports = {
 				errFunc && errFunc(result)
 			}
 		}).catch((error) => {
+			console.log('error')
 			errFunc && errFunc()
 		})
 	},
@@ -31,8 +31,32 @@ module.exports = {
 		this.doService(config.NEW_BOND.storeDetail, {user_id: uid}, sucFunc, errFunc)
 	},
 
+	getCardInfo: function(sucFunc, errFunc) {
+		this.doService(config.NEW_BOND.cardInfo, {}, sucFunc, errFunc)
+	},
+
+	isStoreOpened: function(sucFunc, errFunc) {
+		this.doService(config.NEW_BOND.isStoreOpened, {}, sucFunc, errFunc)
+	},
+
 	getBondList: function (data, sucFunc, errFunc) {
 		this.doService(config.NEW_BOND.newBondList, data, sucFunc, errFunc)
+	},
+
+	getStoreDynamic: function (sucFunc, errFunc) {
+		this.doService(config.NEW_BOND.news, {}, sucFunc, errFunc)
+	},
+
+	deleteStoreDynamic: function (bondSimpleName, sucFunc, errFunc) {
+		this.doService(config.NEW_BOND.deleteNews, {bond_simple_name: bondSimpleName}, sucFunc, errFunc)
+	},
+
+	doShareStore: function(userId, bondSimpleName, sucFunc, errFunc){
+		this.doService(config.USER_TRACKING.accumulateShare,{user_id: userId, bond_simple_name: bondSimpleName}, sucFunc, errFunc)
+	},
+
+	doOpenStore: function(sucFunc, errFunc) {
+		this.doService(config.NEW_BOND.openMyShop, {}, sucFunc, errFunc)
 	},
 
 	doAsk: function(bondSimpleName, content, userId, sucFunc, errFunc) {

@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
 	  "StoreBondList": "../bond-list/bond-list",
-	  "StoreDynamic": "../dynamic/dynamic"
+	  "StoreDynamic": "../dynamic/dynamic",
+	  "StoreRegister": "../register-store/register-store"
   }
 }

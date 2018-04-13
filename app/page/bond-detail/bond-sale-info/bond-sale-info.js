@@ -40,7 +40,7 @@ Component({
   },
 
   ready: function () {
-	console.log('ready....', this.data.bondSaleInfo, this.data.isMyStore)
+	// console.log('ready....', this.data.bondSaleInfo, this.data.isMyStore)
   },
 
   /**

@@ -106,6 +106,6 @@ Component({
 			this.toDetail(this.data.from, uid, bondId, this.data.bondSimpleName)
 		}
 		this.saleDialog.hideDialog()
-	}
+	},
   }
 })

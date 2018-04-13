@@ -1,6 +1,5 @@
 // app/ui/store/dynamic/dynamic.js
-const { request } = require('../../../util/ajax/ajax')
-const config = require('../../../util/ajax/config')
+const service = require('../../../util/service/service')
 let timeId = null
 
 Component({
@@ -9,6 +8,7 @@ Component({
 			type: Boolean,
 			value: false,
 			observer: function(newVal, oldVal) {
+				console.log('update dynamic')
 				this.getDynamicList()
 				if (newVal && !oldVal) {
 					this.setDynamicTimer()
@@ -19,32 +19,27 @@ Component({
 
   	data: {
 		dynamicList: [],
-		showLoading: true,
+		loading: true,
 		emptyData: true
   	},
 
   	ready: function () {
-		this.getDynamicList()
+		// console.log('ready dynamic....')
 	},
 
 	methods: {
 		getDynamicList: function () {
-			request(config.NEW_BOND.news, {}).then((result) => {
-				if (String(result.data.ret) === '0') {
-					let dataList = result.data.retdata.dynamic_tips
-					this.setData({
-						dynamicList: dataList,
-						showLoading: false,
-						emptyData: dataList.length === 0
-					})
-				} else {
-					this.setData({
-						showLoading: false
-					})
-				}
+			service.getStoreDynamic((result) => {
+				let dataList = result.data.retdata.dynamic_tips
+				this.setData({
+					dynamicList: dataList,
+					loading: false,
+					emptyData: dataList.length === 0
+				})
 			})
 		},
 
+	
 		setDynamicTimer: function () {
 			timeId = setInterval(() => {
 				let needUpdate= this.data.needUpdate
@@ -56,11 +51,23 @@ Component({
 			}, 60*1000)
 		},
 
-		clearDynamicTip: function (e) {
-			let bondSimpleName = e.currentTarget.dataset.name
-			request(config.NEW_BOND.deleteNews, {
-				bond_simple_name: bondSimpleName
-			}).then((result) => {})
+		clickDynamic: function (e) {
+			let index = e.currentTarget.dataset.index
+			let bondId = this.data.dynamicList[index].bond_id
+			let bondSimpleName = this.data.dynamicList[index].bond_simple_name
+			this.clearDynamicTip(bondSimpleName)
+			this.navigateToBondDetail(bondId)
+		},
+
+		clearDynamicTip: function (bondSimpleName) {
+			service.deleteStoreDynamic(bondSimpleName,()=>{}, ()=>{})
+		},
+
+		navigateToBondDetail(bondId) {
+			let url=`/app/page/bond-detail/bond-detail?bid=${bondId}&uid=0`
+			wx.navigateTo({
+				url: url
+			})
 		}
 	}
 })

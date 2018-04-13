@@ -1,0 +1,14 @@
+<!--app/page/store/register-store/register-store.wxml-->
+<view class='register-store-component'>
+	<view class="bg">
+		<image src='../../../asset/image/qtrade/register-store.svg' />
+	</view>
+	<view class='tips'>
+		<text>欢迎来QTrade上开通店铺，并发布报价</text>
+	</view>
+	<button class='shop-button' hover-class='button-hover' type='primary' bindtap="doOpenStore">立马开店</button>
+	<view class='protocol'>
+		<text>点击立马开店表示同意</text>
+		<navigator class='to-qtrade-protocol' url='/app/page/protocol/protocol' hover-class="navigator-hover">《QTrade服务协议》</navigator>
+	</view>
+</view>

@@ -1,23 +1,62 @@
 .blank-signal-tpl {
+  background: #EFEFF4;
+  margin-top: 140rpx;
   text-align: center;
 }
+.blank-signal-tpl .blank-signal-tpl-line:before {
+  content: '';
+  display: block;
+  height: 1rpx;
+  width: 80%;
+  background-color: #D8D8D8;
+  /*颜色需与主题大背景色一致*/
+  position: relative;
+  top: 25rpx;
+  /*调节线高*/
+  left: 10%;
+}
 .blank-signal-tpl .prompt {
-  font-size: x-small;
+  display: inline-block;
+  background: #EFEFF4;
+  padding: 0 30rpx;
+  position: relative;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  color: #888888;
 }
 .store-dynamic-component .dynamic-item {
-  padding: 10rpx 0 0;
+  position: relative;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #FFFFFF;
+  margin-top: 20rpx;
+  padding: 0 30rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular;
+  color: #353535;
 }
-.store-dynamic-component .overflow-ellipsis {
-  width: 100%;
+.store-dynamic-component .dynamic-item .item-content text {
+  float: left;
+}
+.store-dynamic-component .dynamic-item .item-content text.bond-simple-name {
+  margin-right: 6px;
+  color: #2196F3;
+  cursor: pointer;
+}
+.store-dynamic-component .dynamic-item .item-content .overflow-ellipsis {
+  max-width: calc(100% - 260rpx);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.store-dynamic-component .dynamic-item text {
-  float: left;
-}
-.store-dynamic-component navigator text {
-  margin-right: 6px;
-  color: #2196F3;
-  cursor: pointer;
+.store-dynamic-component .dynamic-item .icon-right-arrow {
+  display: inline-block;
+  width: 16rpx;
+  height: 16rpx;
+  border-top: 4rpx solid #C7C7CC;
+  border-right: 4rpx solid #C7C7CC;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 35rpx;
+  right: 30rpx;
 }

@@ -2,28 +2,45 @@
 
 .store-dynamic-component {
 	.dynamic-item {
-		padding: 10rpx 0 0;
-	}
+		position: relative;
+		height: 88rpx;
+		line-height: 88rpx;
+		background: #FFFFFF;
+		margin-top: 20rpx;
+		padding: 0 30rpx;
+		font-size: 32rpx;
+		font-family:PingFangSC-Regular;
+		color:rgba(53,53,53,1);
 
-	.overflow-ellipsis {
-		width: 100%;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-	
-	.dynamic-item {
-		text {
-			float: left;
+		.item-content {
+			text {
+				float: left;
+
+				&.bond-simple-name {
+					margin-right: 6px;
+					color: #2196F3;
+					cursor: pointer;
+				}
+			}
+
+			.overflow-ellipsis {
+				max-width: calc(~'100% - 260rpx');
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
 		}
-	
-	}
-	
-	navigator {
-		text {
-			margin-right: 6px;
-			color: #2196F3;
-			cursor: pointer;
+
+		.icon-right-arrow{
+			display:inline-block;
+			width: 16rpx;
+			height: 16rpx;
+			border-top: 4rpx solid #C7C7CC;
+			border-right: 4rpx solid #C7C7CC;
+			transform: rotate(45deg);
+			position:absolute;
+			top:35rpx;
+			right:30rpx;
 		}
 	}
 }

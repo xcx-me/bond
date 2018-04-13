@@ -5,20 +5,14 @@
 		navigatorUrl=''
 		vUrl='{{vUrl}}'
 		userId='{{uid}}'
+		isRegistered='{{true}}'
 		isQtrade='{{isQtrade}}'
 		isHiddenSeller='{{isMyStore}}'
 		needUpdate='{{needUpdate}}'
 		bindevent='onUpdateStoreDetail'/> 
 	</view>
-	<loading wx:if="{{showLoading}}">加载中</loading>
-	<view class='store-bond-list' hidden='{{showLoading}}'>
-		<BondList
-			from='store'
-			isMine='{{isMyStore}}'
-			bondList='{{bondList}}'
-			uid='{{uid}}'
-			userId='{{userId}}'
-			bind:deleteBondEvent='_deleteBondEvent'/>
+	<view class='store-bond-list'>
+		<StoreBondList uid='{{uid}}' userId='{{userId}}' isMyStore='{{false}}' isQtrade='{{isQtrade}}'/>
 	</view>
-	<ShareButton hidden='{{showLoading}}'/>
+	<ShareButton wx:if='{{userId !== "0"}}'/>
 </view>

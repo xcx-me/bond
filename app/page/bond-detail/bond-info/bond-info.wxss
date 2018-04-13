@@ -17,8 +17,27 @@
   border: 1px solid #2196F3;
   color: #2196F3;
 }
-.bond-info-component .infoItem {
+.bond-info-component .info-item {
   background: #FFFFFF;
+  margin-top: 20rpx;
   margin-bottom: 20rpx;
   padding: 10rpx 20rpx;
+}
+.bond-info-component .bond-item {
+  height: 70rpx;
+  line-height: 70rpx;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom: 1rpx solid #E5E5E5;
+}
+.bond-info-component .bond-item .label {
+  color: #888888;
+  width: 140rpx;
+  float: left;
+}
+.bond-info-component .bond-item .value {
+  float: left;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  color: #000000;
 }

@@ -32,7 +32,7 @@
   right: -3rpx;
   width: 26rpx;
   height: 26rpx;
-  background: red;
+  background: #E64340;
   border-radius: 100%;
 }
 .seller-info-tpl .under-line {
@@ -48,12 +48,17 @@
   position: relative;
   width: 100%;
   margin-bottom: 10rpx;
+  padding: 22rpx 0;
+  border-bottom: 1px solid #E5E5E5;
 }
 .bond-sale-info .header .title {
-  height: 42rpx;
-  line-height: 42rpx;
+  height: 45rpx;
+  line-height: 45rpx;
   position: relative;
   left: 8rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular;
+  color: #000000;
 }
 .bond-sale-info .header .btn-edit {
   position: absolute;
@@ -88,4 +93,24 @@
 }
 .bond-sale-info .sale-list {
   overflow: auto;
+  font-size: 28rpx;
+}
+.bond-sale-info .sale-list .label {
+  color: #888888;
+  width: 140rpx;
+  float: left;
+}
+.bond-sale-info .sale-list .value {
+  float: left;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  color: #000000;
+}
+.bond-sale-info .sale-list .bond-info-item-tpl.little_range,
+.bond-sale-info .sale-list .bond-info-item-tpl.early_end {
+  height: 70rpx;
+  line-height: 70rpx;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom: 1rpx solid #E5E5E5;
 }

@@ -26,6 +26,16 @@ module.exports = {
 	OTHER_SERVICE: {
 		
 	},
+	USER_TRACKING: {
+		recordUserOperation: {
+			url: '/qtrade_bond/api/operation/recorduseroperation.do',
+			method: POST
+		},
+		accumulateShare: {
+			url: '/qtrade_bond/api/newbond/accumulate_share.do',
+			method: POST
+		}
+	},
 	NEW_BOND: { // 新债
 		cardInfo: {
 			url: '/appletree/cardinfo.do',

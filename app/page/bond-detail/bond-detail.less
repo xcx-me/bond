@@ -2,19 +2,22 @@
 	font-size: small;
 
 	.tab-bar {
-		overflow: hidden;
-		view {
-			float: left;
+		width:100%;
+		border-bottom:2rpx solid #D8D8D8;
+		text-align:center;
+		line-height:80rpx;
+		background-color:#FFFFFF;
+
+		.tab-bar-item {
 			font-size:30rpx;
-			width: 33.3%;
-			height: 80rpx;
-			line-height: 80rpx;
-			text-align: center;
-			
-			&.active {
-				background: #FFFFFF;
-				border-top-left-radius: 10rpx;
-				border-top-right-radius: 10rpx;
+			display:inline-block;
+			width:16.33%;
+			padding:0 8%;
+			color:#000000;
+
+			.active {
+				color: #2196F3;
+				border-bottom: 5rpx solid #2196F3;
 			}
 		}
 

@@ -4,6 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
+	isRegistered: {
+		type: Boolean,
+		value: false
+	},
 	uid:  {
 		type: String,
 		value: ''
@@ -15,6 +19,10 @@ Component({
 	isQtrade: {
 		type: Boolean,
 		value: false	
+	},
+	needUpdate: {
+		type: Boolean,
+		value: false
 	}
   },
 
@@ -25,19 +33,19 @@ Component({
 	tabIdList:['bond-list', 'dynamic'],
 	currentTabId: 'bond-list',
 	winHeight: '',
+	needUpdateDyNamic: false,
   },
 
   ready: function () {
-	  let that = this
-	wx.getSystemInfo({
-		success: function(res) {
-			let height = res.windowHeight - (res.windowWidth / 750 * 160)
-			console.log('height...', height)
-			that.setData({
-				winHeight: height
-			})
-		}
-	})
+		let that = this
+		wx.getSystemInfo({
+			success: function(res) {
+				let height = res.windowHeight - (res.windowWidth / 750 * 160)
+				that.setData({
+					winHeight: height
+				})
+			}
+		})
   },
 
   /**
@@ -50,7 +58,8 @@ Component({
 	bindChangeTab: function (e) {
 		let currentTabId = e.detail.currentItemId
 		this.setData({
-			currentTabId: currentTabId
+			currentTabId: currentTabId,
+			needUpdateDyNamic: currentTabId === 'dynamic'
 		})
 	},
 
@@ -67,5 +76,17 @@ Component({
 			})
 		}
 	},
+
+	bindDownLoad: function(e) {
+		console.log('bindDownLoad.....')
+	},
+
+	topLoad: function(e) {
+		console.log('topLoad.....')
+	},
+
+	scroll: function(e) {
+		console.log('scroll...')
+	}
   }
 })

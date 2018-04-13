@@ -1,4 +1,6 @@
 <!--app/ui/share-button/share-button.wxml-->
 <view class='share-button-component'>
-	<button class='btn-share' id='shareBtn' open-type='share' type='primary' hover-class='other-button-hover'>分享</button>
+	<button class='btn-share' id='shareBtn' open-type='share' type='primary' hover-class='other-button-hover'>
+		<image src='../../asset/image/qtrade/btn-share.svg' />
+	</button>
 </view>
