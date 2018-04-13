@@ -2,6 +2,7 @@
 var dateTimePicker = require('../../util/date-time-picker/date-time-picker')
 
 const selectConfig = require('./select-config/select-config')
+const converson = require('../../util/converson/converson')
 
 Component({
 	properties: {
@@ -42,17 +43,20 @@ Component({
 		dateTimeArray: dateTimePicker.dateTimePicker(2000, 2050).dateTimeArray,
 		dateTime: dateTimePicker.dateTimePicker(2000, 2050).dateTime,
 
-		// 上市地点 多选框
+		// 上市地点 多选
+		listingOpenFlag: false,
 		listingSpotItems: selectConfig.listingSpot.items, 
-		listingSpotValue: '',
+		// listingSelectFlag: converson.parseToObject(converson.saveValueOfArray(selectConfig.listingSpot.items)),
+		listingSelectFlag: converson.parseToObject([]),
 
 		// 企业性质
 		enterpriseNature: selectConfig.enterpriseNature.items, 
 		enterpriseIndex: -1,
 
 		// 债券品种
-		bondType: selectConfig.bondType.items,
-		bondTypeValue: '',
+		bondTypeOpenFlag: false,
+		bondTypeItems: selectConfig.bondType.items,
+		bondTypeSelectFlag: converson.parseToObject([]),
 
 		// 发行方式
 		issuanceMethodItem: selectConfig.issuanceMethod.items,
@@ -64,8 +68,9 @@ Component({
 		rateReply: false,
 
 		// 特殊条款
+		specificOpenFlag: false,
 		specificItems: selectConfig.specificClause.items,
-		specificitemsValue: ''
+		specificSelectFlag: converson.parseToObject([]),
 	},
 
 	methods: {
@@ -102,14 +107,23 @@ Component({
 		},
 
 		// 上市地点
-		changeListingspot: function (e) {
-			let formData = this.data.formData
-			formData[e.currentTarget.dataset.listingSpot] = this.saveCheckedValue(e.detail.value, this.data.listingSpotItems).checkedParams.join('|')
+		handleListingSelect: function () {
 			this.setData({
-				listingSpotValue: this.saveCheckedValue(e.detail.value, this.data.listingSpotItems).checkedItem.join('、'),
+				listingOpenFlag: !this.data.listingOpenFlag
+			})
+		},
+		inverseChange: function (e) {
+			let formData = this.data.formData
+			let falg = this.data.listingSelectFlag
+			falg[e.currentTarget.dataset.name] = !falg[e.currentTarget.dataset.name]
+
+			formData[e.currentTarget.dataset.listingSpot] = converson.parseToArray(falg).join('|')
+			this.setData({
+				listingSelectFlag: falg,
 				formData: formData
 			})
-			this.triggerEvent('changeValueEvent', formData)
+			// console.log(this.data.listingSelectFlag)
+			// console.log(this.data.formData)
 		},
 
 		// 企业性质
@@ -124,15 +138,23 @@ Component({
 		},
 
 		// 债券品种
-		changeBondType: function (e) {
-			let formData = this.data.formData
-			formData[e.currentTarget.dataset.bondType] = this.saveCheckedValue(e.detail.value, this.data.bondType).checkedParams.join('|')
+		handleOpenBondType: function () {
 			this.setData({
-				bondTypeValue: this.saveCheckedValue(e.detail.value, this.data.bondType).checkedItem.join('、'),
+				bondTypeOpenFlag: !this.data.bondTypeOpenFlag
+			})
+		},
+		bondTypeChange: function (e) {
+			let formData = this.data.formData
+			let falg = this.data.bondTypeSelectFlag
+			falg[e.currentTarget.dataset.name] = !falg[e.currentTarget.dataset.name]
+
+			formData[e.currentTarget.dataset.bondType] = converson.parseToArray(falg).join('|')
+			this.setData({
+				bondTypeSelectFlag: falg,
 				formData: formData
 			})
-			this.triggerEvent('changeValueEvent', formData)
 		},
+
 
 		// 发行方式
 		changeIssuancemethod: function (e) {
@@ -168,15 +190,32 @@ Component({
 		},
 
 		// 特殊条款
-		changeSpecificItems: function (e) {
-			let formData = this.data.formData
-			formData[e.currentTarget.dataset.specificItems] = this.saveCheckedValue(e.detail.value, this.data.specificItems).checkedParams.join('|')
+		handleOpenSpecific: function () {
 			this.setData({
-				specificitemsValue: this.saveCheckedValue(e.detail.value, this.data.specificItems).checkedItem.join('、'),
+				specificOpenFlag: !this.data.specificOpenFlag
+			})
+		},
+		specificChange: function (e) {
+			let formData = this.data.formData
+			let falg = this.data.specificSelectFlag
+			falg[e.currentTarget.dataset.name] = !falg[e.currentTarget.dataset.name]
+
+			formData[e.currentTarget.dataset.specificItems] = converson.parseToArray(falg).join('|')
+			this.setData({
+				specificSelectFlag: falg,
 				formData: formData
 			})
-			this.triggerEvent('changeValueEvent', formData)
 		},
+
+		// changeSpecificItems: function (e) {
+		// 	let formData = this.data.formData
+		// 	formData[e.currentTarget.dataset.specificItems] = this.saveCheckedValue(e.detail.value, this.data.specificItems).checkedParams.join('|')
+		// 	this.setData({
+		// 		specificitemsValue: this.saveCheckedValue(e.detail.value, this.data.specificItems).checkedItem.join('、'),
+		// 		formData: formData
+		// 	})
+		// 	this.triggerEvent('changeValueEvent', formData)
+		// },
 
 		saveCheckedValue: function (targetValue, dataArray) {
 			let checkedItem = []

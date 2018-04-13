@@ -2,7 +2,6 @@ module.exports = {
 	listingSpot: {
 		label: '上市地点：',
 		items: [
-			// {name: '102', value: 'XXXX', checked: 'true'},
 			{name: '1', value: '银行间'},
 			{name: '2', value: '上交所'},
 			{name: '3', value: '深交所'},
@@ -24,7 +23,7 @@ module.exports = {
 		label: '债券品种：',
 		items: [
 			{name: '101', value: 'NCD'},
-			// {name: '102', value: '政金债', checked: 'true'},
+			{name: '102', value: '政金债'},
 			{name: '103', value: '商行债'},
 			{name: '104', value: '次级债'},
 			{name: '105', value: '其他金融债'},

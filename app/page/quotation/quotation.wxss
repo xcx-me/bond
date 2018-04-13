@@ -1,12 +1,20 @@
 
 .send-quote-page {
-	padding: 20rpx 20rpx;
+	/* padding: 20rpx 20rpx; */
 	background-color:#F1F1F1;
 }
 
 .quotation-form, .quotaion-open-shop {
 	height: 100%;
 	background-color: #FFFFFF;
+}
+
+.quotation-form .submit-quotation-btn {
+	width: 80%;
+	margin: 48rpx 0 60rpx;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #2196F3;
 }
 
 .quotaion-open-shop .open-text {
