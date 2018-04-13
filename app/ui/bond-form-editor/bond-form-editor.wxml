@@ -1,76 +1,91 @@
 
 <view class='bond-form-editor' >
 	<view class='form-editor-top'>加<span class='star-span'>*</span>的选项为必填项</view>
+
 	<!-- 债券简称 -->
 	<view class='bond-simple-name row-item'>
-		<view class='label-area'><span class='star-span'>*</span>债券简称:</view>
+		<view class='label-area'><span class='star-span'>*</span>债券简称</view>
 		<view class='editor-area'>
 			<input class='' type='text' bindinput='simpleNameChange' data-input-name='bond_simple_name' value='{{formData.bond_simple_name}}'
-				disabled='{{editorFlag}}' style='background-color: {{editorFlag ? "#DDDDDD" : ""}}; color: {{editorFlag ? "#999999" : "" }}'
+				disabled='{{editorFlag}}' style='{{editorFlag ? "background-color: #DDDDDD; color: #999999" : ""}}' maxlength='15'
 			/>
 		</view>
 	</view>
 
 	<!-- 参考收益 -->
 	<view class='reference-income row-item'>
-		<view class='label-area'>参考收益：</view>
+		<view class='label-area'><span class='star-span'>*</span>参考收益</view>
 		<view class='editor-area'>
-			<input type='text' bindinput='changeValue' data-input-name='left_benefit' value='{{formData.left_benefit}}' />
-			<input type='text' bindinput='changeValue' data-input-name='right_benefit' value='{{formData.right_benefit}}' />
+			<input type='text' bindinput='changeValue' data-input-name='left_benefit' value='{{formData.left_benefit}}' placeholder='%' placeholder-class='color-gray'/>
+			<span class='spacing-line'> - </span>
+			<input type='text' bindinput='changeValue' data-input-name='right_benefit' value='{{formData.right_benefit}}' placeholder='%' placeholder-class='color-gray'/>
 		</view>
 	</view>
 
 	<!-- 主/债评级 -->
 	<view class='bond-rate row-item'>
-		<view class='label-area'>主/债评级：</view>
+		<view class='label-area'><span class='star-span'>*</span>主体评级</view>
 		<view class='editor-area'>
-			<input type='text' bindinput='changeValue' data-input-name='subject_rating' value='{{formData.subject_rating}}' />
-			<input type='text' bindinput='changeValue' data-input-name='facility_rating' value='{{formData.facility_rating}}' />
+			<input type='text' bindinput='changeValue' data-input-name='subject_rating' value='{{formData.subject_rating}}' placeholder='AAA+/AA+' placeholder-class='color-gray'/>
+		</view>
+	</view>
+	<view class='bond-rate row-item'>
+		<view class='label-area'><span class='star-span'>*</span>债项评级</view>
+		<view class='editor-area'>
+			<input type='text' bindinput='changeValue' data-input-name='facility_rating' value='{{formData.facility_rating}}' placeholder='AAA+/AA+' placeholder-class='color-gray'/>
 		</view>
 	</view>
 
 	<!-- 发行期限 -->
 	<view class='reference-income row-item'>
-		<view class='label-area'>发行期限：</view>
+		<view class='label-area'><span class='star-span'>*</span>发行期限</view>
 		<view class='editor-area'>
-			<input type='text' bindinput='changeValue' data-input-name='deadline' value='{{formData.deadline}}' />
+			<input type='text' bindinput='changeValue' data-input-name='deadline' value='{{formData.deadline}}'
+				placeholder='例如：2Y/2Y+3Y/3Y+N' placeholder-class='color-gray' maxlength='15'/>
 		</view>
 	</view>
 
 	<!-- 发行量 -->
 	<view class='bond-circulation row-item'>
-		<view class='label-area'>发行量：</view>
+		<view class='label-area'><span class='star-span'>*</span>发行量(亿)</view>
 		<view class='editor-area'>
-			<input class='' type='text' bindinput='changeValue' data-input-name='issue_total' value='{{formData.issue_total}}' />
+			<input class='' type='text' bindinput='changeValue' data-input-name='issue_total' value='{{formData.issue_total}}' maxlength='15'/>
 		</view>
 	</view>
-
+	
 	<!-- 上市地点 -->
 	<view class='listing-spot row-item'>
-		<view class='label-area'>上市地点：</view>
-		<view class='editor-area'>
-			<checkbox-group class='checkbox-list' bindchange="changeListingspot" data-listing-spot='public_place'>
-				<view class="checkbox" wx:for="{{listingSpotItems}}" wx:key="key">
-					<checkbox wx:key="" value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-				</view>
-			</checkbox-group>
-			<view>{{listingSpotValue}}</view>
+		<view class='checkbox-flag-area'>
+			<view class='label-area'>上市地点</view>
+			<view class='editor-area' bindtap='handleListingSelect'>
+				<span>{{listingOpenFlag ? '开' : '关'}}</span>
+			</view>
+		</view>
+		<view class='{{listingOpenFlag ? "checkbox-item-area" : "checkbox-item-area-hide"}}'>
+			<view class='checkbox-item {{listingSelectFlag[item.name] ? "selected" : ""}}' wx:for="{{listingSpotItems}}" wx:key="key"
+				data-name='{{item.name}}' data-listing-spot='public_place' bindtap='inverseChange'>
+				<text>{{item.value}}</text>
+				<span class='{{listingSelectFlag[item.name] ? "delete-icon" : ""}}'></span>
+			</view>
 		</view>
 	</view>
 
 	<!-- 发行时间 -->
 	<view class='release-time row-item'>
-		<view class='label-area'>发行时间：</view>
-		<picker mode="date" value="{{formData.issue_time}}" start='2000-01-01' end='' bindchange='changeValue' data-input-name='issue_time'>
-			<view class='time-select-picker'>
-				当前选择: {{formData.issue_time}}
-			</view>
-		</picker>
+		<view class='label-area'>发行时间</view>
+		<view class='editor-area'>
+			<input value='{{formData.issue_time}}' maxlength='15'/>
+			<picker class='time-picker-area' mode="date" value="{{formData.issue_time}}" start='2000-01-01' end='' bindchange='changeValue' data-input-name='issue_time'>
+				<view class='time-select-picker'>
+					<span class='calendar-icon'></span>
+				</view>
+			</picker>
+		</view>
 	</view>
 
 	<!-- 截标时间 -->
 	<view class='closing-time row-item'>
-		<view class='label-area'>截标时间：</view>
+		<view class='label-area'>截标时间</view>
 		<picker mode="multiSelector" value="{{dateTime}}" bindchange='changeDateTime' range="{{dateTimeArray}}" data-input-name='bid_end'>
 			<view class='time-select-picker'>
 				当前选择: {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
@@ -80,123 +95,138 @@
 
 	<!-- 企业性质 -->
 	<view class='enterprise-nature row-item'>
-		<view class='label-area'>企业性质：</view>
+		<view class='label-area'>企业性质</view>
 		<view class='editor-area'>
 			<picker class='dropdown-btn' bindchange="changeEnterpriseNature" value="{{enterpriseIndex1}}" range="{{enterpriseNature}}" data-enterprise-nature='company_type'>
-				<view class='select-button'>
+				<span class='triangle-down down-icon'>
 					<text>{{enterpriseNature[enterpriseIndex]}}</text>
-				</view>
+				</span>
 			</picker>
 		</view>
 	</view>
 
 	<!-- 债券品种 -->
 	<view class='bond-type row-item'>
-		<view class='label-area'>债券品种：</view>
-		<view class='editor-area'>
-			<checkbox-group bindchange="changeBondType" data-bond-type='bond_type'>
-				<view class='checkbox' wx:for="{{bondType}}" wx:key="key">
-					<checkbox wx:key='' value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-				</view>
-			</checkbox-group>
+		<view class='checkbox-flag-area'>
+			<view class='label-area'>债券品种</view>
+			<view class='editor-area' bindtap='handleOpenBondType'>
+				<span>{{bondTypeOpenFlag ? '开' : '关'}}</span>
+				<!-- <checkbox-group bindchange="changeBondType" data-bond-type='bond_type'>
+					<view class='checkbox' wx:for="{{bondType}}" wx:key="key">
+						<checkbox wx:key='' value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+					</view>
+				</checkbox-group> -->
+			</view>
 		</view>
-		<text class='bond-type'>{{bondTypeValue}}</text>
+		<view class='{{bondTypeOpenFlag ? "checkbox-item-area" : "checkbox-item-area-hide"}}'>
+			<view class='checkbox-item {{bondTypeSelectFlag[item.name] ? "selected" : ""}}' wx:for="{{bondTypeItems}}" wx:key="key"
+				data-name='{{item.name}}' data-bond-type='bond_type' bindtap='bondTypeChange'>
+				<text>{{item.value}}</text>
+				<span class='{{bondTypeSelectFlag[item.name] ? "delete-icon" : ""}}'></span>
+			</view>
+		</view>
 	</view>
 
 	<!-- 发行方式 -->
 	<view class='issuance-method row-item'>
-		<view class='label-area'>发行方式：</view>
+		<view class='label-area'>发行方式</view>
 		<view class='editor-area'>
 			<picker class='dropdown-btn' bindchange="changeIssuancemethod" value="{{issuanceMethodIndex1}}" range="{{issuanceMethodItem}}" data-issuance-method='issue_way'>
-				<view class='select-button'>
+				<span class='triangle-down down-icon'>
 					<text>{{issuanceMethodItem[issuanceMethodIndex]}}</text>
-				</view>
+				</span>
 			</picker>
 		</view>
 	</view>
 
 	<!-- 利率方式 -->
 	<view class='rate-method row-item'>
-		<view class='label-area'>利率方式：</view>
+		<view class='label-area'>利率方式</view>
 		<view class='editor-area'>
-			<picker class='dropdown-btn' bindchange="handleDropdownRateWay" value="{{rateWayIndex1}}" range="{{rateWayArray}}" data-rate-method='rate_way'>
-				<view class='select-button'>
+			<picker class='dropdown-btn rate-method-picker' bindchange="handleDropdownRateWay" value="{{rateWayIndex1}}" range="{{rateWayArray}}" data-rate-method='rate_way'>
+				<span class='triangle-down down-icon'>
 					<text>{{rateWayArray[rateWayIndex]}}</text>
-				</view>
+				</span>
 			</picker>
 			<view class="section {{rateReply ? 'on' : 'off'}}">
-				<input type='text' bindinput='changeValue' data-input-name='benchmark' />
+				<view class='benchmark-label'>基准</view>
+				<view class='benchmark-input'>
+					<input type='text' disabled='{{!rateReply}}' bindinput='changeValue' data-input-name='benchmark'
+						placeholder='请输入基准' placeholder-class='color-gray' maxlength='15'/>
+				</view>
 			</view>
 		</view>
 	</view>
 
 	<!-- 计息频率 -->
 	<view class='cal-freq row-item'>
-		<view class='label-area'>计息频率：</view>
+		<view class='label-area'>计息频率</view>
 		<view class='editor-area'>
-			<input class='' type='text' bindinput='changeValue' data-input-name='cal_freq' value='{{formData.cal_freq}}' />
+			<input class='' type='text' bindinput='changeValue' data-input-name='cal_freq' value='{{formData.cal_freq}}' maxlength='15'/>
 		</view>
 	</view>
 	
 	<!-- 付息频率 -->
 	<view class='pay-freq row-item'>
-		<view class='label-area'>付息频率：</view>
+		<view class='label-area'>付息频率</view>
 		<view class='editor-area'>
-			<input class='' type='text' bindinput='changeValue' data-input-name='pay_freq' value='{{formData.pay_freq}}' />
+			<input class='' type='text' bindinput='changeValue' data-input-name='pay_freq' value='{{formData.pay_freq}}' maxlength='15'/>
 		</view>
 	</view>
 
 	<!-- 还本方式 -->
 	<view class='repay-way row-item'>
-		<view class='label-area'>还本方式：</view>
+		<view class='label-area'>还本方式</view>
 		<view class='editor-area'>
-			<input class='' type='text' bindinput='changeValue' data-input-name='repay_way' value='{{formData.repay_way}}' />
+			<input type='text' bindinput='changeValue' data-input-name='repay_way' value='{{formData.repay_way}}' maxlength='15'/>
 		</view>
 	</view>
 
 	<!-- 特殊条款 -->
 	<view class='specific-items row-item'>
-		<view class='label-area'>特殊条款：</view>
-		<view class='editor-area'>
-			<checkbox-group bindchange="changeSpecificItems" data-specific-items='specific_items'>
-				<view class='checkbox' wx:for="{{specificItems}}" wx:key="key">
-					<checkbox wx:key='' value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-				</view>
-			</checkbox-group>
+		<view class='checkbox-flag-area'>
+			<view class='label-area'>特殊条款</view>
+			<view class='editor-area' bindtap='handleOpenSpecific'>
+				<span>{{specificOpenFlag ? '开' : '关'}}</span>
+			</view>
 		</view>
-		<text class=''>{{specificitemsValue}}</text>
+		<view class='{{specificOpenFlag ? "checkbox-item-area" : "checkbox-item-area-hide"}}'>
+			<view class='checkbox-item {{specificSelectFlag[item.name] ? "selected" : ""}}' wx:for="{{specificItems}}" wx:key="key"
+				data-name='{{item.name}}' data-specific-items='specific_items' bindtap='specificChange'>
+				<text>{{item.value}}</text>
+				<span class='{{specificSelectFlag[item.name] ? "delete-icon" : ""}}'></span>
+			</view>
+		</view>
 	</view>
 
 	<!-- 增信担保 -->
 	<view class='credit-guarantee row-item'>
-		<view class='label-area'>增信担保：</view>
+		<view class='label-area'>增信担保</view>
 		<view class='editor-area'>
-			<input class='' type='text' bindinput='changeValue' data-input-name='credit_guarantee' value='{{formData.credit_guarantee}}' />
+			<input type='text' bindinput='changeValue' data-input-name='credit_guarantee' value='{{formData.credit_guarantee}}' maxlength='50'/>
 		</view>
 	</view>
 
 	<!-- 主承 -->
 	<view class='zhu-cheng row-item'>
-		<view class='label-area'>主承：</view>
+		<view class='label-area'>主承</view>
 		<view class='editor-area'>
-			<input class='' type='text' bindinput='changeValue' data-input-name='zhu_cheng' value='{{formData.zhu_cheng}}' />
+			<input type='text' bindinput='changeValue' data-input-name='zhu_cheng' value='{{formData.zhu_cheng}}' maxlength='50'/>
 		</view>
 	</view>
 
 	<!-- 债券全称 -->
 	<view class='bond-fullname row-item'>
-		<view class='label-area'>还本方式：</view>
+		<view class='label-area'>债券全称</view>
 		<view class='editor-area'>
-			<input class='' type='text' bindinput='changeValue' data-input-name='bond_full_name' value='{{formData.bond_full_name}}' />
+			<input type='text' bindinput='changeValue' data-input-name='bond_full_name' value='{{formData.bond_full_name}}' maxlength='50'/>
 		</view>
 	</view>
 
 	<!-- 上传附件 -->
 	<view class='upload-fiel'>
-		<span class='iconfont icon-mobile' ></span>
-		<!-- <span class='iconfont icon-share-it'></span> -->
-		<span class=' test-icon'></span>
-		<span class='iconfont icon-share-it' ></span>
+		<!-- <icon type='warn' size='28'/> -->
+		<text>请在电脑端完成上传附件操作</text>
 	</view>
 
 	<!-- <view class='mask_layer' bindtap='modal_click_Hidden' />  
