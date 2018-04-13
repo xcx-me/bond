@@ -3,104 +3,142 @@
 
 	.wrapper {
 		width: 100%;
-		line-height: 60rpx;
 		background: #FFFFFF;
 		overflow: hidden;
+		padding: 10rpx 0;
 	}
 
 	.filter-item {
 		float: left;
-		width: 33.33%;
+		width: calc(~'33.33% - 36rpx');
+		padding: 0 12rpx;
 		font-size: 30rpx;
 		text-align: center;
-
-		&.label {
-			width: 100rpx;
-			color: #999999;
+		color: #888888;
+	
+		.filter-item-pallet {
+			position: relative;
+			z-index: 2;
+			padding: 16rpx 0;
+			background:rgba(247,247,247,1);
+			border-radius: 8rpx ; 
 		}
 
 		.icon-down-arrow {
-			&::before {
-				content:"";  
-				border: 17rpx solid #999;  
-				border-bottom:none;  
-				border-right-color:transparent;  
-				border-left-color:transparent;  
-				position:relative;  
-				top: 32rpx;  
-				left: 16rpx;  
-				border-radius: 12rpx;  
-			}
+			position: relative;
+			top: 26rpx;
+			left: 6rpx;
+			height: 0;
+    		width: 0;
+    		border-right: 10rpx solid transparent;
+    		border-top: 10rpx solid #BCBEC1;
+    		border-left: 10rpx solid transparent;
+		}
 
-			&::after {
-				content:"";  
-				border: 16rpx solid #fff;  
-				border-bottom:none;  
-				border-right-color:transparent;  
-				border-left-color:transparent;  
-				position:relative;  
-				top: 30rpx;  
-				left: -16rpx;  
-			}
+		.icon-up-arrow {
+			position: relative;
+			top: -26rpx;
+			left: 6rpx;
+			height: 0;
+			width: 0;
+			border-right: 10rpx solid transparent;
+			border-bottom: 10rpx solid #2196F3;
+			border-left: 10rpx solid transparent;
 		}
 
 		.filter-pallet {
-			position:absolute;
 			width: 100%;
-			z-index: 99;
+			position: fixed;
+			left: 0;
+			top: 90rpx;
+			z-index: 1;
+			padding: 0;
 			background: #FFFFFF;
-			border: 1rpx solid #EEEEEE;
+			border: 1rpx solid #D8D8D8;
 			border-radius: 2rpx;
 			box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.175);
-
+			text-align: left;
+			
 			.filter-pallet-checkbox {
-				display: flex;
+				padding-left: 30rpx;
+				max-height: 599rpx;
 
 				checkbox-group {
-					.checkbox {
+					.checkbox-wrapper {
 						float: left;
-						width: 50%;
+						width: calc(~'50% - 52rpx');
+						height: 99rpx;
+						border-bottom: 1rpx solid #E5E5E5;
+
+						.checkbox {
+							height: 50rpx;
+							position: relative;
+							top: 25rpx;
+
+							checkbox {
+								margin-right: 12rpx;
+							}
+						}
+
+						&.odd {
+							.checkbox {
+								border-right: 1rpx solid #E5E5E5;
+							}
+						}
+
+						&.even {
+							padding-left: 30rpx;
+						}
+
+						&:hover {
+							background: #F5F5F5;
+						}
 					}
+				}
+
+				.split-line {
+					float: left;
+					background-color:#E5E5E5;
+					width:1rpx;
+					height:49rpx;
+					padding:0;
 				}
 			}
 
 			.filter-pallet-btn {
 				display: flex;
+				border-top: 1px solid #E5E5E5;
 
-				.btn-reset {
-					background-color: #FFFFFF;
-					color: #2196F3;
-				}
+				.btn {
+					width: 50%;
+					text-align: center;
+					padding: 30rpx 0;
 
-				.btn-confirm {
-					background-color: #2196F3;
-					color: #FFFFFF;
-				}
-			}
-		}
-
-		&.bond_type {
-			.filter-pallet {
-				left: 0;
-
-				checkbox-group {
-					.checkbox {
-						&:last-child {
-							width: 100%;
-						}
+					&.btn-reset {
+						background: #FFFFFF;
+						color: #2196F3;
 					}
-				}	
+
+					&.btn-confirm {
+						background: #2196F3;
+						color: #FFFFFF;
+					}
+				}
 			}
 		}
 
+		&.bond-type,
 		&.deadline {
-			.filter-pallet {
-				left: 0;
+			checkbox-group {
+				.checkbox-wrapper {
+					&:last-child {
+						width: 100%;
+						border-bottom: none;
 
-				checkbox-group {
-					.checkbox {
-						&:last-child {
-							width: 100%;
+						&.odd {
+							.checkbox {
+								border-right: none;
+							}
 						}
 					}
 				}
@@ -108,13 +146,37 @@
 		}
 
 		&.subject_rating {
-			.filter-pallet {
-				left: 0;
-
-				checkbox-group {
-					width: 300rpx;
+			checkbox-group {
+				.checkbox-wrapper {
+					&:nth-last-child(1),
+					&:nth-last-child(2) {
+						border-bottom: none;
+					}
 				}
 			}
+			p:nth-last-child(1)
 		}
+
+		&.active {
+			z-index: 100;
+
+			.filter-item-pallet {
+				height:49rpx;
+				background: #FFFFFF;
+				border: 1px solid #D8D8D8;
+				border-bottom: none;
+				border-radius: 0;
+				border-top-left-radius: 8rpx;
+				border-top-right-radius: 8rpx;	
+			}			
+		}
+	}
+
+	.filter-mask {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background-color: #000000;
+		opacity: 0.5;
 	}
 }

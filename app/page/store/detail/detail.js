@@ -23,6 +23,7 @@ Component({
 			type: Boolean,
 			value: false,
 			observer: function(newVal, oldVal){
+				console.log('detail...', newVal, oldVal)
 				if (newVal) {
 					this.getStoreDetail(this.data.userId)
 				}
@@ -61,7 +62,7 @@ Component({
 	},
   
 	ready: function () {
-		this.getStoreDetail(this.data.userId)
+		// this.getStoreDetail(this.data.userId)
 	},
 
 	methods: {
@@ -75,6 +76,14 @@ Component({
 					this.triggerEvent('event', detail)
 				}
 			})
+		},
+
+		doClick () {
+			if (this.data.navigatorUrl) {
+				wx.navigateTo({
+					url: this.data.navigatorUrl
+				})
+			}
 		}
 	}
   })

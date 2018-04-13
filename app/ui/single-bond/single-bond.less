@@ -3,8 +3,7 @@
 
 .single-bond-component {
 	background: #FFFFFF;
-	margin-top: 10rpx;
-	padding: 10rpx 20rpx;
+	padding: 0 20rpx;
 	font-size: small;
 
 	&:hover {
@@ -12,8 +11,13 @@
 	}
 	
 	.pallet {
+		&.header,
+		&.footer {
+			padding: 14rpx  0;
+		}
+
 		&.content {
-			margin: 10rpx 0;
+			margin: 0;
 			padding: 10rpx 0;
 			border-top: 1rpx solid #D8D8D8;
 			border-bottom: 1rpx solid #D8D8D8;
@@ -21,16 +25,40 @@
 	}
 	.bond-info-item-tpl {
 		float: left;
-		
+		overflow: hidden;
+		width: 100%;
+
+		.value,
+		.label {
+			height:40rpx; 
+			font-size:28rpx;
+			font-family:PingFangSC-Regular;
+			color:rgba(53,53,53,1);
+			line-height:40rpx;
+		}
+
+		.label {
+			color: #B2B2B2;
+		}
+
 		&.bond_simple_name {
 			width: 60%;
+			height: 45rpx; 
+			line-height: 45rpx;
+			font-size: 32rpx;
+			font-family:PingFangSC-Regular;
+			color:rgba(53,53,53,1);
 		}
 
 		&.benefit {
 			float: right;
-			width: 35%;
+			width: 38%;
+			position: relative;
+			top: 8rpx;
+			padding-top: 0;
+			padding-bottom: 0;
 			border:1rpx solid #2196F3;
-			border-radius:50rpx;
+			border-radius: 38rpx ; 
 			text-align: center;
 
 			.value {
@@ -40,11 +68,13 @@
 
 		&.rating,
 		{
-			width: 33.33333%;
+			width: calc(~'33.33333% - 1px');
+			border-right: 1px solid #E5E5E5;
 		}
 
 		&.deadline {
-			width: 33.33333%;
+			width: calc(~'33.33333% - 1px');
+			border-right: 1px solid #E5E5E5;
 			text-align: center;
 		}
 
@@ -55,6 +85,9 @@
 
 		&.bond_type {
 			width: 100%;
+			overflow: hidden;
+			text-overflow:ellipsis;
+			white-space: nowrap;
 		}
 
 		&.issue_time {
@@ -77,10 +110,10 @@
 		.seller-info-tpl {
 			.image {
 				.face-url{
-					width: 68rpx;
-					height: 68rpx;	
+					width: 46rpx;
+					height: 46rpx;	
 					border: 1px solid #fff;
-					box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+					//box-shadow: 1px 1px 1px rgba(0,0,0,.3);
 				}
 			}
 			

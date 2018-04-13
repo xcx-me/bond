@@ -16,28 +16,36 @@
   width: 14.28%;
   text-align: center;
 }
-.date-bar-component .date-item {
-  height: 50rpx;
-  line-height: 50rpx;
-  text-align: center;
+.date-bar-component .date-bar-item .weekday {
+  color: #B2B2B2;
+}
+.date-bar-component .date-bar-item .date {
+  color: #888888;
+}
+.date-bar-component .date-bar-item .normal {
   width: calc(100% - 2rpx);
 }
-.date-bar-component .date-item.is-today {
-  color: 888888;
+.date-bar-component .date-bar-item .today {
   display: inline-block;
   width: 50rpx;
   height: 50rpx;
+  line-height: 50rpx;
+  color: #000000;
   background: #2196F3;
   opacity: 0.3;
   border-radius: 100%;
 }
-.date-bar-component .date-item.active {
+.date-bar-component .date-bar-item .active {
   color: #FFFFFF;
   display: inline-block;
   width: 50rpx;
+  line-height: 50rpx;
   height: 50rpx;
   background: #2196F3;
   border-radius: 100%;
+}
+.date-bar-component .test {
+  background: red !important;
 }
 .date-bar-component .split-line {
   color: #D8D8D8;

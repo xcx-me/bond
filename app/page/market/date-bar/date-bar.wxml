@@ -1,14 +1,11 @@
 <!--app/page/market/date-bar/date-bar.wxml-->
 <view class='date-bar-component clearfix'>
-	<!-- <text class='label'>日期：</text> -->
-	<block wx:for='{{dateList}}' wx:for-item="dateItem" wx:key='index'>
-		<view class='date-bar-item' wx:if='{{index > 0}}'>
-			<text class='date-item'>{{dateItem.weekDay}}</text>
-		</view>
-	</block>
-	<block wx:for='{{dateList}}' wx:for-item="dateItem" wx:key='index'>
-		<view class='date-bar-item' wx:if='{{index > 0}}'>
-			<text class='date-item {{currentDate === dateItem.originalDate ? "active" : (dateItem.isToday ? "is-today" : "")}}' bindtap='changeDate' data-index='{{index}}'>{{dateItem.date}}</text>
+	<block wx:for='{{dateList}}' wx:for-item="dateItem" wx:key='originalDate'>
+		<view class='date-bar-item' hidden='{{index === 0}}'>
+			<view class='weekday'><text >{{dateItem.weekDay}}</text></view>
+			<view class='date {{currentDate === dateItem.originalDate ? "active" : dateItem.isToday ? "today" : "normal"}}'>
+				<text bindtap='changeDate' data-index='{{index}}'>{{dateItem.date}}</text>
+			</view>
 		</view>
 	</block>
 </view>

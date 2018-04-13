@@ -11,23 +11,28 @@
 	<view class="wrapper">
 	<!-- <view class='filter-item label'><text>筛选：</text></view> -->
 	<block wx:for='{{filterConfig}}' wx:for-item='filterItem' wx:for-index='index' wx:key='name' >
-		<view class='filter-item {{filterItem.name}}'>
-			<view  bindtap='onShowFilter' data-index='{{index}}'>
+		<view class='filter-item {{filterItem.name}} {{filterItem.isShow ? "active" : ""}}'>
+			<view class='filter-item-pallet'  bindtap='onShowFilter' data-index='{{index}}'>
 				<text class='label'>{{filterItem.title}}</text>
-				<i class='icon-down-arrow'></i>
+				<i class='{{filterItem.isShow ? "icon-up-arrow" : "icon-down-arrow"}}'></i>
 			</view>
 			<view class='filter-pallet' hidden='{{!filterItem.isShow}}'>
-				<view class='filter-pallet-checkbox'>
+				<scroll-view  scroll-y class='filter-pallet-checkbox'>
 					<checkbox-group bindchange="checkboxChange" data-index='{{index}}'>
-						<view class="checkbox" wx:for="{{filterItem.values}}" wx:for-item='item' wx:for-index='index' wx:key="index">
-							<checkbox wx:key="" value="{{index}}" checked="{{item.isSelected}}"/>{{item.title}}
-						</view>
+						<block wx:for="{{filterItem.values}}" wx:for-item='item' wx:for-index='optionIndex' wx:key="optionIndex">
+							<view class='checkbox-wrapper {{optionIndex%2? "even" : "odd"}}' bindtap='clickFilterOption' data-index='{{index}}' data-optionindex='{{optionIndex}}'>
+								<view class='checkbox'>
+									<checkbox wx:key="" value="{{optionIndex}}" checked="{{item.isSelected}}" disabled='{{optionIndex === 0 && item.isSelected}}' color='#2196F3'/><text class='value'>{{item.title}}</text>
+								</view>
+							</view>
+						</block>
 					</checkbox-group>
-				</view>
+				</scroll-view>
 				<view class='filter-pallet-btn'>
-					<button class='btn-reset' size='mini' type='primary' bindtap='onReset' data-index='{{index}}'>重置</button>
-					<button class='btn-confirm' size='mini' type='primary'  bindtap='onConfirm' data-index='{{index}}'>确定</button>
+					<view class='btn btn-reset' bindtap='onReset' data-index='{{index}}'><text>重置</text></view>
+					<view class='btn btn-confirm' bindtap='onConfirm' data-index='{{index}}'><text>确定</text></view>
 				</view>
+				<view class='filter-mask'></view>
 			</view>
 		</view>
 	</block>

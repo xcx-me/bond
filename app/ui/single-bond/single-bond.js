@@ -38,7 +38,7 @@ Component({
   },
 
   ready: function () {
-	console.log('ready...', this.data.bondInfo)
+	// console.log('ready...', this.data.bondInfo)
   },
 
   /**

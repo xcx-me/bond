@@ -2,7 +2,6 @@
 <import src='../../../template/blank-signal/blank-signal.wxml'/>
 
 <view class='store-dynamic-component'>
-	<text class='title'>最新动态</text>
 	<loading wx:if="{{showLoading}}">加载中</loading>
 	<view wx:if="{{!showLoading && !emptyData}}" class='dynamic-list'>
 		<view class='dynamic-item overflow-ellipsis' wx:for="{{dynamicList}}" wx:for-index="index" wx:for-item="dynamic" wx:key="bond_id">

@@ -26,7 +26,7 @@
   right: -3rpx;
   width: 26rpx;
   height: 26rpx;
-  background: red;
+  background: #E64340;
   border-radius: 100%;
 }
 .seller-info-tpl .under-line {
@@ -39,11 +39,8 @@
   font-size: small;
 }
 .overview-page {
+  padding-top: 30rpx;
   height: 100%;
-}
-.overview-page .pallet {
-  padding: 10rpx;
-  background: #FFFFFF;
 }
 .overview-page .pallet-has-slite-line {
   border-top: 1rpx solid #CCCCCC;
@@ -61,27 +58,27 @@
 .overview-page .dynamic-pallet {
   padding: 20rpx;
 }
-.overview-page .recent-notice {
-  margin-top: 20rpx;
+.overview-page .store-pallet {
+  border-top: 1px solid #E5E5E5;
 }
-.overview-page .recent-notice .register-store {
+.overview-page .store-pallet .register-store {
   text-align: center;
 }
-.overview-page .recent-notice .register-store .tips {
+.overview-page .store-pallet .register-store .tips {
   height: 200rpx;
   position: relative;
 }
-.overview-page .recent-notice .register-store .tips text {
+.overview-page .store-pallet .register-store .tips text {
   position: relative;
   top: 40%;
 }
-.overview-page .recent-notice .shop-button {
+.overview-page .store-pallet .shop-button {
   background-color: #2196F3;
 }
-.overview-page .recent-notice .button-hover {
+.overview-page .store-pallet .button-hover {
   background-color: #1A7DD4;
 }
-.overview-page .recent-notice .protocol {
+.overview-page .store-pallet .protocol {
   font-size: small;
   position: relative;
   margin-top: 20rpx;
@@ -90,15 +87,15 @@
   display: flex;
   justify-content: center;
 }
-.overview-page .recent-notice .protocol checkbox {
+.overview-page .store-pallet .protocol checkbox {
   position: relative;
   top: -2px;
 }
-.overview-page .recent-notice .protocol label {
+.overview-page .store-pallet .protocol label {
   width: 159px;
   display: flex;
 }
-.overview-page .recent-notice .protocol .to-qtrade-protocol {
+.overview-page .store-pallet .protocol .to-qtrade-protocol {
   color: #2196F3;
   text-decoration: underline;
 }
