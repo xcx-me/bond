@@ -11,10 +11,10 @@
 	</block>
 	<view class='pallet clearfix footer'>	
 		<view wx:if='{{from === "store" || from === "detail"}}'>
-			<block wx:for='{{[{name:"click_num", label:"点击量："}, {name:"share_num", label:"被分享："}]}}' wx:for-item='item' wx:key='name'>
-				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo}}'></template>
+			<block wx:for='{{[{name:"click_num", image:"../../asset/image/qtrade/clicks_24.svg"}, {name:"share_num", image:"../../asset/image/qtrade/forward_24.svg"}]}}' wx:for-item='item' wx:key='name'>
+				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from}}'></template>
 			</block>
-			<icon class='icon-delete' size='20' wx:if='{{isMine}}' type='success' catchtap='onDeleteBond' data-bname='{{bondInfo.bond_simple_name}}' />	
+			<image class='icon-delete' src='../../asset/image/qtrade/delete_36.svg' wx:if='{{isMine}}' catchtap='onDeleteBond' data-bname='{{bondInfo.bond_simple_name}}' />	
 		</view>
 		<view wx:else >
 			<block wx:for='{{bondInfo.sale_array}}' wx:for-item='sale' wx:key='index'>
