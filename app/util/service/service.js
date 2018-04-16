@@ -69,5 +69,9 @@ module.exports = {
 
 	doAnswer: function (askId, content, sucFunc, errFunc){
 		this.doService(config.NEW_BOND.answerQuestion, {ask_id: askId, content: content}, sucFunc, errFunc)
+	},
+
+	getBondAssociate: function(simpleName, sucFunc, errFunc) {
+		this.doService(config.NEW_BOND.associateBond, {bond_simple_name: simpleName}, sucFunc, errFunc)
 	}
 }

@@ -21,10 +21,9 @@
 		<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
 			<swiper-item item-id='{{tabId}}'>
 				<scroll-view class='pallet' scroll-y>
-					<BondInfo wx:if='{{tabId === currentTabId && currentTabId === "detail"}}' vUrl='{{vUrl}}' bondId='{{bondId}}' isMyStore='{{isMyStore}}' />
+					<BondInfo wx:if='{{tabId === currentTabId && currentTabId === "detail"}}' bondId='{{bondId}}' isMyStore='{{isMyStore}}' />
 					<BondQuestion wx:if='{{tabId === currentTabId && currentTabId === "question"}}' bondId='{{bondId}}' userId='{{userId}}' needUpdate='{{needUpdate}}' bind:updateTotalEvent='_updateQuestionTotalEvent'/>
 					<StoreDetail wx:if='{{tabId === currentTabId && currentTabId === "store"}}'
-						vUrl='{{vUrl}}'
 						userId='{{uid}}'
 						isRegistered='{{true}}'
 						isQtrade='{{isQtrade}}'/> 

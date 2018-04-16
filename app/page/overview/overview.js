@@ -5,7 +5,6 @@ var app = getApp()
 Page({
 	data: {
 		storeRegistered: false, // 是否开店
-		vUrl: '../../asset/image/qtrade/sprites_01.png',
 		uid: '0',
 		userId: '0',
 		userName: '',

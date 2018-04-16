@@ -2,7 +2,7 @@
 <view class="send-quote-page">
 	<view class="quotation-form" wx:if="{{isOpenMyShop}}">
 
-		<BondFormEditor editorFlag='{{editorFlag}}' bind:changeValueEvent='_changeValue' />  
+		<BondFormEditor editorFlag='{{editorFlag}}' bondSimpleName='{{bondSimpleName}}' bind:changeValueEvent='_changeValue' />  
 
 		<button class='margin-bottom submit-quotation-btn' type='primary' bindtap='handleSendQuote'>发布</button>
 

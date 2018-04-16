@@ -1,6 +1,6 @@
 
 var dateTimePicker = require('../../util/date-time-picker/date-time-picker')
-
+const service = require('../../util/service/service')
 const selectConfig = require('./select-config/select-config')
 const converson = require('../../util/converson/converson')
 
@@ -11,6 +11,10 @@ Component({
 			value: false
 		},
 
+		bondSimpleName: {
+			type: String,
+			value: ''
+		}
 	},
 
 	data: {
@@ -71,6 +75,16 @@ Component({
 		specificOpenFlag: false,
 		specificItems: selectConfig.specificClause.items,
 		specificSelectFlag: converson.parseToObject([]),
+	},
+
+	ready: function() {
+		service.getBondAssociate(this.data.bondSimpleName, (result)=>{
+			result.data.retdata.bond_simple_name = this.data.bondSimpleName
+			this.setData({
+				formData: result.data.retdata
+			})
+			this.triggerEvent('changeValueEvent', formData)
+		})
 	},
 
 	methods: {

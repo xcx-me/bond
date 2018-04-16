@@ -24,11 +24,6 @@ Component({
 	fieldList: {
 		type: Array,
 		value: []
-	},
-
-	vUrl: {
-		type: String,
-		value: ''
 	}
   },
 
