@@ -3,6 +3,6 @@
 	<view hidden='{{from !== "bond-info" &&((bondInfo.bond_status === "3" && item.name === "issue_time") || (bondInfo.bond_status !== "3" && item.name === "bid_end"))}}' class='bond-info-item-tpl {{item.name}}'>
 		<text class='label'>{{item.label}}</text>
 		<image class='icon' src='{{item.image}}' wx:if='{{item.image}}'/>	
-		<text class='value'>{{bondInfoItemUtil.parseValue(item.name, bondInfo, from)}}</text>
+		<text class='value'>{{bondInfoItemUtil.parseValue(item.name, bondInfo, type)}}</text>
 	</view>
 </template>

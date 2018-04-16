@@ -5,8 +5,9 @@
 	</view>
 	<block wx:for='{{nameList}}' wx:for-item='name' wx:for-index="index" wx:key='index'>
 		<view class='attached-item' bindtap='doDownloadFile' data-url='{{urlList[index]}}'>
-			<text>{{name}}</text> 
-			<button class='btn-download btn-no-border' plain size='mini' type='default' >下载</button>
+			<image class='icon-attention' src='../../../asset/image/qtrade/enclosure_24.svg' />
+			<text class='attached-name'>{{name}}</text> 
+			<i class='icon-right-arrow'></i>
 		</view>
 	</block>
 </view>

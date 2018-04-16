@@ -115,6 +115,18 @@ Page({
 		}
 	},
 
+	bindDownLoad: function(e) {
+		console.log('market bindDownLoad.....')
+	},
+
+	topLoad: function(e) {
+		console.log('market topLoad.....')
+	},
+
+	scroll: function(e) {
+		console.log('market scroll...')
+	},
+
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */

@@ -1,25 +1,26 @@
 .bond-question {
-	padding: 10rpx 5rpx;
+	padding: 0 0 0 30rpx;
 	background: #FFFFFF;
+	font-size: 28rpx;
 
 	.header {
 		position: relative;
 		width: 100%;
-		margin-bottom: 10rpx;
+		padding: 30rpx 0;
 
 		.title {
-			height: 42rpx;
-			line-height: 42rpx;
 			position: relative;
 			left: 8rpx;
+			color: #888888;
 		}
 
 		.btn-ask {
 			position: absolute;
-			top: 0;
-			right: 8rpx;
-			line-height: 36rpx;
-			padding: 3rpx 20rpx;
+			top: 20rpx;
+			right: 30rpx;
+			height: 60rpx;
+			line-height: 60rpx;
+			padding: 0 33rpx;
 			background: none;
 			border: 1px solid #2196F3;
 			color: #2196F3;
@@ -29,6 +30,8 @@
 	.question-list {
 		overflow: auto;
 		padding-left:14rpx;
+		border-top: 1px solid #E5E5E5;
+		padding-top: 10rpx;
 
 		.question-item {
 			float: left;
@@ -51,6 +54,7 @@
 					background: #CCCCCC;
 				}
 			}
+
 			.content {
 				float: left;
 				width: calc(~'100% - 20px');
@@ -63,14 +67,11 @@
 
 			.btn-answer {
 				position:relative;
-				top:6rpx;
+				top: 8rpx;
 				line-height: 36rpx;
-				padding-left: 10rpx;
-				padding-right: 10rpx;
 				background: none;
 				border: none;
 				outline: none;
-				text-decoration: underline;
 				color: #2196F3;
 			}
 		}
