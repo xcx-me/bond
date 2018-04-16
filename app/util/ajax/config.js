@@ -1,6 +1,84 @@
 const {GET, POST} = require('./method')
 
 module.exports = {
+	USER_REGISTER: {
+		getUserStatus: {
+			// url: '/qtrade_bond/api/user/getuserstatus.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		},
+		getMobileVerificationCode: {
+			// url: '/qtrade_bond/api/register/mobilevarifycode1.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		},
+		activateMobile: {
+			// url: '/qtrade_bond/api/register/activatemobile.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		},
+		getUserInfo: {
+			// url: '/qtrade_bond/api/user/getsubmitinfo.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		},
+		submitUserInfo: {
+			// url: '/qtrade_bond/api/register/submitinfo.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		},
+		verifyQQEmailCode: {
+			// url: '/qtrade_bond/api/activateemail/generalactivate.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		},
+		resendEmail: {
+			// url: '/qtrade_bond/api/activateemail/resend.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: GET
+		},
+
+		// Edit mobile
+
+		getMobileForSubmitInfo: {
+			// url: '/qtrade_bond/api/user/getmobileforsubmitinfo.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: GET
+		},
+		getMobileVerificationCodeForConfirm: {
+			// url: '/qtrade_bond/api/submitinfo/mobileverifycode1.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		},
+		validateMobileForConfirm: {
+			// url: '/qtrade_bond/api/submitinfo/validatemobile.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		},
+		getMobileVerificationCodeForRenew: {
+			// url: '/qtrade_bond/api/submitinfo/mobileverifycode2.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		},
+		modifyMobile: {
+			// url: '/qtrade_bond/api/submitinfo/modifymobile.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		},
+
+		// Edit user info
+
+		getUserInfoForEdit: {
+			// url: '/qtrade_bond/api/user/getuserinfo2.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		},
+		submitUserInfoForEdit: {
+			// url: '/qtrade_bond/api/submitinfo/submit.do',
+			url: '/qtrade_im/daily_checkin.do',
+			method: POST
+		}
+	},
 	EXAMPLE: {
 		getSometing: {
 			url: '/qtrade_im/daily_checkin.do',
@@ -124,5 +202,5 @@ module.exports = {
 			url: '/qtrade_bond/api/newbond/thumb.do',
 			method: POST
 		}
-	},
+	}
 }

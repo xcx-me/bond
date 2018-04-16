@@ -1,4 +1,5 @@
 <view class='administration-page'>
+	<view bindtap='createQuotation'>发布</view>
 	<loading wx:if='{{loading}}'>加载中</loading>
 	<scroll-view hidden='{{loading}}' class='bond-list-pallet' scroll-y scroll-x="{{false}}">
 		<view class='header clearfix'>
