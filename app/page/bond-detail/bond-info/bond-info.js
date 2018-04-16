@@ -13,10 +13,6 @@ Component({
 			type: String,
 			value: ''
 		},
-		vUrl: {
-			type: String,
-			value: ''
-		},
 		isMyStore: {
 			type: Boolean,
 			value: false,

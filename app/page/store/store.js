@@ -15,7 +15,6 @@ Page({
 		isMyStore: false,
 		isQtrade: false,
 		needUpdate: false,
-		vUrl: '../../asset/image/qtrade/sprites_01.png',
 		from: ''
   	},
 

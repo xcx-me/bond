@@ -3,7 +3,6 @@
 	<view class='store-header'>
 		<StoreDetail 
 		navigatorUrl=''
-		vUrl='{{vUrl}}'
 		userId='{{uid}}'
 		isRegistered='{{true}}'
 		isQtrade='{{isQtrade}}'

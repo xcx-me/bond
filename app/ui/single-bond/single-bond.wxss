@@ -54,7 +54,7 @@
   padding: 0 0 0 30rpx;
   font-size: small;
 }
-.single-bond-component:hover {
+.single-bond-component:active {
   background: #F5F5F5;
 }
 .single-bond-component .pallet.header,

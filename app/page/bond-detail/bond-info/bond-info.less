@@ -2,25 +2,32 @@
 .bond-info-component {
 	position: relative;
 
-	.btn-edit {
-		position: absolute;
-		top: 10rpx;
-		right: 8rpx;
-		line-height: 36rpx;
-		padding: 3rpx 20rpx;
-		background: none;
-		border: 1px solid #2196F3;
-		color: #2196F3;	
-	}
-
 	.info-item {
 		background: #FFFFFF;
 		margin-top: 20rpx;
 		margin-bottom: 20rpx;
 		padding: 10rpx 0 10rpx 30rpx;
 		overflow: hidden;
+		position: relative;
 	}
 
+	.btn-edit {
+		position: absolute;
+		top: 30rpx;
+		right: 30rpx;
+
+		.icon-modify {
+			width: 24rpx;
+			height: 24rpx;
+			margin-right: 10rpx;	
+		}
+
+		text {
+			font-size:28rpx;
+			color:#576B95;
+		}
+	}
+	
 	.row {
 		line-height: 50rpx;
 		padding-top: 0;
@@ -31,6 +38,10 @@
 		.bond-item {
 			float: left;
 			width: 50%;
+
+			&.bond_simple_name {
+				width: 100%;
+			}
 	
 			.label {
 				color: #888888;

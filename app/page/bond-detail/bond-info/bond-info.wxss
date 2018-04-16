@@ -12,22 +12,27 @@
 .bond-info-component {
   position: relative;
 }
-.bond-info-component .btn-edit {
-  position: absolute;
-  top: 10rpx;
-  right: 8rpx;
-  line-height: 36rpx;
-  padding: 3rpx 20rpx;
-  background: none;
-  border: 1px solid #2196F3;
-  color: #2196F3;
-}
 .bond-info-component .info-item {
   background: #FFFFFF;
   margin-top: 20rpx;
   margin-bottom: 20rpx;
   padding: 10rpx 0 10rpx 30rpx;
   overflow: hidden;
+  position: relative;
+}
+.bond-info-component .btn-edit {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+}
+.bond-info-component .btn-edit .icon-modify {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 10rpx;
+}
+.bond-info-component .btn-edit text {
+  font-size: 28rpx;
+  color: #576B95;
 }
 .bond-info-component .row {
   line-height: 50rpx;
@@ -39,6 +44,9 @@
 .bond-info-component .row .bond-item {
   float: left;
   width: 50%;
+}
+.bond-info-component .row .bond-item.bond_simple_name {
+  width: 100%;
 }
 .bond-info-component .row .bond-item .label {
   color: #888888;

@@ -41,9 +41,10 @@
 .store-header-component {
   position: relative;
   background: #FFFFFF;
-  padding: 24rpx 30rpx;
+  padding: 24rpx 0;
 }
 .store-header-component .personal-info-pallet {
+  padding-left: 30rpx;
   padding-bottom: 24rpx;
 }
 .store-header-component .personal-info-pallet .seller-info-tpl .image {
@@ -81,7 +82,7 @@
   border-radius: 0;
 }
 .store-header-component .store-statistics-component {
-  border-top: 1rpx solid #CCCCCC;
+  border-top: 1rpx solid #E5E5E5;
 }
 .store-header-component .icon-right-arrow {
   display: inline-block;
