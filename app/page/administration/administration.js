@@ -44,6 +44,21 @@ Page({
 		})
 	},
 
+	createQuotation: function () {
+		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
+			// reg: 0 认证初始化阶段；1 已绑定手机；2 已提交资料；3 已输入验证码或点击激活邮件；4 已完成人工审核
+			result = { 'ret': '0', 'retmsg': 'OK', 'retdata': { 'enable': true, 'v': false, 'reg': 0 } }
+
+			if (!result.retdata.v) {
+				wx.navigateTo({url: '../mobile-form/mobile-form'})
+				return
+			}
+
+			// console.log('do register')
+			wx.navigateTo({url: '../quotation/quotation'})
+		})
+	},
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
