@@ -26,7 +26,8 @@
 					<StoreDetail wx:if='{{tabId === currentTabId && currentTabId === "store"}}'
 						userId='{{uid}}'
 						isRegistered='{{true}}'
-						isQtrade='{{isQtrade}}'/> 
+						isQtrade='{{isQtrade}}'
+						needUpdate='{{true}}'/> 
 					<OtherBonds wx:if='{{tabId === currentTabId}}' isMyStore='{{isMyStore}}' bondId='{{bondId}}' uid='{{uid}}' userId='{{userId}}' needUpdate='{{needUpdate}}' />
 				</scroll-view>
 			</swiper-item>

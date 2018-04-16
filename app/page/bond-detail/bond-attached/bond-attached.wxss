@@ -3,7 +3,6 @@
   width: 100%;
   margin-bottom: 10rpx;
   padding: 22rpx 0;
-  border-bottom: 1px solid #E5E5E5;
 }
 .attached-component .header .title {
   height: 45rpx;
@@ -15,16 +14,39 @@
   color: #000000;
 }
 .attached-component .attached-item {
-  padding: 10rpx 0;
-  display: inline-block;
-}
-.attached-component .attached-item .btn-download {
   position: relative;
-  top: 6rpx;
-  line-height: 36rpx;
-  background: none;
-  border: none;
-  outline: none;
-  text-decoration: underline;
-  color: #2196F3;
+  width: 100%;
+  padding: 20rpx 0;
+  display: inline-block;
+  border-top: 1px solid #E5E5E5;
+}
+.attached-component .attached-item .icon-attention,
+.attached-component .attached-item .attached-name,
+.attached-component .attached-item .icon-right-arrow {
+  float: left;
+}
+.attached-component .attached-item .icon-attention {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 10rpx;
+  position: relative;
+  top: 10rpx;
+}
+.attached-component .attached-item .attached-name {
+  width: calc(100% - 100rpx);
+  margin-right: 20rpx;
+}
+.attached-component .attached-item .icon-right-arrow {
+  display: inline-block;
+  width: 16rpx;
+  height: 16rpx;
+  border-top: 4rpx solid #C7C7CC;
+  border-right: 4rpx solid #C7C7CC;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 25rpx;
+  right: 30rpx;
+}
+.attached-component .attached-item:active {
+  background: #F5F5F5;
 }

@@ -5,14 +5,14 @@
 	<block wx:for='{{bondFieldList}}' wx:for-item='bondItem' wx:key='name'>
 		<view class='pallet clearfix {{bondItem.name}}'>
 			<block wx:for='{{bondItem.value}}' wx:for-item='item' wx:key='name'>
-				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from}}'></template>
+				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from, type: "single-bond"}}'></template>
 			</block>
 		</view>
 	</block>
 	<view class='pallet clearfix footer'>	
 		<view wx:if='{{from === "store" || from === "detail"}}'>
 			<block wx:for='{{[{name:"click_num", image:"../../asset/image/qtrade/clicks_24.svg"}, {name:"share_num", image:"../../asset/image/qtrade/forward_24.svg"}]}}' wx:for-item='item' wx:key='name'>
-				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from}}'></template>
+				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from,  type: "single-bond"}}'></template>
 			</block>
 			<image class='icon-delete' src='../../asset/image/qtrade/delete_36.svg' wx:if='{{isMine}}' catchtap='onDeleteBond' data-bname='{{bondInfo.bond_simple_name}}' />	
 		</view>
