@@ -4,6 +4,11 @@
 .bond-info-item-tpl .label {
   color: #999999;
 }
+.bond-info-item-tpl .icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 10rpx;
+}
 .seller-info-tpl {
   overflow: hidden;
 }
@@ -60,16 +65,6 @@
   font-family: PingFangSC-Regular;
   color: #000000;
 }
-.bond-sale-info .header .btn-edit {
-  position: absolute;
-  top: 0;
-  right: 8rpx;
-  line-height: 36rpx;
-  padding: 3rpx 20rpx;
-  background: none;
-  border: 1px solid #2196F3;
-  color: #2196F3;
-}
 .bond-sale-info .item {
   float: left;
   width: 100%;
@@ -97,7 +92,7 @@
 }
 .bond-sale-info .sale-list .label {
   color: #888888;
-  width: 140rpx;
+  width: 156rpx;
   float: left;
 }
 .bond-sale-info .sale-list .value {

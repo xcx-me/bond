@@ -10,20 +10,21 @@
 </wxs>
 
 <view class='bond-info-component'>
-	<button wx:if='{{isMyStore}}' class='btn-edit' size='mini' type='primary' bindtap='onEditBond'>编辑</button>
-	<block wx:for='{{bondInfoFieldList}}' wx:for-item='infoItem' wx:key='name'>
-		<view wx:if='{{infoItem.name !== "saleInfo"}}' class='info-item {{infoItem.name}}'>
-			<block wx:for='{{infoItem.value}}' wx:for-item='item' wx:key='name'>
-				<view class="bond-item">
-					<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo}}'></template>
-				</view>
-			</block>
-			<view class='attached' wx:if='{{infoItem.name === "saleDetail"}}'>
-				<BondAttached nameList='{{bondInfoUtil.parse(bondInfo.attached_names, "|")}}' urlList='{{bondInfoUtil.parse(bondInfo.attached_urls, "|")}}'/>
+	<view class='info-item sale'>
+		<BondSaleInfo vUrl='{{vUrl}}' isMyStore='{{isMyStore}}' bondSaleInfo='{{bondInfo.sale_info}}' isQtrade='{{bondInfo.is_qtrade === "1"}}' fieldList='{{bondInfoFieldList.sale}}'/>
+	</view>
+	<view class='info-item detail'>
+		<block wx:for='{{bondInfoFieldList.detail}}' wx:for-item='itemRow' wx:for-index='index' wx:key='index'>
+			<view class='row'>
+				<block wx:for='{{itemRow}}' wx:for-item='item' wx:key='name'>
+					<view class='bond-item'>
+						<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: "bond-info"}}'></template>
+					</view>
+				</block>
 			</view>
-		</view>
-		<view wx:if='{{infoItem.name === "saleInfo"}}' class='info-item {{infoItem.name}}'>
-			<BondSaleInfo vUrl='{{vUrl}}' isMyStore='{{isMyStore}}' bondSaleInfo='{{bondInfo.sale_info}}' isQtrade='{{bondInfo.is_qtrade === "1"}}' fieldList='{{infoItem.value}}'/>
-		</view>
-	</block>
+		</block>
+	</view>
+	<view class='info-item attached' hidden='{{!bondInfo.attached_urls}}'>
+		<BondAttached nameList='{{bondInfoUtil.parse(bondInfo.attached_names, "|")}}' urlList='{{bondInfoUtil.parse(bondInfo.attached_urls, "|")}}'/>
+	</view>
 </view>
