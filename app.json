@@ -11,9 +11,10 @@
         "app/page/quotation/quotation",
         "app/page/notice/notice",
         "app/page/user-info/user-info",
-		"app/page/ask/ask",
-		"app/page/answer/answer",
-		"app/page/edit-sale-info/edit-sale-info"
+        "app/page/ask/ask",
+        "app/page/answer/answer",
+        "app/page/edit-sale-info/edit-sale-info",
+        "app/page/mobile-form/mobile-form"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -24,7 +25,7 @@
     },
     "tabBar": {
         "list": [
-			{
+            {
                 "pagePath": "app/page/market/market",
                 "iconPath": "app/asset/image/icon_API.png",
                 "selectedIconPath": "app/asset/image/icon_API_HL.png",
