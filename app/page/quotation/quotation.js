@@ -13,6 +13,9 @@ Page({
 		isOpenMyShop: true, // 是否开店
 		editorFlag: false, // 是否是债券编辑入口
 		sendQuoteData: {}, // 发布报价参数
+		submitQuoteBtnEnable: false,
+		warningShowText: false,
+		warningText: '数据没有填写完毕，请完善'
 	},
 
 	openMyShop: function () {
@@ -27,7 +30,9 @@ Page({
 
 		if (JSON.stringify(this.data.sendQuoteData) !== '{}') {
 			if (this.data.sendQuoteData.bond_simple_name === '') {
-				common.showToast('请输入债券简称', 'none', 2000)
+				// common.showToast('请输入债券简称', 'none', 2000)
+
+				this.showWraningText()
 				return
 			}
 
@@ -40,14 +45,27 @@ Page({
 
 			this.sendQuoteRequest(this.data.sendQuoteData)
 		} else {
+			// this.showWraningText()
 			common.showToast('数据没有填写完毕，请完善', 'none', 2000)
 		}
+	},
+
+	showWraningText: function () {
+		this.setData({
+			warningShowText: true
+		})
+
+		setTimeout(() => {
+			this.setData({
+				warningShowText: false
+			})
+		}, 2000)
 	},
 
 	sendQuoteRequest: function (params) {
 		request(config.NEW_BOND.sendBond, params).then((result) => {
 			if (String(result.data.ret) === '0') {
-				common.showToast('发布报价成功！', 'success', 2000)
+				common.showToast('发布成功！', 'success', 2000)
 			} else {
 				common.showToast(result.data.retmsg, 'none', 2000)
 			}
@@ -79,21 +97,31 @@ Page({
 	},
 
 	_changeValue: function (e) { // 获取发布报价参数
+		let detail = e.detail
+
+		// “发布报价” 按钮是否可用
+		if (detail.bond_simple_name !=='' && (detail.left_benefit !=='' || detail.right_benefit !=='') && detail.subject_rating !=='' && detail.facility_rating !=='' && detail.deadline !=='' && detail.issue_total !=='') {
+			this.setData({
+				submitQuoteBtnEnable: true
+			})
+		} else {
+			this.setData({
+				submitQuoteBtnEnable: false
+			})
+		}
+
 		this.setData({
-			sendQuoteData: e.detail
+			sendQuoteData: detail
 		})
-		// console.log('_changeValue....', e.detail)
+		// console.log('isShowBTn: ', this.data.submitQuoteBtnEnable)
+		// console.log('_changeValue....', detail)
 	},
 
-	// handleShowToast: function () {
-	// 	this.toastedit = this.selectComponent('#toastedit')
-	// 	this.toastedit.showToast('显示这个哈哈哈哈哈', 2000)
+	// showDialog() {
+	// 	this.dialog = this.selectComponent('#dialog')
+	// 	this.dialog.showDialog();
 	// },
 
-	showDialog() {
-		this.dialog = this.selectComponent('#dialog')
-		this.dialog.showDialog();
-	},
 	//取消事件
 	_cancelEvent() {
 		console.log('你点击了取消');

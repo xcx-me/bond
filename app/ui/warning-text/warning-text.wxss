@@ -1,0 +1,14 @@
+.warning-text {
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  height: 70rpx;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 70rpx;
+  background-color: #FAA61A;
+  color: #FFFFFF;
+}

@@ -2,6 +2,7 @@
 	"usingComponents": {
 	  "BondFormEditor": "../../ui/bond-form-editor/bond-form-editor",
 	  "toastedit": "../../ui/toastedit/toastedit",
-	  "dialog": "../../ui/dialog/dialog"
+	  "dialog": "../../ui/dialog/dialog",
+	  "WarningText": "../../ui/warning-text/warning-text"
 	}
 }
