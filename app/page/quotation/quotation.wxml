@@ -4,16 +4,16 @@
 
 		<BondFormEditor editorFlag='{{editorFlag}}' bind:changeValueEvent='_changeValue' />  
 
-		<button class='margin-bottom submit-quotation-btn' type='primary' bindtap='handleSendQuote'>发布</button>
+		<button class='margin-bottom submit-quotation-btn {{submitQuoteBtnEnable ? "" : "submit-quote-unenable"}}'
+			type='primary' disabled='{{!submitQuoteBtnEnable}}' bindtap='handleSendQuote'>
+			发布
+		</button>
+
+		<WarningText isShow='{{warningShowText}}' toolTips='{{warningText}}' />
 
 		<!-- <button  class='margin-bottom' type='primary' bindtap='associateBondDetails'>获取债券详情</button> -->
 
-		<!-- <view class='margin-bottom'>
-			<toastedit id='toastedit'>{{toastedit}}</toastedit>
-			<button type='primary' bindtap='handleShowToast'>click to showToast!</button>
-		</view> -->
-
-		<view class="dialog-container">
+		<!-- <view class="dialog-container">
 			<dialog id='dialog'
 				title='我是标题'
 				content='确定要删除吗？？？'
@@ -23,7 +23,7 @@
 				bind:confirmEvent="_confirmEvent">
 			</dialog>
 			<button class='margin-bottom' type="primary" bindtap="showDialog"> ClickMe! </button>
-		</view>
+		</view> -->
 	</view>
 
 	<view class="quotaion-open-shop" wx:else>

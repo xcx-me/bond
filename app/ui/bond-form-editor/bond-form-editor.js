@@ -10,7 +10,6 @@ Component({
 			type: Boolean,
 			value: false
 		},
-
 	},
 
 	data: {
@@ -45,12 +44,12 @@ Component({
 
 		// 上市地点 多选
 		listingOpenFlag: false,
-		listingSpotItems: selectConfig.listingSpot.items, 
+		listingSpotItems: selectConfig.listingSpot.items,
 		// listingSelectFlag: converson.parseToObject(converson.saveValueOfArray(selectConfig.listingSpot.items)),
 		listingSelectFlag: converson.parseToObject([]),
 
 		// 企业性质
-		enterpriseNature: selectConfig.enterpriseNature.items, 
+		enterpriseNature: selectConfig.enterpriseNature.items,
 		enterpriseIndex: -1,
 
 		// 债券品种
@@ -78,8 +77,6 @@ Component({
 			let formData = this.data.formData
 			formData.bond_simple_name = e.detail.value
 
-			console.log(formData.bond_simple_name)
-
 			this.setData({
 				formData: formData
 			})
@@ -88,11 +85,50 @@ Component({
 
 		changeValue (e) { // 改变各input的value
 			let formData = this.data.formData
-			formData[e.currentTarget.dataset.inputName] = e.detail.value
+
+			if (e.currentTarget.dataset.inputName === 'left_benefit') { // 参考收益 左值
+				let val = e.detail.value
+				this.benifitValueChange(val, 'left_benefit')
+			} else if (e.currentTarget.dataset.inputName === 'right_benefit') { // 参考收益 右值
+				let val = e.detail.value
+				this.benifitValueChange(val, 'right_benefit')
+			} else if (e.currentTarget.dataset.inputName === 'subject_rating' || e.currentTarget.dataset.inputName === 'facility_rating') { // 主债评级
+				let val = e.detail.value
+				let reg = /^[a-zA-Z]{1,3}[+-]?$/
+				if (reg.test(val)) {
+					formData[e.currentTarget.dataset.inputName] = val
+				}
+			}
+			// else if (e.currentTarget.dataset.inputName === 'deadline') { // 发行期限
+			// 	let val = e.detail.value
+			// 	let reg = /(^[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?)([dymDYM]{1}$)|([dymDYM]{1}[+]{1}[a-zA-Z]$)|([dymDYM]{1}[+]{1}[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?[dymDYM]{1}$)/
+			// 	if (reg.test(val)) {
+			// 		formData[e.currentTarget.dataset.inputName] = val
+			// 	}
+			// }
+			else {
+				formData[e.currentTarget.dataset.inputName] = e.detail.value
+			}
+
 			this.setData({
 				formData: formData
 			})
+
+			console.log(this.data.formData)
 			this.triggerEvent('changeValueEvent', formData)
+		},
+
+		benifitValueChange: function(val, currentDataSet) {
+			let formData = this.data.formData
+			let reg = /^\d{0,2}(\.\d{0,4})?$/g
+			if (reg.test(val)) {
+				if (val !== '' && val.substring(0, 1) === '.') {
+					val = ''
+					formData[currentDataSet] = ''
+				}
+
+			 	return	formData[currentDataSet] = val
+			}
 		},
 
 		// picker,年月日 + 时分
@@ -128,7 +164,6 @@ Component({
 
 		// 企业性质
 		changeEnterpriseNature: function (e) {
-			// console.log('---enterpriseNature: ', this.data.enterpriseNature[e.detail.value])
 			let formData = this.data.formData
 			formData[e.currentTarget.dataset.enterpriseNature] = Number(e.detail.value) + 1
 			this.setData({
@@ -155,7 +190,6 @@ Component({
 			})
 		},
 
-
 		// 发行方式
 		changeIssuancemethod: function (e) {
 			let formData = this.data.formData
@@ -169,12 +203,6 @@ Component({
 
 		// 利率方式
 		handleDropdownRateWay: function (e) {
-			console.log('----checked: ', this.data.rateWayArray[e.detail.value])
-			// wx.showToast({
-			// 	title: 'this is blank。。。',
-			// 	icon: 'success',
-			// 	duration: 800
-			// })
 			if (e.detail.value == 2) {
 				this.setData({ rateReply: true })
 			} else {
@@ -206,16 +234,6 @@ Component({
 				formData: formData
 			})
 		},
-
-		// changeSpecificItems: function (e) {
-		// 	let formData = this.data.formData
-		// 	formData[e.currentTarget.dataset.specificItems] = this.saveCheckedValue(e.detail.value, this.data.specificItems).checkedParams.join('|')
-		// 	this.setData({
-		// 		specificitemsValue: this.saveCheckedValue(e.detail.value, this.data.specificItems).checkedItem.join('、'),
-		// 		formData: formData
-		// 	})
-		// 	this.triggerEvent('changeValueEvent', formData)
-		// },
 
 		saveCheckedValue: function (targetValue, dataArray) {
 			let checkedItem = []

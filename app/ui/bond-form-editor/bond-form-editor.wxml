@@ -58,7 +58,7 @@
 		<view class='checkbox-flag-area'>
 			<view class='label-area'>上市地点</view>
 			<view class='editor-area' bindtap='handleListingSelect'>
-				<span>{{listingOpenFlag ? '开' : '关'}}</span>
+				<span class='triangle-icon {{listingOpenFlag ? "triangle-up" : "triangle-down"}}'/>
 			</view>
 		</view>
 		<view class='{{listingOpenFlag ? "checkbox-item-area" : "checkbox-item-area-hide"}}'>
@@ -74,9 +74,9 @@
 	<view class='release-time row-item'>
 		<view class='label-area'>发行时间</view>
 		<view class='editor-area'>
-			<input value='{{formData.issue_time}}' maxlength='15'/>
 			<picker class='time-picker-area' mode="date" value="{{formData.issue_time}}" start='2000-01-01' end='' bindchange='changeValue' data-input-name='issue_time'>
 				<view class='time-select-picker'>
+					{{formData.issue_time}}
 					<span class='calendar-icon'></span>
 				</view>
 			</picker>
@@ -86,11 +86,14 @@
 	<!-- 截标时间 -->
 	<view class='closing-time row-item'>
 		<view class='label-area'>截标时间</view>
-		<picker mode="multiSelector" value="{{dateTime}}" bindchange='changeDateTime' range="{{dateTimeArray}}" data-input-name='bid_end'>
-			<view class='time-select-picker'>
-				当前选择: {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
-			</view>
-		</picker>
+		<view class='editor-area'>
+			<picker class='time-picker-area' mode="multiSelector" value="{{dateTime}}" bindchange='changeDateTime' range="{{dateTimeArray}}" data-input-name='bid_end'>
+				<view class='time-select-picker'>
+					{{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
+					<span class='calendar-icon'></span>
+				</view>
+			</picker>
+		</view>
 	</view>
 
 	<!-- 企业性质 -->
@@ -98,8 +101,9 @@
 		<view class='label-area'>企业性质</view>
 		<view class='editor-area'>
 			<picker class='dropdown-btn' bindchange="changeEnterpriseNature" value="{{enterpriseIndex1}}" range="{{enterpriseNature}}" data-enterprise-nature='company_type'>
-				<span class='triangle-down down-icon'>
+				<span class='down-icon'>
 					<text>{{enterpriseNature[enterpriseIndex]}}</text>
+					<span class='triangle-icon triangle-down'/>
 				</span>
 			</picker>
 		</view>
@@ -110,12 +114,7 @@
 		<view class='checkbox-flag-area'>
 			<view class='label-area'>债券品种</view>
 			<view class='editor-area' bindtap='handleOpenBondType'>
-				<span>{{bondTypeOpenFlag ? '开' : '关'}}</span>
-				<!-- <checkbox-group bindchange="changeBondType" data-bond-type='bond_type'>
-					<view class='checkbox' wx:for="{{bondType}}" wx:key="key">
-						<checkbox wx:key='' value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-					</view>
-				</checkbox-group> -->
+				<span class='triangle-icon {{bondTypeOpenFlag ? "triangle-up" : "triangle-down"}}'/>
 			</view>
 		</view>
 		<view class='{{bondTypeOpenFlag ? "checkbox-item-area" : "checkbox-item-area-hide"}}'>
@@ -132,8 +131,9 @@
 		<view class='label-area'>发行方式</view>
 		<view class='editor-area'>
 			<picker class='dropdown-btn' bindchange="changeIssuancemethod" value="{{issuanceMethodIndex1}}" range="{{issuanceMethodItem}}" data-issuance-method='issue_way'>
-				<span class='triangle-down down-icon'>
+				<span class='down-icon'>
 					<text>{{issuanceMethodItem[issuanceMethodIndex]}}</text>
+					<span class='triangle-icon triangle-down'/>
 				</span>
 			</picker>
 		</view>
@@ -144,8 +144,9 @@
 		<view class='label-area'>利率方式</view>
 		<view class='editor-area'>
 			<picker class='dropdown-btn rate-method-picker' bindchange="handleDropdownRateWay" value="{{rateWayIndex1}}" range="{{rateWayArray}}" data-rate-method='rate_way'>
-				<span class='triangle-down down-icon'>
+				<span class='down-icon'>
 					<text>{{rateWayArray[rateWayIndex]}}</text>
+					<span class='triangle-icon triangle-down rate-triangle-right'/>
 				</span>
 			</picker>
 			<view class="section {{rateReply ? 'on' : 'off'}}">
@@ -187,7 +188,7 @@
 		<view class='checkbox-flag-area'>
 			<view class='label-area'>特殊条款</view>
 			<view class='editor-area' bindtap='handleOpenSpecific'>
-				<span>{{specificOpenFlag ? '开' : '关'}}</span>
+				<span class='triangle-icon {{specificOpenFlag ? "triangle-up" : "triangle-down"}}'/>
 			</view>
 		</view>
 		<view class='{{specificOpenFlag ? "checkbox-item-area" : "checkbox-item-area-hide"}}'>
@@ -229,15 +230,4 @@
 		<text>请在电脑端完成上传附件操作</text>
 	</view>
 
-	<!-- <view class='mask_layer' bindtap='modal_click_Hidden' />  
-	<view class='modal_box'>  
-		<view class="title">提示</view>  
-		<view class='content'>  
-			<text class='modalMsg'>{{modalMsg}}</text>  
-		</view>  
-		<view class='btn'>  
-			<view bindtap='modal_click_Hidden' class='cancel'>取消</view>  
-			<view bindtap='Sure' class='Sure'>确定</view>  
-		</view>  
-	</view> -->
 </view> 
