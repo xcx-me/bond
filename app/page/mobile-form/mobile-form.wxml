@@ -1,2 +1,5 @@
-<!--app/page/mobile-form/mobile-form.wxml-->
-<text>app/page/mobile-form/mobile-form.wxml</text>
+<view class='mobile-form'>
+	<form-viewer-editor descriptors='{{descriptors}}' bind:changeDescriptors='onChangeDescriptors' />
+	<view bindtap='getMobileValidationCode'>获取验证码</view>
+	<button type='primary' bindtap='doSubmit'>下一步</button>
+</view>
