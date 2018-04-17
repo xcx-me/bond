@@ -1,0 +1,10 @@
+<view class='form-area'>
+	<view class='form-item text-input'>
+		<view class='label-area'>{{label}}</view>
+		<input value='{{value}}'
+			bindinput='handleInputChange'
+			placeholder='{{placeholder}}'
+			maxlength='{{maxlength}}'
+			data-field-name='{{fieldName}}' />
+	</view>
+</view>
