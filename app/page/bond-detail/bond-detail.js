@@ -14,7 +14,6 @@ Page({
 		isQtrade: false,
 		currentTabId: 'detail',
 		questionTotal: '0',
-		vUrl: '../../asset/image/qtrade/sprites_01.png',
 		winHeight: 0,
 		tabIdList:['detail', 'question', 'store'],
 		needUpdate: false

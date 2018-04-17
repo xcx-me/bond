@@ -10,7 +10,7 @@
 	</view>
 	<swiper current-item-id='{{currentTabId}}' class='content' duration='300' style='height: {{winHeight}}px' bindchange="bindChangeTab">
 			<swiper-item item-id='bond-list'>
-				<scroll-view class='pallet' scroll-y scroll-y  bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad"  bindscroll="scroll">
+				<scroll-view class='pallet' scroll-y bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad"  bindscroll="scroll">
 					<StoreRegister wx:if='{{!isRegistered}}' />
 					<StoreBondList wx:if='{{isRegistered}}' uid='{{uid}}' userId='{{userId}}' isMyStore='{{true}}' isQtrade='{{isQtrade}}' needUpdate='{{needUpdate}}'/>
 				</scroll-view>

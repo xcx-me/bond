@@ -9,7 +9,7 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-		bondSimpleName: '',
+		bondSimpleName: '', //编辑传送过来的简称
 		isOpenMyShop: true, // 是否开店
 		editorFlag: false, // 是否是债券编辑入口
 		sendQuoteData: {}, // 发布报价参数
@@ -140,9 +140,14 @@ Page({
 	 */
 	onLoad: function (options) {
 		// 获取点击编辑时传过来的债券简称，后续工作由孙庆完成
-		// this.setData({
-		// 	bondSimpleName: options.bname
-		// })
+		let bondSimpleName = options.bname
+		if (bondSimpleName) {
+			this.setData({
+				bondSimpleName: bondSimpleName,
+				editorFlag: bondSimpleName.length > 0
+			})
+		}
+		console.log('quotation onLoad....', options.bname)
 	},
 
 	/**

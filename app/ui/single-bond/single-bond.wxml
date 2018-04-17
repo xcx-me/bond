@@ -5,21 +5,21 @@
 	<block wx:for='{{bondFieldList}}' wx:for-item='bondItem' wx:key='name'>
 		<view class='pallet clearfix {{bondItem.name}}'>
 			<block wx:for='{{bondItem.value}}' wx:for-item='item' wx:key='name'>
-				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from}}'></template>
+				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from, type: "single-bond"}}'></template>
 			</block>
 		</view>
 	</block>
 	<view class='pallet clearfix footer'>	
 		<view wx:if='{{from === "store" || from === "detail"}}'>
-			<block wx:for='{{[{name:"click_num", label:"点击量："}, {name:"share_num", label:"被分享："}]}}' wx:for-item='item' wx:key='name'>
-				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo}}'></template>
+			<block wx:for='{{[{name:"click_num", image:"../../asset/image/qtrade/clicks_24.svg"}, {name:"share_num", image:"../../asset/image/qtrade/forward_24.svg"}]}}' wx:for-item='item' wx:key='name'>
+				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from,  type: "single-bond"}}'></template>
 			</block>
-			<icon class='icon-delete' size='20' wx:if='{{isMine}}' type='success' catchtap='onDeleteBond' data-bname='{{bondInfo.bond_simple_name}}' />	
+			<image class='icon-delete' src='../../asset/image/qtrade/delete_36.svg' wx:if='{{isMine}}' catchtap='onDeleteBond' data-bname='{{bondInfo.bond_simple_name}}' />	
 		</view>
 		<view wx:else >
 			<block wx:for='{{bondInfo.sale_array}}' wx:for-item='sale' wx:key='index'>
 				<view hidden='{{index >= maxSeller}}' class='sale-info'>
-					<template is='sellerInfoTpl' data='{{vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: sale.face_url, isZhuCheng: sale.is_zhu_cheng, isVUser:"1", userName: bondInfo.sale_array.length > 1 ? "" : sale.sale_name, companyName: bondInfo.sale_array.length > 1 ? "" : sale.company_name}}'></template>
+					<template is='sellerInfoTpl' data='{{faceUrl: sale.face_url, isZhuCheng: sale.is_zhu_cheng, isVUser:"1", userName: bondInfo.sale_array.length > 1 ? "" : sale.sale_name, companyName: bondInfo.sale_array.length > 1 ? "" : sale.company_name}}'></template>
 				</view>
 			</block>
 			<text class='overflow-data' wx:if='{{bondInfo.sale_array.length > maxSeller}}'>+{{bondInfo.sale_array.length - maxSeller}}</text>

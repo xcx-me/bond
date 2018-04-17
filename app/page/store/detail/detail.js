@@ -43,12 +43,6 @@ Component({
 			type: String,
 			value: ''
 		},
-	
-		vUrl: {
-			type: String,
-			value: ''
-		},
-		
 		isHiddenSeller: {
 			type: Boolean,
 			value: false
@@ -96,7 +90,6 @@ Component({
 						history_bond: '0',
 						user_id: '0',
 						url: this.data.navigatorUrl,
-						vUrl: this.data.vUrl,
 						sale_name: result.data.realname,
 						company_simple_name: result.data.company.simpleName
 					}

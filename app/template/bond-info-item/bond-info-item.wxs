@@ -1,7 +1,7 @@
 
 
 module.exports = {
-	parseValue: function(field, detailInfo, from) {
+	parseValue: function(field, detailInfo, type) {
 		var emptyValue = '--'
 		switch (field) {
 			case 'little_range':
@@ -20,13 +20,13 @@ module.exports = {
 				var leftValue = isNotLeftEmpty ? orginLeft : emptyValue;
 				var rightValue = isNotRightEmpty ? orginRight : emptyValue
 				var value = leftValue + '-' + rightValue
-				if (from === 'board' || from === 'store') {
+				if (type === 'single-bond') {
 					value = leftValue + '%-' + rightValue +'%' 
 				}
 				return value;
 			case 'issue_total':
 				var value = detailInfo[field] || '--'
-				if ((from === 'board' || from === 'store' )&& value !== '--') {
+				if ((type === 'single-bond')&& value !== '--') {
 					return value + '亿';
 				} else {
 					return value;

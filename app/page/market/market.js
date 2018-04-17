@@ -29,7 +29,6 @@ Page({
 		this.getBondList(this.data.currentTab, 1)
 	},
 
-
 	getBondList (currentTab, page) { // 询量
 		let bondStatus =  '1'
 		if (currentTab === 1) {
@@ -43,7 +42,6 @@ Page({
 			current_page: page || 1,
 			page_size: 25
 		}	
-
 		request(config.NEW_BOND.quotationBoard, Object.assign(postData, this.data.filterValue)).then((result) => {
 			if (String(result.data.ret) === '0') {
 				this.setData({
@@ -91,7 +89,14 @@ Page({
 		let currentTab = e.detail.current
 		this.setData({
 			currentTab: currentTab,
-			loading: true
+			loading: true,
+			filterValue: {
+				bond_type: 0,
+				deadline: 0,
+				subject_rating: 0,
+				date: common.formatDate(new Date()),
+				key: ''
+			}
 		});
 		this.getBondList(currentTab, 1)
 	},
@@ -110,6 +115,18 @@ Page({
 		}
 	},
 
+	bindDownLoad: function(e) {
+		console.log('market bindDownLoad.....')
+	},
+
+	topLoad: function(e) {
+		console.log('market topLoad.....')
+	},
+
+	scroll: function(e) {
+		console.log('market scroll...')
+	},
+
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
@@ -121,7 +138,6 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-
 	},
 
 	/**

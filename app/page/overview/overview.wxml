@@ -3,7 +3,6 @@
 	<loading wx:if="{{loading}}">加载中</loading>
 	<block hidden="{{loading}}">
 		<StoreDetail navigatorUrl='../my-configuration/my-configuration' 
-			vUrl='../../asset/image/qtrade/sprites_01.png' 
 			userId='{{uid}}'
 			isRegistered='{{storeRegistered}}'
 			needUpdate='{{needUpdate}}' 

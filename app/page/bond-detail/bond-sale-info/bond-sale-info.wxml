@@ -4,22 +4,21 @@
 <view class='bond-sale-info'>
 	<view class="header">
 		<text class="title">销售信息</text>
-		<button wx:if='{{isMyStore}}' class='btn-edit' size='mini' type='primary' bindtap='onEditSaleInfo'>编辑</button>
 	</view>
 	<view class='sale-list'>
 	<block wx:if='{{isQtrade}}'>
 		<block wx:for='{{bondSaleInfo}}' wx:for-item='saleInfo' wx:key='index'>
 			<view class='item'>
-				<template is='sellerInfoTpl' data='{{vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: saleInfo.logo, isVUser:false, userName: "", companyName: saleInfo.zhu_cheng, isBookKeeper: saleInfo.is_book_keeper === "1"}}'></template>			
+				<template is='sellerInfoTpl' data='{{faceUrl: saleInfo.logo, isVUser:false, userName: "", companyName: saleInfo.zhu_cheng, isBookKeeper: saleInfo.is_book_keeper === "1"}}'></template>			
 			</view>
 		</block>
 	</block>
 	<block wx:else>
 		<block wx:for='{{bondSaleInfo}}' wx:for-item='saleInfo' wx:key='index'>
 			<view class='item'>
-				<template is='sellerInfoTpl' data='{{vUrl: "/app/asset/image/qtrade/sprites_01.png", faceUrl: saleInfo.face_url, isVUser:saleInfo.v_user, userName: saleInfo.sale_name, companyName: saleInfo.company_name}}'></template>
+				<template is='sellerInfoTpl' data='{{faceUrl: saleInfo.face_url, isVUser:saleInfo.v_user, userName: saleInfo.sale_name, companyName: saleInfo.company_name}}'></template>
 				<block wx:for='{{fieldList}}' wx:for-item='item' wx:key='name'>
-					<template is='bondInfoItemTpl' data='{{item: item, bondInfo: saleInfo}}'></template>
+					<template is='bondInfoItemTpl' data='{{item: item, bondInfo: saleInfo, from: "bond-sale-info"}}'></template>
 				</block>
 			</view>
 		</block>

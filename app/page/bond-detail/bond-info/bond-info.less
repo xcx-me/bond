@@ -2,42 +2,64 @@
 .bond-info-component {
 	position: relative;
 
-	.btn-edit {
-		position: absolute;
-		top: 10rpx;
-		right: 8rpx;
-		line-height: 36rpx;
-		padding: 3rpx 20rpx;
-		background: none;
-		border: 1px solid #2196F3;
-		color: #2196F3;	
-	}
-
 	.info-item {
 		background: #FFFFFF;
 		margin-top: 20rpx;
 		margin-bottom: 20rpx;
-		padding: 10rpx 20rpx;
+		padding: 0 0 0 30rpx;
+		overflow: hidden;
+		position: relative;
 	}
 
-	.bond-item {
-		height: 70rpx;
-		line-height: 70rpx;
+	.btn-edit {
+		position: absolute;
+		top: 30rpx;
+		right: 30rpx;
+
+		.icon-modify {
+			width: 24rpx;
+			height: 24rpx;
+			margin-right: 10rpx;	
+		}
+
+		text {
+			font-size:28rpx;
+			color:#576B95;
+		}
+	}
+	
+	.row {
+		line-height: 50rpx;
 		padding-top: 0;
 		padding-bottom: 0;
 		border-bottom: 1rpx solid #E5E5E5;
+		overflow: hidden;
 
-		.label {
-			color: #888888;
-			width: 140rpx;
+		.bond-item {
 			float: left;
+			width: calc(~'50% - 30rpx');
+			padding: 0 15rpx 0 0;
+
+			&.bond_simple_name {
+				width: 100%;
+			}
+	
+			.label {
+				color: #888888;
+				width: 156rpx;
+				display: block;
+			}
+	
+			.value {
+				display: block;
+				font-size:28rpx;
+				font-family:PingFangSC-Regular;
+				color:rgba(0,0,0,1);
+			}
 		}
 
-		.value {
-			float: left;
-			font-size:28rpx;
-			font-family:PingFangSC-Regular;
-			color:rgba(0,0,0,1);
+		&:last-child {
+			border-bottom: none;
 		}
 	}
 }

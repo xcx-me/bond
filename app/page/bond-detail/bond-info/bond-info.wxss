@@ -4,40 +4,62 @@
 .bond-info-item-tpl .label {
   color: #999999;
 }
+.bond-info-item-tpl .icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 10rpx;
+}
 .bond-info-component {
   position: relative;
-}
-.bond-info-component .btn-edit {
-  position: absolute;
-  top: 10rpx;
-  right: 8rpx;
-  line-height: 36rpx;
-  padding: 3rpx 20rpx;
-  background: none;
-  border: 1px solid #2196F3;
-  color: #2196F3;
 }
 .bond-info-component .info-item {
   background: #FFFFFF;
   margin-top: 20rpx;
   margin-bottom: 20rpx;
-  padding: 10rpx 20rpx;
+  padding: 0 0 0 30rpx;
+  overflow: hidden;
+  position: relative;
 }
-.bond-info-component .bond-item {
-  height: 70rpx;
-  line-height: 70rpx;
+.bond-info-component .btn-edit {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+}
+.bond-info-component .btn-edit .icon-modify {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 10rpx;
+}
+.bond-info-component .btn-edit text {
+  font-size: 28rpx;
+  color: #576B95;
+}
+.bond-info-component .row {
+  line-height: 50rpx;
   padding-top: 0;
   padding-bottom: 0;
   border-bottom: 1rpx solid #E5E5E5;
+  overflow: hidden;
 }
-.bond-info-component .bond-item .label {
+.bond-info-component .row .bond-item {
+  float: left;
+  width: calc(50% - 30rpx);
+  padding: 0 15rpx 0 0;
+}
+.bond-info-component .row .bond-item.bond_simple_name {
+  width: 100%;
+}
+.bond-info-component .row .bond-item .label {
   color: #888888;
-  width: 140rpx;
-  float: left;
+  width: 156rpx;
+  display: block;
 }
-.bond-info-component .bond-item .value {
-  float: left;
+.bond-info-component .row .bond-item .value {
+  display: block;
   font-size: 28rpx;
   font-family: PingFangSC-Regular;
   color: #000000;
+}
+.bond-info-component .row:last-child {
+  border-bottom: none;
 }
