@@ -15,7 +15,7 @@ Page({
 		sendQuoteData: {}, // 发布报价参数
 		submitQuoteBtnEnable: false,
 		warningShowText: false,
-		warningText: '数据没有填写完毕，请完善'
+		warningText: '格式输入错误，请重新输入'
 	},
 
 	openMyShop: function () {
@@ -25,28 +25,47 @@ Page({
 	},
 
 	handleSendQuote () { // 发布报价
-
-		console.log(this.data.sendQuoteData)
-
-		if (JSON.stringify(this.data.sendQuoteData) !== '{}') {
-			if (this.data.sendQuoteData.bond_simple_name === '') {
-				// common.showToast('请输入债券简称', 'none', 2000)
-
+		let submitData = this.data.sendQuoteData
+		// console.log(submitData)
+		if (JSON.stringify(submitData) !== '{}') {
+			if (Number(submitData.left_benefit) > Number(submitData.right_benefit)) { // 参考收益
+				this.showWraningText()
+				return
+			}
+			if (!this.checkRatingFormat(submitData.subject_rating)) { // 主体评级
+				this.showWraningText()
+				return
+			}
+			if (!this.checkRatingFormat(submitData.facility_rating)) { // 债项评级
+				this.showWraningText()
+				return
+			}
+			if (!this.checkDeadlineFormat(submitData.deadline)) { // 发行期限
 				this.showWraningText()
 				return
 			}
 
-			if (this.data.sendQuoteData.left_benefit === '' && this.data.sendQuoteData.right_benefit === '') {
-				common.showToast('请输入参考收益', 'none', 2000)
-				return
-			}
+			this.sendQuoteRequest(submitData)
+		}else {
+			common.showToast('数据填写有误', 'none', 2000)
+		}
+	},
 
-			// ...
-
-			this.sendQuoteRequest(this.data.sendQuoteData)
+	checkRatingFormat: function (value) {// 校验 主债评级格式
+		let reg = /^[a-zA-Z]{1,3}[+-]?$/
+		if (reg.test(value)) {
+			return true
 		} else {
-			// this.showWraningText()
-			common.showToast('数据没有填写完毕，请完善', 'none', 2000)
+			return false
+		}
+	},
+
+	checkDeadlineFormat: function (value) { // 校验 发行期限
+		let reg = /(^[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?)([dymDYM]{1}$)|([dymDYM]{1}[+]{1}[a-zA-Z]$)|([dymDYM]{1}[+]{1}[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?[dymDYM]{1}$)/
+		if (reg.test(value)) {
+			return true
+		}else {
+			return false
 		}
 	},
 
@@ -76,7 +95,7 @@ Page({
 
 	// 获取债券详情。。。。。。。。。。
 	associateBondDetails: function () {
-		console.log('bondDetailsName： ', this.data.sendQuoteData.bond_simple_name)
+		// console.log('bondDetailsName： ', this.data.sendQuoteData.bond_simple_name)
 
 		request(config.NEW_BOND.associateBond, {bond_simple_name: this.data.sendQuoteData.bond_simple_name}).then((result) => {
 			if (String(result.data.ret) === '0') {
@@ -87,17 +106,21 @@ Page({
 				formData.right_benefit = resultData.right_benefit
 
 				this._setNewQuoteData(formData)
-				console.log(this.data.sendQuoteData)
+				// console.log(this.data.sendQuoteData)
 			} else {
 				common.showToast(result.data.retmsg, 'none', 2000)
 			}
 		}).catch(() => {
-			common.showToast('请求错误222', 'none', 2000)
+			common.showToast('请求错误', 'none', 2000)
 		})
 	},
 
 	_changeValue: function (e) { // 获取发布报价参数
 		let detail = e.detail
+
+		this.setData({
+			sendQuoteData: detail
+		})
 
 		// “发布报价” 按钮是否可用
 		if (detail.bond_simple_name !=='' && (detail.left_benefit !=='' || detail.right_benefit !=='') && detail.subject_rating !=='' && detail.facility_rating !=='' && detail.deadline !=='' && detail.issue_total !=='') {
@@ -109,10 +132,6 @@ Page({
 				submitQuoteBtnEnable: false
 			})
 		}
-
-		this.setData({
-			sendQuoteData: detail
-		})
 		// console.log('isShowBTn: ', this.data.submitQuoteBtnEnable)
 		// console.log('_changeValue....', detail)
 	},

@@ -1,4 +1,5 @@
 .bond-form-editor {
+  padding-left: 30rpx;
   font-size: 34rpx;
 }
 .bond-form-editor view {
@@ -6,7 +7,8 @@
   line-height: 48rpx;
 }
 .bond-form-editor .form-editor-top {
-  padding: 20rpx 30rpx;
+  padding: 24rpx 30rpx 6rpx;
+  margin-left: -30rpx;
   font-size: 28rpx;
   color: #888888;
   background-color: #F1F1F1;
@@ -23,7 +25,7 @@
   height: 48rpx;
 }
 .bond-form-editor .row-item {
-  padding: 20rpx 30rpx;
+  padding: 20rpx 0;
   border-bottom: 1rpx solid #E5E5E5;
 }
 .bond-form-editor .label-area {
@@ -171,15 +173,18 @@
   color: #B2B2B2;
 }
 .bond-form-editor .upload-fiel {
-  padding: 12rpx 30rpx;
+  display: block;
+  padding: 12rpx 0;
+}
+.bond-form-editor .upload-fiel .attention-icon {
+  display: inline-block;
+  width: 34rpx;
+  height: 34rpx;
+  margin-right: 10rpx;
+  line-height: 48rpx;
+  vertical-align: middle;
 }
 .bond-form-editor .upload-fiel text {
   font-size: 28rpx;
-}
-.test-icon {
-  display: inline-block;
-  width: 50rpx;
-  height: 50rpx;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000000' height='24' viewBox='0 0 24 24' width='24'%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3Cpath d='M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z'/%3E %3C/svg%3E");
-  background-size: cover;
+  color: #888888;
 }
