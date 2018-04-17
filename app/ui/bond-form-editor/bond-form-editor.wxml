@@ -89,7 +89,8 @@
 		<view class='editor-area'>
 			<picker class='time-picker-area' mode="multiSelector" value="{{dateTime}}" bindchange='changeDateTime' range="{{dateTimeArray}}" data-input-name='bid_end'>
 				<view class='time-select-picker'>
-					{{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
+					<!-- {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}} -->
+					{{formData.bid_end}}
 					<span class='calendar-icon'></span>
 				</view>
 			</picker>
@@ -226,7 +227,7 @@
 
 	<!-- 上传附件 -->
 	<view class='upload-fiel'>
-		<!-- <icon type='warn' size='28'/> -->
+		<image class='attention-icon' src='../../asset/image/qtrade/attention_32.svg' />
 		<text>请在电脑端完成上传附件操作</text>
 	</view>
 

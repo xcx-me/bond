@@ -79,11 +79,13 @@ Component({
 
 	ready: function() {
 		service.getBondAssociate(this.data.bondSimpleName, (result)=>{
-			result.data.retdata.bond_simple_name = this.data.bondSimpleName
-			this.setData({
-				formData: result.data.retdata
-			})
-			this.triggerEvent('changeValueEvent', formData)
+			if (JSON.stringify(result.data.retdata) !== '{}') {
+				result.data.retdata.bond_simple_name = this.data.bondSimpleName
+				this.setData({
+					formData: result.data.retdata
+				})
+				this.triggerEvent('changeValueEvent', formData)
+			}
 		})
 	},
 
@@ -91,7 +93,6 @@ Component({
 		simpleNameChange: function (e) {
 			let formData = this.data.formData
 			formData.bond_simple_name = e.detail.value
-
 			this.setData({
 				formData: formData
 			})
@@ -107,21 +108,23 @@ Component({
 			} else if (e.currentTarget.dataset.inputName === 'right_benefit') { // 参考收益 右值
 				let val = e.detail.value
 				this.benifitValueChange(val, 'right_benefit')
-			} else if (e.currentTarget.dataset.inputName === 'subject_rating' || e.currentTarget.dataset.inputName === 'facility_rating') { // 主债评级
+			} else if (e.currentTarget.dataset.inputName === 'issue_total') { // 发行量
 				let val = e.detail.value
-				let reg = /^[a-zA-Z]{1,3}[+-]?$/
+				let reg = /^\d{0,5}(\.\d{0,4})?$/g
 				if (reg.test(val)) {
+					if (val !== '' && val.substring(0, 1) === '.') {
+						val = ''
+						formData[e.currentTarget.dataset.inputName] = ''
+					}
+					val = val.replace(/[^\d.]/g, '')
+					val = val.replace(/\.{2,}/g, '.')
+					val = val.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.')
+					if (val.indexOf('.') < 0 && val !== '' && val.substring(0, 1) === '0' && val.length === 2) {
+						val = val.substring(1, val.length)
+					}
 					formData[e.currentTarget.dataset.inputName] = val
 				}
-			}
-			// else if (e.currentTarget.dataset.inputName === 'deadline') { // 发行期限
-			// 	let val = e.detail.value
-			// 	let reg = /(^[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?)([dymDYM]{1}$)|([dymDYM]{1}[+]{1}[a-zA-Z]$)|([dymDYM]{1}[+]{1}[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?[dymDYM]{1}$)/
-			// 	if (reg.test(val)) {
-			// 		formData[e.currentTarget.dataset.inputName] = val
-			// 	}
-			// }
-			else {
+			}else {
 				formData[e.currentTarget.dataset.inputName] = e.detail.value
 			}
 
@@ -129,7 +132,7 @@ Component({
 				formData: formData
 			})
 
-			console.log(this.data.formData)
+			// console.log(this.data.formData)
 			this.triggerEvent('changeValueEvent', formData)
 		},
 
@@ -141,7 +144,6 @@ Component({
 					val = ''
 					formData[currentDataSet] = ''
 				}
-
 			 	return	formData[currentDataSet] = val
 			}
 		},
@@ -154,7 +156,8 @@ Component({
 				dateTime: e.detail.value
 			});
 			this.triggerEvent('changeValueEvent', formData)
-			// console.log(this.data.formData.closingTime)
+	
+			console.log(this.data.formData.bid_end)
 		},
 
 		// 上市地点
