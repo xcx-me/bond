@@ -13,6 +13,10 @@ Component({
 		bondSimpleName: {
 			type: String,
 			value: ''
+		},
+		highLight: {
+			type: String,
+			value: ''
 		}
 	},
 
@@ -118,6 +122,9 @@ Component({
 			if (e.currentTarget.dataset.inputName === 'left_benefit') { // 参考收益 左值
 				let val = e.detail.value
 				this.benifitValueChange(val, 'left_benefit')
+
+				this.triggerEvent('changeHighLightState', e.detail.value) //......
+
 			} else if (e.currentTarget.dataset.inputName === 'right_benefit') { // 参考收益 右值
 				let val = e.detail.value
 				this.benifitValueChange(val, 'right_benefit')
