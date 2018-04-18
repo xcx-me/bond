@@ -11,7 +11,7 @@ Page({
 	data: {
 		bondSimpleName: '', //编辑传送过来的简称
 		isOpenMyShop: true, // 是否开店
-		editorFlag: false, // 是否是债券编辑入口
+		isEditEntry: false, // 是否是债券编辑入口
 		sendQuoteData: {}, // 发布报价参数
 		submitQuoteBtnEnable: false,
 		warningShowText: false,
@@ -26,7 +26,9 @@ Page({
 
 	handleSendQuote () { // 发布报价
 		let submitData = this.data.sendQuoteData
-		// console.log(submitData)
+
+		console.log(submitData)
+		
 		if (JSON.stringify(submitData) !== '{}') {
 			if (Number(submitData.left_benefit) > Number(submitData.right_benefit)) { // 参考收益
 				this.showWraningText()
@@ -51,7 +53,7 @@ Page({
 		}
 	},
 
-	checkRatingFormat: function (value) {// 校验 主债评级格式
+	checkRatingFormat: function (value) {
 		let reg = /^[a-zA-Z]{1,3}[+-]?$/
 		if (reg.test(value)) {
 			return true
@@ -59,8 +61,8 @@ Page({
 			return false
 		}
 	},
-
-	checkDeadlineFormat: function (value) { // 校验 发行期限
+	 
+	checkDeadlineFormat: function (value) {
 		let reg = /(^[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?)([dymDYM]{1}$)|([dymDYM]{1}[+]{1}[a-zA-Z]$)|([dymDYM]{1}[+]{1}[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?[dymDYM]{1}$)/
 		if (reg.test(value)) {
 			return true
@@ -94,52 +96,36 @@ Page({
 	},
 
 	// 获取债券详情。。。。。。。。。。
-	associateBondDetails: function () {
-		// console.log('bondDetailsName： ', this.data.sendQuoteData.bond_simple_name)
+	// associateBondDetails: function () {
+	// 	// console.log('bondDetailsName： ', this.data.sendQuoteData.bond_simple_name)
+	// 	request(config.NEW_BOND.associateBond, {bond_simple_name: this.data.sendQuoteData.bond_simple_name}).then((result) => {
+	// 		if (String(result.data.ret) === '0') {
+	// 			console.log(result.data.retdata)
+	// 			let resultData = result.data.retdata
+	// 			let formData = this.data.sendQuoteData
+	// 			formData.left_benefit = resultData.left_benefit
+	// 			formData.right_benefit = resultData.right_benefit
 
-		request(config.NEW_BOND.associateBond, {bond_simple_name: this.data.sendQuoteData.bond_simple_name}).then((result) => {
-			if (String(result.data.ret) === '0') {
-				console.log(result.data.retdata)
-				let resultData = result.data.retdata
-				let formData = this.data.sendQuoteData
-				formData.left_benefit = resultData.left_benefit
-				formData.right_benefit = resultData.right_benefit
-
-				this._setNewQuoteData(formData)
-				// console.log(this.data.sendQuoteData)
-			} else {
-				common.showToast(result.data.retmsg, 'none', 2000)
-			}
-		}).catch(() => {
-			common.showToast('请求错误', 'none', 2000)
-		})
-	},
+	// 			this._setNewQuoteData(formData)
+	// 			// console.log(this.data.sendQuoteData)
+	// 		} else {
+	// 			common.showToast(result.data.retmsg, 'none', 2000)
+	// 		}
+	// 	}).catch(() => {
+	// 		common.showToast('请求错误', 'none', 2000)
+	// 	})
+	// },
 
 	_changeValue: function (e) { // 获取发布报价参数
 		let detail = e.detail
-
 		this.setData({
-			sendQuoteData: detail
+			sendQuoteData: detail,
+			submitQuoteBtnEnable: detail.bond_simple_name !=='' && (detail.left_benefit !=='' || detail.right_benefit !=='') && detail.subject_rating !=='' && detail.facility_rating !=='' && detail.deadline !=='' && detail.issue_total !==''
 		})
 
-		// “发布报价” 按钮是否可用
-		if (detail.bond_simple_name !=='' && (detail.left_benefit !=='' || detail.right_benefit !=='') && detail.subject_rating !=='' && detail.facility_rating !=='' && detail.deadline !=='' && detail.issue_total !=='') {
-			this.setData({
-				submitQuoteBtnEnable: true
-			})
-		} else {
-			this.setData({
-				submitQuoteBtnEnable: false
-			})
-		}
 		// console.log('isShowBTn: ', this.data.submitQuoteBtnEnable)
 		// console.log('_changeValue....', detail)
 	},
-
-	// showDialog() {
-	// 	this.dialog = this.selectComponent('#dialog')
-	// 	this.dialog.showDialog();
-	// },
 
 	//取消事件
 	_cancelEvent() {
@@ -158,15 +144,14 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		// 获取点击编辑时传过来的债券简称，后续工作由孙庆完成
 		let bondSimpleName = options.bname
 		if (bondSimpleName) {
 			this.setData({
 				bondSimpleName: bondSimpleName,
-				editorFlag: bondSimpleName.length > 0
+				isEditEntry: bondSimpleName.length > 0
 			})
 		}
-		console.log('quotation onLoad....', options.bname)
+		// console.log('quotation onLoad....', options.bname)
 	},
 
 	/**
