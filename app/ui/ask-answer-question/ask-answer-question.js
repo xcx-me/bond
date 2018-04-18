@@ -29,7 +29,6 @@ Component({
    	*/
  	 data: {
 		  content: '',
-		  errTips: '',
 		  isSubmitDisabled: true
   	},
 
@@ -56,24 +55,18 @@ Component({
 
 		onFormSubmit: function(e) {
 			let content = this.data.content
-			if (content.replace(/(^\s*)|(\s*$)/g, '').length === 0) {
-				this.setData({
-					errTips: '输入为空'
+			if (this.data.isAsk) {
+				service.doAsk(this.data.bondSimpleName, this.data.content, this.data.userId, (result)=>{
+					this.onSuccess()
+				}, (result) => {
+					this.onFailed(result)
 				})
-			}else {
-				if (this.data.isAsk) {
-					service.doAsk(this.data.bondSimpleName, this.data.content, this.data.userId, (result)=>{
-						this.onSuccess()
-					}, (result) => {
-						this.onFailed(result)
-					})
-				} else {
-					service.doAnswer(this.data.askId, this.data.content, (result)=>{
-						this.onSuccess()
-					}, (result) => {
-						this.onFailed(result)
-					})
-				}
+			} else {
+				service.doAnswer(this.data.askId, this.data.content, (result)=>{
+					this.onSuccess()
+				}, (result) => {
+					this.onFailed(result)
+				})
 			}
 		},
 	

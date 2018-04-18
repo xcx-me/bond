@@ -1,12 +1,29 @@
 <!--app/page/edit-sale-info/edit-sale-info.wxml-->
-<view class='edit-sale-info-page'>
+<loading wx:if='{{loading}}'>数据加载中...</loading>
+<view class='edit-sale-info-page' wx:if='{{!loading}}'>
 	<view class='header'>
 		<text>{{saleInfo.bond_simple_name}}</text>
 	</view>
 	<view class='form-edit'>
-		<block wx:for='' wx:for-item="item" >
-		<view>
-		</view>
+		<block wx:for='{{fieldList}}' wx:for-item='fieldItem' wx:key='name'>
+			<view class='form-item'>
+				<view class='label'>
+					<text>{{fieldItem.label}}</text>
+				</view>
+				<view class='input-area'>
+					<block wx:for='{{fieldItem.types}}' wx:for-item='formItem' wx:key='index'>
+						<text class='split-line' wx:if='{{index > 0}}'>-</text>
+						<input class='{{formItem.postfix ? "has-postfix" : ""}}' wx:if='{{formItem.formType === "input"}}' data-name='{{formItem.name}}' focus='{{index === 0}}' maxlength='{{formItem.maxlength}}' type='{{formItem.type}}' value='{{saleInfo[formItem.name]}}' placeholder='{{formItem.placeholder}}' bindinput='onInput'/>
+						<text class='postfix' wx:if='{{formItem.postfix}}'>{{formItem.postfix}}</text>
+						<checkbox-group class="checkbox-group" bindchange="onCheckboxChange" data-name='{{formItem.name}}' wx:if='{{formItem.formType === "checkbox"}}'>
+							<label class="checkbox" wx:for="{{formItem.items}}" wx:key='name'>
+								<checkbox value="{{item.value}}" checked="{{item.value === saleInfo[formItem.name]}}" color='#2196F3'/>{{item.label}}
+							</label>
+						</checkbox-group>
+					</block>
+				</view>
+			</view>
 		</block>
 	</view>
+	<button class='btn-save {{isSubmitDisabled ? "disabled" : ""}}' hover-class='button-hover' type='primary' disabled="{{isSubmitDisabled}}" bindtap='onFormSubmit'>保存</button>
 </view>

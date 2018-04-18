@@ -5,3 +5,58 @@
   color: #353535;
   line-height: 48rpx;
 }
+.edit-sale-info-page .form-edit {
+  padding-left: 30rpx;
+  background: #FFFFFF;
+  overflow: hidden;
+  font-size: 34rpx;
+}
+.edit-sale-info-page .form-edit view {
+  display: flex;
+  line-height: 48rpx;
+}
+.edit-sale-info-page .form-edit .form-item {
+  width: 100%;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #E5E5E5;
+}
+.edit-sale-info-page .form-edit .form-item:last-child {
+  border-bottom: none;
+}
+.edit-sale-info-page .form-edit .form-item .label {
+  float: left;
+  width: 200rpx;
+}
+.edit-sale-info-page .form-edit .form-item .input-area {
+  float: left;
+  width: calc(100% - 200rpx);
+}
+.edit-sale-info-page .form-edit .form-item .input-area .split-line {
+  margin: 0 15rpx;
+}
+.edit-sale-info-page .form-edit .form-item .input-area input {
+  width: 100%;
+}
+.edit-sale-info-page .form-edit .form-item .input-area input.has-postfix {
+  width: 80%;
+}
+.edit-sale-info-page .form-edit .form-item .input-area .postfix {
+  color: #B2B2B2;
+}
+.edit-sale-info-page .form-edit .form-item .input-area .checkbox {
+  margin-right: 60rpx;
+}
+.edit-sale-info-page button {
+  margin-top: 60rpx;
+  width: 670rpx;
+  color: #FFFFFF;
+  background-color: #2196F3;
+  border-radius: 10rpx;
+}
+.edit-sale-info-page button.disabled {
+  background-color: #2196F3;
+  opacity: 0.4;
+}
+.edit-sale-info-page .button-hover {
+  background-color: #2196F3;
+}
