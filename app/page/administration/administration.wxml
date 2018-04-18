@@ -1,28 +1,24 @@
 <view class='administration-page'>
-	<view bindtap='createQuotation'>发布</view>
 	<loading wx:if='{{loading}}'>加载中</loading>
-	<scroll-view hidden='{{loading}}' class='bond-list-pallet' scroll-y scroll-x="{{false}}">
-		<view class='header clearfix'>
-			<text class='item'>债券简称</text>
-			<text class='item'>小区间(%)</text>
-			<text class='item operator'>操作</text>
-		</view>
-		<view class='content clearfix'>
-			<block wx:for='{{bondList}}' wx:for-item='bondItem' wx:for-index='index' wx:key='index'>
-				<view class='bond-content'>
-					<view class='item name'><text>{{bondItem.bond_simple_name}}</text></view>
-					<view class='item little-range'><text>{{bondItem.little_left}}~{{bondItem.little_right}}</text></view>
-					<view class='item operator'>
-						<button class='btn-modify' size='mini' type='primary' bindtap='onModifyBond' data-index='{{index}}'>修改</button>
-						<button class='btn-more' size='mini' type='primary'  bindtap='onSeeMore' data-index='{{index}}'>更多</button>
-					</view>
-				</view>
-			</block>
-		</view>
-	</scroll-view>
-	<view>
-		 <navigator class='bond-send-quote' url='../quotation/quotation'>
-		 	<span class='iconfont icon-plus-with-circle'></span>
-		 </navigator>
-	</view>
+	<block wx:else>
+		<block wx:if='{{!isStoreRegistered}}'>
+			<StoreRegister type='page' />
+		</block>
+		<block wx:else>
+			<view class='to-quotation' bindtap='createQuotation'>
+				<image src='../../asset/image/qtrade/release_36.svg' />
+				<text>发布报价</text>
+				<i class='icon-right-arrow' />
+			</view>
+			<scroll-view hidden='{{loading}}' class='bond-list-pallet' scroll-y bindscroll="onScroll">
+				<BondList from='admin'
+					isMine='{{true}}'
+					bondList='{{bondList}}'
+					uid='0'
+					userId='' 
+					bind:modifyBondEvent='onModifyBondEvent'
+					bind:deleteBondEvent='onDeleteBondEvent'/>
+			</scroll-view>
+		</block>
+	</block>
 </view>

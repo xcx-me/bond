@@ -1,5 +1,6 @@
 {
 	"usingComponents": {
-		"DataListDisplay": "../../ui/data-list-display/data-list-display"
+		"BondList": "../../ui/list/bond-list/bond-list",
+		"StoreRegister": "../../page/store/register-store/register-store"
 	}
 }

@@ -93,7 +93,8 @@ Page({
 	sendQuoteRequest: function (params) {
 		request(config.NEW_BOND.sendBond, params).then((result) => {
 			if (String(result.data.ret) === '0') {
-				common.showToast('发布成功！', 'success', 2000)
+				common.showToast('发布报价成功！', 'success', 2000)
+				wx.navigateBack()
 			} else {
 				common.showToast(result.data.retmsg, 'none', 2000)
 			}

@@ -3,3 +3,39 @@
 		margin-top: 20rpx;
 	}
 }
+
+.operator-pallet {
+	position: fixed;
+	top: 0;
+	right: 140rpx;
+	width: 356rpx;
+	background: #FFFFFF;
+	border: 1px solid #fff;
+	border-radius: 6rpx ; 
+    box-shadow: 0 1rpx 10rpx rgba(0,0,0, 0.1);
+	z-index: 101;
+
+	.operator-item {
+		padding: 24rpx 18rpx;
+		font-size:30rpx;
+		font-family:PingFangSC-Regular;
+		color:rgba(0,0,0,1);
+		border-bottom: 1px solid #DDDDDD;
+		
+		image {
+			width: 36rpx;
+			height: 36rpx;
+			position: relative;
+			top: 2rpx;
+			margin-right: 18rpx;
+		}
+
+		&:hover{
+			background: #F7F7F7;
+		}
+
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+}

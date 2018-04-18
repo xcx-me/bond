@@ -29,43 +29,44 @@ Component({
    	*/
  	 data: {
 		  content: '',
-		  errTips: ''
+		  isSubmitDisabled: true
   	},
 
 	methods: {
-		bindTextAreaBlur: function(e) {
+		onTextAreaBlur: function(e) {
 			let content = e.detail.value
 			this.setData({
 				content: content
 			}) 
 		},
 
-		bindFocus: function (e) {
+		onFocus: function (e) {
 			this.setData({
 				errTips: ''
 			})
 		},
 	
-		bindFormSubmit: function(e) {
+		onInput: function (e) {
+			let value = e.detail.value.replace(/(^\s*)|(\s*$)/g, '')
+			this.setData({
+				isSubmitDisabled: value.length === 0
+			})
+		},
+
+		onFormSubmit: function(e) {
 			let content = this.data.content
-			if (content.replace(/(^\s*)|(\s*$)/g, '').length === 0) {
-				this.setData({
-					errTips: '输入为空'
+			if (this.data.isAsk) {
+				service.doAsk(this.data.bondSimpleName, this.data.content, this.data.userId, (result)=>{
+					this.onSuccess()
+				}, (result) => {
+					this.onFailed(result)
 				})
-			}else {
-				if (this.data.isAsk) {
-					service.doAsk(this.data.bondSimpleName, this.data.content, this.data.userId, (result)=>{
-						this.onSuccess()
-					}, (result) => {
-						this.onFailed(result)
-					})
-				} else {
-					service.doAnswer(this.data.askId, this.data.content, (result)=>{
-						this.onSuccess()
-					}, (result) => {
-						this.onFailed(result)
-					})
-				}
+			} else {
+				service.doAnswer(this.data.askId, this.data.content, (result)=>{
+					this.onSuccess()
+				}, (result) => {
+					this.onFailed(result)
+				})
 			}
 		},
 	
@@ -94,10 +95,6 @@ Component({
 			} else {
 				common.showFailedToast('系统繁忙，请稍后再试')
 			}
-		},
-
-		onCancel: function () {
-			this.onNavigateBack()
-		},
+		}
 	}
 })

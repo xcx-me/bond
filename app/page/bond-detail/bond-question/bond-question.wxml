@@ -8,15 +8,17 @@
 		<block wx:for='{{questionList}}' wx:for-item='questionItem' wx:key='ask_id'>
 			<view class="question-item clearfix">
 				<view class='icon'><view /></view>
-				<view class='content'>
-					<text>问：{{questionItem.content}}</text>
-					<button class='btn-answer btn-no-border' plain size='mini' type='default' bindtap='onAnswer' data-id='{{questionItem.ask_id}}'>去回答</button>
-					<view class='answer-list' wx:if='{{questionItem.ans_array.length > 0}}'>
-						<BondAnswer answerList='{{questionItem.ans_array}}' bind:thumbEvent='_onThumbEvent'/>
-					</view>
+				<view class='question-content'>
+					<text class="content-title">问：</text>
+					<text class="content-text">{{questionItem.content}}</text>
+					<button class='btn-answer btn-no-border' plain size='mini' type='default' bindtap='onAnswer' data-id='{{questionItem.ask_id}}' data-question='{{questionItem.content}}'>去回答</button>
+				</view>
+				<view class='answer-list' wx:if='{{questionItem.ans_array.length > 0}}'>
+					<BondAnswer answerList='{{questionItem.ans_array}}' bind:thumbEvent='_onThumbEvent'/>
 				</view>
 			</view>
 		</block>
 	</view>
 </view>
+
 

@@ -1,5 +1,5 @@
 .bond-question {
-	padding: 0 0 0 30rpx;
+	padding: 10rpx 0 20rpx 30rpx;
 	background: #FFFFFF;
 	font-size: 28rpx;
 
@@ -37,7 +37,8 @@
 			float: left;
 			width: 100%;
 			padding:10rpx 0;
-			border-left: 1px solid #CCCCCC;
+			margin-bottom: 20rpx;
+			border-left: 1px solid #E5E5E5;
 
 			.icon {
 				position:relative;
@@ -46,38 +47,56 @@
 				margin-right:10rpx;
 				left: -8rpx;
 
-
 				view {
-					width: 18rpx;
-					height: 18rpx;
+					width: 13rpx;
+					height: 13rpx;
 					border-radius: 50%;
-					background: #CCCCCC;
+					background: #E5E5E5;
 				}
 			}
 
-			.content {
+			.question-content {
 				float: left;
 				width: calc(~'100% - 20px');
 				font-size: small;
 				
+				.content-title,
+				.content-text,
+				.btn-answer {
+					float: left;
+				}
+
+				.content-title {
+					width: 60rpx;
+				}
+
+				.content-text {
+					width: calc(~'100% - 160rpx');
+				}
+
 				text {
 					line-height: 36rpx;
 				}
+
+				.btn-answer {
+					position:relative;
+					line-height: 36rpx;
+					width: 100rpx;
+					padding-left: 0;
+					padding-right: 0;
+					background: none;
+					border: none;
+					outline: none;
+					color: #2196F3;
+				}
 			}
 
-			.btn-answer {
-				position:relative;
-				top: 8rpx;
-				line-height: 36rpx;
-				background: none;
-				border: none;
-				outline: none;
-				color: #2196F3;
+			.answer-list {
+				float: left;
+				width: calc(~'100% - 50rpx');
+				padding-left: 20rpx;
+				margin-top: 20rpx;
 			}
 		}
-	}
-
-	.answer-list {
-		margin-top: 10rpx;
 	}
 }

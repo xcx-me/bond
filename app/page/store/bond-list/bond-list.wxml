@@ -8,7 +8,7 @@
 			bondList='{{bondList}}'
 			uid='{{uid}}'
 			userId='{{userId}}'
-			bind:deleteBondEvent='_deleteBondEvent'
+			bind:deleteBondEvent='onDeleteBondEvent'
 		/>
 	</view>
 </view>

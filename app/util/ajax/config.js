@@ -201,6 +201,10 @@ module.exports = {
 		thumbQuestion: {
 			url: '/qtrade_bond/api/newbond/thumb.do',
 			method: POST
+		},
+		getSaleInfo: {
+			url: '/qtrade_bond/api/newbond/get_bond_saleinfo.do',
+			method: POST
 		}
 	}
 }

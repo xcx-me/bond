@@ -1,4 +1,5 @@
 {
+	"navigationBarTitleText": "填写提问",
 	"usingComponents": {
 		"AskAnswerQuestion": "../../ui/ask-answer-question/ask-answer-question"
   	}

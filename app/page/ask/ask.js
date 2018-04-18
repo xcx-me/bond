@@ -9,7 +9,7 @@ Page({
   data: {
 	  	bondId:'',
 		bondSimpleName: '',
-		userId: '',
+		userId: ''
   	},
 
   	/**
