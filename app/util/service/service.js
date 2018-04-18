@@ -75,5 +75,9 @@ module.exports = {
 
 	getSaleInfo: function(bondId, sucFunc, errFunc) {
 		this.doService(config.NEW_BOND.getSaleInfo, {bond_id: bondId}, sucFunc, errFunc)
+	},
+
+	modNewBondDetail: function(data, sucFunc, errFunc) {
+		this.doService(config.NEW_BOND.modNewBondDetail, data, sucFunc, errFunc)
 	}
 }

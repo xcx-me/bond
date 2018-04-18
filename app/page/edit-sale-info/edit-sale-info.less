@@ -6,4 +6,74 @@
 		color:rgba(53,53,53,1);
 		line-height:48rpx;
 	}
+
+
+	.form-edit {
+		padding-left: 30rpx;
+		background: #FFFFFF;
+		overflow: hidden;
+		font-size: 34rpx;
+
+		view {
+			display:flex;
+			line-height:48rpx;
+		}
+			
+		.form-item  {
+			width: 100%;
+			padding:20rpx 0;
+			border-bottom:1rpx solid #E5E5E5;
+
+			&:last-child {
+				border-bottom: none;
+			}
+			
+			.label {
+				float: left;
+				width: 200rpx;
+			}
+
+			.input-area {
+				float: left;
+				width: calc(~'100% - 200rpx');
+				
+				.split-line {
+					margin:0 15rpx;
+				}
+
+				input {
+					width: 100%;
+
+					&.has-postfix {
+						width: 80%;
+					}
+				}
+
+				.postfix {
+					color: #B2B2B2;
+				}
+
+				.checkbox {
+					margin-right: 60rpx;
+				}
+			}
+		}
+	}
+
+	button {
+		margin-top: 60rpx;
+		width: 670rpx;
+		color: #FFFFFF;
+		background-color:#2196F3;
+		border-radius: 10rpx; 
+
+		&.disabled {
+			background-color:#2196F3;
+			opacity: 0.4
+		}
+	}
+
+	.button-hover {
+		background-color:  #2196F3;
+	}
 }
