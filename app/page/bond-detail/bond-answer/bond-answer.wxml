@@ -3,14 +3,17 @@
 <view class='bond-answer-component'>
 	<block wx:for='{{answerList}}' wx:for-item='answerItem' wx:key='ans_id'>
 		<view class="answer-item clearfix">
-			<view class='content'>
-				<template is='sellerInfoTpl' data='{{faceUrl: answerItem.face_url, isVUser:answerItem.v_user}}'></template>
-				<text>{{answerItem.content}}</text>
-			</view>
-			<view class='thumb'>
-				<icon type='{{answerItem.is_thumb === "1" ? "success" : "info"}}' bindtap='onThumb' data-id='{{answerItem.ans_id}}'/>
-				<text>{{answerItem.thumb_num}}</text>
+			<template is='sellerInfoTpl' data='{{faceUrl: answerItem.face_url, isVUser:answerItem.v_user}}'></template>
+			<view class='content-wrapper'>
+				<view class='content'>
+					<text class="answer-text">：{{answerItem.content}}</text>
+					<view class='thumb' bindtap='onThumb' data-id='{{answerItem.ans_id}}'>
+						<image class='icon-thumb' src='{{answerItem.is_thumb === "1" ? "../../../asset/image/qtrade/said-good.svg" : "../../../asset/image/qtrade/give_the_thumbs_up_24.svg"}}' />
+						<text>{{answerItem.thumb_num}}</text>
+					</view>
+				</view>
 			</view>
 		</view>
 	</block>
 </view>
+ 

@@ -1,63 +1,36 @@
 .administration-page {
-  padding: 20rpx;
+  padding-top: 20rpx;
   height: calc(100% - 40rpx);
+}
+.administration-page .to-quotation {
+  position: relative;
+  background: #FFFFFF;
+  height: 88rpx;
+  line-height: 88rpx;
+  padding: 0 30rpx;
+}
+.administration-page .to-quotation text {
+  font-size: 34rpx;
+}
+.administration-page .to-quotation image {
+  width: 36rpx;
+  height: 36rpx;
+  position: relative;
+  top: 5rpx;
+  margin-right: 20rpx;
+}
+.administration-page .to-quotation .icon-right-arrow {
+  display: inline-block;
+  width: 16rpx;
+  height: 16rpx;
+  border-top: 4rpx solid #C7C7CC;
+  border-right: 4rpx solid #C7C7CC;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 35rpx;
+  right: 30rpx;
 }
 .administration-page .bond-list-pallet {
-  width: calc(100% - 40rpx);
+  width: 100%;
   height: calc(100% - 40rpx);
-  padding: 20rpx;
-  background: #FFFFFF;
-}
-.administration-page .bond-list-pallet .item {
-  float: left;
-  width: 30%;
-}
-.administration-page .bond-list-pallet .item.operator {
-  width: 40%;
-}
-.administration-page .bond-list-pallet .header {
-  height: 80rpx;
-  line-height: 80rpx;
-  border-bottom: 1px solid #D8D8D8;
-}
-.administration-page .bond-list-pallet .content {
-  font-size: 30rpx;
-}
-.administration-page .bond-list-pallet .content .item {
-  height: 80rpx;
-  line-height: 80rpx;
-}
-.administration-page .bond-list-pallet .content .item.name {
-  width: 30%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.administration-page .bond-list-pallet .content .item.operator button {
-  position: relative;
-  top: 10rpx;
-  height: 60rpx;
-  line-height: 60rpx;
-  padding: 0 26rpx;
-}
-.administration-page .bond-list-pallet .content .item.operator .btn-more {
-  margin-left: 20rpx;
-}
-.administration-page .bond-send-quote {
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 50%;
-  position: absolute;
-  right: 50rpx;
-  bottom: 50rpx;
-  background-color: #2196F3;
-}
-.administration-page .bond-send-quote .iconfont {
-  display: inline-block;
-  width: 100rpx;
-  height: 100rpx;
-}
-.administration-page .bond-send-quote .icon-plus-with-circle {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23FFFFFF' height='24' viewBox='0 0 24 24' width='24'%3E %3Cpath d='M0 0h24v24H0z' fill='none'/%3E %3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z'/%3E %3C/svg%3E");
-  background-size: cover;
 }

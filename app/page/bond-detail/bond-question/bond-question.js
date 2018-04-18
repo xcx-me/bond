@@ -14,6 +14,11 @@ Component({
 			type: String,
 			value: ''
 		},
+		questionTotal: {
+			type: Number,
+			value: 0
+		},
+
 		needUpdate: {
 			type: Boolean,
 			value: false,
@@ -46,19 +51,23 @@ Component({
 				this.triggerEvent('updateTotalEvent', questionTotal)
 			})
 		},
+
 		onAsk: function () {
 			let url = '/app/page/ask/ask?bid=' + this.data.bondId +'&bname=' + this.data.bondSimpleName +'&uid=' + this.data.userId
 			wx.navigateTo({
 				url: url
 			})
 		},
+
 		onAnswer: function (e) {
 			let askId = e.currentTarget.dataset.id
-			let url = '/app/page/answer/answer?bid=' + this.data.bondId +'&askid=' + askId +'&uid=' + this.data.userId
+			let question = e.currentTarget.dataset.question
+			let url = '/app/page/answer/answer?bid=' + this.data.bondId +'&askid=' + askId + '&question=' + question+ '&uid=' + this.data.userId
 			wx.navigateTo({
 				url: url
 			})
 		},
+
 		_onThumbEvent: function () {
 			this.getQuestionList()
 		}

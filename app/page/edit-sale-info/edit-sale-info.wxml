@@ -1,2 +1,12 @@
 <!--app/page/edit-sale-info/edit-sale-info.wxml-->
-<text>app/page/edit-sale-info/edit-sale-info.wxml</text>
+<view class='edit-sale-info-page'>
+	<view class='header'>
+		<text>{{saleInfo.bond_simple_name}}</text>
+	</view>
+	<view class='form-edit'>
+		<block wx:for='' wx:for-item="item" >
+		<view>
+		</view>
+		</block>
+	</view>
+</view>

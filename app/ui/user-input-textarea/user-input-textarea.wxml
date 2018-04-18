@@ -1,0 +1,7 @@
+<!--app/ui/user-input-textarea/user-input-textarea.wxml-->
+<view class="user-input-textarea-component" hidden='{{!focus}}'>
+	<view>
+		<textarea cursor-spacing='100' focus="{{focus}}"  fixed auto-height placeholder='{{placeholder}}' maxlength='50' value='{{content}}'/>
+		<button class='btn-confirm' size='mini' type='primary' formType='submit'>确定</button>
+	</view>
+</view>

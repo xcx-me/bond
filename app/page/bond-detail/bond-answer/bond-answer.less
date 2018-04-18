@@ -1,7 +1,7 @@
 @import '../../../template/seller-info/seller-template.less';
 
 .bond-answer-component {
-	padding: 33rpx 20rpx;
+	padding: 20rpx 0 20rpx 20rpx;
 	overflow: hidden;
 	background:rgba(33,150,243, 0.08);
 	border-radius: 4px ;
@@ -10,36 +10,54 @@
 		float: left;
 		width: 100%;
 		border-left: none;
-		border-bottom: 1px dashed #D8D8D8;
 		border-radius: 2px;
 		zoom: 1;
 		line-height: 38rpx;
 
-		&:last-child {
-			border-bottom: none;
-		}
-
-		.content {
+		.seller-info-tpl {
 			float: left;
-			.seller-info-tpl {
-				display: inline-block;
-
-				.image {
-					.face-url {
-						width: 48rpx;
-						height: 48rpx;
-					}
+			position: relative;
+			top: 12rpx;
+		
+			.image {		
+				.face-url {
+					width: 48rpx;
+					height: 48rpx;
 				}
 			}
 		}
 
-		.thumb {
-			float: right;
+		.content-wrapper {
+			float: left;
+			width: calc(~'100% - 68rpx');	
+			padding-top: 20rpx;
+			padding-bottom: 20rpx;
+			border-bottom: 1px dashed #E5E5E5;
+
+			.content {
+				padding-right: 20rpx;
+
+				.answer-text {
+					float: left;
+				}
+	
+				.thumb {
+					float: right;
+	
+					.icon-thumb {
+						width: 24rpx;
+						height: 24rpx;
+						margin-right: 6rpx;
+					}
+				}
+			}
+			
+		}
+
+		&:last-child {
+			.content-wrapper {
+				border-bottom: none;
+			}
 		}
 	}
-
-	// image {
-	// 	width: 18px;
-	// 	height: 18px;
-	// }
 }

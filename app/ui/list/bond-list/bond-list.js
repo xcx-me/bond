@@ -9,7 +9,10 @@ Component({
   properties: {
 	bondList: {
 		type: Array,
-		value: []
+		value: [],
+		observer: function(newVal, oldVal) {
+			//
+		}
 	},
 	userId: {
 		type: String,
@@ -34,8 +37,24 @@ Component({
    */
   data: {
 	saleList: [],
-	bondSimpleName: ''
+	bondSimpleName: '',
+	isShowModifyPallet: false,
+	modifyPalletTop: 0,
+	winHeight: 0,
+	rpx: 0,
+	modifyIndex: 0
   },
+
+
+  ready: function () {
+	let that = this
+	wx.getSystemInfo({
+		success: function(res) {
+			that.data.rpx = res.windowWidth / 750
+			that.data.winHeight = res.windowHeight - (that.data.rpx* 128)	
+		}
+	})
+},
 
   /**
    * 组件的方法列表
@@ -72,13 +91,46 @@ Component({
 	},
 
 	toDetail: function (from, uid, bondId, bondSimpleName) {
+		this.hiddenModifyPallet()
 		request(config.NEW_BOND.accumulateClick, {user_id: uid, bond_simple_name: bondSimpleName})
 		let virtualUid = this.data.isMine ? '0' : uid
 		let url = '/app/page/bond-detail/bond-detail?bid=' + bondId +'&uid=' + virtualUid
 		from === 'detail' ? wx.redirectTo({url: url}) : wx.navigateTo({url: url})
 	},
 
-	_deleteBondEvent: function (e) {
+	onModifyBondEvent: function(e) {
+		let offsetTop = e.detail.offsetTop - 40 * this.data.rpx
+		if (offsetTop > this.data.winHeight - 30) {
+			offsetTop = this.data.winHeight - 50
+		}
+
+		console.log('onModifyBondEvent...', e)
+		this.setData({
+			isShowModifyPallet: true,
+			modifyPalletTop: offsetTop,
+			bondSimpleName: e.detail.bondSimpleName,
+			bondId: e.detail.bondId
+		})
+		
+		this.triggerEvent('modifyBondEvent', e.detail)
+	},
+
+	onModifySaleInfo: function() {
+		this.hiddenModifyPallet()
+		wx.navigateTo({
+			url: '/app/page/edit-sale-info/edit-sale-info?bid=' + this.data.bondId
+		})
+	},
+
+	onModifyBondDetail: function() {
+		this.hiddenModifyPallet()
+		wx.navigateTo({
+			url: '/app/page/quotation/quotation?bname=' + this.data.bondSimpleName
+		})
+	},
+
+	onDeleteBondEvent: function (e) {
+		this.hiddenModifyPallet()
 		this.deleteBondName = e.detail
 		this.deleteDialog = this.selectComponent('#delete-dialog')
 		this.deleteDialog.showDialog()
@@ -107,5 +159,15 @@ Component({
 		}
 		this.saleDialog.hideDialog()
 	},
+
+	hiddenModifyPallet() {
+		this.setData({
+			isShowModifyPallet: false
+		})
+	},
+
+	onTouchMove: function() {
+		this.hiddenModifyPallet()
+	}
   }
 })

@@ -29,24 +29,32 @@ Component({
    	*/
  	 data: {
 		  content: '',
-		  errTips: ''
+		  errTips: '',
+		  isSubmitDisabled: true
   	},
 
 	methods: {
-		bindTextAreaBlur: function(e) {
+		onTextAreaBlur: function(e) {
 			let content = e.detail.value
 			this.setData({
 				content: content
 			}) 
 		},
 
-		bindFocus: function (e) {
+		onFocus: function (e) {
 			this.setData({
 				errTips: ''
 			})
 		},
 	
-		bindFormSubmit: function(e) {
+		onInput: function (e) {
+			let value = e.detail.value.replace(/(^\s*)|(\s*$)/g, '')
+			this.setData({
+				isSubmitDisabled: value.length === 0
+			})
+		},
+
+		onFormSubmit: function(e) {
 			let content = this.data.content
 			if (content.replace(/(^\s*)|(\s*$)/g, '').length === 0) {
 				this.setData({
@@ -94,10 +102,6 @@ Component({
 			} else {
 				common.showFailedToast('系统繁忙，请稍后再试')
 			}
-		},
-
-		onCancel: function () {
-			this.onNavigateBack()
-		},
+		}
 	}
 })

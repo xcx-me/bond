@@ -66,7 +66,7 @@ Component({
 		})
 	  },
 	  
-	  _deleteBondEvent: function (e) {
+	  onDeleteBondEvent: function (e) {
 		let bname = e.detail
 		request(config.NEW_BOND.deleteBond, {
 			bond_simple_name: bname

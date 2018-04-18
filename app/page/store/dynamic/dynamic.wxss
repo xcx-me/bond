@@ -60,3 +60,6 @@
   top: 35rpx;
   right: 30rpx;
 }
+.store-dynamic-component .dynamic-item:active {
+  background: #F5F5F5;
+}

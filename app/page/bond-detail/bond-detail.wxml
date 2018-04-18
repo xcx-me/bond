@@ -1,5 +1,5 @@
 <!--app/page/detail/detail.wxml-->
-<view class='bond-detail-page page-wrapper'>
+<view class='bond-detail-page page-wrapper' >
 	<view class='tab-bar'>
 		<view class='tab-bar-item' bindtap='onSwitchTab' data-tid='detail'>
 			<view class='{{currentTabId === "detail" ? "active": ""}}'>
@@ -20,9 +20,9 @@
 	<swiper current-item-id='{{currentTabId}}' class='content' duration='300' style='height: {{winHeight}}px' bindchange="bindChangeTab">
 		<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
 			<swiper-item item-id='{{tabId}}'>
-				<scroll-view class='pallet' scroll-y>
+				<scroll-view class='pallet' scroll-y >
 					<BondInfo wx:if='{{tabId === currentTabId && currentTabId === "detail"}}' bondId='{{bondId}}' isMyStore='{{isMyStore}}' />
-					<BondQuestion wx:if='{{tabId === currentTabId && currentTabId === "question"}}' bondId='{{bondId}}' userId='{{userId}}' needUpdate='{{needUpdate}}' bind:updateTotalEvent='_updateQuestionTotalEvent'/>
+					<BondQuestion wx:if='{{tabId === currentTabId && currentTabId === "question"}}' bondId='{{bondId}}' userId='{{userId}}' questionTotal='{{questionTotal}}' needUpdate='{{needUpdate}}' bind:updateTotalEvent='_updateQuestionTotalEvent'/>
 					<StoreDetail wx:if='{{tabId === currentTabId && currentTabId === "store"}}'
 						userId='{{uid}}'
 						isRegistered='{{true}}'
@@ -34,4 +34,5 @@
 		</block>
 	</swiper>
 	<ShareButton />
+	<UserInputTextArea focus='{{isAsking || isAnswering}}' placeholder='{{isAsking ? "向主承及其他销售经理提问，50字以内" : "请输入您的回答，50字以内"}}'/>
 </view>

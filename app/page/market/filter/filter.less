@@ -1,17 +1,18 @@
 .filter-component {
 	font-size: 30rpx;
+	position:relative;
 
 	.wrapper {
 		width: 100%;
 		background: #FFFFFF;
 		overflow: hidden;
-		padding: 10rpx 0;
+		padding: 10rpx 15rpx;
 	}
 
 	.filter-item {
 		float: left;
-		width: calc(~'33.33% - 36rpx');
-		padding: 0 12rpx;
+		width: calc(~'33.33% - 30rpx');
+		padding: 0 10rpx;
 		font-size: 30rpx;
 		text-align: center;
 		color: #888888;
@@ -19,8 +20,9 @@
 		.filter-item-pallet {
 			position: relative;
 			z-index: 2;
-			padding: 16rpx 0;
-			background:rgba(247,247,247,1);
+			height: 60rpx;
+			line-height: 60rpx;
+			background:#F7F7F7;
 			border-radius: 8rpx ; 
 		}
 
@@ -50,7 +52,7 @@
 			width: 100%;
 			position: fixed;
 			left: 0;
-			top: 90rpx;
+			top: 80rpx;
 			z-index: 1;
 			padding: 0;
 			background: #FFFFFF;
@@ -161,13 +163,13 @@
 			z-index: 100;
 
 			.filter-item-pallet {
-				height:49rpx;
 				background: #FFFFFF;
 				border: 1px solid #D8D8D8;
-				border-bottom: none;
+				border-bottom: 1px solid #FFFFFF;
 				border-radius: 0;
 				border-top-left-radius: 8rpx;
 				border-top-right-radius: 8rpx;	
+				padding-bottom:11rpx;
 			}			
 		}
 	}

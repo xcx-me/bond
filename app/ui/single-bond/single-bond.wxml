@@ -1,20 +1,25 @@
 <!--app/ui/single-bond/single-bond.wxml-->
 <import src="../../template/bond-info-item/bond-info-item.wxml" />
 <import src="../../template/seller-info/seller-template.wxml" />
-<view class='single-bond-component'>
-	<block wx:for='{{bondFieldList}}' wx:for-item='bondItem' wx:key='name'>
+<view class='single-bond-component {{from}}'>
+	<block wx:for='{{from === "admin" ? adminBondFieldList : bondFieldList}}' wx:for-item='bondItem' wx:key='name'>
 		<view class='pallet clearfix {{bondItem.name}}'>
 			<block wx:for='{{bondItem.value}}' wx:for-item='item' wx:key='name'>
-				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from, type: "single-bond"}}'></template>
+				<view catchtap='doClickBondItem' wx:if='{{item.type === "operator"}}' data-name='{{item.name}}' data-bondname='{{bondInfo.bond_simple_name}}'>
+					<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from, type: "single-bond"}}'></template>
+				</view>
+				<block wx:else>
+					<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from, type: "single-bond"}}'></template>
+				</block>
 			</block>
 		</view>
 	</block>
-	<view class='pallet clearfix footer'>	
+	<view class='pallet clearfix footer' hidden='{{from === "admin"}}'>	
 		<view wx:if='{{from === "store" || from === "detail"}}'>
 			<block wx:for='{{[{name:"click_num", image:"../../asset/image/qtrade/clicks_24.svg"}, {name:"share_num", image:"../../asset/image/qtrade/forward_24.svg"}]}}' wx:for-item='item' wx:key='name'>
 				<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from,  type: "single-bond"}}'></template>
 			</block>
-			<image class='icon-delete' src='../../asset/image/qtrade/delete_36.svg' wx:if='{{isMine}}' catchtap='onDeleteBond' data-bname='{{bondInfo.bond_simple_name}}' />	
+			<!-- <image class='icon-delete' src='../../asset/image/qtrade/delete_36.svg' wx:if='{{isMine}}' catchtap='onDeleteBond' data-bname='{{bondInfo.bond_simple_name}}' />	 -->
 		</view>
 		<view wx:else >
 			<block wx:for='{{bondInfo.sale_array}}' wx:for-item='sale' wx:key='index'>

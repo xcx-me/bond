@@ -10,6 +10,7 @@ Page({
 		bondId: '',
 		userId: '',
 		askId: '',
+		question: ''
 	  },
   /**
    * 生命周期函数--监听页面加载
@@ -18,7 +19,8 @@ Page({
 		this.setData({
 			bondId: options.bid,
 			askId: options.askid,
-			userId: options.uid
+			userId: options.uid,
+			question: options.question
 		})
   },
 

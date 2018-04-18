@@ -45,3 +45,18 @@
   color: #576B95;
   text-decoration: underline;
 }
+.register-store-component.page .bg {
+  margin: 158rpx 0 28rpx;
+}
+.register-store-component.page .bg image {
+  width: 424rpx;
+  height: 424rpx;
+}
+.register-store-component.page button {
+  width: 670rpx;
+  height: 94rpx;
+  line-height: 94rpx;
+}
+.register-store-component.page .protocol {
+  margin-top: 200rpx;
+}

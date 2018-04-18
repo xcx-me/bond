@@ -16,7 +16,9 @@ Page({
 		questionTotal: '0',
 		winHeight: 0,
 		tabIdList:['detail', 'question', 'store'],
-		needUpdate: false
+		needUpdate: false,
+		isAsking: false,
+		isAnswering: false
 	},
 
 	bindChangeTab: function (e) {
@@ -58,7 +60,6 @@ Page({
 			questionTotal: questionTotal
 		})
 	},
-
 
 
   /**

@@ -39,7 +39,7 @@
   font-size: small;
 }
 .bond-answer-component {
-  padding: 33rpx 20rpx;
+  padding: 20rpx 0 20rpx 20rpx;
   overflow: hidden;
   background: rgba(33, 150, 243, 0.08);
   border-radius: 4px ;
@@ -48,24 +48,40 @@
   float: left;
   width: 100%;
   border-left: none;
-  border-bottom: 1px dashed #D8D8D8;
   border-radius: 2px;
   zoom: 1;
   line-height: 38rpx;
 }
-.bond-answer-component .answer-item:last-child {
-  border-bottom: none;
-}
-.bond-answer-component .answer-item .content {
+.bond-answer-component .answer-item .seller-info-tpl {
   float: left;
+  position: relative;
+  top: 12rpx;
 }
-.bond-answer-component .answer-item .content .seller-info-tpl {
-  display: inline-block;
-}
-.bond-answer-component .answer-item .content .seller-info-tpl .image .face-url {
+.bond-answer-component .answer-item .seller-info-tpl .image .face-url {
   width: 48rpx;
   height: 48rpx;
 }
-.bond-answer-component .answer-item .thumb {
+.bond-answer-component .answer-item .content-wrapper {
+  float: left;
+  width: calc(100% - 68rpx);
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px dashed #E5E5E5;
+}
+.bond-answer-component .answer-item .content-wrapper .content {
+  padding-right: 20rpx;
+}
+.bond-answer-component .answer-item .content-wrapper .content .answer-text {
+  float: left;
+}
+.bond-answer-component .answer-item .content-wrapper .content .thumb {
   float: right;
+}
+.bond-answer-component .answer-item .content-wrapper .content .thumb .icon-thumb {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 6rpx;
+}
+.bond-answer-component .answer-item:last-child .content-wrapper {
+  border-bottom: none;
 }

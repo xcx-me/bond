@@ -6,11 +6,9 @@ module.exports = {
 			if (String(result.data.ret) === '0') {
 				sucFunc && sucFunc(result)
 			} else {
-				console.log('failed', result)
 				errFunc && errFunc(result)
 			}
 		}).catch((error) => {
-			console.log('error')
 			errFunc && errFunc()
 		})
 	},
@@ -73,5 +71,9 @@ module.exports = {
 
 	getBondAssociate: function(simpleName, sucFunc, errFunc) {
 		this.doService(config.NEW_BOND.associateBond, {bond_simple_name: simpleName}, sucFunc, errFunc)
+	},
+
+	getSaleInfo: function(bondId, sucFunc, errFunc) {
+		this.doService(config.NEW_BOND.getSaleInfo, {bond_id: bondId}, sucFunc, errFunc)
 	}
 }

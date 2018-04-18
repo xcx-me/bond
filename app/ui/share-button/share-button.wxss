@@ -1,7 +1,7 @@
 .share-button-component {
   position: fixed;
   right: 30rpx;
-  bottom: 60rpx;
+  bottom: 90rpx;
 }
 .share-button-component .btn-share {
   width: 88rpx;

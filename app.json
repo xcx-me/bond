@@ -30,18 +30,18 @@
                 "iconPath": "app/asset/image/icon_API.png",
                 "selectedIconPath": "app/asset/image/icon_API_HL.png",
                 "text": "市场"
+			},
+			{
+                "pagePath": "app/page/administration/administration",
+                "iconPath": "app/asset/image/icon_API.png",
+                "selectedIconPath": "app/asset/image/icon_API_HL.png",
+                "text": "管理/发布"
             },
             {
                 "pagePath": "app/page/overview/overview",
                 "iconPath": "app/asset/image/icon_component.png",
                 "selectedIconPath": "app/asset/image/icon_component_HL.png",
                 "text": "概览"
-            },
-            {
-                "pagePath": "app/page/administration/administration",
-                "iconPath": "app/asset/image/icon_API.png",
-                "selectedIconPath": "app/asset/image/icon_API_HL.png",
-                "text": "管理"
             }
         ]
     }
