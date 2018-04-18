@@ -4,10 +4,10 @@
 
 	<!-- 债券简称 -->
 	<view class='bond-simple-name row-item'>
-		<view class='label-area'><span class='star-span'>*</span>债券简称</view>
+		<view class='label-area' style='{{isEditEntry ? "color: #888888" : ""}}'><span class='star-span'>*</span>债券简称</view>
 		<view class='editor-area'>
 			<input class='' type='text' bindinput='simpleNameChange' data-input-name='bond_simple_name' value='{{formData.bond_simple_name}}'
-				disabled='{{editorFlag}}' style='{{editorFlag ? "background-color: #DDDDDD; color: #999999" : ""}}' maxlength='15'
+				disabled='{{isEditEntry}}' style='{{isEditEntry ? "color: #888888" : ""}}' maxlength='15'
 			/>
 		</view>
 	</view>
@@ -89,7 +89,6 @@
 		<view class='editor-area'>
 			<picker class='time-picker-area' mode="multiSelector" value="{{dateTime}}" bindchange='changeDateTime' range="{{dateTimeArray}}" data-input-name='bid_end'>
 				<view class='time-select-picker'>
-					<!-- {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}} -->
 					{{formData.bid_end}}
 					<span class='calendar-icon'></span>
 				</view>
@@ -153,7 +152,7 @@
 			<view class="section {{rateReply ? 'on' : 'off'}}">
 				<view class='benchmark-label'>基准</view>
 				<view class='benchmark-input'>
-					<input type='text' disabled='{{!rateReply}}' bindinput='changeValue' data-input-name='benchmark'
+					<input type='text' disabled='{{!rateReply}}' value='{{formData.benchmark}}' bindinput='changeValue' data-input-name='benchmark'
 						placeholder='请输入基准' placeholder-class='color-gray' maxlength='15'/>
 				</view>
 			</view>

@@ -15,12 +15,12 @@ module.exports = {
 			}
 		})
 		return array
-	},
-	saveValueOfArray: function (object) {
-		let array = []
-		object.map((item, index) => {
-			array.push(item.name)
-		})
-		return array
 	}
+	// saveValueOfArray: function (object) { // 发布-多选-状态
+	// 	let array = []
+	// 	object.map((item, index) => {
+	// 		array.push(item.name)
+	// 	})
+	// 	return array
+	// }
 }

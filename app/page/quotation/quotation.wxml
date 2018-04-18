@@ -2,7 +2,7 @@
 <view class="send-quote-page">
 	<view class="quotation-form" wx:if="{{isOpenMyShop}}">
 
-		<BondFormEditor editorFlag='{{editorFlag}}' bondSimpleName='{{bondSimpleName}}' bind:changeValueEvent='_changeValue' />  
+		<BondFormEditor isEditEntry='{{isEditEntry}}' bondSimpleName='{{bondSimpleName}}' bind:changeValueEvent='_changeValue' />  
 
 		<button class='margin-bottom submit-quotation-btn {{submitQuoteBtnEnable ? "" : "submit-quote-unenable"}}'
 			type='primary' disabled='{{!submitQuoteBtnEnable}}' bindtap='handleSendQuote'>
@@ -13,17 +13,6 @@
 
 		<!-- <button  class='margin-bottom' type='primary' bindtap='associateBondDetails'>获取债券详情</button> -->
 
-		<!-- <view class="dialog-container">
-			<dialog id='dialog'
-				title='我是标题'
-				content='确定要删除吗？？？'
-				cancelText='取消'
-				confirm='确认'
-				bind:cancelEvent="_cancelEvent"
-				bind:confirmEvent="_confirmEvent">
-			</dialog>
-			<button class='margin-bottom' type="primary" bindtap="showDialog"> ClickMe! </button>
-		</view> -->
 	</view>
 
 	<view class="quotaion-open-shop" wx:else>

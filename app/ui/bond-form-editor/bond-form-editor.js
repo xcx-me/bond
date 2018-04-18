@@ -6,11 +6,10 @@ const converson = require('../../util/converson/converson')
 
 Component({
 	properties: {
-		editorFlag: { // 是否是编辑债券的入口
+		isEditEntry: { // 是否是编辑债券的入口
 			type: Boolean,
 			value: false
 		},
-
 		bondSimpleName: {
 			type: String,
 			value: ''
@@ -41,28 +40,27 @@ Component({
 			credit_guarantee: '', // 增信担保 
 			zhu_cheng: '', // 主承
 			bond_full_name: '', // 债券全称
-			attached_ids: '' 
+			attached_ids: ''
 		},
 		// 时间
 		dateTimeArray: dateTimePicker.dateTimePicker(2000, 2050).dateTimeArray,
 		dateTime: dateTimePicker.dateTimePicker(2000, 2050).dateTime,
 
-		// 上市地点 多选
+		// 上市地点-多选
 		listingOpenFlag: false,
 		listingSpotItems: selectConfig.listingSpot.items,
-		// listingSelectFlag: converson.parseToObject(converson.saveValueOfArray(selectConfig.listingSpot.items)),
 		listingSelectFlag: converson.parseToObject([]),
 
-		// 企业性质
+		// 企业性质-单选
 		enterpriseNature: selectConfig.enterpriseNature.items,
 		enterpriseIndex: -1,
 
-		// 债券品种
+		// 债券品种-多选
 		bondTypeOpenFlag: false,
 		bondTypeItems: selectConfig.bondType.items,
 		bondTypeSelectFlag: converson.parseToObject([]),
 
-		// 发行方式
+		// 发行方式-单选
 		issuanceMethodItem: selectConfig.issuanceMethod.items,
 		issuanceMethodIndex: -1,
 
@@ -71,7 +69,7 @@ Component({
 		rateWayIndex: -1,
 		rateReply: false,
 
-		// 特殊条款
+		// 特殊条款-多选
 		specificOpenFlag: false,
 		specificItems: selectConfig.specificClause.items,
 		specificSelectFlag: converson.parseToObject([]),
@@ -79,10 +77,25 @@ Component({
 
 	ready: function() {
 		service.getBondAssociate(this.data.bondSimpleName, (result)=>{
-			if (JSON.stringify(result.data.retdata) !== '{}') {
-				result.data.retdata.bond_simple_name = this.data.bondSimpleName
+			let resultData = result.data.retdata
+			if (JSON.stringify(resultData) !== '{}') {
+				resultData.bond_simple_name = this.data.bondSimpleName
 				this.setData({
-					formData: result.data.retdata
+					formData: resultData,
+					enterpriseIndex: resultData.company_type && (resultData.company_type - 1), // 企业性质
+					issuanceMethodIndex: resultData.issue_way && (resultData.issue_way - 1), // 发行方式
+
+					rateReply: resultData.rate_way && String(resultData.rate_way) === '3',
+					rateWayIndex: resultData.rate_way && (resultData.rate_way - 1),
+
+					listingOpenFlag: resultData.public_place,
+					listingSelectFlag: resultData.public_place && converson.parseToObject(resultData.public_place.split('|')),
+
+					bondTypeOpenFlag: resultData.bond_type,
+					bondTypeSelectFlag: resultData.bond_type && converson.parseToObject(resultData.bond_type.split('|')),
+
+					specificOpenFlag: resultData.specific_items,
+					specificSelectFlag: resultData.specific_items && converson.parseToObject(resultData.specific_items.split('|'))
 				})
 				this.triggerEvent('changeValueEvent', formData)
 			}
@@ -132,7 +145,6 @@ Component({
 				formData: formData
 			})
 
-			// console.log(this.data.formData)
 			this.triggerEvent('changeValueEvent', formData)
 		},
 
@@ -153,11 +165,10 @@ Component({
 			let formData = this.data.formData
 			formData[e.currentTarget.dataset.inputName] = this.data.dateTimeArray[0][e.detail.value[0]] +'-'+ this.data.dateTimeArray[1][e.detail.value[1]] +'-'+ this.data.dateTimeArray[2][e.detail.value[2]] +' '+ this.data.dateTimeArray[3][e.detail.value[3]] +':'+ this.data.dateTimeArray[4][e.detail.value[4]]
 			this.setData({
-				dateTime: e.detail.value
+				dateTime: e.detail.value,
+				formData: formData
 			});
 			this.triggerEvent('changeValueEvent', formData)
-	
-			console.log(this.data.formData.bid_end)
 		},
 
 		// 上市地点
@@ -176,8 +187,6 @@ Component({
 				listingSelectFlag: falg,
 				formData: formData
 			})
-			// console.log(this.data.listingSelectFlag)
-			// console.log(this.data.formData)
 		},
 
 		// 企业性质
@@ -185,7 +194,8 @@ Component({
 			let formData = this.data.formData
 			formData[e.currentTarget.dataset.enterpriseNature] = Number(e.detail.value) + 1
 			this.setData({
-				enterpriseIndex: e.detail.value
+				enterpriseIndex: e.detail.value,
+				formData: formData
 			})
 			this.triggerEvent('changeValueEvent', formData)
 		},
@@ -224,7 +234,12 @@ Component({
 			if (e.detail.value == 2) {
 				this.setData({ rateReply: true })
 			} else {
-				this.setData({ rateReply: false })
+				let formData = this.data.formData
+				formData['benchmark'] = ''
+				this.setData({
+					rateReply: false,
+					formData: formData
+				})
 			}
 			let formData = this.data.formData
 			formData[e.currentTarget.dataset.rateMethod] = Number(e.detail.value) + 1

@@ -11,13 +11,6 @@ module.exports = {
 	enterpriseNature: {
 		label: '企业性质：',
 		items: ['中央国企', '地方国企', '公众企业', '民营企业', '三资企业']
-		// items: [
-		// 	{name: '1', value: '中央国企'},
-		// 	{name: '2', value: '地方国企'},
-		// 	{name: '3', value: '公众企业'},
-		// 	{name: '4', value: '民营企业'},
-		// 	{name: '5', value: '三资企业'}
-		// ]
 	},
 	bondType: {
 		label: '债券品种：',
@@ -27,10 +20,15 @@ module.exports = {
 			{name: '103', value: '商行债'},
 			{name: '104', value: '次级债'},
 			{name: '105', value: '其他金融债'},
-			{name: '106', value: 'ABS'},
-			{name: '107', value: '公司债'},
-			{name: '108', value: '小公募'},
-			{name: '109', value: 'SCP'},
+			{name: '106', value: '企业债'},
+			{name: '107', value: 'ABS'},
+			{name: '108', value: '公司债'},
+			{name: '109', value: '小公募'},
+			{name: '110', value: '私募债'},
+			{name: '111', value: 'SCP'},
+			{name: '112', value: 'CP'},
+			{name: '113', value: 'MTN'},
+			{name: '114', value: 'PPN'}
 		]
 	},
 	issuanceMethod: {
