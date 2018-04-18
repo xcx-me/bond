@@ -15,7 +15,8 @@ Page({
 		sendQuoteData: {}, // 发布报价参数
 		submitQuoteBtnEnable: false,
 		warningShowText: false,
-		warningText: '格式输入错误，请重新输入'
+		warningText: '格式输入错误，请重新输入',
+		highlightItem: 'none'
 	},
 
 	openMyShop: function () {
@@ -31,6 +32,12 @@ Page({
 		
 		if (JSON.stringify(submitData) !== '{}') {
 			if (Number(submitData.left_benefit) > Number(submitData.right_benefit)) { // 参考收益
+
+				console.log('quotation form of benifit error: ')
+				this.setData({
+					highlightItem: 'benifit'
+				})
+
 				this.showWraningText()
 				return
 			}
@@ -124,21 +131,28 @@ Page({
 		})
 
 		// console.log('isShowBTn: ', this.data.submitQuoteBtnEnable)
-		// console.log('_changeValue....', detail)
+		console.log('_changeValue....', detail)
 	},
 
-	//取消事件
-	_cancelEvent() {
-		console.log('你点击了取消');
-		this.dialog = this.selectComponent('#dialog')
-		this.dialog.hideDialog();
+	_changeHighLight: function () {
+		this.setData({
+			highlightItem: 'none'
+		})
 	},
-	//确认事件
-	_confirmEvent() {
-		console.log('你点击了确定');
-		this.dialog = this.selectComponent('#dialog')
-		this.dialog.hideDialog();
-	},
+
+
+	// //取消事件
+	// _cancelEvent() {
+	// 	console.log('你点击了取消');
+	// 	this.dialog = this.selectComponent('#dialog')
+	// 	this.dialog.hideDialog();
+	// },
+	// //确认事件
+	// _confirmEvent() {
+	// 	console.log('你点击了确定');
+	// 	this.dialog = this.selectComponent('#dialog')
+	// 	this.dialog.hideDialog();
+	// },
 
 	/**
 	 * 生命周期函数--监听页面加载

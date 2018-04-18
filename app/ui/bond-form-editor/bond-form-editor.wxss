@@ -42,7 +42,11 @@
   color: #B2B2B2;
 }
 .bond-form-editor .editor-area .spacing-line {
-  margin: 0 15rpx;
+  display: inline-block;
+  width: 36rpx;
+  height: 2rpx;
+  background-color: #979797;
+  margin: 25rpx 20rpx 0 0;
 }
 .bond-form-editor .editor-area .triangle-icon {
   float: right;
@@ -59,6 +63,9 @@
 .bond-form-editor .editor-area .triangle-up {
   margin-top: 22rpx;
   transform: rotate(-45deg);
+}
+.bond-form-editor .editor-area .highlight-color {
+  color: #FAA61A;
 }
 .bond-form-editor .release-time .editor-area .time-picker-area,
 .bond-form-editor .closing-time .editor-area .time-picker-area {
@@ -80,9 +87,12 @@
   width: 32rpx;
   height: 32rpx;
   margin-top: 14rpx;
-  background-image: url("data:image/svg+xml,%3C?xml version='1.0' standalone='no'?%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg t='1523525778828' class='icon' style='' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='1150' xmlns:xlink='http://www.w3.org/1999/xlink' width='16' height='16'%3E%3Cdefs%3E%3Cstyle type='text/css'%3E%3C/style%3E%3C/defs%3E%3Cpath d='M105.813333 158.068364a26.127515 26.127515 0 0 0-26.127515 26.127515v705.536c0 14.429091 11.698424 26.127515 26.127515 26.127515h783.918546a26.127515 26.127515 0 0 0 26.127515-26.127515V184.195879a26.127515 26.127515 0 0 0-26.127515-26.127515H105.813333z m0-78.382546h783.918546a104.510061 104.510061 0 0 1 104.541091 104.510061v705.536a104.510061 104.510061 0 0 1-104.541091 104.541091H105.813333a104.510061 104.510061 0 0 1-104.51006-104.541091V184.195879A104.510061 104.510061 0 0 1 105.813333 79.685818z m-26.127515 209.051152v78.382545h836.173576V288.73697H79.685818zM275.673212 1.303273c21.628121 0 39.191273 17.532121 39.191273 39.191272v156.765091a39.191273 39.191273 0 1 1-78.382546 0V40.494545c0-21.659152 17.532121-39.191273 39.191273-39.191272z m-26.127515 496.484848h78.382545a39.191273 39.191273 0 1 1 0 78.382546H249.545697a39.191273 39.191273 0 1 1 0-78.382546z m209.020121 0h78.413576a39.191273 39.191273 0 0 1 0 78.382546h-78.413576a39.191273 39.191273 0 1 1 0-78.382546z m-209.020121 209.020121h78.382545a39.191273 39.191273 0 1 1 0 78.413576H249.545697a39.191273 39.191273 0 0 1 0-78.413576z m209.020121 0h78.413576a39.191273 39.191273 0 0 1 0 78.413576h-78.413576a39.191273 39.191273 0 1 1 0-78.413576z m209.051152-209.020121h78.413575a39.191273 39.191273 0 1 1 0 78.382546h-78.413575a39.191273 39.191273 0 1 1 0-78.382546z m52.28606-496.484848c21.628121 0 39.191273 17.532121 39.191273 39.191272v156.765091a39.191273 39.191273 0 0 1-78.382545 0V40.494545c0-21.659152 17.532121-39.191273 39.191272-39.191272z' fill='%23888888' p-id='1151'%3E%3C/path%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right;
+}
+.bond-form-editor .release-time .editor-area .time-picker-area .time-select-picker .calendar-icon image,
+.bond-form-editor .closing-time .editor-area .time-picker-area .time-select-picker .calendar-icon image {
+  display: block;
+  width: 32rpx;
+  height: 32rpx;
 }
 .bond-form-editor .listing-spot,
 .bond-form-editor .bond-type,

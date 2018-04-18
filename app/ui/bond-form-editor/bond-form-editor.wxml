@@ -16,9 +16,12 @@
 	<view class='reference-income row-item'>
 		<view class='label-area'><span class='star-span'>*</span>参考收益</view>
 		<view class='editor-area'>
-			<input type='text' bindinput='changeValue' data-input-name='left_benefit' value='{{formData.left_benefit}}' placeholder='%' placeholder-class='color-gray'/>
-			<span class='spacing-line'> - </span>
-			<input type='text' bindinput='changeValue' data-input-name='right_benefit' value='{{formData.right_benefit}}' placeholder='%' placeholder-class='color-gray'/>
+			<input class='{{highLight === "benifit" ? "highlight-color" : ""}}'
+				type='text' value='{{formData.left_benefit}}' placeholder='%' placeholder-class='color-gray'
+				bindinput='changeValue' data-input-name='left_benefit' />
+			<span class='spacing-line'></span>
+			<input type='text'value='{{formData.right_benefit}}' placeholder='%' placeholder-class='color-gray'
+				bindinput='changeValue' data-input-name='right_benefit' />
 		</view>
 	</view>
 
@@ -77,7 +80,9 @@
 			<picker class='time-picker-area' mode="date" value="{{formData.issue_time}}" start='2000-01-01' end='' bindchange='changeValue' data-input-name='issue_time'>
 				<view class='time-select-picker'>
 					{{formData.issue_time}}
-					<span class='calendar-icon'></span>
+					<span class='calendar-icon'>
+						<image src='../../asset/image/qtrade/calendar_40.svg' />
+					</span>
 				</view>
 			</picker>
 		</view>
@@ -90,7 +95,9 @@
 			<picker class='time-picker-area' mode="multiSelector" value="{{dateTime}}" bindchange='changeDateTime' range="{{dateTimeArray}}" data-input-name='bid_end'>
 				<view class='time-select-picker'>
 					{{formData.bid_end}}
-					<span class='calendar-icon'></span>
+					<span class='calendar-icon'>
+						<image src='../../asset/image/qtrade/calendar_40.svg' />
+					</span>
 				</view>
 			</picker>
 		</view>
