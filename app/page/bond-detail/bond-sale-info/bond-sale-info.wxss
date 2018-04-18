@@ -101,11 +101,13 @@
   font-family: PingFangSC-Regular;
   color: #000000;
 }
-.bond-sale-info .sale-list .bond-info-item-tpl.little_range,
-.bond-sale-info .sale-list .bond-info-item-tpl.early_end {
+.bond-sale-info .sale-list .bond-info-item-tpl {
   height: 70rpx;
   line-height: 70rpx;
   padding-top: 0;
   padding-bottom: 0;
+}
+.bond-sale-info .sale-list .bond-info-item-tpl.little_range,
+.bond-sale-info .sale-list .bond-info-item-tpl.early_end {
   border-bottom: 1rpx solid #E5E5E5;
 }

@@ -1,5 +1,5 @@
 <!--app/page/store/register-store/register-store.wxml-->
-<view class='register-store-component'>
+<view class='register-store-component {{type}}'>
 	<view class="bg">
 		<image src='../../../asset/image/qtrade/register-store.svg' />
 	</view>

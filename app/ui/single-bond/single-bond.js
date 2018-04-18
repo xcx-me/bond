@@ -12,13 +12,6 @@ Component({
 		type: Object,
 		value: {}
 	},
-	bondId: {
-		type: String,
-		value: '',
-		observer: function (newVal, oldVal) {
-			// console.log('observer....', newVal, oldVal)
-		}
-	},
 	isMine: {
 		type: Boolean,
 		value: ''
@@ -33,6 +26,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+	adminBondFieldList: bond.bondAdminFieldList,  
 	bondFieldList: bond.bondFieldList,
 	maxSeller: 3
   },
@@ -48,6 +42,17 @@ Component({
 	onDeleteBond: function (e) {
 		let bname = e.currentTarget.dataset.bname
 		this.triggerEvent('deleteBondEvent', bname)
+	},
+
+	doClickBondItem: function (e) {
+		let name = e.currentTarget.dataset.name
+		let bondSimpleName = e.currentTarget.dataset.bondname
+		if (name === 'icon-modify') {
+			console.log(e)
+			this.triggerEvent('modifyBondEvent', {bondSimpleName: bondSimpleName, offsetTop: e.detail.y, bondId: this.data.bondInfo.bond_id})
+		} else if (name === 'icon-delete') {
+			this.triggerEvent('deleteBondEvent', bondSimpleName)
+		}
 	}
   }
 })

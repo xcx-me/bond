@@ -1,13 +1,23 @@
 .ask-answer-component {
   width: 100%;
-  padding: 20rpx;
 }
 .ask-answer-component textarea {
-  width: calc(100% - 40rpx);
+  padding: 20rpx 30rpx;
+  width: calc(100% - 60rpx);
   background: #FFFFFF;
-  min-height: 160rpx;
+  min-height: 184rpx;
+  font-size: 34rpx;
+  font-family: PingFangSC-Regular;
+  line-height: 48rpx;
 }
-.ask-answer-component view {
-  position: relative;
-  top: 20rpx;
+.ask-answer-component button {
+  margin-top: 60rpx;
+  width: 670rpx;
+  color: #FFFFFF;
+  background-color: #2196F3;
+  border-radius: 10rpx;
+}
+.ask-answer-component button.disabled {
+  background-color: #2196F3;
+  opacity: 0.4;
 }

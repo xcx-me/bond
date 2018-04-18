@@ -20,7 +20,7 @@ module.exports = {
 				var leftValue = isNotLeftEmpty ? orginLeft : emptyValue;
 				var rightValue = isNotRightEmpty ? orginRight : emptyValue
 				var value = leftValue + '-' + rightValue
-				if (type === 'single-bond') {
+				if (type === 'single-bond' && field === "benefit" ) {
 					value = leftValue + '%-' + rightValue +'%' 
 				}
 				return value;
@@ -68,6 +68,10 @@ module.exports = {
 				for (var i=0; i < valueList.length; i++) {
 					var type = valueList[i]
 					value += valueMap[type] + ' '
+				}
+
+				if (field === 'rate_way' && origValue === '3') {
+					value += ' ' + detailInfo['benchmark']
 				}
 				return value;
 			case 'hot':

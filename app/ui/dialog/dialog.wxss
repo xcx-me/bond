@@ -20,10 +20,12 @@
   left: 50%;
   right: 0;
   top: 30%;
-  width: 450rpx;
-  margin-left: -225rpx;
+  width: 560rpx;
+  margin-left: -280rpx;
   background-color: #FFFFFF;
   border-radius: 4rpx;
+  font-size: 30rpx;
+  line-height: 42px;
 }
 .wx-dialog-container .wx-dialog-main .wx-dialog-title {
   padding: 10rpx;
