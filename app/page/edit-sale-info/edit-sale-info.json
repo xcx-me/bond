@@ -1,3 +1,6 @@
 {
-	"navigationBarTitleText": "修改销售信息"
+	"navigationBarTitleText": "修改销售信息",
+	"usingComponents": {
+		"WarningText": "../../ui/warning-text/warning-text"
+	}
 }

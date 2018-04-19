@@ -20,7 +20,10 @@ Page({
 			little_right: '',
 			early_end: '',
 			sale_type: ''
-		}
+		},
+		warningShowText: false,
+		warningText: '格式输入错误，请重新输入',
+		hightlight: false
 	},
 
 	getSaleInfo: function(bondId) {
@@ -44,10 +47,22 @@ Page({
 		let saveValue = this.data.saveValue
 		let name = e.currentTarget.dataset.name
 		saveValue[name] = value
+		// if (name === 'little_left' || name === 'little_right') {
+		// 	console.log(111)
+		// 	let reg = /^\d{0,2}(\.\d{0,4})?$/g
+		// 	if (reg.test(value)) {
+		// 		if (value !== '' && value.substring(0, 1) === '.') {
+		// 			value = ''
+		// 			saveValue[name] = ''
+		// 		}
+		// 	 	return	saveValue[name] = val
+		// 	}
+		// }
 		if (value.length > 0) {
 			this.setData({
 				isSubmitDisabled: false,
-				saveValue: saveValue
+				saveValue: saveValue,
+				hightlight: false
 			})
 		}
 	},
@@ -66,6 +81,20 @@ Page({
 	},
 
 	onFormSubmit: function(e) {
+		let curValue = this.data.saveValue
+		if (Number(curValue.little_left) > Number(curValue.little_right)) {
+			this.setData({
+				warningShowText: true,
+				hightlight: true
+			})
+			setTimeout(() =>{
+				this.setData({
+					warningShowText: false
+				})
+			}, 1500)
+			return
+		}
+
 		service.modNewBondDetail(this.data.saveValue, (result) => {
 			wx.navigateBack()
 		})
