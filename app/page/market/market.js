@@ -56,7 +56,7 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		let to = options.to 
+		let to = options.to
 		if (to === 'store') {
 			wx.navigateTo({
 				url: '/app/page/store/store?from=share&uid=' + options.uid

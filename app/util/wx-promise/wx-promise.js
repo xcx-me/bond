@@ -1,12 +1,34 @@
-
-function login () {
-	return new Promise((resolve, reject) => {
-		wx.login({
-			success: resolve
-		})
-	})
-}
-
 module.exports = {
-	login: login
+	login: function () {
+		return new Promise((resolve, reject) => {
+			wx.login({
+				success: resolve
+			})
+		})
+	},
+
+	getSetting: function () {
+		return new Promise((resolve, reject) => {
+			wx.getSetting({
+				success: resolve
+			})
+		})
+	},
+
+	checkSession: function () {
+		return new Promise((resolve, reject) => {
+			wx.checkSession({
+				success: resolve,
+				fail: reject
+			})
+		})
+	},
+
+	getUserInfo: function () {
+		return new Promise((resolve, reject) => {
+			wx.getUserInfo({
+				success: resolve
+			})
+		})
+	}
 }

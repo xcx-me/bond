@@ -1,36 +1,55 @@
-// app/page/mobile-form/mobile-form.js
-Page({
+const FormViewerEditorUtil = require('../../ui/form-viewer-editor/form-viewer-editor-util')
+const RegexpUtil = require('../../util/regexp-util/regexp-util')
 
+const MOBILE_NUMBER = 'mobileNumber'
+const MOBILE_VALIDATION_CODE = 'mobileValidationCode'
+const MAX_LENGTH_OF_MOBILE_NUMBER = 11
+
+Page({
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
 		descriptors: [
 			{
-				fieldName: 'mobileNumber',
+				fieldName: MOBILE_NUMBER,
 				label: '手机号',
 				value: '',
 				placeholder: '输入手机号',
-				maxlength: 11
+				maxlength: MAX_LENGTH_OF_MOBILE_NUMBER
 			},
 			{
-				fieldName: 'mobileValidationCode',
+				fieldName: MOBILE_VALIDATION_CODE,
 				label: '验证码',
 				value: '3333',
 				placeholder: '输入验证码',
 				maxlength: 4
 			},
-		]
+		],
+		disabledOfMobileVerificationCodeButton: true
 	},
 
 	onChangeDescriptors: function (e) {
+		let mobileNumberDescriptor = FormViewerEditorUtil.findDescriptorByFieldName(e.detail.descriptors, MOBILE_NUMBER)
 		this.setData({
-			descriptors: e.detail.descriptors
+			descriptors: e.detail.descriptors,
+			disabledOfMobileVerificationCodeButton: mobileNumberDescriptor.value.length !== MAX_LENGTH_OF_MOBILE_NUMBER
 		})
 	},
 
-	getMobileValidationCode: function () {
+	getMobileVerificationCode: function () {
 		console.log('get code...')
+	},
+
+	handleGetMobileVerificationCode: function () {
+		let mobileNumberDescriptor = FormViewerEditorUtil.findDescriptorByFieldName(this.data.descriptors, MOBILE_NUMBER)
+		console.log('mobileNumberDescriptor', mobileNumberDescriptor)
+
+		if (RegexpUtil.isPhoneNumber(mobileNumberDescriptor.value)) {
+			console.log('valid')
+		} else {
+			console.log('not valid.')
+		}
 	},
 
 	doSubmit: function () {

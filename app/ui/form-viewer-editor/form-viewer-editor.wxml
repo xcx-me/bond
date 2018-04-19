@@ -1,8 +1,10 @@
-<view class='mobile-form' wx:for='{{descriptors}}' wx:key='index'>
-	<text-input value='{{item.value}}'
+<view class='form-viewer-editor-component'>
+	<block wx:for='{{descriptors}}' wx:key='index'>
+		<text-input value='{{item.value}}'
 		label='{{item.label}}'
 		field-name='{{item.fieldName}}'
 		placeholder='{{item.placeholder}}'
 		maxlength='{{item.maxlength}}'
 		bind:change='onChange' />
+	</block>
 </view>
