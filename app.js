@@ -1,11 +1,10 @@
-const Anthentication = require('app/util/authentication/authentication')
 const {getConcreteCookie} = require('app/util/ajax/ajax')
 
 App({
 	onLaunch: function () {
-		getConcreteCookie(() => {
-			console.log('EVERYTHING OK!!!')
-		})
+		// getConcreteCookie(() => {
+		// 	console.log('EVERYTHING OK!!!')
+		// })
 	},
 
 	globalData: {

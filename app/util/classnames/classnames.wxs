@@ -1,4 +1,4 @@
-// Reference from: https://github.com/JedWatson/classnames/blob/master/index.js
+// Referenced from: https://github.com/JedWatson/classnames/blob/master/index.js
 
 module.exports = function () {
 	var classes = [];
