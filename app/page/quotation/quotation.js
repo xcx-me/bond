@@ -1,6 +1,6 @@
 // app/page/quotation/quotation.js
 
-const common = require('../../util/common.js')
+const Toast = require('../../util/toast/toast')
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 

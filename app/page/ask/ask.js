@@ -1,6 +1,6 @@
 // app/page/ask/ask.js
 const service = require('../../util/service/service')
-const common = require('../../util/common')
+
 Page({
 
   /**
