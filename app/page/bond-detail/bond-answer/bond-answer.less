@@ -19,7 +19,9 @@
 			position: relative;
 			top: 12rpx;
 		
-			.image {		
+			.image {
+				margin-right: 10rpx;
+
 				.face-url {
 					width: 48rpx;
 					height: 48rpx;
@@ -37,8 +39,15 @@
 			.content {
 				padding-right: 20rpx;
 
+				.colon {
+					float: left;
+					margin-right: 10rpx;
+				}
+
 				.answer-text {
 					float: left;
+					width: calc(~'100% - 100rpx');
+					word-wrap:break-word;
 				}
 	
 				.thumb {

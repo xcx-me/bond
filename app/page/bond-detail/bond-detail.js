@@ -18,7 +18,10 @@ Page({
 		tabIdList:['detail', 'question', 'store'],
 		needUpdate: false,
 		isAsking: false,
-		isAnswering: false
+		isAnswering: false,
+		bondList: [],
+		storeDetail: {},
+		loading: true
 	},
 
 	bindChangeTab: function (e) {
@@ -35,33 +38,55 @@ Page({
 		})
   	},
 
-	getStoreDetail: function (uid) {
+	initData: function(uid) {
+		this.getStoreDetail(uid)
+	},
+
+	  getStoreDetail: function (uid) {
 		service.getStoreDetail(uid, (result) => {
 			let detail = result.data.retdata
 			let isMyStore = String(detail.is_myself) === '1' && String(uid) === '0'
 			this.setData({
 				isMyStore: isMyStore,
-				userId: detail.user_id
+				userId: detail.user_id,
+				storeDetail: detail,
+				loading:false
 			})
+
+			this.getQuestionTotal()
+			this.getBondList()
 		})
 	},
 
   	getQuestionTotal: function () {
 		service.getQuestionTotal(this.data.bondId, (result)=> {
 			this.setData({
-				questionTotal: result.data.retdata.ask_num
+				questionTotal: result.data.retdata.ask_num > 99 ?  '99+' : result.data.retdata.ask_num
+			})
+		})
+	},
+
+	_updateQuestionTotalEvent: function (e) {
+		let questionTotal =  e.detail
+		this.setData({
+			questionTotal: questionTotal > 99 ?  '99+' : questionTotal
+		})
+	},
+
+	getBondList: function () {
+		service.getBondList({
+			bond_id: this.data.bondId,
+			user_id: this.data.userId,
+			offset: 0,
+			limit: 3,
+			type: this.data.isMyStore && this.data.uid === '0' ? 3 : 4
+		}, (result) => {
+			this.setData({
+				bondList: result.data.retdata.bond_list
 			})
 		})
 	},
 	
-	_updateQuestionTotalEvent: function (e) {
-		let questionTotal =  e.detail
-		this.setData({
-			questionTotal: questionTotal
-		})
-	},
-
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -73,8 +98,8 @@ Page({
 		currentTabId: options.tid ? options.tid : 'detail',
 		from: options.from || ''
 	})
-	this.getStoreDetail(options.uid)
-	this.getQuestionTotal()
+
+	this.initData(options.uid)
 
 	var that = this; 
 	wx.getSystemInfo({

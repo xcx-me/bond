@@ -1,3 +1,4 @@
+// app/page/administration/administration.js
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const service = require('../../util/service/service')
@@ -35,7 +36,6 @@ Page({
 	onModifyBondEvent: function(e) {
 		let bname = e.detail
 		this.data.modifyBondSimpleName = bname
-		console.log('admin onModifyBond.....', bname)
 		this.setData({
 			isShowModify: true
 		})
@@ -67,7 +67,6 @@ Page({
 
 	isStoreOpened: function () {
 		service.isStoreOpened((result) => {
-			// result.data.retdata.is_myshop_opened = '0' // for debug
 			let isStoreRegistered = String(result.data.retdata.is_myshop_opened) === '1'
 			if (isStoreRegistered) {
 				wx.setNavigationBarTitle({
@@ -89,7 +88,6 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		
 	},
 
 	/**
@@ -111,7 +109,8 @@ Page({
 	 */
 	onHide: function () {
 		this.setData({
-			isShowModify: false
+			isShowModify: false,
+			loading: !this.data.isStoreRegistered
 		})
 	},
 

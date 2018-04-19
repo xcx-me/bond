@@ -22,6 +22,7 @@ Component({
 			value: false,
 			observer: function(newVal, oldVal){
 				if (newVal) {
+					console.log('bond-info needUpdate', this.data.loading)
 					this.getBondDetail()
 				}
 			}
@@ -30,12 +31,12 @@ Component({
 
 	data: {
 		bondInfoFieldList: bond.bondInfoFieldList,
-		bondInfo: {},
-		attached: 'gag34|gare3'
+		loading: true,
+		bondInfo: {}
 	},
 
   	ready: function () {
-	  	console.log('bond-info', this.data.isMyStore)
+		console.log('bond-info  ready....', this.data.loading)
 		this.getBondDetail()
   	},
 
@@ -47,15 +48,10 @@ Component({
 		request(config.NEW_BOND.newBondDetail, {bond_id: this.data.bondId}).then((result) => {
 			if (String(result.data.ret) === '0') {
 				this.setData({
+					loading: false,
 					bondInfo: result.data.retdata
 				})
 			}
-		})
-	},
-
-	onEditBond: function () {
-		wx.navigateTo({
-			url: '/app/page/quotation/quotation?bname=' + this.data.bondInfo.bond_simple_name
 		})
 	}
   }

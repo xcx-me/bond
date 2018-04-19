@@ -42,7 +42,8 @@ Component({
 	modifyPalletTop: 0,
 	winHeight: 0,
 	rpx: 0,
-	modifyIndex: 0
+	modifyIndex: 0,
+	isClicking: false
   },
 
 
@@ -91,11 +92,20 @@ Component({
 	},
 
 	toDetail: function (from, uid, bondId, bondSimpleName) {
+		if (this.data.isClicking) {
+			return 
+		}
+		this.data.isClicking = true
 		this.hiddenModifyPallet()
 		request(config.NEW_BOND.accumulateClick, {user_id: uid, bond_simple_name: bondSimpleName})
-		let virtualUid = this.data.isMine ? '0' : uid
-		let url = '/app/page/bond-detail/bond-detail?bid=' + bondId +'&uid=' + virtualUid
-		from === 'detail' ? wx.redirectTo({url: url}) : wx.navigateTo({url: url})
+		
+		let that = this
+		setTimeout(()=>{
+			that.data.isClicking = false
+			let virtualUid = this.data.isMine ? '0' : uid
+			let url = '/app/page/bond-detail/bond-detail?bid=' + bondId +'&uid=' + virtualUid
+			from === 'detail' ? wx.redirectTo({url: url}) : wx.navigateTo({url: url})
+		}, 200)
 	},
 
 	onModifyBondEvent: function(e) {

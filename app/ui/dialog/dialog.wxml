@@ -4,8 +4,8 @@
 		<!-- <view class='wx-dialog-title'>{{ title }}</view> -->
 		<view class='wx-dialog-content'>{{ content }}</view>
 		<view class='wx-dialog-footer'>
-			<button class='cancel-btn' type='primary' size='mini' catchtap='_cancelEvent'>{{ cancelText }}</button>
-			<button class='confirm-btn' type='primary' size='mini' catchtap='_confirmEvent'>{{ confirmText }}</button>
+			<view class='btn btn-cancel' catchtap='_cancelEvent'>{{ cancelText }}</view>
+			<view class='btn btn-confirm' catchtap='_confirmEvent'>{{ confirmText }}</view>
 		</view>
 	</view>
 </view>

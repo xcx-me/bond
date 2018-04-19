@@ -17,21 +17,31 @@
 			</view>
 		</view>
 	</view>
-	<swiper current-item-id='{{currentTabId}}' class='content' duration='300' style='height: {{winHeight}}px' bindchange="bindChangeTab">
-		<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
-			<swiper-item item-id='{{tabId}}'>
-				<scroll-view class='pallet' scroll-y >
-					<BondInfo wx:if='{{tabId === currentTabId && currentTabId === "detail"}}' bondId='{{bondId}}' isMyStore='{{isMyStore}}' />
-					<BondQuestion wx:if='{{tabId === currentTabId && currentTabId === "question"}}' bondId='{{bondId}}' userId='{{userId}}' questionTotal='{{questionTotal}}' needUpdate='{{needUpdate}}' bind:updateTotalEvent='_updateQuestionTotalEvent'/>
-					<StoreDetail wx:if='{{tabId === currentTabId && currentTabId === "store"}}'
-						userId='{{uid}}'
-						isRegistered='{{true}}'
-						isQtrade='{{isQtrade}}'
-						needUpdate='{{true}}'/> 
-					<OtherBonds wx:if='{{tabId === currentTabId}}' isMyStore='{{isMyStore}}' bondId='{{bondId}}' uid='{{uid}}' userId='{{userId}}' needUpdate='{{needUpdate}}' />
-				</scroll-view>
-			</swiper-item>
-		</block>
+	<swiper wx:if='{{!loading}}' current-item-id='{{currentTabId}}' class='content' duration='300' style='height: {{winHeight}}px' bindchange="bindChangeTab">
+		<swiper-item item-id='detail'>
+			<scroll-view class='pallet' scroll-y >
+				<BondInfo bondId='{{bondId}}' isMyStore='{{isMyStore}}' />
+				<OtherBonds  isMyStore='{{isMyStore}}' bondId='{{bondId}}' uid='{{uid}}' userId='{{userId}}' bondList='{{bondList}}' />
+			</scroll-view>
+		</swiper-item>
+		<swiper-item item-id='question'>
+			<scroll-view class='pallet' scroll-y >
+				<BondQuestion bondId='{{bondId}}' userId='{{userId}}' needUpdate='{{needUpdate}}' bind:updateTotalEvent='_updateQuestionTotalEvent'/>
+				<OtherBonds isMyStore='{{isMyStore}}' bondId='{{bondId}}' uid='{{uid}}' userId='{{userId}}' bondList='{{bondList}}' />
+			</scroll-view>
+		</swiper-item>
+		<swiper-item item-id='store'>
+			<scroll-view class='pallet' scroll-y >
+				<StoreDetail
+					userId='{{uid}}'
+					isRegistered='{{true}}'
+					needUpdate='{{true}}'
+					detail='{{storeDetail}}'
+					bindevent='()=>{}'
+				/> 
+				<OtherBonds isMyStore='{{isMyStore}}' bondId='{{bondId}}' uid='{{uid}}' userId='{{userId}}' bondList='{{bondList}}' />
+			</scroll-view>
+		</swiper-item>
 	</swiper>
 	<ShareButton />
 	<UserInputTextArea focus='{{isAsking || isAnswering}}' placeholder='{{isAsking ? "向主承及其他销售经理提问，50字以内" : "请输入您的回答，50字以内"}}'/>
