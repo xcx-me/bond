@@ -1,6 +1,7 @@
 {
 	"usingComponents": {
 		"text-input": "../../ui/form-viewer-editor/text-input/text-input",
-		"form-viewer-editor": "../../ui/form-viewer-editor/form-viewer-editor"
+		"form-viewer-editor": "../../ui/form-viewer-editor/form-viewer-editor",
+		"mobile-verification-code-button": "./mobile-verification-code-button/mobile-verification-code-button"
 	}
 }

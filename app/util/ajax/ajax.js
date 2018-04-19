@@ -1,9 +1,9 @@
 const Promise = require('./es6-promise').Promise
 const Environment = require('./environment')
-
 const config = require('../ajax/config')
-
 const APPLETREE_KEY = 'appletree_key'
+const StringUtil = require('../string-util/string-util')
+const wxPromise = require('../wx-promise/wx-promise')
 
 function ajax (configuration, data, cookie) {
 	let url = Environment.withDomain(configuration.url)
@@ -26,28 +26,60 @@ function isValidAppletreeKey (appletreeKey) {
 	return appletreeKey
 }
 
-function shortcut (appletreeKey, configuration, data, resolve, reject) {
-	let cookie = getApp().isLocalhost ? Environment.TARGET_SERVER.cookie : `${APPLETREE_KEY}=${appletreeKey}`
-	ajax(configuration, data, cookie).then(resolve).catch(reject)
+function getCookie () {
+	if (getApp().isLocalhost) {
+		wx.setStorageSync(APPLETREE_KEY, Environment.TARGET_SERVER.cookie)
+		return Environment.TARGET_SERVER.cookie
+	}
+	return cookie = `${APPLETREE_KEY}=${wx.getStorageSync(APPLETREE_KEY)}`
+}
+
+function getConcreteCookie (done) {
+	let appletreeKey = wx.getStorageSync(APPLETREE_KEY)
+	if (StringUtil.isNullOrEmpty(appletreeKey)) {
+		doLogin(done)
+	} else {
+		wxPromise.checkSession().then(done).catch((error) => {
+			doLogin(done)
+		})
+	}
+}
+
+function doLogin (done) {
+	wxPromise.login().then((loginResult) => {
+		wxPromise.getSetting().then((result) => {
+			result.authSetting['scope.userInfo'] && wxPromise.getUserInfo().then((secret) => {
+				ajax(config.AUTHENTICATION.getAppletreeKey, {
+					code: loginResult.code,
+					userInfo: secret.userInfo,
+					rawData: secret.rawData,
+					signature: secret.signature,
+					encryptedData: secret.encryptedData,
+					iv: secret.iv
+				}).then((result) => {
+					// TODO: this is mock data.
+					// result.appletreeKey = '1ffc0512f2e1538fe6b8ea3041454cb2a885b03b'
+					let appletreeKey = result.appletreeKey
+					wx.setStorageSync(APPLETREE_KEY, appletreeKey)
+					done()
+				})
+			})
+		})
+	})
 }
 
 function request (configuration, data) {
-	let appletreeKey = wx.getStorageSync(APPLETREE_KEY)
-	if (isValidAppletreeKey(appletreeKey)) {
-		return new Promise((resolve, reject) => {
-			shortcut(appletreeKey, configuration, data, resolve, reject)
-		})
-	}
 	return new Promise((resolve, reject) => {
-		ajax(config.AUTHENTICATION.getAppletreeKey, {}).then((result) => {
-			let appletreeKey = result.appletreeKey
-			wx.setStorageSync(APPLETREE_KEY, appletreeKey)
-			shortcut(appletreeKey, configuration, data, resolve, reject)
+		getConcreteCookie(() => {
+			ajax(configuration, data, getCookie()).then(resolve).catch(reject)
 		})
 	})
 }
 
 module.exports = {
+	ajax: ajax,
 	request: request,
-	isValidAppletreeKey: isValidAppletreeKey
+	isValidAppletreeKey: isValidAppletreeKey,
+	APPLETREE_KEY: APPLETREE_KEY,
+	getConcreteCookie: getConcreteCookie
 }

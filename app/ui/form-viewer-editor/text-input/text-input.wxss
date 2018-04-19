@@ -1,1 +1,9 @@
-/* app/ui/form-viewer-editor/text-input/text-input.wxss */
+.form-item-component {
+  border-bottom: 1rpx solid #E5E5E5;
+  font-size: 34rpx;
+  display: flex;
+  padding: 10px;
+}
+.form-item-component .label-area {
+  width: 140rpx;
+}

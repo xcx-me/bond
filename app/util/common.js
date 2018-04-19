@@ -1,22 +1,4 @@
 module.exports = {
-	showFailedToast: function (title) {
-		wx.showToast({
-			title: title || '操作失败，请稍后再试',
-			icon: 'none',
-			mask: true,
-			duration: 1000
-		})
-	},
-
-	showToast: function (text, iconType, showTime) { // icon 只支持'success' 和 'loading'
-		wx.showToast({
-			title: text,
-			icon: iconType,
-			duration: showTime
-		})
-	},
-
-
 	formatDate: function (date) {  
 		var year = date.getFullYear()  
 		var month = date.getMonth() + 1  

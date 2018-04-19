@@ -3,38 +3,31 @@ const {GET, POST} = require('./method')
 module.exports = {
 	USER_REGISTER: {
 		getUserStatus: {
-			// url: '/qtrade_bond/api/user/getuserstatus.do',
-			url: '/qtrade_im/daily_checkin.do',
-			method: POST
+			url: '/qtrade_bond/api/user/getuserstatus.do',
+			method: GET
 		},
 		getMobileVerificationCode: {
-			// url: '/qtrade_bond/api/register/mobilevarifycode1.do',
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/register/mobileverifycode.do',
 			method: POST
 		},
 		activateMobile: {
-			// url: '/qtrade_bond/api/register/activatemobile.do',
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/register/activatemobile.do',
 			method: POST
 		},
 		getUserInfo: {
-			// url: '/qtrade_bond/api/user/getsubmitinfo.do',
-			url: '/qtrade_im/daily_checkin.do',
-			method: POST
+			url: '/qtrade_bond/api/user/getuserinfo1.do',
+			method: GET
 		},
 		submitUserInfo: {
-			// url: '/qtrade_bond/api/register/submitinfo.do',
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/register/submitinfo.do',
 			method: POST
 		},
 		verifyQQEmailCode: {
-			// url: '/qtrade_bond/api/activateemail/generalactivate.do',
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/activateemail/generalactivate.do',
 			method: POST
 		},
 		resendEmail: {
-			// url: '/qtrade_bond/api/activateemail/resend.do',
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/activateemail/resend.do',
 			method: GET
 		},
 
@@ -87,7 +80,7 @@ module.exports = {
 	},
 	AUTHENTICATION: {
 		getAppletreeKey: {
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/user/login/wxminiprogramlogin.do',
 			method: POST
 		}
 	},
@@ -142,7 +135,7 @@ module.exports = {
 		},
 		// ==========
 
-		getWorkdaysInfo: { 
+		getWorkdaysInfo: {
 			url: '/qtrade_bond/api/newbond/get_workdays_info.do',
 			method: POST
 		},

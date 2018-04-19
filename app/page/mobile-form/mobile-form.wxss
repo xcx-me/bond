@@ -1,3 +1,17 @@
-.mobile-form {
-  background-color: pink;
+.mobile-form .description {
+  font-size: 28rpx;
+  padding: 20rpx;
+  color: #888888;
+}
+.mobile-form .form-section {
+  position: relative;
+  background-color: white;
+}
+.mobile-form .form-section .mobile-verification-code-button {
+  font-size: 34rpx;
+  border-left: 1px solid #E5E5E5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
 }

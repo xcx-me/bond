@@ -1,0 +1,8 @@
+<wxs module='classnames'>
+	var classnames = require('../../../util/classnames/classnames.wxs')
+	module.exports = function (disabled) {
+		return classnames('mobile-verification-code-button-component', disabled ? 'disabled' : '')
+	}
+</wxs>
+
+<view class='{{classnames(disabled)}}' bindtap='getMobileVerificationCode'>{{label}}</view>

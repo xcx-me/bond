@@ -1,6 +1,6 @@
 // app/ui/ask-answer-question/ask-answer-question.js
 const service = require('../../util/service/service')
-const common = require('../../util/common')
+const Toast = require('../../util/toast/toast')
 Component({
 	properties: {
 		isAsk: {
@@ -86,14 +86,14 @@ Component({
 			if (result && result.data && result.data.ret) {
 				let ret = String(result.data.ret)
 				if (ret === '-2') {
-					common.showFailedToast('非V用户不可以' + this.data.isAsk ? '提问' : '回答')
+					Toast.showFailedToast('非V用户不可以' + this.data.isAsk ? '提问' : '回答')
 				} else if (ret === '-3') {
-					common.showFailedToast('操作太频繁，请明天再试')
+					Toast.showFailedToast('操作太频繁，请明天再试')
 				} else {
-					common.showFailedToast('操作失败，请稍后再试')
+					Toast.showFailedToast('操作失败，请稍后再试')
 				}
 			} else {
-				common.showFailedToast('系统繁忙，请稍后再试')
+				Toast.showFailedToast('系统繁忙，请稍后再试')
 			}
 		}
 	}

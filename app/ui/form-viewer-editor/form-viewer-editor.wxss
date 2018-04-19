@@ -1,1 +1,3 @@
-/* app/ui/form-viewer-editor/form-viewer-editor.wxss */
+.form-viewer-editor-component .form-item {
+  border-bottom: 1rpx solid grey;
+}
