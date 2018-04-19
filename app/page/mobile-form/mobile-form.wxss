@@ -15,3 +15,6 @@
   right: 0;
   padding: 10px;
 }
+.mobile-form .form-section .mobile-verification-code-button.disabled {
+  color: grey;
+}

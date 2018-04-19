@@ -6,6 +6,9 @@ const MOBILE_NUMBER = 'mobileNumber'
 const MOBILE_VALIDATION_CODE = 'mobileValidationCode'
 const MAX_LENGTH_OF_MOBILE_NUMBER = 11
 
+const PERIOD = 60
+const DAFAULT_LABEL = '获取验证码'
+
 Page({
 	/**
 	 * 页面的初始数据
@@ -27,14 +30,21 @@ Page({
 				maxlength: 4
 			},
 		],
-		disabledOfMobileVerificationCodeButton: true
+		disabledOfMobileVerificationCodeButton: true,
+		labelOfMobileVerificationCodeButton: DAFAULT_LABEL
 	},
 
 	onChangeDescriptors: function (e) {
 		let mobileNumberDescriptor = FormViewerEditorUtil.findDescriptorByFieldName(e.detail.descriptors, MOBILE_NUMBER)
+
+		let disabledOfMobileVerificationCodeButton = (mobileNumberDescriptor.value.length !== MAX_LENGTH_OF_MOBILE_NUMBER)
+		if (this.timer) {
+			disabledOfMobileVerificationCodeButton = true
+		}
+		
 		this.setData({
 			descriptors: e.detail.descriptors,
-			disabledOfMobileVerificationCodeButton: mobileNumberDescriptor.value.length !== MAX_LENGTH_OF_MOBILE_NUMBER
+			disabledOfMobileVerificationCodeButton: disabledOfMobileVerificationCodeButton
 		})
 	},
 
@@ -42,17 +52,37 @@ Page({
 		console.log('get code...')
 	},
 
+	setLabelByCondition (disabled, counter) {
+		this.setData({
+			disabledOfMobileVerificationCodeButton: disabled,
+			labelOfMobileVerificationCodeButton: disabled ? `${counter}秒后重发` : DAFAULT_LABEL
+		})
+	},
+
+	updateLabel () {
+		this.setLabelByCondition(true, PERIOD)
+		let counter = PERIOD
+		this.timer = setInterval(() => {
+			counter--
+			if (counter === 0) {
+				clearInterval(this.timer)
+				this.timer = undefined
+				counter = PERIOD
+				this.setLabelByCondition(false)
+				return
+			}
+			this.setLabelByCondition(true, counter)
+		}, 1000)
+	},
+
 	handleGetMobileVerificationCode: function () {
 		let mobileNumberDescriptor = FormViewerEditorUtil.findDescriptorByFieldName(this.data.descriptors, MOBILE_NUMBER)
-		console.log('mobileNumberDescriptor', mobileNumberDescriptor)
 
 		if (RegexpUtil.isPhoneNumber(mobileNumberDescriptor.value)) {
-			console.log('valid')
+			this.updateLabel()
 		} else {
 			Toast.showToast('验证码错误，请重新输入')
-			this.setData({
-				disabledOfMobileVerificationCodeButton: false
-			})
+			this.setLabelByCondition(false)
 		}
 	},
 
