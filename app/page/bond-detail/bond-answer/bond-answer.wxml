@@ -6,7 +6,8 @@
 			<template is='sellerInfoTpl' data='{{faceUrl: answerItem.face_url, isVUser:answerItem.v_user}}'></template>
 			<view class='content-wrapper'>
 				<view class='content'>
-					<text class="answer-text">：{{answerItem.content}}</text>
+					<text class='colon'>：</text>
+					<view class='answer-text'><text>{{answerItem.content}}</text></view>
 					<view class='thumb' bindtap='onThumb' data-id='{{answerItem.ans_id}}'>
 						<image class='icon-thumb' src='{{answerItem.is_thumb === "1" ? "../../../asset/image/qtrade/said-good.svg" : "../../../asset/image/qtrade/give_the_thumbs_up_24.svg"}}' />
 						<text>{{answerItem.thumb_num}}</text>

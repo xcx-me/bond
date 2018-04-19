@@ -1,16 +1,13 @@
 
 <view class='overview-page page-wrapper'>
-	<loading wx:if="{{loading}}">加载中</loading>
-	<block hidden="{{loading}}">
-		<StoreDetail navigatorUrl='../my-configuration/my-configuration' 
-			userId='{{uid}}'
-			isRegistered='{{storeRegistered}}'
-			needUpdate='{{needUpdate}}' 
-			bindevent='onUpdateStoreDetail'
-		/>
-		<view class='store-pallet'>
-			<MyStore isRegistered='{{storeRegistered}}' uid='{{uid}}' userId='{{userId}}' isQtrade='{{isQtrade}}' needUpdate='{{needUpdate}}' />
-		</view>
-	</block>
-	<ShareButton wx:if='{{storeRegistered}}'/>
+	<StoreDetail navigatorUrl='../my-configuration/my-configuration' 
+		userId='{{uid}}'
+		isRegistered='{{isStoreRegistered}}'
+		needUpdate='{{needUpdate}}' 
+		bindevent='onUpdateStoreDetail'
+	/>
+	<view class='store-pallet' hidden='{{loading}}'>
+		<MyStore isStoreRegistered='{{isStoreRegistered}}' uid='{{uid}}' userId='{{userId}}' isQtrade='{{isQtrade}}' needUpdate='{{needUpdate}}' />
+	</view>
+	<ShareButton wx:if='{{isStoreRegistered}}'/>
 </view>

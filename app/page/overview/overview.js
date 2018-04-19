@@ -1,10 +1,8 @@
 // app/page/overview/overview.js
 const service = require('../../util/service/service')
-var app = getApp()
-
 Page({
 	data: {
-		storeRegistered: false, // 是否开店
+		isStoreRegistered: false, // 是否开店
 		uid: '0',
 		userId: '0',
 		userName: '',
@@ -17,8 +15,7 @@ Page({
 		service.isStoreOpened((result) => {
 			// result.data.retdata.is_myshop_opened = 0 // for debug
 			this.setData({
-				storeRegistered: String(result.data.retdata.is_myshop_opened) === '1',
-				loading: false,
+				isStoreRegistered: String(result.data.retdata.is_myshop_opened) === '1',
 				needUpdate: true
 			})
 		})
@@ -32,7 +29,8 @@ Page({
 			isMyStore: isMyStore,
 			isQtrade: String(detail.is_qtrade) === '1',
 			userId: detail.user_id,
-			userName: detail.sale_name
+			userName: detail.sale_name,
+			loading: false
 		})
 	},
 
@@ -68,9 +66,9 @@ Page({
 	 * 生命周期函数--监听页面隐藏
 	 */
 	onHide: function () {
-		console.log('overview needUpdate....')
 		this.setData({
-			needUpdate: false
+			needUpdate: false,
+			loading: !this.data.isStoreRegistered
 		})
 	},
 
@@ -107,7 +105,7 @@ Page({
 		}
 
 		let userId = this.data.userId
-		let path = '/app/page/market/market?to=store&uid=' + userId
+		let path = '/app/page/store/store?from=share&uid=' + userId
 		let that = this
 		return {
 			title: `${this.data.userName}的店铺`,

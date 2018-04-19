@@ -1,7 +1,6 @@
 // components/Dialog/dialog.js
 var detail =require('../../../util/store/detail.js')
 const service = require('../../../util/service/service')
-var app = getApp()
 
 Component({
 	options: {
@@ -17,14 +16,23 @@ Component({
 			type: String,
 			value: ''
 		},
-
+		detail: {
+			type: Object,
+			value: ''
+		},
 		needUpdate: {
 			type: Boolean,
 			value: false,
 			observer: function(newVal, oldVal){
-				console.log('detail...', newVal, oldVal)
 				if (newVal) {
-					this.getStoreDetail(this.data.userId)
+					 if (this.data.detail && Object.keys(this.data.detail)) {
+						this.setData({
+							loading: false,
+							storeDetail: this.data.detail
+						})
+					 }else {
+						this.getStoreDetail(this.data.userId)
+					 }	
 				}
 			}
 		},
@@ -33,12 +41,7 @@ Component({
 			type: Boolean,
 			value: false
 		},
-		
-		isQtrade: {
-			type: Boolean,
-			value: false
-		},
-		
+			
 		navigatorUrl: {
 			type: String,
 			value: ''
@@ -50,6 +53,7 @@ Component({
 	},
   
 	data: {
+		loading: true,
 		storeDetail: {
 			face_url: 'loading',
 			history_bond: "0",
@@ -67,6 +71,7 @@ Component({
 	methods: {
 		updateStoreDetail: function(detail) {
 			this.setData({
+				loading: false,
 				storeDetail: detail,
 			})
 			this.triggerEvent('event', detail)
@@ -76,6 +81,7 @@ Component({
 			if (this.data.isRegistered) { // 已开店
 				service.getStoreDetail(userId, (result) => {
 					this.updateStoreDetail(result.data.retdata)
+				}, () => {
 				})
 			} else { // 未开店
 				service.getCardInfo((result) => {

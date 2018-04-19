@@ -1,7 +1,6 @@
 <!--app/page/store/bond-list/bond-list.wxml-->
 <view class='store-bond-list-component {{isQtrade? "qtrade-store" : ""}}'>
-	<loading wx:if="{{loading}}">数据加载中</loading>
-	<view class='store-bond-list' hidden='{{loading}}'>
+	<view class='store-bond-list' >
 		<BondList
 			from='store'
 			isMine='{{true}}'

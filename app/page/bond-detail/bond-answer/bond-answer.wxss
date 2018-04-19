@@ -57,6 +57,9 @@
   position: relative;
   top: 12rpx;
 }
+.bond-answer-component .answer-item .seller-info-tpl .image {
+  margin-right: 10rpx;
+}
 .bond-answer-component .answer-item .seller-info-tpl .image .face-url {
   width: 48rpx;
   height: 48rpx;
@@ -71,8 +74,14 @@
 .bond-answer-component .answer-item .content-wrapper .content {
   padding-right: 20rpx;
 }
+.bond-answer-component .answer-item .content-wrapper .content .colon {
+  float: left;
+  margin-right: 10rpx;
+}
 .bond-answer-component .answer-item .content-wrapper .content .answer-text {
   float: left;
+  width: calc(100% - 100rpx);
+  word-wrap: break-word;
 }
 .bond-answer-component .answer-item .content-wrapper .content .thumb {
   float: right;

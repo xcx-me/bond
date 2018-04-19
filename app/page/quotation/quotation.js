@@ -164,7 +164,9 @@ Page({
 				isEditEntry: bondSimpleName.length > 0
 			})
 		}
-		// console.log('quotation onLoad....', options.bname)
+		wx.setNavigationBarTitle({
+			title: bondSimpleName ? '编辑' : '发布'
+		})
 	},
 
 	/**

@@ -22,10 +22,10 @@
   top: 30%;
   width: 560rpx;
   margin-left: -280rpx;
-  background-color: #FFFFFF;
-  border-radius: 4rpx;
   font-size: 30rpx;
-  line-height: 42px;
+  background-color: #FFFFFF;
+  border-radius: 8px ;
+  text-align: center;
 }
 .wx-dialog-container .wx-dialog-main .wx-dialog-title {
   padding: 10rpx;
@@ -34,12 +34,23 @@
 .wx-dialog-container .wx-dialog-main .wx-dialog-content {
   padding: 30rpx 20rpx;
   max-height: 200rpx;
-  text-align: center;
+  line-height: 42px;
 }
 .wx-dialog-container .wx-dialog-main .wx-dialog-footer {
-  margin-bottom: 10rpx;
-  text-align: center;
+  border-top: 1px solid #E5E5E5;
+  display: flex;
+  width: 100%;
 }
-.wx-dialog-container .wx-dialog-main .wx-dialog-footer .cancel-btn {
-  margin-right: 15rpx;
+.wx-dialog-container .wx-dialog-main .wx-dialog-footer .btn {
+  width: 50%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 30rpx;
+}
+.wx-dialog-container .wx-dialog-main .wx-dialog-footer .btn.btn-cancel {
+  color: #000000;
+  border-right: 1px solid #E5E5E5;
+}
+.wx-dialog-container .wx-dialog-main .wx-dialog-footer .btn.btn-confirm {
+  color: #2196F3;
 }

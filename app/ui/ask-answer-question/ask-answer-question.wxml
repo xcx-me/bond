@@ -1,7 +1,11 @@
 <!--app/ui/ask-answer-question/ask-answer-question.wxml-->
 <view class='ask-answer-component'>
  	<form bindsubmit="onFormSubmit">
-		<textarea bindfocus='onFocus' bindinput='onInput' bindblur='onTextAreaBlur' auto-focus auto-height placeholder='{{isAsk ? "向主承及其他销售经理提问，50字以内" : "请输入您的回答，50字以内"}}' maxlength='50' value='{{content}}'/>
-		<button class='btn-confirm {{isSubmitDisabled ? "disabled" : ""}}' hover-class='button-hover' type='primary' formType='submit' disabled="{{isSubmitDisabled}}">完成</button>
+		<textarea bindfocus='onFocus' bindinput='onInput' auto-focus auto-height placeholder='{{isAsk ? "向主承及其他销售经理提问，50字以内" : "请输入您的回答，50字以内"}}' maxlength='50' value='{{content}}'/>
+		<view hidden='{{errTips.length === 0}}'>
+			<icon type='warn' />
+			<text>{{errTips}}</text>
+		</view>
+		<button class='btn-confirm {{isSubmitDisabled || isSubmitting ? "disabled" : ""}}' loading='{{isSubmitting}}' hover-class='button-hover' type='primary' formType='submit' disabled="{{isSubmitDisabled || isSubmitting }}">{{isSubmitting ? '提交中...' : '完成'}}</button>
 	</form>
 </view>
