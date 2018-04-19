@@ -21,3 +21,6 @@
   background-color: #2196F3;
   opacity: 0.4;
 }
+.ask-answer-component button:hover {
+  background: #1A7DD4;
+}

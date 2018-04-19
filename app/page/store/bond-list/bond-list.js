@@ -36,12 +36,11 @@ Component({
    * 组件的初始数据
    */
   data: {
-	bondList: [],
-	loading: true
+	bondList: []
   },
 
   ready: function () {
-	// this.getBondList(this.data.uid, 10)
+	 // this.getBondList(this.data.uid, 10)
   },
 
   /**
@@ -60,8 +59,7 @@ Component({
 		}, (result) => {
 			console.log('store-bond-list:',  result.data.retdata.bond_list)
 			this.setData({
-				bondList: result.data.retdata.bond_list,
-				loading: false
+				bondList: result.data.retdata.bond_list
 			})
 		})
 	  },

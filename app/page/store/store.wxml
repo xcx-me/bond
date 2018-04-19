@@ -5,13 +5,12 @@
 		navigatorUrl=''
 		userId='{{uid}}'
 		isRegistered='{{true}}'
-		isQtrade='{{isQtrade}}'
 		isHiddenSeller='{{isMyStore}}'
 		needUpdate='{{needUpdate}}'
 		bindevent='onUpdateStoreDetail'/> 
 	</view>
 	<view class='store-bond-list'>
-		<StoreBondList uid='{{uid}}' userId='{{userId}}' isMyStore='{{false}}' isQtrade='{{isQtrade}}'/>
+		<StoreBondList uid='{{uid}}' userId='{{userId}}' isMyStore='{{false}}' needUpdate='{{needUpdate}}' isQtrade='{{isQtrade}}'/>
 	</view>
 	<ShareButton wx:if='{{userId !== "0"}}'/>
 </view>

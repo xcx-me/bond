@@ -4,7 +4,6 @@ App({
 	},
 
 	globalData: {
-
 	},
 
 	isLocalhost: true

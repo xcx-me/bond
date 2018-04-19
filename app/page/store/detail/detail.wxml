@@ -1,7 +1,8 @@
 
 <import src="../../../template/seller-info/seller-template.wxml" />
-<view class='store-header-component'>
-	<view class='personal-info-pallet {{isQtrade ? "is-qtrade" : ""}}' wx:if='{{!isHiddenSeller}}' bindtap='doClick'>
+<loading wx:if='{{loading}}'>加载中...</loading>
+<view class='store-header-component' hidden='{{loading}}'>
+	<view class='personal-info-pallet {{storeDetail.is_qtrade === "1" ? "is-qtrade" : ""}}' wx:if='{{!isHiddenSeller}}' bindtap='doClick'>
 		<template is='sellerInfoTpl' data='{{url: navigatorUrl, faceUrl: storeDetail.face_url, isVUser:storeDetail.v_user, userName: storeDetail.sale_name, companyName: storeDetail.company_simple_name}}'></template>
 		<i wx:if='{{navigatorUrl}}' class='icon-right-arrow'></i>
 	</view>

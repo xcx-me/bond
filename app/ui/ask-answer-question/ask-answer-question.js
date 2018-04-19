@@ -1,6 +1,6 @@
 // app/ui/ask-answer-question/ask-answer-question.js
 const service = require('../../util/service/service')
-const Toast = require('../../util/toast/toast')
+const toast = require('../../util/toast/toast')
 Component({
 	properties: {
 		isAsk: {
@@ -29,17 +29,12 @@ Component({
    	*/
  	 data: {
 		  content: '',
-		  isSubmitDisabled: true
+		  errTips: '',
+		  isSubmitDisabled: true,
+		  isSubmitting: '',
   	},
 
 	methods: {
-		onTextAreaBlur: function(e) {
-			let content = e.detail.value
-			this.setData({
-				content: content
-			}) 
-		},
-
 		onFocus: function (e) {
 			this.setData({
 				errTips: ''
@@ -49,24 +44,34 @@ Component({
 		onInput: function (e) {
 			let value = e.detail.value.replace(/(^\s*)|(\s*$)/g, '')
 			this.setData({
-				isSubmitDisabled: value.length === 0
+				isSubmitDisabled: value.length === 0,
+				content: value
 			})
 		},
 
 		onFormSubmit: function(e) {
 			let content = this.data.content
-			if (this.data.isAsk) {
-				service.doAsk(this.data.bondSimpleName, this.data.content, this.data.userId, (result)=>{
-					this.onSuccess()
-				}, (result) => {
-					this.onFailed(result)
+			this.setData({
+				isSubmitting: true
+			})
+			if (content.replace(/(^\s*)|(\s*$)/g, '').length === 0) {
+				this.setData({
+					errTips: '输入为空'
 				})
-			} else {
-				service.doAnswer(this.data.askId, this.data.content, (result)=>{
-					this.onSuccess()
-				}, (result) => {
-					this.onFailed(result)
-				})
+			}else {
+				if (this.data.isAsk) {
+					service.doAsk(this.data.bondSimpleName, this.data.content, this.data.userId, (result)=>{
+						this.onSuccess()
+					}, (result) => {
+						this.onFailed(result)
+					})
+				} else {
+					service.doAnswer(this.data.askId, this.data.content, (result)=>{
+						this.onSuccess()
+					}, (result) => {
+						this.onFailed(result)
+					})
+				}
 			}
 		},
 	
@@ -78,22 +83,31 @@ Component({
 		},
 
 		onSuccess: function () {
-			this.onNavigateBack()
+			toast.showToast('提交成功')
+			this.setData({
+				isSubmitting: false,
+				isSubmitDisabled: true
+			})
+			setTimeout(()=>{
+				this.onNavigateBack()
+			}, 1600)	
 		},
 	
 		onFailed: function (result) {
-			console.log('onFailed...', this.data, result)
+			this.setData({
+				isSubmitting: false
+			})
 			if (result && result.data && result.data.ret) {
 				let ret = String(result.data.ret)
 				if (ret === '-2') {
-					Toast.showFailedToast('非V用户不可以' + this.data.isAsk ? '提问' : '回答')
+					toast.showFailedToast('非V用户不可以' + this.data.isAsk ? '提问' : '回答')
 				} else if (ret === '-3') {
-					Toast.showFailedToast('操作太频繁，请明天再试')
+					toast.showFailedToast('操作太频繁，请明天再试')
 				} else {
-					Toast.showFailedToast('操作失败，请稍后再试')
+					toast.showFailedToast('操作失败，请稍后再试')
 				}
 			} else {
-				Toast.showFailedToast('系统繁忙，请稍后再试')
+				toast.showFailedToast('系统繁忙，请稍后再试')
 			}
 		}
 	}

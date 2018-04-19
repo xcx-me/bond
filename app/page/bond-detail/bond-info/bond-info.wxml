@@ -8,16 +8,12 @@
 		}
 	}
 </wxs>
-
-<view class='bond-info-component'>
+<loading wx:if='{{loading}}'>加载中...</loading>
+<view class='bond-info-component' hidden='{{loading}}'>
 	<view class='info-item sale'>
 		<BondSaleInfo isMyStore='{{isMyStore}}' bondSaleInfo='{{bondInfo.sale_info}}' isQtrade='{{bondInfo.is_qtrade === "1"}}' fieldList='{{bondInfoFieldList.sale}}'/>
 	</view>
 	<view class='info-item detail'>
-		<!-- <view wx:if='{{isMyStore}}' class='btn-edit' bindtap='onEditBond'>
-			<image class='icon-modify' src='../../../asset/image/qtrade/modify_24.svg' />
-			<text>编辑</text>
-		</view> -->
 		<block wx:for='{{bondInfoFieldList.detail}}' wx:for-item='itemRow' wx:for-index='index' wx:key='index'>
 			<view class='row'>
 				<block wx:for='{{itemRow}}' wx:for-item='item' wx:key='name'>

@@ -14,11 +14,6 @@ Component({
 			type: String,
 			value: ''
 		},
-		questionTotal: {
-			type: Number,
-			value: 0
-		},
-
 		needUpdate: {
 			type: Boolean,
 			value: false,
@@ -31,12 +26,13 @@ Component({
   	},
 
   	data: {
+		loading: true,
 		questionList: [],
 		bondSimpleName: ''
   	},
 
   	ready: function () {
-		this.getQuestionList()
+		// this.getQuestionList()
   	},
 
   	methods: {
@@ -45,6 +41,7 @@ Component({
 				let questionList = result.data.retdata.ask_array
 				let questionTotal = questionList.length
 				this.setData({
+					loading: false,
 					questionList: questionList,
 					bondSimpleName: result.data.retdata.bond_simple_name
 				})

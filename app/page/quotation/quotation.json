@@ -1,5 +1,4 @@
 {
-	"navigationBarTitleText": "发布",
 	"usingComponents": {
 	  "BondFormEditor": "../../ui/bond-form-editor/bond-form-editor",
 	  "toastedit": "../../ui/toastedit/toastedit",
