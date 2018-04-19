@@ -49,8 +49,10 @@ Page({
 		if (RegexpUtil.isPhoneNumber(mobileNumberDescriptor.value)) {
 			console.log('valid')
 		} else {
-			console.log('not valid.')
 			Toast.showToast('验证码错误，请重新输入')
+			this.setData({
+				disabledOfMobileVerificationCodeButton: false
+			})
 		}
 	},
 
