@@ -93,13 +93,13 @@ Component({
 					rateWayIndex: resultData.rate_way && (resultData.rate_way - 1),
 
 					listingOpenFlag: resultData.public_place,
-					listingSelectFlag: resultData.public_place && converson.parseToObject(resultData.public_place.split('|')),
+					listingSelectFlag: resultData.public_place !=='' ? converson.parseToObject(resultData.public_place.split('|')) : converson.parseToObject([]),
 
 					bondTypeOpenFlag: resultData.bond_type,
-					bondTypeSelectFlag: resultData.bond_type && converson.parseToObject(resultData.bond_type.split('|')),
+					bondTypeSelectFlag: resultData.bond_type !=='' ? converson.parseToObject(resultData.bond_type.split('|')) : converson.parseToObject([]),
 
 					specificOpenFlag: resultData.specific_items,
-					specificSelectFlag: resultData.specific_items && converson.parseToObject(resultData.specific_items.split('|'))
+					specificSelectFlag: resultData.specific_items !=='' ? converson.parseToObject(resultData.specific_items.split('|')) : converson.parseToObject([])
 				})
 				this.triggerEvent('changeValueEvent', formData)
 			}
@@ -198,12 +198,12 @@ Component({
 			let formData = this.data.formData
 			let falg = this.data.listingSelectFlag
 			falg[e.currentTarget.dataset.name] = !falg[e.currentTarget.dataset.name]
-
-			formData[e.currentTarget.dataset.listingSpot] = converson.parseToArray(falg).join('|')
+			formData[e.currentTarget.dataset.listingSpot] = converson.parseToArray(falg).filter((item) => { return item !== '' && item !== undefined }).join('|')
 			this.setData({
 				listingSelectFlag: falg,
 				formData: formData
 			})
+			this.triggerEvent('changeValueEvent', formData)
 		},
 
 		// 企业性质
@@ -228,11 +228,12 @@ Component({
 			let falg = this.data.bondTypeSelectFlag
 			falg[e.currentTarget.dataset.name] = !falg[e.currentTarget.dataset.name]
 
-			formData[e.currentTarget.dataset.bondType] = converson.parseToArray(falg).join('|')
+			formData[e.currentTarget.dataset.bondType] = converson.parseToArray(falg).filter((item) => { return item !== '' && item !== undefined }).join('|')
 			this.setData({
 				bondTypeSelectFlag: falg,
 				formData: formData
 			})
+			this.triggerEvent('changeValueEvent', formData)
 		},
 
 		// 发行方式
@@ -278,11 +279,12 @@ Component({
 			let falg = this.data.specificSelectFlag
 			falg[e.currentTarget.dataset.name] = !falg[e.currentTarget.dataset.name]
 
-			formData[e.currentTarget.dataset.specificItems] = converson.parseToArray(falg).join('|')
+			formData[e.currentTarget.dataset.specificItems] = converson.parseToArray(falg).filter((item) => { return item !== '' && item !== undefined }).join('|')
 			this.setData({
 				specificSelectFlag: falg,
 				formData: formData
 			})
+			this.triggerEvent('changeValueEvent', formData)
 		},
 
 		saveCheckedValue: function (targetValue, dataArray) {
