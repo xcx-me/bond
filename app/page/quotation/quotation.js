@@ -16,7 +16,12 @@ Page({
 		submitQuoteBtnEnable: false,
 		warningShowText: false,
 		warningText: '格式输入错误，请重新输入',
-		highlightItem: 'none'
+		highlightItem: {
+			benefit: '',
+			subject_rating: '',
+			facility_rating: '',
+			deadline: ''
+		}
 	},
 
 	openMyShop: function () {
@@ -28,36 +33,35 @@ Page({
 	handleSendQuote () { // 发布报价
 		let submitData = this.data.sendQuoteData
 
-		console.log(submitData)
-		
+		// console.log(submitData)
+
 		if (JSON.stringify(submitData) !== '{}') {
-			if (Number(submitData.left_benefit) > Number(submitData.right_benefit)) { // 参考收益
-
-				console.log('quotation form of benifit error: ')
-				this.setData({
-					highlightItem: 'benifit'
-				})
-
-				this.showWraningText()
-				return
-			}
-			if (!this.checkRatingFormat(submitData.subject_rating)) { // 主体评级
-				this.showWraningText()
-				return
-			}
-			if (!this.checkRatingFormat(submitData.facility_rating)) { // 债项评级
-				this.showWraningText()
-				return
-			}
-			if (!this.checkDeadlineFormat(submitData.deadline)) { // 发行期限
-				this.showWraningText()
-				return
-			}
-
-			this.sendQuoteRequest(submitData)
+			this.validate(submitData) && this.sendQuoteRequest(submitData)
 		}else {
 			Toast.showToast('数据填写有误')
 		}
+	},
+
+	validate (submitData) {
+		let result = true
+		if (Number(submitData.left_benefit) > Number(submitData.right_benefit)) { // 参考收益
+			this.showWraningText('benefit')
+			result = false
+		}
+		if (!this.checkRatingFormat(submitData.subject_rating)) { // 主体评级
+			this.showWraningText('subject_rating')
+			result = false
+		}
+		if (!this.checkRatingFormat(submitData.facility_rating)) { // 债项评级
+			this.showWraningText('facility_rating')
+			result = false
+		}
+		if (!this.checkDeadlineFormat(submitData.deadline)) { // 发行期限
+			this.showWraningText('deadline')
+			result = false
+		}
+
+		return result
 	},
 
 	checkRatingFormat: function (value) {
@@ -68,7 +72,7 @@ Page({
 			return false
 		}
 	},
-	 
+
 	checkDeadlineFormat: function (value) {
 		let reg = /(^[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?)([dymDYM]{1}$)|([dymDYM]{1}[+]{1}[a-zA-Z]$)|([dymDYM]{1}[+]{1}[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?[dymDYM]{1}$)/
 		if (reg.test(value)) {
@@ -78,9 +82,13 @@ Page({
 		}
 	},
 
-	showWraningText: function () {
+	showWraningText: function (currentHighlight) {
+		let highLightFlag = this.data.highlightItem
+		highLightFlag[currentHighlight] = true
+
 		this.setData({
-			warningShowText: true
+			warningShowText: true,
+			highlightItem: highLightFlag
 		})
 
 		setTimeout(() => {
@@ -94,7 +102,9 @@ Page({
 		request(config.NEW_BOND.sendBond, params).then((result) => {
 			if (String(result.data.ret) === '0') {
 				Toast.showToast('发布报价成功！', 'success')
-				wx.navigateBack()
+				setTimeout(() => {
+					wx.navigateBack()
+				}, 2000)
 			} else {
 				Toast.showToast(result.data.retmsg)
 			}
@@ -132,28 +142,16 @@ Page({
 		})
 
 		// console.log('isShowBTn: ', this.data.submitQuoteBtnEnable)
-		console.log('_changeValue....', detail)
+		// console.log('_changeValue....', detail)
 	},
 
-	_changeHighLight: function () {
+	_changeHighLight: function (e) {
+		let curHighlightItem = this.data.highlightItem
+		curHighlightItem[e.detail] = false
 		this.setData({
-			highlightItem: 'none'
+			highlightItem: curHighlightItem
 		})
 	},
-
-
-	// //取消事件
-	// _cancelEvent() {
-	// 	console.log('你点击了取消');
-	// 	this.dialog = this.selectComponent('#dialog')
-	// 	this.dialog.hideDialog();
-	// },
-	// //确认事件
-	// _confirmEvent() {
-	// 	console.log('你点击了确定');
-	// 	this.dialog = this.selectComponent('#dialog')
-	// 	this.dialog.hideDialog();
-	// },
 
 	/**
 	 * 生命周期函数--监听页面加载
