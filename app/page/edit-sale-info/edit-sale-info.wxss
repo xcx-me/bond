@@ -40,6 +40,9 @@
 .edit-sale-info-page .form-edit .form-item .input-area input.has-postfix {
   width: 80%;
 }
+.edit-sale-info-page .form-edit .form-item .input-area input.highlight-color {
+  color: #FAA61A;
+}
 .edit-sale-info-page .form-edit .form-item .input-area .postfix {
   color: #B2B2B2;
 }
