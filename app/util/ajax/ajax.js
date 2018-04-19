@@ -67,6 +67,12 @@ function doLogin (done) {
 }
 
 function request (configuration, data) {
+	if (getApp().isLocalhost) {
+		return new Promise((resolve, reject) => {
+			ajax(configuration, data, getCookie()).then(resolve).catch(reject)
+		})
+	}
+
 	return new Promise((resolve, reject) => {
 		getConcreteCookie(() => {
 			ajax(configuration, data, getCookie()).then(resolve).catch(reject)
