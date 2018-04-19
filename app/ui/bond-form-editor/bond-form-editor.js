@@ -14,9 +14,9 @@ Component({
 			type: String,
 			value: ''
 		},
-		highLight: {
-			type: String,
-			value: ''
+		highlight: {
+			type: Object,
+			value: {}
 		}
 	},
 
@@ -122,12 +122,20 @@ Component({
 			if (e.currentTarget.dataset.inputName === 'left_benefit') { // 参考收益 左值
 				let val = e.detail.value
 				this.benifitValueChange(val, 'left_benefit')
-
-				this.triggerEvent('changeHighLightState', e.detail.value) //......
-
+				this.triggerEvent('changeHighLightState', 'benefit')
 			} else if (e.currentTarget.dataset.inputName === 'right_benefit') { // 参考收益 右值
 				let val = e.detail.value
 				this.benifitValueChange(val, 'right_benefit')
+				this.triggerEvent('changeHighLightState', 'benefit')
+			} else if (e.currentTarget.dataset.inputName === 'subject_rating') { // 主体评级
+				formData[e.currentTarget.dataset.inputName] = e.detail.value
+				this.triggerEvent('changeHighLightState', 'subject_rating')
+			} else if (e.currentTarget.dataset.inputName === 'facility_rating') { // 债项评级
+				formData[e.currentTarget.dataset.inputName] = e.detail.value
+				this.triggerEvent('changeHighLightState', 'facility_rating')
+			} else if (e.currentTarget.dataset.inputName === 'deadline') { // 期限
+				formData[e.currentTarget.dataset.inputName] = e.detail.value
+				this.triggerEvent('changeHighLightState', 'deadline')
 			} else if (e.currentTarget.dataset.inputName === 'issue_total') { // 发行量
 				let val = e.detail.value
 				let reg = /^\d{0,5}(\.\d{0,4})?$/g
@@ -144,6 +152,8 @@ Component({
 					}
 					formData[e.currentTarget.dataset.inputName] = val
 				}
+
+				this.triggerEvent('changeHighLightState', 'issue_total')
 			}else {
 				formData[e.currentTarget.dataset.inputName] = e.detail.value
 			}

@@ -5,7 +5,7 @@
 
 // const SERVER = {
 // 	domain: 'http://test.qtrade.com.cn',
-// 	cookie: 'appletree_key=87a0066f8bbb18ff73706fa085b5487b24240460'
+// 	cookie: 'appletree_key=79500dc9a6909644eb19634500aef558aa5068bd' // sunqing
 // }
 
 const SERVER = {

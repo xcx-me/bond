@@ -2,7 +2,7 @@
 <view class="send-quote-page">
 	<view class="quotation-form" wx:if="{{isOpenMyShop}}">
 
-		<BondFormEditor isEditEntry='{{isEditEntry}}' highLight='{{highlightItem}}' bondSimpleName='{{bondSimpleName}}'
+		<BondFormEditor isEditEntry='{{isEditEntry}}' highlight='{{highlightItem}}' bondSimpleName='{{bondSimpleName}}'
 			bind:changeValueEvent='_changeValue' bind:changeHighLightState='_changeHighLight'
 		/>  
 
