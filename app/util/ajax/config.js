@@ -87,7 +87,7 @@ module.exports = {
 	},
 	AUTHENTICATION: {
 		getAppletreeKey: {
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/user/login/wxminiprogramlogin.do',
 			method: POST
 		}
 	},
@@ -142,7 +142,7 @@ module.exports = {
 		},
 		// ==========
 
-		getWorkdaysInfo: { 
+		getWorkdaysInfo: {
 			url: '/qtrade_bond/api/newbond/get_workdays_info.do',
 			method: POST
 		},

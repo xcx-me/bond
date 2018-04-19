@@ -1,4 +1,3 @@
-// app/page/administration/administration.js
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const service = require('../../util/service/service')
