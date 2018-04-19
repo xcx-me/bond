@@ -56,7 +56,7 @@ Page({
 
 			this.sendQuoteRequest(submitData)
 		}else {
-			common.showToast('数据填写有误', 'none', 2000)
+			Toast.showToast('数据填写有误')
 		}
 	},
 
@@ -93,13 +93,13 @@ Page({
 	sendQuoteRequest: function (params) {
 		request(config.NEW_BOND.sendBond, params).then((result) => {
 			if (String(result.data.ret) === '0') {
-				common.showToast('发布报价成功！', 'success', 2000)
+				Toast.showToast('发布报价成功！', 'success')
 				wx.navigateBack()
 			} else {
-				common.showToast(result.data.retmsg, 'none', 2000)
+				Toast.showToast(result.data.retmsg)
 			}
 		}).catch(() => {
-			common.showToast('请求错误', 'none', 2000)
+			Toast.showToast('请求错误')
 		})
 	},
 
@@ -117,10 +117,10 @@ Page({
 	// 			this._setNewQuoteData(formData)
 	// 			// console.log(this.data.sendQuoteData)
 	// 		} else {
-	// 			common.showToast(result.data.retmsg, 'none', 2000)
+	// 			Toast.showToast(result.data.retmsg, 'none', 2000)
 	// 		}
 	// 	}).catch(() => {
-	// 		common.showToast('请求错误', 'none', 2000)
+	// 		Toast.showToast('请求错误', 'none', 2000)
 	// 	})
 	// },
 

@@ -1,6 +1,7 @@
 .mobile-form .description {
   font-size: 28rpx;
   padding: 20rpx;
+  color: #888888;
 }
 .mobile-form .form-section {
   position: relative;

@@ -1,5 +1,6 @@
 const FormViewerEditorUtil = require('../../ui/form-viewer-editor/form-viewer-editor-util')
 const RegexpUtil = require('../../util/regexp-util/regexp-util')
+const Toast = require('../../util/toast/toast')
 
 const MOBILE_NUMBER = 'mobileNumber'
 const MOBILE_VALIDATION_CODE = 'mobileValidationCode'
@@ -21,7 +22,7 @@ Page({
 			{
 				fieldName: MOBILE_VALIDATION_CODE,
 				label: '验证码',
-				value: '3333',
+				value: '',
 				placeholder: '输入验证码',
 				maxlength: 4
 			},
@@ -49,6 +50,7 @@ Page({
 			console.log('valid')
 		} else {
 			console.log('not valid.')
+			Toast.showToast('验证码错误，请重新输入')
 		}
 	},
 
