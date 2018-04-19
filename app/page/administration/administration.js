@@ -54,7 +54,6 @@ Page({
 
 	createQuotation: function () {
 		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
-			console.log('okok')
 			// result.data = {ret: '0', retmsg: 'OK', retdata: {enable: true, v: flase, audit: false}}
 			// result.data.retdata.v = false
 			

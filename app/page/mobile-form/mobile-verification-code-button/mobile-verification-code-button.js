@@ -8,11 +8,14 @@ Component({
 	properties: {
 		disabled: {
 			type: Boolean,
-			value: false
+			value: false,
+			observer: function(newVal, oldVal){
+				console.log('newVal', newVal, 'oldVal', oldVal)
+			}
 		},
 		skin: {
 			type: String,
-			value: 'abc'
+			value: ''
 		}
 	},
 
