@@ -26,9 +26,12 @@ function isValidAppletreeKey (appletreeKey) {
 	return appletreeKey
 }
 
-function shortcut (configuration, data, resolve, reject) {
-	let cookie = getApp().isLocalhost ? Environment.TARGET_SERVER.cookie : `${APPLETREE_KEY}=${wx.getStorageSync(APPLETREE_KEY)}`
-	ajax(configuration, data, cookie).then(resolve).catch(reject)
+function getCookie () {
+	if (getApp().isLocalhost) {
+		wx.setStorageSync(APPLETREE_KEY, Environment.TARGET_SERVER.cookie)
+		return Environment.TARGET_SERVER.cookie
+	}
+	return cookie = `${APPLETREE_KEY}=${wx.getStorageSync(APPLETREE_KEY)}`
 }
 
 function getConcreteCookie (done) {
@@ -68,7 +71,7 @@ function doLogin (done) {
 function request (configuration, data) {
 	return new Promise((resolve, reject) => {
 		getConcreteCookie(() => {
-			shortcut(configuration, data, resolve, reject)
+			ajax(configuration, data, getCookie()).then(resolve).catch(reject)
 		})
 	})
 }
