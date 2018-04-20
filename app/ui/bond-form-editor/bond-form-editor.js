@@ -1,7 +1,7 @@
 
 var dateTimePicker = require('../../util/date-time-picker/date-time-picker')
 const service = require('../../util/service/service')
-const selectConfig = require('./select-config/select-config')
+const formConfig = require('./form-config/form-config')
 const converson = require('../../util/converson/converson')
 
 Component({
@@ -21,89 +21,43 @@ Component({
 	},
 
 	data: {
-		formData: {
-			bond_simple_name: '', // 简称
-			left_benefit: '', // 参考收益左值
-			right_benefit: '', // 参考收益右值
-			subject_rating: '', // 主体评级
-			facility_rating: '', // 债项评级
-			deadline: '', // 期限
-			issue_total: '', // 发行量
-			public_place: '', // 上市地点
-			issue_time: '', // 发行时间
-			bid_end: '', // 截标时间
-			company_type: '', // 企业性质
-			bond_type: '', // 债券品种
-			issue_way: '', // 发行方式
-			rate_way: '', // 利率方式
-			benchmark: '', // 基准
-			cal_freq: '', // 计息频率
-			pay_freq: '', // 付息频率
-			repay_way: '', // 还本方式
-			specific_items: '', // 特殊条款
-			credit_guarantee: '', // 增信担保 
-			zhu_cheng: '', // 主承
-			bond_full_name: '', // 债券全称
-			attached_ids: ''
-		},
+		formData: JSON.parse(JSON.stringify(formConfig.defaultFormData)),
+
 		// 时间
 		dateTimeArray: dateTimePicker.dateTimePicker(2000, 2050).dateTimeArray,
 		dateTime: dateTimePicker.dateTimePicker(2000, 2050).dateTime,
 
 		// 上市地点-多选
 		listingOpenFlag: false,
-		listingSpotItems: selectConfig.listingSpot.items,
+		listingSpotItems: formConfig.listingSpot.items,
 		listingSelectFlag: converson.parseToObject([]),
 
 		// 企业性质-单选
-		enterpriseNature: selectConfig.enterpriseNature.items,
+		enterpriseNature: formConfig.enterpriseNature.items,
 		enterpriseIndex: -1,
 
 		// 债券品种-多选
 		bondTypeOpenFlag: false,
-		bondTypeItems: selectConfig.bondType.items,
+		bondTypeItems: formConfig.bondType.items,
 		bondTypeSelectFlag: converson.parseToObject([]),
 
 		// 发行方式-单选
-		issuanceMethodItem: selectConfig.issuanceMethod.items,
+		issuanceMethodItem: formConfig.issuanceMethod.items,
 		issuanceMethodIndex: -1,
 
 		//  利率方式
-		rateWayArray: selectConfig.rateWay.items,
+		rateWayArray: formConfig.rateWay.items,
 		rateWayIndex: -1,
 		rateReply: false,
 
 		// 特殊条款-多选
 		specificOpenFlag: false,
-		specificItems: selectConfig.specificClause.items,
+		specificItems: formConfig.specificClause.items,
 		specificSelectFlag: converson.parseToObject([]),
 	},
 
 	ready: function() {
-		service.getBondAssociate(this.data.bondSimpleName, (result)=>{
-			let resultData = result.data.retdata
-			if (JSON.stringify(resultData) !== '{}') {
-				resultData.bond_simple_name = this.data.bondSimpleName
-				this.setData({
-					formData: resultData,
-					enterpriseIndex: resultData.company_type && (resultData.company_type - 1), // 企业性质
-					issuanceMethodIndex: resultData.issue_way && (resultData.issue_way - 1), // 发行方式
-
-					rateReply: resultData.rate_way && String(resultData.rate_way) === '3',
-					rateWayIndex: resultData.rate_way && (resultData.rate_way - 1),
-
-					listingOpenFlag: resultData.public_place,
-					listingSelectFlag: resultData.public_place !=='' ? converson.parseToObject(resultData.public_place.split('|')) : converson.parseToObject([]),
-
-					bondTypeOpenFlag: resultData.bond_type,
-					bondTypeSelectFlag: resultData.bond_type !=='' ? converson.parseToObject(resultData.bond_type.split('|')) : converson.parseToObject([]),
-
-					specificOpenFlag: resultData.specific_items,
-					specificSelectFlag: resultData.specific_items !=='' ? converson.parseToObject(resultData.specific_items.split('|')) : converson.parseToObject([])
-				})
-				this.triggerEvent('changeValueEvent', formData)
-			}
-		})
+		this.associateBondDetails(this.data.bondSimpleName)
 	},
 
 	methods: {
@@ -113,12 +67,20 @@ Component({
 			this.setData({
 				formData: formData
 			})
+
+			let currentTime = new Date().getTime()
+			this.timeStamp_ = currentTime
+			setTimeout(() => {
+				if (this.timeStamp_ - currentTime === 0) {
+					this.associateBondDetails(e.detail.value)
+				}
+			}, 1000)
+
 			this.triggerEvent('changeValueEvent', formData)
 		},
 
 		changeValue (e) { // 改变各input的value
 			let formData = this.data.formData
-
 			if (e.currentTarget.dataset.inputName === 'left_benefit') { // 参考收益 左值
 				let val = e.detail.value
 				this.benifitValueChange(val, 'left_benefit')
@@ -285,6 +247,55 @@ Component({
 				formData: formData
 			})
 			this.triggerEvent('changeValueEvent', formData)
+		},
+
+		// 获取债券详情
+		associateBondDetails: function (bondSimpleName) {
+			service.getBondAssociate(bondSimpleName, (result)=>{
+				let resultData = result.data.retdata
+				if (Object.keys(resultData).length > 0) {
+					resultData.bond_simple_name = bondSimpleName
+					this.setData({
+						formData: resultData,
+						enterpriseIndex: resultData.company_type && (resultData.company_type - 1), // 企业性质
+						issuanceMethodIndex: resultData.issue_way && (resultData.issue_way - 1), // 发行方式
+	
+						rateReply: resultData.rate_way && String(resultData.rate_way) === '3',
+						rateWayIndex: resultData.rate_way && (resultData.rate_way - 1),
+	
+						listingOpenFlag: resultData.public_place,
+						listingSelectFlag: resultData.public_place !=='' ? converson.parseToObject(resultData.public_place.split('|')) : converson.parseToObject([]),
+	
+						bondTypeOpenFlag: resultData.bond_type,
+						bondTypeSelectFlag: resultData.bond_type !=='' ? converson.parseToObject(resultData.bond_type.split('|')) : converson.parseToObject([]),
+	
+						specificOpenFlag: resultData.specific_items,
+						specificSelectFlag: resultData.specific_items !=='' ? converson.parseToObject(resultData.specific_items.split('|')) : converson.parseToObject([])
+					})
+					this.triggerEvent('changeValueEvent', formData)
+				} else {
+					let formData = JSON.parse(JSON.stringify(formConfig.defaultFormData))
+					formData.bond_simple_name = this.data.formData.bond_simple_name
+					this.setData({
+						formData: formData,
+
+						enterpriseIndex: -1, // 企业性质
+						issuanceMethodIndex: -1, // 发行方式
+	
+						rateReply: false,
+						rateWayIndex: -1,
+	
+						listingOpenFlag: false,
+						listingSelectFlag: converson.parseToObject([]),
+	
+						bondTypeOpenFlag: false,
+						bondTypeSelectFlag: converson.parseToObject([]),
+	
+						specificOpenFlag: false,
+						specificSelectFlag: converson.parseToObject([])
+					})
+				}
+			})
 		},
 
 		saveCheckedValue: function (targetValue, dataArray) {

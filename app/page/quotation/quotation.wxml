@@ -1,7 +1,6 @@
 
 <view class="send-quote-page">
 	<view class="quotation-form" wx:if="{{isOpenMyShop}}">
-
 		<BondFormEditor isEditEntry='{{isEditEntry}}' highlight='{{highlightItem}}' bondSimpleName='{{bondSimpleName}}'
 			bind:changeValueEvent='_changeValue' bind:changeHighLightState='_changeHighLight'
 		/>  
@@ -12,9 +11,6 @@
 		</button>
 
 		<WarningText isShow='{{warningShowText}}' toolTips='{{warningText}}' />
-
-		<!-- <button  class='margin-bottom' type='primary' bindtap='associateBondDetails'>获取债券详情</button> -->
-
 	</view>
 
 	<view class="quotaion-open-shop" wx:else>

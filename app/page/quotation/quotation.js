@@ -113,27 +113,6 @@ Page({
 		})
 	},
 
-	// 获取债券详情。。。。。。。。。。
-	// associateBondDetails: function () {
-	// 	// console.log('bondDetailsName： ', this.data.sendQuoteData.bond_simple_name)
-	// 	request(config.NEW_BOND.associateBond, {bond_simple_name: this.data.sendQuoteData.bond_simple_name}).then((result) => {
-	// 		if (String(result.data.ret) === '0') {
-	// 			console.log(result.data.retdata)
-	// 			let resultData = result.data.retdata
-	// 			let formData = this.data.sendQuoteData
-	// 			formData.left_benefit = resultData.left_benefit
-	// 			formData.right_benefit = resultData.right_benefit
-
-	// 			this._setNewQuoteData(formData)
-	// 			// console.log(this.data.sendQuoteData)
-	// 		} else {
-	// 			Toast.showToast(result.data.retmsg, 'none', 2000)
-	// 		}
-	// 	}).catch(() => {
-	// 		Toast.showToast('请求错误', 'none', 2000)
-	// 	})
-	// },
-
 	_changeValue: function (e) { // 获取发布报价参数
 		let detail = e.detail
 		this.setData({
