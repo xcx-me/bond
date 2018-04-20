@@ -1,8 +1,12 @@
-<view class='form-item-component text-input'>
-	<view class='label-area'>{{label}}</view>
-	<input class='input-area' value='{{value}}'
+<view class='text-input-component'>
+	<view class='label-area'>
+		<text class='star' wx:if='{{mandatory}}'>*</text>
+		<text>{{label}}</text>
+	</view>
+	<input class='input-field' value='{{value}}'
 		bindinput='handleInputChange'
 		placeholder='{{placeholder}}'
-		maxlength='{{maxlength}}'
+		maxlength='{{maxlength ? maxlength : -1}}'
+		type='{{type}}'
 		data-field-name='{{fieldName}}' />
 </view>

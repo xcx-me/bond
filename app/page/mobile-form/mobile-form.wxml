@@ -1,7 +1,12 @@
-<wxs module='classnames'>
-	var classnames = require('../../util/classnames/classnames.wxs')
-	module.exports = function (disabled) {
-		return classnames('mobile-verification-code-button', disabled ? 'disabled' : '')
+<wxs module='ClassNamesUtil'>
+	var ClassNames = require('../../util/classnames/classnames.wxs')
+	module.exports = {
+		getMobileVerificationCodeButtonClassNames: function (disabled) {
+			return ClassNames('mobile-verification-code-button', disabled ? 'disabled' : '')	
+		},
+		getSubmitButtonClassNames: function (disabled) {
+			return ClassNames('qtrade-button', 'submit', disabled ? 'disabled' : '')
+		}
 	}
 </wxs>
 
@@ -9,7 +14,19 @@
 	<view class='description'>已在电脑端认证的用户，验证手机后即可快速绑定</view>
 	<view class='form-section'>
 		<form-viewer-editor descriptors='{{descriptors}}' bind:changeDescriptors='onChangeDescriptors' />
-		<view class='{{classnames(disabledOfMobileVerificationCodeButton)}}' bindtap='handleGetMobileVerificationCode'>{{labelOfMobileVerificationCodeButton}}</view>
+		<view class='{{ClassNamesUtil.getMobileVerificationCodeButtonClassNames(disabledOfMobileVerificationCodeButton)}}' bindtap='handleGetMobileVerificationCode'>
+			{{labelOfMobileVerificationCodeButton}}
+		</view>
 	</view>
-	<button type='primary' bindtap='doSubmit'>下一步</button>
+	<view class='control-area'>
+		<button type='primary'
+			bindtap='doSubmit'
+			class='{{ClassNamesUtil.getSubmitButtonClassNames(disabledOfSubmitButton)}}'>
+			下一步
+		</button>
+	</view>
+	<view class='agreement-area'>
+		<text>点击认证或绑定表示同意</text>
+		<navigator class='to-qtrade-protocol' url='/app/page/protocol/protocol' hover-class="navigator-hover">《QTrade服务协议》</navigator>
+	</view>
 </view>
