@@ -47,5 +47,30 @@ module.exports = {
 			{name: '3', value: '延期'},
 			{name: '4', value: '交叉违约'}
 		]
+	},
+	defaultFormData: {
+		bond_simple_name: '', // 简称
+		left_benefit: '', // 参考收益左值
+		right_benefit: '', // 参考收益右值
+		subject_rating: '', // 主体评级
+		facility_rating: '', // 债项评级
+		deadline: '', // 期限
+		issue_total: '', // 发行量
+		public_place: '', // 上市地点
+		issue_time: '', // 发行时间
+		bid_end: '', // 截标时间
+		company_type: '', // 企业性质
+		bond_type: '', // 债券品种
+		issue_way: '', // 发行方式
+		rate_way: '', // 利率方式
+		benchmark: '', // 基准
+		cal_freq: '', // 计息频率
+		pay_freq: '', // 付息频率
+		repay_way: '', // 还本方式
+		specific_items: '', // 特殊条款
+		credit_guarantee: '', // 增信担保 
+		zhu_cheng: '', // 主承
+		bond_full_name: '', // 债券全称
+		attached_ids: ''
 	}
 }
