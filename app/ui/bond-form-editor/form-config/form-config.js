@@ -72,5 +72,8 @@ module.exports = {
 		zhu_cheng: '', // 主承
 		bond_full_name: '', // 债券全称
 		attached_ids: ''
+	},
+	simpleName: {
+		name: ['利随本清', '固定利率', '浮动利率', '累积利率', '浮动利率', '累积利率']
 	}
 }
