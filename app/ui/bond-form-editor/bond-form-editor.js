@@ -22,7 +22,7 @@ Component({
 
 	data: {
 		formData: JSON.parse(JSON.stringify(formConfig.defaultFormData)),
-
+simpleNameList: JSON.parse(JSON.stringify(formConfig.simpleName)),
 		// 时间
 		dateTimeArray: dateTimePicker.dateTimePicker(2000, 2050).dateTimeArray,
 		dateTime: dateTimePicker.dateTimePicker(2000, 2050).dateTime,
