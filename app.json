@@ -14,7 +14,8 @@
         "app/page/ask/ask",
         "app/page/answer/answer",
         "app/page/edit-sale-info/edit-sale-info",
-        "app/page/mobile-form/mobile-form"
+        "app/page/mobile-form/mobile-form",
+        "app/page/user-detail-form/user-detail-form"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -30,8 +31,8 @@
                 "iconPath": "app/asset/image/icon_API.png",
                 "selectedIconPath": "app/asset/image/icon_API_HL.png",
                 "text": "市场"
-			},
-			{
+            },
+            {
                 "pagePath": "app/page/administration/administration",
                 "iconPath": "app/asset/image/icon_API.png",
                 "selectedIconPath": "app/asset/image/icon_API_HL.png",

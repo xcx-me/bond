@@ -1,0 +1,10 @@
+<view class='picture-upload-input-component'>
+	<view class='label-area'>
+		<text class='star' wx:if='{{mandatory}}'>*</text>
+		<text>{{label}}</text>
+	</view>
+	<view bindtap='showActionSheet' wx:if='{{!value}}'>
+		点击上传
+	</view>
+	<image src='{{value}}' wx:if='{{value}}'></image>
+</view>

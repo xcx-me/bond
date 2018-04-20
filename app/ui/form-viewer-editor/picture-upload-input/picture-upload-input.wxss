@@ -1,0 +1,11 @@
+.picture-upload-input-component {
+  border-bottom: 1rpx solid #E5E5E5;
+  font-size: 34rpx;
+  padding: 10px;
+}
+.picture-upload-input-component .label-area {
+  width: 160rpx;
+}
+.picture-upload-input-component .label-area .star {
+  color: #E64340;
+}

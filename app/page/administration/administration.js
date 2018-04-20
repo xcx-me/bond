@@ -56,7 +56,6 @@ Page({
 		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
 			// result.data = {ret: '0', retmsg: 'OK', retdata: {enable: true, v: flase, audit: false}}
 			// result.data.retdata.v = false
-			
 			if (!result.data.retdata.v) {
 				wx.navigateTo({url: '../mobile-form/mobile-form'})
 				return
