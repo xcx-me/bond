@@ -12,7 +12,17 @@ function setValueByFieldName (host, descriptors, fieldName, propertyName, value)
 	})
 }
 
+function parseAllFieldsToSubmissionObject (descriptors) {
+	let allFieldNames = descriptors.map((item) => item.fieldName)
+	let submissionObject = {}
+	allFieldNames.forEach((fieldName) => {
+		submissionObject[fieldName] = this.findDescriptorByFieldName(descriptors, fieldName).value
+	})
+	return submissionObject
+}
+
 module.exports = {
 	findDescriptorByFieldName: findDescriptorByFieldName,
-	setValueByFieldName: setValueByFieldName
+	setValueByFieldName: setValueByFieldName,
+	parseAllFieldsToSubmissionObject: parseAllFieldsToSubmissionObject
 }

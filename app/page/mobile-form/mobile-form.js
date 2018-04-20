@@ -1,3 +1,5 @@
+const UiType = require('../../ui/form-viewer-editor/ui-type')
+
 const FormViewerEditorUtil = require('../../ui/form-viewer-editor/form-viewer-editor-util')
 const RegexpUtil = require('../../util/regexp-util/regexp-util')
 const Toast = require('../../util/toast/toast')
@@ -5,6 +7,7 @@ const Toast = require('../../util/toast/toast')
 const MOBILE_NUMBER = 'mobileNumber'
 const MOBILE_VALIDATION_CODE = 'mobileValidationCode'
 const MAX_LENGTH_OF_MOBILE_NUMBER = 11
+const MAX_LENGTH_OF_MOBILE_VALIDATION_CODE = 4
 
 const PERIOD = 60
 const DAFAULT_LABEL = '获取验证码'
@@ -17,39 +20,56 @@ Page({
 		descriptors: [
 			{
 				fieldName: MOBILE_NUMBER,
+				uiType: UiType.TEXT_INPUT,
 				label: '手机号',
 				value: '',
+				type: 'number',
 				placeholder: '输入手机号',
 				maxlength: MAX_LENGTH_OF_MOBILE_NUMBER
 			},
 			{
 				fieldName: MOBILE_VALIDATION_CODE,
+				uiType: UiType.TEXT_INPUT,
 				label: '验证码',
 				value: '',
+				type: 'number',
 				placeholder: '输入验证码',
-				maxlength: 4
+				maxlength: MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
 			},
 		],
 		disabledOfMobileVerificationCodeButton: true,
-		labelOfMobileVerificationCodeButton: DAFAULT_LABEL
+		labelOfMobileVerificationCodeButton: DAFAULT_LABEL,
+
+		disabledOfSubmitButton: true
 	},
 
-	onChangeDescriptors: function (e) {
-		let mobileNumberDescriptor = FormViewerEditorUtil.findDescriptorByFieldName(e.detail.descriptors, MOBILE_NUMBER)
-
-		let disabledOfMobileVerificationCodeButton = (mobileNumberDescriptor.value.length !== MAX_LENGTH_OF_MOBILE_NUMBER)
-		if (this.timer) {
-			disabledOfMobileVerificationCodeButton = true
+	validators: {
+		[MOBILE_NUMBER]: (value) => {
+			return value.length === MAX_LENGTH_OF_MOBILE_NUMBER
+		},
+		[MOBILE_VALIDATION_CODE]: (value) => {
+			return value.length === MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
 		}
-		
-		this.setData({
-			descriptors: e.detail.descriptors,
-			disabledOfMobileVerificationCodeButton: disabledOfMobileVerificationCodeButton
+	},
+
+	doBasicValidation: function (descriptors, fieldName) {
+		let matchedDescriptor = FormViewerEditorUtil.findDescriptorByFieldName(descriptors, fieldName)
+		return this.validators[fieldName](matchedDescriptor.value)
+	},
+
+	doBasicValidationForAllFields: function (descriptors) {
+		return descriptors.every((item) => {
+			return this.doBasicValidation(descriptors, item.fieldName)
 		})
 	},
 
-	getMobileVerificationCode: function () {
-		console.log('get code...')
+	onChangeDescriptors: function (e) {
+		let descriptors = e.detail.descriptors
+		this.setData({
+			descriptors: descriptors,
+			disabledOfMobileVerificationCodeButton: this.timer ? true : !this.doBasicValidation(descriptors, MOBILE_NUMBER),
+			disabledOfSubmitButton: !this.doBasicValidationForAllFields(descriptors)
+		})
 	},
 
 	setLabelByCondition (disabled, counter) {
@@ -75,26 +95,37 @@ Page({
 		}, 1000)
 	},
 
-	handleGetMobileVerificationCode: function () {
+	validateMobileFormat: function () {
 		let mobileNumberDescriptor = FormViewerEditorUtil.findDescriptorByFieldName(this.data.descriptors, MOBILE_NUMBER)
-
 		if (RegexpUtil.isPhoneNumber(mobileNumberDescriptor.value)) {
 			this.updateLabel()
-		} else {
-			Toast.showToast('验证码错误，请重新输入')
-			this.setLabelByCondition(false)
+			return true
 		}
+		Toast.showToast('手机号码格式不正确，请重新输入')
+		this.setLabelByCondition(false)
+		return false
+	},
+
+	handleGetMobileVerificationCode: function () {
+		if (this.data.disabledOfMobileVerificationCodeButton) return
+		this.validateMobileFormat()
 	},
 
 	doSubmit: function () {
-		console.log('do submit...')
+		if (this.data.disabledOfSubmitButton) return
+
+		let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
+
+		console.log('submissionObject', submissionObject)
+
+		this.validateMobileFormat() && wx.redirectTo({url: '../user-detail-form/user-detail-form'})
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-
+		// wx.redirectTo({url: '../user-detail-form/user-detail-form'})
 	},
 
 	/**
@@ -108,7 +139,7 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-
+		
 	},
 
 	/**

@@ -23,6 +23,14 @@ Component({
 		maxlength: {
 			type: Number,
 			value: -1
+		},
+		type: {
+			type: String,
+			value: 'text'
+		},
+		mandatory: {
+			type: Boolean,
+			value: false
 		}
 	},
 

@@ -1,10 +1,19 @@
 <view class='form-viewer-editor-component'>
 	<block wx:for='{{descriptors}}' wx:key='index'>
-		<text-input value='{{item.value}}'
-		label='{{item.label}}'
-		field-name='{{item.fieldName}}'
-		placeholder='{{item.placeholder}}'
-		maxlength='{{item.maxlength}}'
-		bind:change='onChange' />
+		<picture-upload-input wx:if='{{item.uiType === "PICTURE_UPLOAD_INPUT"}}'
+			value='{{item.value}}'
+			label='{{item.label}}'
+			fieldName='{{item.fieldName}}'
+			mandatory='{{item.mandatory}}'
+			bind:change='onChange' />
+		<text-input wx:if='{{item.uiType === "TEXT_INPUT"}}'
+			value='{{item.value}}'
+			label='{{item.label}}'
+			fieldName='{{item.fieldName}}'
+			placeholder='{{item.placeholder}}'
+			maxlength='{{item.maxlength}}'
+			type='{{item.type}}'
+			mandatory='{{item.mandatory}}'
+			bind:change='onChange' />
 	</block>
 </view>

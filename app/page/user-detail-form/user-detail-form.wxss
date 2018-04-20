@@ -1,0 +1,11 @@
+.user-detail-form .description {
+  font-size: 28rpx;
+  padding: 20rpx;
+  color: #888888;
+}
+.user-detail-form .form-section {
+  background-color: white;
+}
+.user-detail-form .control-area {
+  margin: 60rpx 0;
+}

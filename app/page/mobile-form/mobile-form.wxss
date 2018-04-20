@@ -11,10 +11,22 @@
   font-size: 34rpx;
   border-left: 1px solid #E5E5E5;
   position: absolute;
-  top: 0;
+  top: 0rpx;
   right: 0;
-  padding: 10px;
+  padding: 24rpx;
 }
 .mobile-form .form-section .mobile-verification-code-button.disabled {
   color: grey;
+}
+.mobile-form .control-area {
+  margin: 60rpx 0;
+}
+.mobile-form .agreement-area {
+  font-size: 26rpx;
+  text-align: center;
+  color: #B2B2B2;
+}
+.mobile-form .agreement-area .to-qtrade-protocol {
+  display: inline;
+  color: #576B95;
 }
