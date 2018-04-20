@@ -1,10 +1,15 @@
+<wxs module='classnames'>
+	var classnames = require('../../util/classnames/classnames.wxs')
+	module.exports = function (disabled) {
+		return classnames('mobile-verification-code-button', disabled ? 'disabled' : '')
+	}
+</wxs>
+
 <view class='mobile-form'>
 	<view class='description'>已在电脑端认证的用户，验证手机后即可快速绑定</view>
 	<view class='form-section'>
 		<form-viewer-editor descriptors='{{descriptors}}' bind:changeDescriptors='onChangeDescriptors' />
-		<view class='mobile-verification-code-button' bindtap='getMobileVerificationCode'>获取验证码</view>
-		<mobile-verification-code-button disabled='{{disabledOfMobileVerificationCodeButton}}'
-			bind:getMobileVerificationCode='handleGetMobileVerificationCode' />
+		<view class='{{classnames(disabledOfMobileVerificationCodeButton)}}' bindtap='handleGetMobileVerificationCode'>{{labelOfMobileVerificationCodeButton}}</view>
 	</view>
 	<button type='primary' bindtap='doSubmit'>下一步</button>
 </view>
