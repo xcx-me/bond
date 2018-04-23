@@ -15,6 +15,7 @@
 					<button class='btn-answer btn-no-border' plain size='mini' type='default' bindtap='onAnswer' data-id='{{questionItem.ask_id}}' data-question='{{questionItem.content}}'>去回答</button>
 				</view>
 				<view class='answer-list' wx:if='{{questionItem.ans_array.length > 0}}'>
+					<i class='icon-up-rectangle'></i>
 					<BondAnswer answerList='{{questionItem.ans_array}}' bind:thumbEvent='_onThumbEvent'/>
 				</view>
 			</view>

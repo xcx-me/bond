@@ -16,10 +16,21 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
+  position: relative;
 }
 .my-store-component .tab-bar .tab-item .active {
   color: #2196F3;
   border-bottom: 5rpx solid #2196F3;
+}
+.my-store-component .tab-bar .tab-item .red-point {
+  width: 20rpx;
+  height: 20rpx;
+  background: #F43530;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  margin-left: 7rpx;
 }
 .my-store-component .content scroll-view {
   height: 100%;

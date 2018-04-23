@@ -7,6 +7,7 @@ Page({
 
 	data: {
 		bondId: '',
+		bondSimpleName: '',
 		uid: '',
 		userId: '',
 		from: '',
@@ -21,13 +22,15 @@ Page({
 		isAnswering: false,
 		bondList: [],
 		storeDetail: {},
-		loading: true
+		loading: true,
+		scrollTop: 0
 	},
 
 	bindChangeTab: function (e) {
 		let currentTabId = e.detail.currentItemId
 		this.setData({
-			currentTabId: currentTabId
+			currentTabId: currentTabId,
+			scrollTop: 0
 		})
 	},
 
@@ -42,7 +45,7 @@ Page({
 		this.getStoreDetail(uid)
 	},
 
-	  getStoreDetail: function (uid) {
+	getStoreDetail: function (uid) {
 		service.getStoreDetail(uid, (result) => {
 			let detail = result.data.retdata
 			let isMyStore = String(detail.is_myself) === '1' && String(uid) === '0'
@@ -50,7 +53,8 @@ Page({
 				isMyStore: isMyStore,
 				userId: detail.user_id,
 				storeDetail: detail,
-				loading:false
+				loading:false,
+				needUpdate: true
 			})
 
 			this.getQuestionTotal()
@@ -66,13 +70,6 @@ Page({
 		})
 	},
 
-	_updateQuestionTotalEvent: function (e) {
-		let questionTotal =  e.detail
-		this.setData({
-			questionTotal: questionTotal > 99 ?  '99+' : questionTotal
-		})
-	},
-
 	getBondList: function () {
 		service.getBondList({
 			bond_id: this.data.bondId,
@@ -85,6 +82,40 @@ Page({
 				bondList: result.data.retdata.bond_list
 			})
 		})
+	},
+
+	clearStoreDetail: function() {
+		this.setData({
+			storeDetail: {}
+		})
+	},
+
+	updateStoreDetail: function(userId) {
+		service.getStoreDetail(userId, (result) => {
+			this.setData({
+				storeDetail: result.data.retdata
+			})
+		})
+	},
+
+	onUpdateQuestionTotalEvent: function (e) {
+		let questionTotal =  e.detail
+		this.setData({
+			questionTotal: questionTotal > 99 ?  '99+' : questionTotal
+		})
+	},
+
+	onGetBondSimpleNameEvent: function (e) {
+		this.setData({
+			bondSimpleName: e.detail
+		})
+	},
+
+	doShareStore: function (userId,bondSimpleName) {
+		this.clearStoreDetail()
+		service.doShareStore(userId,bondSimpleName, () => {
+			this.updateStoreDetail(this.data.uid)
+		}, () => {})	
 	},
 	
   /**
@@ -115,7 +146,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-	
   },
 
   /**
@@ -162,27 +192,23 @@ Page({
    */
   onShareAppMessage: function (ops) {
 	if (ops.from === 'button') {
-		// 来自页面内转发按钮
-		//console.log(ops.target)
-		//console.log('buttton')
-	  } else {
-		  //console.log('onShareAppMessage.......')
-	  }
+	} else {
+	}
 
-	  // let path = '/app/page/bond-detail/bond-detail?from=share&bid=' + this.data.bondId +'&uid=' + this.data.userId + '&tid=' + this.data.currentTabId
-	  let path = '/app/page/market/market?to=bond-detail&bid=' + this.data.bondId +'&uid=' + this.data.userId + '&tid=' + this.data.currentTabId
-	  return {
-		title: 'Qtrade一级债小程序',
-		desc: 'desc....',
+	let userId = this.data.userId
+	let bondId = this.data.bondId
+	let bondSimpleName = this.data.bondSimpleName
+	let path = '/app/page/market/market?to=bond-detail&bid=' + this.data.bondId +'&uid=' + userId + '&tid=' + this.data.currentTabId
+	let that = this
+	return {
+		title: `债券【${bondSimpleName}】最新信息`,
+		desc: '介绍一个基于QQ的同业报价工具给你哦！事不宜迟，现在加入QTrade吧。',
 		path: path,
 		success: function (res) {
-		  // 转发成功
-		  //console.log("转发成功:" + JSON.stringify(res));
+			that.doShareStore(userId, bondSimpleName)
 		},
 		fail: function (res) {
-		  // 转发失败
-		  // console.log("转发失败:" + JSON.stringify(res));
 		}
-	  }
+	}
   }
 })

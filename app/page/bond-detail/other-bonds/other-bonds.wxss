@@ -3,17 +3,13 @@
   margin: 30rpx 0;
   text-align: center;
 }
-.other-bonds-component .bond-list-line:before {
-  content: '';
-  display: block;
+.other-bonds-component .line {
+  background: #D8D8D8;
+  margin-top: 4rpx;
+  display: inline-block;
+  width: 100rpx;
   height: 1rpx;
-  width: 50%;
-  background-color: #D8D8D8;
-  /*颜色需与主题大背景色一致*/
-  position: relative;
-  top: 25rpx;
-  /*调节线高*/
-  left: 25%;
+  vertical-align: middle;
 }
 .other-bonds-component .title {
   display: inline-block;

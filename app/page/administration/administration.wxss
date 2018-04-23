@@ -1,6 +1,7 @@
 .administration-page {
   padding-top: 20rpx;
   height: calc(100% - 40rpx);
+  position: relative;
 }
 .administration-page .to-quotation {
   position: relative;
@@ -32,5 +33,11 @@
 }
 .administration-page .bond-list-pallet {
   width: 100%;
-  height: calc(100% - 40rpx);
+  height: calc(100% - 44rpx);
+}
+.administration-page .loading-more {
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
 }

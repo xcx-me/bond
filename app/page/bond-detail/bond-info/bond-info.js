@@ -22,7 +22,6 @@ Component({
 			value: false,
 			observer: function(newVal, oldVal){
 				if (newVal) {
-					console.log('bond-info needUpdate', this.data.loading)
 					this.getBondDetail()
 				}
 			}
@@ -36,7 +35,6 @@ Component({
 	},
 
   	ready: function () {
-		console.log('bond-info  ready....', this.data.loading)
 		this.getBondDetail()
   	},
 
@@ -51,6 +49,7 @@ Component({
 					loading: false,
 					bondInfo: result.data.retdata
 				})
+				this.triggerEvent('getBondSimpleNameEvent', result.data.retdata.bond_simple_name)
 			}
 		})
 	}
