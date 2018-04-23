@@ -1,37 +1,43 @@
 // app/page/store/store.js
 const service = require('../../util/service/service')
+const {getStatus, getType} = require('../../util/type/bond-list')
+
 Page({
 	properties: {	
-		navigatorUrl: {
-			type: String,
-			value: ''
-		}
 	},
 
   	data: {
 		uid: '',
 		userId: '',
 		userName: '',
-		isMyStore: false,
+		from: '',
 		isQtrade: false,
 		needUpdate: false,
-		from: ''
+		loading: true,
+		bondListType: getType.OTHERS,
+		bondListStatus: getStatus.INIT
   	},
 
 	onUpdateStoreDetail: function (e) {
 		let detail = e.detail
-		let isMyStore = String(detail.is_myself) === '1' && String(this.data.uid) === '0'
 		this.setData({
-			isMyStore: isMyStore,
 			isQtrade: String(detail.is_qtrade) === '1',
 			userId: detail.user_id,
-			userName: detail.sale_name
+			userName: detail.sale_name,
+			loading: false
+		})
+	},
+
+	onUpdateBondListEvent: function () {
+		this.setData({
+			bondListStatus: getStatus.ENDLOADED
 		})
 	},
 
   	onLoad: function (options) {
 		let uid = options.uid
 		this.setData({
+			needUpdate: true,
 			uid: uid,
 			from: options.from || ''
 		})
@@ -49,9 +55,9 @@ Page({
    */
   	onShow: function () {
 		this.setData({
+			bondListStatus: getStatus.INIT,
 			needUpdate: true
 		})
-
   	},
 
   /**
@@ -59,6 +65,7 @@ Page({
    */
   onHide: function () {
     this.setData({
+		bondListStatus: null,
 		needUpdate: false
 	})
   },
@@ -74,14 +81,19 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+	this.setData({
+		bondListStatus: getStatus.FRESH
+	})
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
 	onReachBottom: function () {
-  
+		this.setData({
+			bondListStatus: getStatus.LOADMORE
+		})
+		console.log('onReachBottom.....')
 	},
 
 	doShareStore: function (userId) {

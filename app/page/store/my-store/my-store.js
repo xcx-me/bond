@@ -1,4 +1,6 @@
 // app/page/store/my-store/my-store.js
+const {getStatus, getType} = require('../../../util/type/bond-list')
+
 Component({
   /**
    * 组件的属性列表
@@ -8,6 +10,14 @@ Component({
 		type: Boolean,
 		value: false
 	},
+	bondListType: {
+		type: Number,
+		value: 0
+	},
+	bondListStatus: {
+		type: Number,
+		value: 0
+	},
 	uid:  {
 		type: String,
 		value: ''
@@ -15,14 +25,6 @@ Component({
 	userId: {
 		type: String,
 		value: ''
-	},
-	isQtrade: {
-		type: Boolean,
-		value: false	
-	},
-	needUpdate: {
-		type: Boolean,
-		value: false
 	}
   },
 
@@ -41,7 +43,7 @@ Component({
 		let that = this
 		wx.getSystemInfo({
 			success: function(res) {
-				let height = res.windowHeight - (res.windowWidth / 750 * 160)
+				let height = res.windowHeight - (res.windowWidth / 750 * 380)
 				that.setData({
 					winHeight: height
 				})
@@ -84,14 +86,17 @@ Component({
 		})
 	},
 
-	bindDownLoad: function(e) {
-		console.log('bindDownLoad.....')
+	onUpdateBondListEvent: function (e) {
+		this.triggerEvent('updateEvent', getStatus.ENDLOADED)
 	},
 
 	topLoad: function(e) {
-		console.log('topLoad.....')
+		this.triggerEvent('updateEvent', getStatus.FRESH)
 	},
 
+	bindDownLoad: function(e) {
+		this.triggerEvent('updateEvent', getStatus.LOADMORE)
+	},
 	scroll: function(e) {
 		console.log('scroll...')
 	}

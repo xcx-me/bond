@@ -3,7 +3,7 @@
 	<view class='bond-list-header' wx:if='{{bondList.length > 0}}'>
        <i class='line'/><text class="title">更多债券</text><i class='line'/>
 	</view>
-	<BondList
+	<BondListDisplay
 		isMine='{{isMyStore}}'
 		from='detail'
 		bondList='{{bondList}}'

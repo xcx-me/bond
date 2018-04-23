@@ -1,6 +1,6 @@
 {
 	"usingComponents": {
-		"BondList": "../../ui/list/bond-list/bond-list",
+		"BondList": "../../ui/bond-list/bond-list",
 		"StoreRegister": "../../page/store/register-store/register-store"
 	},
 	"enablePullDownRefresh": true

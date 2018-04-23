@@ -1,7 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-	  "StoreBondList": "../bond-list/bond-list",
+	  "BondList": "../../../ui/bond-list/bond-list",
 	  "StoreDynamic": "../dynamic/dynamic",
 	  "StoreRegister": "../register-store/register-store"
   }

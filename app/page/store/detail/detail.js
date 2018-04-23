@@ -32,6 +32,7 @@ Component({
 			type: Boolean,
 			value: false,
 			observer: function(newVal, oldVal){
+				console.log('store detail...', newVal, oldVal)
 				if (newVal) {
 					this.getStoreDetail(this.data.userId)
 				}
@@ -75,11 +76,12 @@ Component({
 				loading: false,
 				storeDetail: detail,
 			})
+			console.log('detail....', detail)
 			this.triggerEvent('event', detail)
 		},
 
 		getStoreDetail: function (userId) {
-			console.log('getstoredetail.......')
+			console.log('getstoredetail ....', userId)
 			if (this.data.isRegistered) { // 已开店
 				service.getStoreDetail(userId, (result) => {
 					this.updateStoreDetail(result.data.retdata)

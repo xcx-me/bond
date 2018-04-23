@@ -1,0 +1,19 @@
+<!--app/ui/bond-list/bond-list.wxml-->
+<loading wx:if='{{firstLoading}}'>加载中...</loading>
+<view hidden='{{firstLoading}}' class='bond-list-component'>
+	<BondListDisplay from='{{from}}'
+					isMine='{{isMine}}'
+					bondList='{{bondList}}'
+					uid='{{uid}}'
+					userId='{{userId}}' 
+					bind:deleteBondEvent='onDeleteBondEvent'/>
+
+	<view class="loading-more" hidden="{{!moreLoading}}">
+		<view class="icon"></view>
+		<view class="tips"><text>正在努力加载...</text></view>
+	</view>
+	<view class="loading-over" hidden="{{!overLoaded}}">
+		<view class="icon"></view>
+		<view class="tips"><text>已经到底啦</text></view>
+	</view>
+</view>
