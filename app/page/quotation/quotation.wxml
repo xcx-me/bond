@@ -1,8 +1,10 @@
 
-<view class="send-quote-page">
+<view class="send-quote-page {{fixedPage ? 'fixed' : ''}}">
 	<view class="quotation-form" wx:if="{{isOpenMyShop}}">
 		<BondFormEditor isEditEntry='{{isEditEntry}}' highlight='{{highlightItem}}' bondSimpleName='{{bondSimpleName}}'
-			bind:changeValueEvent='_changeValue' bind:changeHighLightState='_changeHighLight'
+			bind:changeValueEvent='_changeValue'
+			bind:changeHighLightState='_changeHighLight'
+			bind:changeFixedPageScroll='_changePageScrollFixed'
 		/>  
 
 		<button class='margin-bottom submit-quotation-btn {{submitQuoteBtnEnable ? "" : "submit-quote-unenable"}}'

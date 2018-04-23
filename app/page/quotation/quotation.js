@@ -21,7 +21,8 @@ Page({
 			subject_rating: '',
 			facility_rating: '',
 			deadline: ''
-		}
+		},
+		fixedPage: false
 	},
 
 	openMyShop: function () {
@@ -129,6 +130,13 @@ Page({
 		curHighlightItem[e.detail] = false
 		this.setData({
 			highlightItem: curHighlightItem
+		})
+	},
+
+	_changePageScrollFixed: function (e) {
+		// console.log('page scroll falg', e.detail)
+		this.setData({
+			fixedPage: e.detail
 		})
 	},
 
