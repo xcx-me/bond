@@ -100,7 +100,7 @@
 .single-bond-component .bond-info-item-tpl.benefit {
   width: 38%;
   position: relative;
-  top: 8rpx;
+  top: 10rpx;
   padding-top: 0;
   padding-bottom: 0;
   border: 1rpx solid #2196F3;
@@ -113,15 +113,21 @@
 .single-bond-component .bond-info-item-tpl.rating {
   width: calc(33.33333% - 1px);
   border-right: 1px solid #E5E5E5;
+  padding: 0;
+  margin: 8rpx 0;
 }
 .single-bond-component .bond-info-item-tpl.deadline {
   width: calc(33.33333% - 1px);
   border-right: 1px solid #E5E5E5;
+  padding: 0;
   text-align: center;
+  margin: 8rpx 0;
 }
 .single-bond-component .bond-info-item-tpl.issue_total {
   width: 33.33333%;
   text-align: right;
+  padding: 0;
+  margin: 8rpx 0;
 }
 .single-bond-component .bond-info-item-tpl.bond_type {
   width: 100%;

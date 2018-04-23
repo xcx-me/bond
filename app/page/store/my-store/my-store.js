@@ -34,6 +34,7 @@ Component({
 	currentTabId: 'bond-list',
 	winHeight: '',
 	needUpdateDyNamic: false,
+	isShowRedPoint: getApp().globalData.isShowRedPoint
   },
 
   ready: function () {
@@ -75,6 +76,12 @@ Component({
 				currentTabId: tabId
 			})
 		}
+	},
+
+	onUpdateRedPointEvent: function(e) {
+		this.setData({
+			isShowRedPoint: e.detail
+		})
 	},
 
 	bindDownLoad: function(e) {

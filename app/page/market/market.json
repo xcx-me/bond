@@ -5,5 +5,6 @@
 		"Consultation": "./consultation/consultation",
 		"Announcement": "./announcement/announcement",
 		"Issues": "./issues/issues"
-	}
+	},
+  "enablePullDownRefresh": true
 }

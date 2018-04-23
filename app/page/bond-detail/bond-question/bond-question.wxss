@@ -25,7 +25,7 @@
   color: #2196F3;
 }
 .bond-question .question-list {
-  overflow: auto;
+  overflow: hidden;
   padding-left: 14rpx;
   border-top: 1px solid #E5E5E5;
   padding-top: 10rpx;
@@ -80,8 +80,19 @@
   color: #2196F3;
 }
 .bond-question .question-list .question-item .answer-list {
+  position: relative;
   float: left;
   width: calc(100% - 50rpx);
   padding-left: 20rpx;
   margin-top: 20rpx;
+}
+.bond-question .question-list .question-item .answer-list .icon-up-rectangle {
+  position: absolute;
+  top: -18rpx;
+  left: 40rpx;
+  height: 0px;
+  width: 0px;
+  border-left: 18rpx solid transparent;
+  border-bottom: 18rpx solid rgba(33, 150, 243, 0.08);
+  border-right: 18rpx solid transparent;
 }

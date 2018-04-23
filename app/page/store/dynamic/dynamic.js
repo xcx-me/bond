@@ -36,6 +36,8 @@ Component({
 					loading: false,
 					emptyData: dataList.length === 0
 				})
+
+				this.triggerEvent('updateRedPointEvent', dataList.length > 0)
 			})
 		},
 
@@ -64,7 +66,7 @@ Component({
 		},
 
 		navigateToBondDetail(bondId) {
-			let url=`/app/page/bond-detail/bond-detail?bid=${bondId}&uid=0`
+			let url=`/app/page/bond-detail/bond-detail?bid=${bondId}&uid=0&tid=question`
 			wx.navigateTo({
 				url: url
 			})

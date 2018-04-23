@@ -1,5 +1,6 @@
 // app/page/overview/overview.js
 const service = require('../../util/service/service')
+const redPoint = require('../../util/red-point/red-point')
 Page({
 	data: {
 		isStoreRegistered: false, // 是否开店
@@ -22,7 +23,6 @@ Page({
 	},
 
 	onUpdateStoreDetail: function (e) {
-		console.log('overview onUpdateStoreDetail...', e)
 		let detail = e.detail
 		let isMyStore = String(detail.is_myself) === '1' && String(this.data.uid) === '0'
 		this.setData({
@@ -30,7 +30,7 @@ Page({
 			isQtrade: String(detail.is_qtrade) === '1',
 			userId: detail.user_id,
 			userName: detail.sale_name,
-			loading: false
+			loading: false,
 		})
 	},
 
@@ -59,6 +59,7 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
+		redPoint.hideTabBarRedDot()
 		this.initData()
 	},
 
@@ -105,7 +106,7 @@ Page({
 		}
 
 		let userId = this.data.userId
-		let path = '/app/page/store/store?from=share&uid=' + userId
+		let path = '/app/page/market/market?to=store&uid=' + userId
 		let that = this
 		return {
 			title: `${this.data.userName}的店铺`,
