@@ -1,6 +1,6 @@
 <!--app/page/market/stage-issues/stage-issues.wxml-->
 <view class='stage-issues'>
-	<BondList
+	<BondListDisplay
 		from='board'
 		isMine='{{false}}'
 		bondList='{{bondList}}'

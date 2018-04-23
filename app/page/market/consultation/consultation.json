@@ -2,6 +2,6 @@
   "component": true,
   "usingComponents": {
 	"Filter": "../filter/filter",
-	"BondList": "../../../ui/list/bond-list/bond-list"
+	"BondListDisplay": "../../../ui/bond-list-display/bond-list-display"
   }
 }

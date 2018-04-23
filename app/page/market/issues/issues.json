@@ -3,6 +3,6 @@
   "usingComponents": {
 	"Filter": "../filter/filter",
 	"DateBar": "../date-bar/date-bar",
-	"BondList": "../../../ui/list/bond-list/bond-list"
+	"BondListDisplay": "../../../ui/bond-list-display/bond-list-display"
   }
 }

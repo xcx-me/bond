@@ -1,6 +1,6 @@
 <!--app/page/market/consultation/consultation.wxml-->
 <view class='consultation-component'>
-	<BondList
+	<BondListDisplay
 		from='board'
 		isMine='{{false}}'
 		bondList='{{bondList}}'

@@ -1,16 +1,16 @@
 <!--app/page/store/store.wxml-->
-<view class='store-page page-wrapper {{isQtrade? "qtrade-store" : ""}}'>
+<view class='store-page page-wrapper {{isQtrade? "qtrade-store" : ""}}' >
 	<view class='store-header'>
 		<StoreDetail 
 		navigatorUrl=''
 		userId='{{uid}}'
 		isRegistered='{{true}}'
-		isHiddenSeller='{{isMyStore}}'
+		isHiddenSeller='{{false}}'
 		needUpdate='{{needUpdate}}'
 		bindevent='onUpdateStoreDetail'/> 
 	</view>
-	<view class='store-bond-list'>
-		<StoreBondList uid='{{uid}}' userId='{{userId}}' isMyStore='{{false}}' needUpdate='{{needUpdate}}' isQtrade='{{isQtrade}}'/>
+	<view class='store-bond-list' wx:if='{{!loading}}'>
+		<BondList type='{{bondListType}}' status='{{bondListStatus}}' uid='{{uid}}' userId='{{userId}}' isMyStore='{{false}}' bind:updateEvent='onUpdateBondListEvent'/>
 	</view>
 	<ShareButton wx:if='{{userId !== "0"}}'/>
 </view>
