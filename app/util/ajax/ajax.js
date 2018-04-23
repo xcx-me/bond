@@ -4,6 +4,7 @@ const config = require('../ajax/config')
 const APPLETREE_KEY = 'appletree_key'
 const StringUtil = require('../string-util/string-util')
 const wxPromise = require('../wx-promise/wx-promise')
+const isLocalhost = true
 
 function ajax (configuration, data, cookie) {
 	let url = Environment.withDomain(configuration.url)
@@ -23,7 +24,7 @@ function ajax (configuration, data, cookie) {
 }
 
 function parseCookieToString () {
-	if (getApp().isLocalhost) {
+	if (isLocalhost) {
 		wx.setStorageSync(APPLETREE_KEY, Environment.TARGET_SERVER.cookie.split('=')[1])
 		return Environment.TARGET_SERVER.cookie
 	}
@@ -31,7 +32,7 @@ function parseCookieToString () {
 }
 
 function signon (done) {
-	if (getApp().isLocalhost) {
+	if (isLocalhost) {
 		done()
 		return
 	}

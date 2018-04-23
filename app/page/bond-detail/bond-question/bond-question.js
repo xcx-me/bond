@@ -31,8 +31,7 @@ Component({
 		bondSimpleName: ''
   	},
 
-  	ready: function () {
-		// this.getQuestionList()
+  	ready: function () {  
   	},
 
   	methods: {

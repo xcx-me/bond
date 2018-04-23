@@ -26,7 +26,7 @@
   right: -3rpx;
   width: 26rpx;
   height: 26rpx;
-  background: red;
+  background: #E64340;
   border-radius: 100%;
 }
 .seller-info-tpl .under-line {
@@ -55,7 +55,7 @@
   opacity: 0.3;
 }
 .sale-dialog-container .wx-dialog-main {
-  z-index: 999;
+  z-index: 9999;
   position: absolute;
   width: 450rpx;
   top: 10%;
@@ -63,7 +63,8 @@
   margin-left: -225rpx;
   /* padding: 20rpx; */
   background-color: #FFFFFF;
-  border-radius: 8rpx;
+  border-radius: 4rpx;
+  max-height: 400rpx;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-title {
   overflow: hidden;

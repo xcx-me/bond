@@ -1,3 +1,4 @@
+
 App({
   // 全局常量
   data: {
@@ -6,11 +7,8 @@ App({
   },
 
 	onLaunch: function () {
-
 	},
 
 	globalData: {
-	},
-
-	isLocalhost: true
+	}
 })

@@ -18,21 +18,22 @@ Component({
 		},
 		detail: {
 			type: Object,
-			value: ''
+			value: '',
+			observer: function(newVal, oldVal){
+				if (Object.keys(this.data.detail).length > 0) {
+					this.setData({
+						loading: false,
+						storeDetail: this.data.detail
+					})
+				}
+			}
 		},
 		needUpdate: {
 			type: Boolean,
 			value: false,
 			observer: function(newVal, oldVal){
 				if (newVal) {
-					 if (this.data.detail && Object.keys(this.data.detail)) {
-						this.setData({
-							loading: false,
-							storeDetail: this.data.detail
-						})
-					 }else {
-						this.getStoreDetail(this.data.userId)
-					 }	
+					this.getStoreDetail(this.data.userId)
 				}
 			}
 		},
@@ -78,6 +79,7 @@ Component({
 		},
 
 		getStoreDetail: function (userId) {
+			console.log('getstoredetail.......')
 			if (this.data.isRegistered) { // 已开店
 				service.getStoreDetail(userId, (result) => {
 					this.updateStoreDetail(result.data.retdata)

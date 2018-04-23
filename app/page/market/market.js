@@ -2,7 +2,7 @@
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const common = require('../../util/common')
-
+const redPoint = require('../../util/red-point/red-point')
 Page({
 	/**
 	 * 页面的初始数据
@@ -24,7 +24,8 @@ Page({
 			page_size: 10
 		},
 		bondList: [],
-		loading: true
+		loading: true,
+		intervalTimer: 0,
 	},
 
 	_onFilter: function (e) {
@@ -238,13 +239,17 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
+		redPoint.setTabBarRedDot()
+		this.data.intervalTimer = setInterval(() => {
+			redPoint.setTabBarRedDot()
+		}, 1000 * 60)
 	},
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
 	onHide: function () {
-
+		clearInterval(this.data.intervalTimer)
 	},
 
 	/**

@@ -1,4 +1,17 @@
 <!--app/page/edit-sale-info/edit-sale-info.wxml-->
+<wxs module='saleInfoUtil'>
+	module.exports = {
+		isChecked: function (checkBoxValue, values, splitChar) {
+			var valueList =  values && values !== 'undefined' ? values.split(splitChar) : []
+			for(var i=0; i < valueList.length;i++){
+				if (checkBoxValue === valueList[i]) {
+					return true
+				}
+			}
+			return false				
+		}
+	}
+</wxs>
 <loading wx:if='{{loading}}'>数据加载中...</loading>
 <view class='edit-sale-info-page' wx:if='{{!loading}}'>
 	<view class='header'>
@@ -22,7 +35,7 @@
 						<text class='postfix' wx:if='{{formItem.postfix}}'>{{formItem.postfix}}</text>
 						<checkbox-group class="checkbox-group" bindchange="onCheckboxChange" data-name='{{formItem.name}}' wx:if='{{formItem.formType === "checkbox"}}'>
 							<label class="checkbox" wx:for="{{formItem.items}}" wx:key='name'>
-								<checkbox value="{{item.value}}" checked="{{item.value === saleInfo[formItem.name]}}" color='#2196F3'/>{{item.label}}
+								<checkbox value="{{item.value}}" checked="{{saleInfoUtil.isChecked(item.value, saleInfo[formItem.name], '|')}}" color='#2196F3'/>{{item.label}}
 							</label>
 						</checkbox-group>
 					</block>

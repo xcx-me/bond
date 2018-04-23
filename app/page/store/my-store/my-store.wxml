@@ -5,7 +5,7 @@
 			<view class='{{currentTabId === "bond-list" ? "active": ""}}'><text>我的店铺</text></view>
 		</view>
 		<view class="tab-item" data-tid='dynamic' catchtap='switchNav'>
-			<view class='{{currentTabId === "dynamic" ? "active": ""}}'><text>最新动态</text></view>
+			<view class='{{currentTabId === "dynamic" ? "active": ""}}'><text>最新动态</text><i class='red-point' wx:if='{{isShowRedPoint}}'/></view>
 		</view>
 	</view>
 	<swiper current-item-id='{{currentTabId}}' class='content' duration='300' style='height: {{winHeight}}px' bindchange="bindChangeTab">
@@ -17,7 +17,7 @@
 			</swiper-item>
 			<swiper-item item-id='dynamic'>
 				<scroll-view class='pallet' scroll-y>
-					<StoreDynamic needUpdate='{{needUpdateDyNamic}}' needUpdate='{{needUpdate}}'/>
+					<StoreDynamic needUpdate='{{needUpdateDyNamic}}' needUpdate='{{needUpdate}}' bind:updateRedPointEvent='onUpdateRedPointEvent'/>
 				</scroll-view>
 			</swiper-item>
 	</swiper>

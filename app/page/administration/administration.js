@@ -2,17 +2,20 @@
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const service = require('../../util/service/service')
-
+const redPoint = require('../../util/red-point/red-point')
 Page({
 	data: {
 		page: 0,
-		pageSize: 15,
+		pageSize: 10,
 		winHeight: 0,
 		isStoreRegistered: false,
 		isShowModify: false,
 		modifyBondSimpleName: '',
 		loading: true,
+		isLoadingMore: false,
+		isLoadOver: false,
 		bondList: [],
+		intervalTimer: 0
 	},
 
 	getBondList: function (page, len) {
@@ -25,12 +28,33 @@ Page({
 			limit: limit,
 			type: 1
 		}, (result) => {
+			let prevBondList = this.data.bondList
+			let newBondList = result.data.retdata.bond_list
+			let bondList = page > 0 ? prevBondList.concat(newBondList) : newBondList
+			let isLoadOver = newBondList.length < limit
 			this.setData({
 				isStoreRegistered: true,
-				bondList: result.data.retdata.bond_list,
-				loading: false
+				bondList: bondList,
+				loading: false,
+				isLoadingMore: false,
+				isLoadOver: isLoadOver,
+				page: isLoadOver ? page: page + 1
 			})
 		})
+	},
+
+	initBondList: function () {
+		this.getBondList(0, this.data.pageSize)
+	},
+
+	loadMoreBondList: function () {
+		if (this.data.isLoadOver) {
+			return 
+		}
+		this.setData({
+			isLoadingMore: true
+		})
+		this.getBondList(this.data.page, this.data.pageSize)
 	},
 
 	onModifyBondEvent: function(e) {
@@ -71,7 +95,7 @@ Page({
 				wx.setNavigationBarTitle({
 					title: 'QTrade一级债'
 				})
-				this.getBondList(0, this.data.pageSize)
+				this.initBondList()
 			} else {
 				wx.setNavigationBarTitle({
 					title: '开店申请'
@@ -100,6 +124,10 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
+		redPoint.setTabBarRedDot()
+		this.data.intervalTimer = setInterval(() => {
+			redPoint.setTabBarRedDot()
+		}, 1000 * 60)
 		this.isStoreOpened()
 	},
 
@@ -107,6 +135,7 @@ Page({
 	 * 生命周期函数--监听页面隐藏
 	 */
 	onHide: function () {
+		clearInterval(this.data.intervalTimer)
 		this.setData({
 			isShowModify: false,
 			loading: !this.data.isStoreRegistered
@@ -123,15 +152,15 @@ Page({
 	/**
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
-	onPullDownRefresh: function () {
-
+	onPullDownRefresh: function (e) {
+		this.initBondList()
 	},
 
 	/**
 	 * 页面上拉触底事件的处理函数
 	 */
-	onReachBottom: function () {
-
+	onReachBottom: function (e) {
+		this.loadMoreBondList()
 	},
 
 	/**
