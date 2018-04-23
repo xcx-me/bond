@@ -202,7 +202,6 @@
   position: relative;
 }
 .bond-form-editor .simple-name-associate {
-  display: block;
   z-index: 99;
   position: absolute;
   left: 0;
@@ -220,9 +219,6 @@
   border-bottom: 1rpx solid #EFEFF4;
   background-color: #FFFFFF;
 }
-.bond-form-editor .simple-name-associate .close-name-list {
-  background-color: #EFEFF4;
-}
 .bond-form-editor .simple-name-associate .close-mask {
   z-index: 999;
   position: fixed;
@@ -232,4 +228,10 @@
   height: 100%;
   background-color: #000000;
   opacity: 0.3;
+}
+.bond-form-editor .show-name-list {
+  display: block;
+}
+.bond-form-editor .hide-name-list {
+  display: none;
 }

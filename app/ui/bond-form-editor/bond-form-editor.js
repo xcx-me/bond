@@ -22,7 +22,11 @@ Component({
 
 	data: {
 		formData: JSON.parse(JSON.stringify(formConfig.defaultFormData)),
-simpleNameList: JSON.parse(JSON.stringify(formConfig.simpleName)),
+
+		ascNameListOpen: false, 
+		// simpleNameList: JSON.parse(JSON.stringify(formConfig.simpleName)),
+		simpleNameList: [],
+
 		// 时间
 		dateTimeArray: dateTimePicker.dateTimePicker(2000, 2050).dateTimeArray,
 		dateTime: dateTimePicker.dateTimePicker(2000, 2050).dateTime,
@@ -72,7 +76,8 @@ simpleNameList: JSON.parse(JSON.stringify(formConfig.simpleName)),
 			this.timeStamp_ = currentTime
 			setTimeout(() => {
 				if (this.timeStamp_ - currentTime === 0) {
-					this.associateBondDetails(e.detail.value)
+					this.associateBondDetails(e.detail.value) // 债券详情联想
+					this.ascBondSimpleName(e.detail.value) // 债券简称列表联想
 				}
 			}, 1000)
 
@@ -257,6 +262,7 @@ simpleNameList: JSON.parse(JSON.stringify(formConfig.simpleName)),
 					resultData.bond_simple_name = bondSimpleName
 					this.setData({
 						formData: resultData,
+
 						enterpriseIndex: resultData.company_type && (resultData.company_type - 1), // 企业性质
 						issuanceMethodIndex: resultData.issue_way && (resultData.issue_way - 1), // 发行方式
 	
@@ -296,6 +302,48 @@ simpleNameList: JSON.parse(JSON.stringify(formConfig.simpleName)),
 					})
 				}
 			})
+		},
+
+		// 债券简称联想
+		ascBondSimpleName: function (curName) {
+			service.getBondSimpleName(curName, (result) => {
+				let resultData = result.data.retdata.array
+				if (curName !=='' && resultData.length > 0) {
+					let nameArray = []
+					resultData.map((item, index) => {
+						if (curName !== '') {
+							nameArray.push(item.bond_simple_name)
+						}
+					})
+					this.setData({
+						ascNameListOpen: true,
+						simpleNameList: nameArray
+					})
+					this.triggerEvent('changeFixedPageScroll', true)
+				} else {
+					this.setData({
+						ascNameListOpen: false,
+						simpleNameList: []
+					})
+					this.triggerEvent('changeFixedPageScroll', false)
+				}
+			})
+		},
+
+		closeAssociateList: function () {
+			this.setData({
+				ascNameListOpen: false,
+			})
+			this.triggerEvent('changeFixedPageScroll', false)
+		},
+
+		checkAscBondName: function (e) {
+			this.associateBondDetails(e.currentTarget.dataset.bondName)
+			this.setData({
+				ascNameListOpen: false,
+				simpleNameList: []
+			})
+			this.triggerEvent('changeFixedPageScroll', false)
 		},
 
 		saveCheckedValue: function (targetValue, dataArray) {

@@ -10,14 +10,13 @@
 				disabled='{{isEditEntry}}' style='{{isEditEntry ? "color: #888888" : ""}}' maxlength='15'
 			/>
 		</view>
-		<view class='simple-name-associate'>
-			<scroll-view style="height: 400rpx;" scroll-y >
-				<view wx:for='{{simpleNameList.name}}' wx:key='index'>
+		<view class='simple-name-associate {{ascNameListOpen ? "show-name-list" : "hide-name-list"}}'>
+			<scroll-view style="max-height: 460rpx;" scroll-y >
+				<view wx:for='{{simpleNameList}}' wx:key='index' data-bond-name='{{item}}' bindtap='checkAscBondName'>
 					<text>{{item}}</text>
 				</view>
 			</scroll-view>
-			<view class='close-name-list'>关闭</view>
-			<view class='close-mask'></view>
+			<view class='close-mask' bindtap='closeAssociateList'></view>
 		</view>
 	</view>
 

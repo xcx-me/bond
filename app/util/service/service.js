@@ -69,15 +69,19 @@ module.exports = {
 		this.doService(config.NEW_BOND.answerQuestion, {ask_id: askId, content: content}, sucFunc, errFunc)
 	},
 
-	getBondAssociate: function(simpleName, sucFunc, errFunc) {
-		this.doService(config.NEW_BOND.associateBond, {bond_simple_name: simpleName}, sucFunc, errFunc)
-	},
-
 	getSaleInfo: function(bondId, sucFunc, errFunc) {
 		this.doService(config.NEW_BOND.getSaleInfo, {bond_id: bondId}, sucFunc, errFunc)
 	},
 
 	modNewBondDetail: function(data, sucFunc, errFunc) {
 		this.doService(config.NEW_BOND.modNewBondDetail, data, sucFunc, errFunc)
+	},
+
+	// 发布报价
+	getBondAssociate: function(simpleName, sucFunc, errFunc) { //债券详情
+		this.doService(config.NEW_BOND.associateBond, {bond_simple_name: simpleName}, sucFunc, errFunc)
+	},
+	getBondSimpleName: function(data, sucFunc, errFunc) { // 债券简称联想
+		this.doService(config.NEW_BOND.associateBondName, {bond_msg: data}, sucFunc, errFunc)
 	}
 }
