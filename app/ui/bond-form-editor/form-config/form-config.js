@@ -73,7 +73,7 @@ module.exports = {
 		bond_full_name: '', // 债券全称
 		attached_ids: ''
 	},
-	simpleName: {
+	simpleName: { //test
 		name: ['利随本清', '固定利率', '浮动利率', '累积利率', '浮动利率', '累积利率']
 	}
 }
