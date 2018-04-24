@@ -1,157 +1,105 @@
 .seller-info-tpl {
-  	overflow: hidden;
+  overflow: hidden;
 }
 .seller-info-tpl view {
-	position: relative;
-	float: left;
+  position: relative;
+  float: left;
 }
 .seller-info-tpl view.image {
-  	margin-right: 20rpx;
+  margin-right: 20rpx;
 }
 .seller-info-tpl .face-url {
-	width: 60rpx;
-	height: 60rpx;
-	border-radius: 100%;
-	position: relative;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 100%;
+  position: relative;
 }
 .seller-info-tpl .v-user {
-	position: absolute;
-	bottom: 0;
-	right: -16rpx;
-	padding: 18rpx;
+  position: absolute;
+  bottom: 0;
+  right: -16rpx;
+  padding: 18rpx;
 }
 .seller-info-tpl .zhucheng {
-	position: absolute;
-	bottom: 5rpx;
-	right: -3rpx;
-	width: 26rpx;
-	height: 26rpx;
-	background: #E64340;
-	border-radius: 100%;
+  position: absolute;
+  bottom: 5rpx;
+  right: -3rpx;
+  width: 26rpx;
+  height: 26rpx;
+  background: #E64340;
+  border-radius: 100%;
 }
 .seller-info-tpl .under-line {
-  	font-size: 0;
+  font-size: 0;
 }
 .seller-info-tpl .user-name {
-  	font-size: x-large;
+  font-size: x-large;
 }
 .seller-info-tpl .company-name {
-  	font-size: small;
+  font-size: small;
 }
 .sale-dialog-container {
-	z-index: 99;
-	position: fixed;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
+  z-index: 99;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
 }
 .sale-dialog-container .wx-dialog-mask {
-	width: 100%;
-	height: 100%;
-	background-color: #000000;
-	opacity: 0.3;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.3;
 }
 .sale-dialog-container .wx-dialog-main {
-	z-index: 9999;
-	position: absolute;
-	width: 450rpx;
-	top: 10%;
-	left: 50%;
-	margin-left: -225rpx;
-	/* padding: 20rpx; */
-	background-color: #FFFFFF;
-	border-radius: 4rpx;
-	max-height: 400rpx;
+  z-index: 9999;
+  position: absolute;
+  width: 450rpx;
+  top: 10%;
+  left: 50%;
+  margin-left: -225rpx;
+  padding: 20rpx;
+  background-color: #FFFFFF;
+  border-radius: 4rpx;
+  max-height: 400rpx;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-title {
-	overflow: hidden;
-	padding: 25rpx 30rpx;
-	/* background-color: #f2f6fd; */
-	background-color: transparent;
-	border-bottom: 1rpx solid #E5E5E5;
-	/* margin-left: -15rpx;
-	margin-right: -15rpx; */
+  overflow: hidden;
+  padding: 5rpx 15rpx;
+  background-color: #f2f6fd;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content {
-	max-height: 400rpx;
-	overflow: auto;
-	width: 420rpx;
-	margin-left: 30rpx;
+  max-height: 400rpx;
+  overflow: auto;
+  width: 450rpx;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .item {
-	float: left;
-	padding: 10rpx 0;
-	/* width: 450rpx; */
-	width: 100%;
-	overflow: hidden;
-	position: relative;
-	border-bottom: 1rpx solid #E5E5E5;
-}
-.sale-dialog-container .wx-dialog-main .wx-dialog-content .radio:last-child .item {
-	border-bottom: 0;
+  float: left;
+  padding: 10rpx 0;
+  width: 450rpx;
+  overflow: hidden;
+  position: relative;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .item .seller-info-tpl {
-  	float: left;
+  float: left;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .item .seller-info-tpl .user-name,
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .item .seller-info-tpl .under-line {
-  	font-size: small;
+  font-size: small;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .item radio {
-	position: absolute;
-	right: 20rpx;
-}
-.sale-dialog-container .wx-dialog-main .wx-dialog-content .item .icon-checked-radio {
-	width: 60rpx;
-	height: 60rpx;
-	background-color:#FFFFFF;
-	position: absolute;
-	right: 30rpx;
-	border-radius: 100%;
-	padding: 0;
-	top: 10rpx;
-	border: 1rpx solid #C9C9C9;
-}
-.sale-dialog-container .wx-dialog-main .wx-dialog-content .item .checked {
-	/* width: 60rpx;
-	height: 60rpx; */
-	background-color:#2196F3;
-	/* position: absolute;
-	right: 30rpx;
-	border-radius: 100%;
-	padding: 0;
-	top: 10rpx; */
-	border: 1rpx solid #2196F3;
-}
-.sale-dialog-container .wx-dialog-main .wx-dialog-content .item .checked span {
-	width: 20rpx;
-	height: 20rpx;
-	background-color: #FFFFFF;
-	display: block;
-	margin: 20rpx;
-	border-radius: 100%;
+  position: absolute;
+  right: 20rpx;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-footer {
-  	text-align: center;
+  text-align: center;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-footer .wx-dialog-btn {
-	float: left;
-	width: 50%;
-	/* height: 60rpx; */
-	/* border: 1rpx solid #DDDDDD; */
-	border-radius: 0;
-	background-color: transparent;
-	color: #000000;
-	padding-top: 15rpx;
-	padding-bottom: 15rpx;
-}
-.sale-dialog-container .wx-dialog-main .wx-dialog-footer .wx-dialog-btn::after {
-	border: none;
-	border-top: 1rpx solid #E5E5E5;
-}
-.sale-dialog-container .wx-dialog-main .wx-dialog-footer .wx-dialog-btn:first-child {
-	border-right: 1rpx solid #E5E5E5;
+  float: left;
+  height: 60rpx;
+  border: 1rpx solid #DDDDDD;
+  border-radius: 2rpx;
 }
