@@ -6,16 +6,20 @@
 		<view class='wx-dialog-title'>{{ title }}</view>
 		<view class='wx-dialog-content'>
 			<radio-group class="sale-group" bindchange="saleChange">
-  				<label class="radio" wx:for='{{saleList}}' wx:for-item='sale'  wx:for-index='index' wx:key='bond_id'>
+  				<label class="radio {{bondId != '' && bondId == index ? 'c1' : 'c2'}}" wx:for='{{saleList}}' wx:for-item='sale'  wx:for-index='index' wx:key='bond_id'>
 					<view class='item'>
 						<template is='sellerInfoTpl' data='{{faceUrl: sale.face_url, isVUser:"1", userName: sale.sale_name, companyName: sale.company_name}}'></template>
 						<radio value="{{index}}" checked="{{sale.checked}}"></radio>
-						<button class='icon-checked-radio'></button>
 					</view>
   				</label>
 			</radio-group>
 			<!-- <block wx:for='{{saleList}}' wx:for-item='sale' wx:key='bond_id'>
-				
+				<radio value="{{index}}" checked="{{bondId != '' && bondId == index ? true : false}}"></radio>
+				sale.checked
+				icon-checked-radio
+
+				<radio value="{{index}}" checked="{{bondId != '' && bondId == index ? true : false}}" hidden></radio>
+				<button class="icon-checked-radio {{bondId != '' && bondId == index ? 'checked' : ''}}"><span /></button>
 			</block> -->
 		</view>
 		<view class='wx-dialog-footer'>

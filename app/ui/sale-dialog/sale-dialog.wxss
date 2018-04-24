@@ -107,12 +107,32 @@
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .item .icon-checked-radio {
 	width: 60rpx;
 	height: 60rpx;
-	background-color:red;
-	position:absolute;
-	right:30rpx;
-	border-radius:100%;
-	padding:0;
-	top:10rpx;
+	background-color:#FFFFFF;
+	position: absolute;
+	right: 30rpx;
+	border-radius: 100%;
+	padding: 0;
+	top: 10rpx;
+	border: 1rpx solid #C9C9C9;
+}
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .item .checked {
+	/* width: 60rpx;
+	height: 60rpx; */
+	background-color:#2196F3;
+	/* position: absolute;
+	right: 30rpx;
+	border-radius: 100%;
+	padding: 0;
+	top: 10rpx; */
+	border: 1rpx solid #2196F3;
+}
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .item .checked span {
+	width: 20rpx;
+	height: 20rpx;
+	background-color: #FFFFFF;
+	display: block;
+	margin: 20rpx;
+	border-radius: 100%;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-footer {
   	text-align: center;
