@@ -1,29 +1,29 @@
 <view class='market-page'>
 	<!-- 市场页 -->
 	<view class='market-tab'>
-		<view class='market-tab-list' data-current='0' catchtap='switchNav'>
-			<view class="{{currentTab === 0 ? 'on' : ''}}" data-current='0'>询量</view>
+		<view class='market-tab-list' data-tid='consultation' catchtap='switchNav'>
+			<view class="{{currentTabId === 'consultation' ? 'on' : ''}}" >询量</view>
 		</view>
-		<view class="market-tab-list" data-current='1' catchtap='switchNav'>
-			<view class="{{currentTab === 1 ? 'on' : ''}}" data-current='1'>公告</view>
+		<view class="market-tab-list" data-tid='announcement' catchtap='switchNav'>
+			<view class="{{currentTabId === 'announcement' ? 'on' : ''}}" >公告</view>
 		</view>
-		<view class="market-tab-list" data-current='2' catchtap='switchNav'>
-			<view class="{{currentTab === 2 ? 'on' : ''}}" data-current='2'>发行</view>
+		<view class="market-tab-list" data-tid='issues' catchtap='switchNav'>
+			<view class="{{currentTabId === 'issues' ? 'on' : ''}}">发行</view>
 		</view>
 	</view>
 
 	<loading wx:if='{{loading}}'>加载中...</loading>
 
 	<view hidden='{{loading}}' >
-		<swiper current='{{currentTab}}' class='swiper-tab-box' duration='300' style='height: {{winHeight}}px' bindchange='bindChangeTab'>
-			<block wx:for='{{[0, 1, 2]}}' wx:for-item='tabId' wx:key='index'>
-				<swiper-item>
-					<Filter wx:if='{{tabId === currentTab}}' bind:onFilterEvent='_onFilter' />
-					<DateBar wx:if='{{tabId === currentTab && tabId === 2}}' bind:onFilterEvent='_onFilter' />
+		<swiper current-item-id='{{currentTabId}}' class='swiper-tab-box' duration='300' style='height: {{winHeight}}px' bindchange='bindChangeTab'>
+			<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
+				<swiper-item item-id='{{tabId}}'> 
+					<Filter wx:if='{{tabId === currentTabId}}' bind:onFilterEvent='_onFilter' />
+					<DateBar wx:if='{{tabId === currentTabId && tabId === "issues"}}' bind:onFilterEvent='_onFilter' />
 					<scroll-view class='stage-pallet' scroll-y bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll" bindtouchmove="ballMoveEvent">
-						<Consultation wx:if='{{currentTab === 0 && tabId === currentTab}}' bondList='{{bondList}}' />
-						<Announcement wx:if='{{currentTab === 1 && tabId === currentTab}}' bondList='{{bondList}}' />
-						<Issues wx:if='{{currentTab === 2 && tabId === currentTab}}' bondList='{{bondList}}' />
+						<Consultation wx:if='{{currentTabId === "consultation" && tabId === currentTabId}}' bondList='{{bondList}}' />
+						<Announcement wx:if='{{currentTabId === "announcement" && tabId === currentTabId}}' bondList='{{bondList}}' />
+						<Issues wx:if='{{currentTabId === "issues" && tabId === currentTabId}}' bondList='{{bondList}}' />
 					</scroll-view>
 				</swiper-item>
 			</block>

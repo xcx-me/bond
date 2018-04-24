@@ -10,7 +10,8 @@ Page({
 	data: {
 		winWidth: 0,
 		winHeight: 0,
-		currentTab: 0,
+		tabIdList: ['consultation', 'announcement', 'issues'],
+		currentTabId: 'consultation',
 		filterValue: {
 			bond_type: 0,
 			deadline: 0,
@@ -26,7 +27,22 @@ Page({
 		bondList: [],
 		loading: true,
 		loadMore: false,
-		intervalTimer: 0,
+		intervalTimer: 0
+	},
+
+	initFilter: function (bondStatus) {
+		return {
+			bond_type: 0,
+			deadline: 0,
+			subject_rating: 0,
+			date: common.formatDate(new Date()),
+			key: '',
+			// 
+			bond_status: bondStatus,
+			current_page: 1,
+			max_page: 1,
+			page_size: 10
+		}
 	},
 
 	_onFilter: function (e) {
@@ -106,23 +122,18 @@ Page({
      * 滑动切换tab
      */
 	bindChangeTab: function (e) {
-		let currentTab = e.detail.current
+		let currentTabId = e.detail.currentItemId
+		console.log('bindChangeTab...', currentTabId)
 		let lastData = this.data
 		let bondStatus =  '1'
-		if (currentTab === 1) {
+		if (currentTabId === "announcement") {
 			bondStatus =  '2'
-		} else if (currentTab === 2) {
+		} else if (currentTabId === "issues") {
 			bondStatus =  '3'
 		}
-		lastData.currentTab = currentTab
+		lastData.currentTabId = currentTabId
 		lastData.loading = true
-		lastData.filterValue.bond_type = 0
-		lastData.filterValue.deadline = 0
-		lastData.filterValue.subject_rating = 0
-		lastData.filterValue.date = common.formatDate(new Date())
-		lastData.filterValue.bond_status = bondStatus
-		lastData.filterValue.current_page = 1
-		lastData.filterValue.max_page = 1
+		lastData.filterValue = this.initFilter(bondStatus)
 		this.setData(lastData)
 		this.getBondList()
 	},
@@ -131,15 +142,10 @@ Page({
 	 * 点击tab切换 
 	 */  
 	switchNav: function (e) {
-		var that = this;
-		if(this.data.currentTab === e.target.dataset.current) {
-			console.log('switchNav.....此处有bug')
-			return false;
-		} else {
-			that.setData({
-				currentTab: e.target.dataset.current,
-			})
-		}
+		let tabId = e.currentTarget.dataset.tid
+		this.setData({
+			currentTabId: tabId,
+		})
 	},
 
 	bindDownLoad: function(e) {
