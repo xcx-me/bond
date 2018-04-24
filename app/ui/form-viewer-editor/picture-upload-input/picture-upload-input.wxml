@@ -3,8 +3,9 @@
 		<text class='star' wx:if='{{mandatory}}'>*</text>
 		<text>{{label}}</text>
 	</view>
-	<view bindtap='showActionSheet' wx:if='{{!value}}'>
-		点击上传
+	<view class='upload-button-area' bindtap='showActionSheet' wx:if='{{!value}}'>+</view>
+	<view class='image-area'>
+		<image class='picture' src='{{value}}' bindtap='preview' wx:if='{{value}}' />
+		<image class='deletion' bindtap='deletePicture' wx:if='{{value}}' src='/app/asset/image/qtrade/close_32.svg' />
 	</view>
-	<image src='{{value}}' wx:if='{{value}}'></image>
 </view>

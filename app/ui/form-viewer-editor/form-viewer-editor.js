@@ -29,7 +29,6 @@ Component({
 	 */
 	methods: {
 		onChange: function (e) {
-			console.log('form-viewer-editor on change', e)
 			let descriptors = this.data.descriptors
 			FormViewerEditorUtil.setValueByFieldName(this, descriptors, e.detail.fieldName, 'value', e.detail.value)
 			this.triggerEvent('changeDescriptors', {
