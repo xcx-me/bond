@@ -35,8 +35,23 @@ Component({
 	data: {
 		// 弹窗显示控制
 		isShow: false,
-		bondId: ''
+		bondId: '',
+		winHeight: 0
 	},
+
+	ready: function () {
+		let that = this
+		wx.getSystemInfo({
+			success: function(res) {
+				let height = res.windowHeight
+				console.log('sale-dialog...', height)
+				that.setData({
+					winHeight: height
+				})
+			}
+		})
+	},
+
 	/**
 	 * 组件的方法列表
 	 * 更新属性和数据的方法与更新页面数据的方法类似

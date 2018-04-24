@@ -32,7 +32,7 @@
 					<view class='btn btn-reset' bindtap='onReset' data-index='{{index}}'><text>重置</text></view>
 					<view class='btn btn-confirm' bindtap='onConfirm' data-index='{{index}}'><text>确定</text></view>
 				</view>
-				<view class='filter-mask'></view>
+				<view class='filter-mask' catchtap='onHideFilter'></view>
 			</view>
 		</view>
 	</block>

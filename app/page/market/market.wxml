@@ -1,4 +1,4 @@
-<view class='market-page'>
+<view class='market-page {{isShowMask ? "fixed" : ""}}'>
 	<!-- 市场页 -->
 	<view class='market-tab'>
 		<view class='market-tab-list' data-tid='consultation' catchtap='switchNav'>
@@ -18,16 +18,32 @@
 		<swiper current-item-id='{{currentTabId}}' class='swiper-tab-box' duration='300' style='height: {{winHeight}}px' bindchange='bindChangeTab'>
 			<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
 				<swiper-item item-id='{{tabId}}'> 
-					<Filter wx:if='{{tabId === currentTabId}}' bind:onFilterEvent='_onFilter' />
-					<DateBar wx:if='{{tabId === currentTabId && tabId === "issues"}}' bind:onFilterEvent='_onFilter' />
-					<scroll-view class='stage-pallet' scroll-y bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll" bindtouchmove="ballMoveEvent">
-						<Consultation wx:if='{{currentTabId === "consultation" && tabId === currentTabId}}' bondList='{{bondList}}' />
-						<Announcement wx:if='{{currentTabId === "announcement" && tabId === currentTabId}}' bondList='{{bondList}}' />
-						<Issues wx:if='{{currentTabId === "issues" && tabId === currentTabId}}' bondList='{{bondList}}' />
+					<Filter wx:if='{{tabId === currentTabId}}' bind:doFilterEvent='onDoFilter' bind:showFilterEvent='onShowFilterEvent'/>
+					<DateBar wx:if='{{tabId === currentTabId && tabId === "issues"}}' bind:onFilterEvent='onDoFilter' />
+					<scroll-view wx:if='{{tabId === currentTabId}}'class='stage-pallet' scroll-y='{{!isShowMask}}' bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll" bindtouchmove="ballMoveEvent">
+						<BondListDisplay
+							from='board'
+							isMine='{{false}}'
+							bondList='{{bondList}}'
+							uid=''
+							userId=''
+							bind:showSaleEvent='onShowSaleEvent'
+						/>
 					</scroll-view>
 				</swiper-item>
 			</block>
 		</swiper>
+	</view>
+
+	<view class="dialog-container">
+		<SaleDialog id='sale-dialog'
+			title='销售经理'
+			saleList='{{saleList}}'
+			cancelText='取消'
+			confirm='确认'
+			bind:cancelEvent="_cancelSelectSaleEvent"
+			bind:confirmEvent="_confirmSelectSaleEvent">
+		</SaleDialog>	
 	</view>
 
 	<view class="loading-more" hidden="{{!loadMore}}">

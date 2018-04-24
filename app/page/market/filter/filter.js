@@ -34,6 +34,21 @@ Component({
 		this.setData({
 			filterConfig: filterConfig,
 		})
+
+		this.triggerEvent('showFilterEvent', true)
+	},
+
+	onHideFilter: function() {
+		let filterConfig = this.data.filterConfig
+		filterConfig.map((filter, index) => {
+			filter.isShow = false
+		})
+	
+		this.setData({
+			filterConfig: filterConfig,
+		})
+
+		this.triggerEvent('showFilterEvent', false)
 	},
 
 	checkboxChange: function (e) {
@@ -111,13 +126,13 @@ Component({
 			})
 			filterValue[filterName] = valueList.join('|')
 		})
-		console.log(filterConfig,filterValue)
+		
 		this.setData({
 			filterConfig: filterConfig,
 			filterValue: filterValue
 		})
 
-		this.triggerEvent('onFilterEvent', filterValue)
+		this.triggerEvent('doFilterEvent', filterValue)
 	}
   }
 })
