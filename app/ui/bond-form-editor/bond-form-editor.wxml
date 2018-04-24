@@ -12,8 +12,11 @@
 		</view>
 		<view class='simple-name-associate {{ascNameListOpen ? "show-name-list" : "hide-name-list"}}'>
 			<scroll-view style="max-height: 460rpx;" scroll-y >
-				<view wx:for='{{simpleNameList}}' wx:key='index' data-bond-name='{{item}}' bindtap='checkAscBondName'>
-					<text>{{item}}</text>
+				<view wx:for='{{simpleNameList}}' wx:for-item='simpleNameItem' wx:key='index' data-bond-name='{{simpleNameItem.value}}' bindtap='checkAscBondName'>
+					<block wx:for='{{simpleNameItem.list}}' wx:for-item='item' wx:key='index' >
+						<text wx:if='{{item.tag}}' class='highlight-color'>{{item.value}}</text>
+						<text wx:else>{{item.value}}</text>
+					</block>
 				</view>
 			</scroll-view>
 			<view class='close-mask' bindtap='closeAssociateList'></view>
