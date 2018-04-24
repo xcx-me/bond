@@ -61,45 +61,93 @@
   top: 10%;
   left: 50%;
   margin-left: -225rpx;
-  padding: 20rpx;
   background-color: #FFFFFF;
   border-radius: 4rpx;
   max-height: 400rpx;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-title {
   overflow: hidden;
-  padding: 5rpx 15rpx;
-  background-color: #f2f6fd;
+  padding: 25rpx 30rpx;
+  background-color: transparent;
+  border-bottom: 1rpx solid #E5E5E5;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content {
   max-height: 400rpx;
   overflow: auto;
-  width: 450rpx;
+  width: 420rpx;
+  margin-left: 30rpx;
 }
-.sale-dialog-container .wx-dialog-main .wx-dialog-content .item {
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item {
   float: left;
   padding: 10rpx 0;
-  width: 450rpx;
+  /* width: 450rpx; */
+  width: 100%;
   overflow: hidden;
   position: relative;
+  border-bottom: 1rpx solid #E5E5E5;
 }
-.sale-dialog-container .wx-dialog-main .wx-dialog-content .item .seller-info-tpl {
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item .seller-info-tpl {
   float: left;
 }
-.sale-dialog-container .wx-dialog-main .wx-dialog-content .item .seller-info-tpl .user-name,
-.sale-dialog-container .wx-dialog-main .wx-dialog-content .item .seller-info-tpl .under-line {
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item .seller-info-tpl .user-name,
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item .seller-info-tpl .under-line {
   font-size: small;
 }
-.sale-dialog-container .wx-dialog-main .wx-dialog-content .item radio {
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item radio {
   position: absolute;
   right: 20rpx;
+}
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item .icon-checked-radio {
+  width: 60rpx;
+  height: 60rpx;
+  background-color: #FFFFFF;
+  position: absolute;
+  right: 30rpx;
+  border-radius: 100%;
+  padding: 0;
+  top: 10rpx;
+  border: 1rpx solid #C9C9C9;
+}
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item .checked {
+  /* width: 60rpx;
+						height: 60rpx; */
+  background-color: #2196F3;
+  /* position: absolute;
+						right: 30rpx;
+						border-radius: 100%;
+						padding: 0;
+						top: 10rpx; */
+  border: 1rpx solid #2196F3;
+}
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item .checked span {
+  width: 20rpx;
+  height: 20rpx;
+  background-color: #FFFFFF;
+  display: block;
+  margin: 20rpx;
+  border-radius: 100%;
+}
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .radio:last-child .item {
+  border-bottom: 0;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-footer {
   text-align: center;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-footer .wx-dialog-btn {
   float: left;
-  height: 60rpx;
-  border: 1rpx solid #DDDDDD;
-  border-radius: 2rpx;
+  width: 50%;
+  /* height: 60rpx; */
+  /* border: 1rpx solid #DDDDDD; */
+  border-radius: 0;
+  background-color: transparent;
+  color: #000000;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+}
+.sale-dialog-container .wx-dialog-main .wx-dialog-footer .wx-dialog-btn::after {
+  border: none;
+  border-top: 1rpx solid #E5E5E5;
+}
+.sale-dialog-container .wx-dialog-main .wx-dialog-footer .wx-dialog-btn:first-child {
+  border-right: 1rpx solid #E5E5E5;
 }
