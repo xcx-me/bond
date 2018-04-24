@@ -59,8 +59,11 @@ Component({
 		},
 
 		saleChange(e) {
-			console.log('saleChange.....')
+			// console.log(e.detail.value)
 			this.bondId = e.detail.value
+			// let lastData = this.data
+			// lastData.bondId = e.detail.value
+			// this.setData(lastData)
 		},
 
 		/*
