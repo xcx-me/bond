@@ -59,6 +59,7 @@ Component({
 		},
 
 		saleChange(e) {
+			console.log('saleChange.....')
 			this.bondId = e.detail.value
 		},
 

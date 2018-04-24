@@ -9,24 +9,8 @@
 				<text>发布报价</text>
 				<i class='icon-right-arrow' />
 			</view>
-<<<<<<< HEAD
 			<view class='bond-list-pallet'>
 				<BondList type='{{bondListType}}' status='{{bondListStatus}}' from='admin' isMine='{{true}}' uid='0' userId='' bind:updateEvent='onUpdateBondListEvent'/>
-=======
-			<view hidden='{{loading}}' class='bond-list-pallet'>
-				<BondList from='admin'
-					isMine='{{true}}'
-					bondList='{{bondList}}'
-					uid='0'
-					userId='' 
-					bind:modifyBondEvent='onModifyBondEvent'
-					bind:deleteBondEvent='onDeleteBondEvent'/>
-
-					<view class="loading-more" hidden="{{!isLoadingMore}}">
-    					<view class="icon"></view>
-    					<view class="tips"><text>正在加载</text></view>
-  					</view>
->>>>>>> aid-wxxcx-0423-1000
 			</view>
 	</block>
 </view>
