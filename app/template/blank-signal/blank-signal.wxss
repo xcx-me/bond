@@ -1,21 +1,17 @@
-.blank-signal-tpl {
+.line-text-line-tpl {
   background: #EFEFF4;
-  margin-top: 140rpx;
+  margin: 30rpx 0;
   text-align: center;
 }
-.blank-signal-tpl .blank-signal-tpl-line:before {
-  content: '';
-  display: block;
+.line-text-line-tpl .line {
+  background: #D8D8D8;
+  margin-top: 4rpx;
+  display: inline-block;
+  width: 100rpx;
   height: 1rpx;
-  width: 80%;
-  background-color: #D8D8D8;
-  /*颜色需与主题大背景色一致*/
-  position: relative;
-  top: 25rpx;
-  /*调节线高*/
-  left: 10%;
+  vertical-align: middle;
 }
-.blank-signal-tpl .prompt {
+.line-text-line-tpl .title {
   display: inline-block;
   background: #EFEFF4;
   padding: 0 30rpx;
@@ -23,4 +19,12 @@
   font-size: 28rpx;
   font-family: PingFangSC-Regular;
   color: #888888;
+}
+.blank-signal-tpl {
+  background: #EFEFF4;
+  text-align: center;
+}
+.blank-signal-tpl.board,
+.blank-signal-tpl.store {
+  margin-top: 140rpx;
 }

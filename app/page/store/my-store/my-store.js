@@ -25,6 +25,10 @@ Component({
 	userId: {
 		type: String,
 		value: ''
+	},
+	needUpdate: {
+		type: Boolean,
+		value: false
 	}
   },
 
@@ -35,8 +39,7 @@ Component({
 	tabIdList:['bond-list', 'dynamic'],
 	currentTabId: 'bond-list',
 	winHeight: '',
-	needUpdateDyNamic: false,
-	isShowRedPoint: getApp().globalData.isShowRedPoint
+	isShowRedPoint: false
   },
 
   ready: function () {
@@ -61,8 +64,7 @@ Component({
 	bindChangeTab: function (e) {
 		let currentTabId = e.detail.currentItemId
 		this.setData({
-			currentTabId: currentTabId,
-			needUpdateDyNamic: currentTabId === 'dynamic'
+			currentTabId: currentTabId
 		})
 	},
 

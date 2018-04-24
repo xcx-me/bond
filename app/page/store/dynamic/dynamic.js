@@ -8,7 +8,6 @@ Component({
 			type: Boolean,
 			value: false,
 			observer: function(newVal, oldVal) {
-				console.log('update dynamic')
 				this.getDynamicList()
 				if (newVal && !oldVal) {
 					this.setDynamicTimer()

@@ -229,6 +229,9 @@
   background-color: #000000;
   opacity: 0.3;
 }
+.bond-form-editor .simple-name-associate .highlight-color {
+  color: #f04134;
+}
 .bond-form-editor .show-name-list {
   display: block;
 }

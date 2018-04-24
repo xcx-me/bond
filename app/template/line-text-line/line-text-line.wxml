@@ -1,0 +1,5 @@
+<template name='lineTextLineTpl'>
+	<view class='line-text-line-tpl'>
+		<i class='line'/><text class="title">{{title}}</text><i class='line'/>
+	</view>
+</template>

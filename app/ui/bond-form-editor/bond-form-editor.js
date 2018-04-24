@@ -304,17 +304,42 @@ Component({
 			})
 		},
 
+		parseAscBondSimpleName: function(curName, ascBondSimpleNameList) {
+			let result = []
+			if (curName === '') {
+				return result
+			}
+
+			ascBondSimpleNameList.map((item) => {
+				let bondSimpleName = item.bond_simple_name
+				let valueList = bondSimpleName.split(curName)
+				let newValueList = []
+				valueList.map((value, index) => {
+					newValueList.push({
+						value: value,
+						tag: 0
+					})
+					if (index < valueList.length - 1) {
+						newValueList.push({
+							value: curName,
+							tag: 1
+						})
+					}
+				})
+				result.push({
+					value: bondSimpleName,
+					list: newValueList
+				})
+			})
+			return result
+		},
+
 		// 债券简称联想
 		ascBondSimpleName: function (curName) {
 			service.getBondSimpleName(curName, (result) => {
 				let resultData = result.data.retdata.array
 				if (curName !=='' && resultData.length > 0) {
-					let nameArray = []
-					resultData.map((item, index) => {
-						if (curName !== '') {
-							nameArray.push(item.bond_simple_name)
-						}
-					})
+					let nameArray = this.parseAscBondSimpleName(curName, resultData)
 					this.setData({
 						ascNameListOpen: true,
 						simpleNameList: nameArray

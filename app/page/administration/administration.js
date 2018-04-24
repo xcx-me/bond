@@ -41,7 +41,6 @@ Page({
 	},
 
 	onUpdateBondListEvent: function () {
-		console.log('onUpdateBondListEvent......')
 		this.setData({
 			bondListStatus: getStatus.ENDLOADED
 		})
