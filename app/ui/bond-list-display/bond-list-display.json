@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+	"SingleBond": "../single-bond/single-bond",
+	"Dialog": "../dialog/dialog",
+	"SaleDialog": "../sale-dialog/sale-dialog"
+  }
+}

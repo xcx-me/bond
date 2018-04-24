@@ -16,6 +16,6 @@
 		</block>
 	</view>
 	<view wx:elif="{{!loading && emptyData}}" class='no-dynamic-list'>
-		<template is='blankSignalTpl' data='{{prompt: "暂无动态"}}'></template>
+		<template is='blankSignalTpl' data='{{prompt: "暂无动态", from: "store"}}'></template>
 	</view>
 </view>

@@ -32,12 +32,21 @@ Component({
 		  errTips: '',
 		  isSubmitDisabled: true,
 		  isSubmitting: '',
+		  isShowRemainTotal: true,
+		  remainTotal: 50,
   	},
 
 	methods: {
 		onFocus: function (e) {
 			this.setData({
-				errTips: ''
+				errTips: '',
+				isShowRemainTotal: true
+			})
+		},
+
+		onBlur: function(e) {
+			this.setData({
+				isShowRemainTotal: false
 			})
 		},
 	
@@ -45,7 +54,9 @@ Component({
 			let value = e.detail.value.replace(/(^\s*)|(\s*$)/g, '')
 			this.setData({
 				isSubmitDisabled: value.length === 0,
-				content: value
+				content: value,
+				isShowRemainTotal: true,
+				remainTotal: 50 - value.length
 			})
 		},
 

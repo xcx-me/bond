@@ -79,7 +79,6 @@ Component({
 		},
 
 		getStoreDetail: function (userId) {
-			console.log('getstoredetail.......')
 			if (this.data.isRegistered) { // 已开店
 				service.getStoreDetail(userId, (result) => {
 					this.updateStoreDetail(result.data.retdata)

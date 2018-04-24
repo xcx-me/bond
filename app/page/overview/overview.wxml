@@ -7,7 +7,7 @@
 		bindevent='onUpdateStoreDetail'
 	/>
 	<view class='store-pallet' hidden='{{loading}}'>
-		<MyStore isStoreRegistered='{{isStoreRegistered}}' uid='{{uid}}' userId='{{userId}}' isQtrade='{{isQtrade}}' needUpdate='{{needUpdate}}' />
+		<MyStore isStoreRegistered='{{isStoreRegistered}}' bondListType='{{bondListType}}' bondListStatus='{{bondListStatus}}' uid='{{uid}}' userId='{{userId}}' needUpdate='{{needUpdate}}' bind:updateEvent='onUpdateBondListStatusEvent'/>
 	</view>
 	<ShareButton wx:if='{{isStoreRegistered}}'/>
 </view>

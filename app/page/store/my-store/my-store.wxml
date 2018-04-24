@@ -12,12 +12,12 @@
 			<swiper-item item-id='bond-list'>
 				<scroll-view class='pallet' scroll-y bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad"  bindscroll="scroll">
 					<StoreRegister wx:if='{{!isStoreRegistered}}' type='pallet'/>
-					<StoreBondList wx:if='{{isStoreRegistered}}' uid='{{uid}}' userId='{{userId}}' isMyStore='{{true}}' isQtrade='{{isQtrade}}' needUpdate='{{needUpdate}}'/>
+					<BondList wx:if='{{isStoreRegistered}}' type='{{bondListType}}' status='{{bondListStatus}}' from='store' isMine='{{true}}' uid='{{uid}}' userId='{{userId}}' bind:updateEvent='onUpdateBondListEvent'/>
 				</scroll-view>
 			</swiper-item>
 			<swiper-item item-id='dynamic'>
 				<scroll-view class='pallet' scroll-y>
-					<StoreDynamic needUpdate='{{needUpdateDyNamic}}' needUpdate='{{needUpdate}}' bind:updateRedPointEvent='onUpdateRedPointEvent'/>
+					<StoreDynamic needUpdate='{{needUpdate}}' bind:updateRedPointEvent='onUpdateRedPointEvent'/>
 				</scroll-view>
 			</swiper-item>
 	</swiper>

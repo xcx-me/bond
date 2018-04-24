@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-	"BondList": "../../../ui/list/bond-list/bond-list"
-  }
-}

@@ -1,6 +1,8 @@
 // app/page/overview/overview.js
 const service = require('../../util/service/service')
 const redPoint = require('../../util/red-point/red-point')
+const {getStatus, getType} = require('../../util/type/bond-list')
+
 Page({
 	data: {
 		isStoreRegistered: false, // 是否开店
@@ -9,7 +11,9 @@ Page({
 		userName: '',
 		isQtrade: false,
 		loading: true,
-		needUpdate: false
+		needUpdate: false,
+		bondListType: getType.MYSTORE,
+		bondListStatus: getStatus.INIT
 	},
 
 	isStoreOpened: function () {
@@ -31,6 +35,13 @@ Page({
 			userId: detail.user_id,
 			userName: detail.sale_name,
 			loading: false,
+			needUpdate: false
+		})
+	},
+
+	onUpdateBondListStatusEvent: function (e) {
+		this.setData({
+			bondListStatus: e.detail
 		})
 	},
 
@@ -84,14 +95,20 @@ Page({
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function () {
-		console.log('onPullDownRefresh....')
+		console.log('overview onPullDownRefresh.....')
+		this.setData({
+			needUpdate: true,
+			bondListStatus: getStatus.FRESH
+		})
 	},
 
 	/**
 	 * 页面上拉触底事件的处理函数
 	 */
 	onReachBottom: function () {
-		console.log('onReachBottom....')
+		this.setData({
+			bondListStatus: getStatus.LOADMORE
+		})
 	},
 
 	/**

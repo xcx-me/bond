@@ -1,7 +1,6 @@
+<import src='../line-text-line/line-text-line.wxml' />
 <template name='blankSignalTpl'>
-	<view class="blank-signal-tpl">
-    	<view class="blank-signal-tpl-line">
-        	<span class="prompt">{{prompt}}</span>
-    	</view>
+	<view class="blank-signal-tpl {{from}}">
+		<template is='lineTextLineTpl' data='{{title: prompt}}'></template>
 	</view>
 </template>

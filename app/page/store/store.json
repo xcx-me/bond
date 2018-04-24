@@ -2,7 +2,8 @@
 	"navigationBarTitleText": "店铺详情",
 	"usingComponents": {
 		"StoreDetail": "./detail/detail",
-		"StoreBondList": "./bond-list/bond-list",
+		"BondList": "../../ui/bond-list/bond-list",
 		"ShareButton": "../../ui/share-button/share-button"
-	}
+	},
+	"enablePullDownRefresh": true
 }

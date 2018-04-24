@@ -77,6 +77,9 @@ module.exports = {
 		this.doService(config.NEW_BOND.modNewBondDetail, data, sucFunc, errFunc)
 	},
 
+	deleteBond: function (simpleName, sucFunc, errFunc) {
+		this.doService(config.NEW_BOND.deleteBond, {bond_simple_name: simpleName}, sucFunc, errFunc)
+	},
 	// 发布报价
 	getBondAssociate: function(simpleName, sucFunc, errFunc) { //债券详情
 		this.doService(config.NEW_BOND.associateBond, {bond_simple_name: simpleName}, sucFunc, errFunc)
