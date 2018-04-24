@@ -8,15 +8,15 @@
 			<view class='{{currentTabId === "dynamic" ? "active": ""}}'><text>最新动态</text><i class='red-point' wx:if='{{isShowRedPoint}}'/></view>
 		</view>
 	</view>
-	<swiper current-item-id='{{currentTabId}}' class='content' duration='300' style='height: {{winHeight}}px' bindchange="bindChangeTab">
+	<swiper current-item-id='{{currentTabId}}' class='content' duration='300' autoplay='{{false}}' style='height: {{winHeight}}px' bindchange="bindChangeTab">
 			<swiper-item item-id='bond-list'>
-				<scroll-view class='pallet' scroll-y bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad"  bindscroll="scroll">
+				<scroll-view class='pallet bond-list-pallet' scroll-y bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad"  bindscroll="scroll">
 					<StoreRegister wx:if='{{!isStoreRegistered}}' type='pallet'/>
 					<BondList wx:if='{{isStoreRegistered}}' type='{{bondListType}}' status='{{bondListStatus}}' from='store' isMine='{{true}}' uid='{{uid}}' userId='{{userId}}' bind:updateEvent='onUpdateBondListEvent'/>
 				</scroll-view>
 			</swiper-item>
 			<swiper-item item-id='dynamic'>
-				<scroll-view class='pallet' scroll-y>
+				<scroll-view class='pallet dynamic-pallet' scroll-y>
 					<StoreDynamic needUpdate='{{needUpdate}}' bind:updateRedPointEvent='onUpdateRedPointEvent'/>
 				</scroll-view>
 			</swiper-item>

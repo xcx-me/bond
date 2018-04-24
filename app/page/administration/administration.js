@@ -11,7 +11,8 @@ Page({
 		isStoreRegistered: false,
 		intervalTimer: 0,
 		bondListType: getType.ADMIN,
-		bondListStatus: getStatus.INIT
+		bondListStatus: getStatus.INIT,
+		isPostionFixed: false
 	},
 
 	createQuotation: function () {
@@ -43,6 +44,12 @@ Page({
 	onUpdateBondListEvent: function () {
 		this.setData({
 			bondListStatus: getStatus.ENDLOADED
+		})
+	},
+
+	onDeleteBondEvent: function (e) {
+		this.setData({
+			isPostionFixed: e.detail
 		})
 	},
 
@@ -82,6 +89,9 @@ Page({
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function (e) {
+		if (this.data.isPostionFixed) {
+			return
+		}
 		this.setData({
 			bondListStatus: getStatus.FRESH
 		})
@@ -91,6 +101,9 @@ Page({
 	 * 页面上拉触底事件的处理函数
 	 */
 	onReachBottom: function (e) {
+		if (this.data.isPostionFixed) {
+			return
+		}
 		this.setData({
 			bondListStatus: getStatus.LOADMORE
 		})

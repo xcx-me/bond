@@ -38,3 +38,9 @@
 .my-store-component .content .other-bond-list {
   margin-top: 10rpx;
 }
+.my-store-component .content .bond-list-pallet {
+  background: red;
+}
+.my-store-component .content .dynamic-pallet {
+  background: blue;
+}

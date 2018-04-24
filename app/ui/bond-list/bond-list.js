@@ -111,11 +111,19 @@ Component({
 			})	
 		},
 
-		onDeleteBondEvent: function (e) {
+		onWillDeleteBondEvent: function (e) {
+			this.triggerEvent('deleteEvent', true)
+		},
+
+		onDoDeleteBondEvent: function (e) {
 			let bname = e.detail
-			service.deleteBond(bname,(result)=>{
-				this.getBondList(this.data.type, getStatus.UPDATE)
-			})
+			if (bname) {
+				service.deleteBond(bname, (result)=>{
+					this.getBondList(this.data.type, getStatus.UPDATE)
+				})
+			}
+			
+			this.triggerEvent('deleteEvent', false)
 		}		
   	}
 })

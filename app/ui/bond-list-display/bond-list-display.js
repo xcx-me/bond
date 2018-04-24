@@ -114,7 +114,6 @@ Component({
 			offsetTop = this.data.winHeight - 50
 		}
 
-		console.log('onModifyBondEvent...', e)
 		this.setData({
 			isShowModifyPallet: true,
 			modifyPalletTop: offsetTop,
@@ -141,17 +140,19 @@ Component({
 
 	onDeleteBondEvent: function (e) {
 		this.hiddenModifyPallet()
+		this.triggerEvent('willDeleteBondEvent')
 		this.deleteBondName = e.detail
 		this.deleteDialog = this.selectComponent('#delete-dialog')
 		this.deleteDialog.showDialog()
 	},
   
 	_cancelDelEvent: function () {
+		this.triggerEvent('doDeleteBondEvent', '')
 		this.deleteDialog.hideDialog();
 	},
   
 	_confirmDelEvent: function () {
-		this.triggerEvent('deleteBondEvent', this.deleteBondName)
+		this.triggerEvent('doDeleteBondEvent', this.deleteBondName)
 		this.deleteDialog.hideDialog();
 	},
 

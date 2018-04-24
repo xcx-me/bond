@@ -15,7 +15,7 @@
 	<loading wx:if='{{loading}}'>加载中...</loading>
 
 	<view hidden='{{loading}}' >
-		<swiper current='{{currentTab}}' class='swiper-tab-box' duration='300' style='height: {{winHeight}}px' bindchange='bindChangeTab'>
+		<swiper current='{{currentTab}}' class='swiper-tab-box' duration='300' autoplay='{{false}}' style='height: {{winHeight}}px' bindchange='bindChangeTab'>
 			<block wx:for='{{[0, 1, 2]}}' wx:for-item='tabId' wx:key='index'>
 				<swiper-item>
 					<Filter wx:if='{{tabId === currentTab}}' bind:onFilterEvent='_onFilter' />
