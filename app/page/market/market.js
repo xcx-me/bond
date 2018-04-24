@@ -123,7 +123,6 @@ Page({
      */
 	bindChangeTab: function (e) {
 		let currentTabId = e.detail.currentItemId
-		console.log('bindChangeTab...', currentTabId)
 		let lastData = this.data
 		let bondStatus =  '1'
 		if (currentTabId === "announcement") {
