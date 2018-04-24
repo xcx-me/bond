@@ -25,6 +25,7 @@ Page({
 		},
 		bondList: [],
 		loading: true,
+		loadMore: false,
 		intervalTimer: 0,
 	},
 
@@ -33,34 +34,10 @@ Page({
 		this.setData({
 			filterValue: filterValue
 		})
-		// this.getBondList(this.data.currentTab, 1)
 		this.getBondList()
 	},
 
-	// getBondList (currentTab, page) { // 询量
 	getBondList (OperationType) { // 询量
-		// let bondStatus =  '1'
-		// if (currentTab === 1) {
-		// 	bondStatus = '2'
-		// } else if (currentTab === 2) {
-		// 	bondStatus = '3'
-		// }
-
-		// let filterValue = this.data.filterValue
-		// filterValue.bond_status = bondStatus
-		// filterValue.current_page = page || 1
-
-		// this.setData({
-		// 	filterValue: filterValue
-		// })
-		
-		// let postData = {
-		// 	bond_status: bondStatus,
-		// 	current_page: page || 1,
-		// 	page_size: this.data.page_size
-		// }
-
-		// request(config.NEW_BOND.quotationBoard, Object.assign(postData, this.data.filterValue)).then((result) => {
 		request(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
 			if (String(result.data.ret) === '0') {
 				let lastData = this.data
@@ -70,10 +47,9 @@ Page({
 					maxPage = Math.ceil(result.data.retdata.total / lastData.filterValue.page_size)
 				}
 				lastData.filterValue.max_page = maxPage
-				// lastData.filterValue.bond_status = bondStatus
-				// lastData.bondList = result.data.retdata.bond_array
 				// 13
 				lastData.loading = false
+				lastData.loadMore = false
 
 				if (OperationType === getApp().data.bindscrolltolower) {
 					lastData.bondList = lastData.bondList.concat(result.data.retdata.bond_array)
@@ -87,22 +63,11 @@ Page({
 				wx.pageScrollTo({
 					scrollTop: 0
 				})
-
-				// this.setData({
-				// 	filterValue: filterValue,
-				// 	bondList: result.data.retdata.bond_array,
-				// 	loading: false
-				// })
-				// console.log(result.data.retdata.total)
+				
 				if (OperationType === getApp().data.onPullDownRefresh) {
-					// setTimeout(() => {
-					// 	wx.hideNavigationBarLoading() // 完成停止加载
-					// 	wx.stopPullDownRefresh() // 停止下拉刷新
-					// }, 500)
 					wx.hideNavigationBarLoading() // 完成停止加载
 					wx.stopPullDownRefresh() // 停止下拉刷新
 				}
-				// console.log(this.data)
 			}
 		})
 	},
@@ -121,8 +86,7 @@ Page({
 				url: '/app/page/bond-detail/bond-detail?from=share&bid=' + options.bid +'&uid=' + options.uid + '&tid=' + options.tid
 			})
 		}
-
-		// this.getBondList(this.data.currentTab, 1)
+		
 		this.getBondList()
 		var that = this;
 		/** 
@@ -156,36 +120,10 @@ Page({
 		lastData.filterValue.deadline = 0
 		lastData.filterValue.subject_rating = 0
 		lastData.filterValue.date = common.formatDate(new Date())
-		// lastData.filterValue.key = ''
 		lastData.filterValue.bond_status = bondStatus
 		lastData.filterValue.current_page = 1
 		lastData.filterValue.max_page = 1
-		// this.setData({
-		// 	currentTab: currentTab,
-		// 	loading: true,
-		// 	filterValue: {
-		// 		bond_type: 0,
-		// 		deadline: 0,
-		// 		subject_rating: 0,
-		// 		date: common.formatDate(new Date()),
-		// 		key: ''
-		// 	}
-		// });
-
-		// bond_status: '1',
-		// current_page: 1,
-		// max_page: 1,
-		// page_size: 10
-
-		// let bondStatus =  '1'
-		// if (currentTab === 1) {
-		// 	bondStatus = '2'
-		// } else if (currentTab === 2) {
-		// 	bondStatus = '3'
-		// }
-
 		this.setData(lastData)
-		// this.getBondList(currentTab, 1)
 		this.getBondList()
 	},
 
@@ -205,24 +143,23 @@ Page({
 	},
 
 	bindDownLoad: function(e) {
-		console.log('market bindDownLoad.....', this.data)
+		// console.log('market bindDownLoad.....', this.data)
 		let lastData = this.data
 		if (lastData.filterValue.current_page < lastData.filterValue.max_page) {
 			lastData.filterValue.current_page++
 			// 13
-			lastData.loading = true
+			lastData.loading = false
+			lastData.loadMore = true
 			this.setData(lastData)
-			this.getBondList(getApp().data.bindscrolltolower)
+			setTimeout(() => {
+				this.getBondList(getApp().data.bindscrolltolower)
+			}, 1000)
 		}
 	},
 
-	topLoad: function(e) {
-		// console.log('market topLoad.....')
-	},
+	topLoad: function(e) {},
 
-	scroll: function(e) {
-		// console.log('market scroll...', e.detail.scrollTop)
-	},
+	scroll: function(e) {},
 
 	ballMoveEvent: function(e) { // 此处函数不起作用，到时候记得将html代码中绑定的函数解绑
 		console.log('我被拖动了.....', e)
@@ -231,9 +168,7 @@ Page({
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
-	onReady: function () {
-
-	},
+	onReady: function () {},
 
 	/**
 	 * 生命周期函数--监听页面显示
@@ -255,86 +190,29 @@ Page({
 	/**
 	 * 生命周期函数--监听页面卸载
 	 */
-	onUnload: function () {
-
-	},
+	onUnload: function () {},
 
 	/**
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function () {
-		// console.log('onPullDownRefresh')
-		// wx.showNavigationBarLoading() // 在标题栏中显示加载
-		// wx.hideNavigationBarLoading() // 完成停止加载
-		// wx.stopPullDownRefresh() // 停止下拉刷新
-		// 
-		// this is an idea as follow
-		// 
-		// page => 0
-		// this.setData => (list => [], scrollTop => 0)
-		// loadMore(this)
-
-		// wx.showNavigationBarLoading() // 在标题栏中显示加载
-		// setTimeout(() => {
-		// 	this.setData({
-		// 		bondList: [],
-		// 		loading: false
-		// 	})
-
-		// 	wx.hideNavigationBarLoading() // 完成停止加载
-		// 	wx.stopPullDownRefresh() // 停止下拉刷新
-		// }, 5000)
-
-		// let currentTab = e.detail.current
-		// this.setData({
-		// 	currentTab: currentTab,
-		// 	loading: true,
-		// 	filterValue: {
-		// 		bond_type: 0,
-		// 		deadline: 0,
-		// 		subject_rating: 0,
-		// 		date: common.formatDate(new Date()),
-		// 		key: ''
-		// 	}
-		// });
-		// this.getBondList(currentTab, 1)
-
 		wx.showNavigationBarLoading() // 在标题栏中显示加载
 		let lastData = this.data
-		// let bondStatus =  '1'
-		// if (currentTab === 1) {
-		// 	bondStatus =  '2'
-		// } else if (currentTab === 2) {
-		// 	bondStatus =  '3'
-		// }
-		// lastData.currentTab = currentTab
 		// 13
 		lastData.loading = true
-		// lastData.filterValue.bond_type = 0
-		// lastData.filterValue.deadline = 0
-		// lastData.filterValue.subject_rating = 0
-		// lastData.filterValue.date = common.formatDate(new Date())
-		// lastData.filterValue.key = ''
-		// lastData.filterValue.bond_status = bondStatus
 		lastData.filterValue.current_page = 1
 		lastData.filterValue.max_page = 1
 		this.setData(lastData)
 		this.getBondList(getApp().data.onPullDownRefresh)
-
-		// console.log(this.data.currentTab, this.data.filterValue.bond_status, this.data.filterValue.max_page)
 	},
 
 	/**
 	 * 页面上拉触底事件的处理函数
 	 */
-	onReachBottom: function (e) {
-		// console.log('onReachBottom.....', e)
-	},
+	onReachBottom: function (e) {},
 
 	/**
 	 * 用户点击右上角分享
 	 */
-	onShareAppMessage: function () {
-
-	}
+	onShareAppMessage: function () {}
 })
