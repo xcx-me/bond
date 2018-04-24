@@ -1,5 +1,5 @@
 <loading wx:if='{{loading}}'>加载中...</loading>
-<view class='administration-page' wx:if='{{!loading}}'>
+<view class='administration-page {{isPostionFixed ? "fixed" : ""}}' wx:if='{{!loading}}'>
 	<block wx:if='{{!isStoreRegistered}}'>
 			<StoreRegister type='page' />
 		</block>
@@ -10,7 +10,7 @@
 				<i class='icon-right-arrow' />
 			</view>
 			<view class='bond-list-pallet'>
-				<BondList type='{{bondListType}}' status='{{bondListStatus}}' from='admin' isMine='{{true}}' uid='0' userId='' bind:updateEvent='onUpdateBondListEvent'/>
+				<BondList type='{{bondListType}}' status='{{bondListStatus}}' from='admin' isMine='{{true}}' uid='0' userId='' bind:updateEvent='onUpdateBondListEvent' bind:deleteEvent='onDeleteBondEvent'/>
 			</view>
 	</block>
 </view>
