@@ -2,9 +2,8 @@
 	"usingComponents": {
 		"Filter": "./filter/filter",
 		"DateBar": "./date-bar/date-bar",
-		"Consultation": "./consultation/consultation",
-		"Announcement": "./announcement/announcement",
-		"Issues": "./issues/issues"
+		"BondListDisplay": "../../ui/bond-list-display/bond-list-display",
+		"SaleDialog": "../../ui/sale-dialog/sale-dialog"
 	},
   "enablePullDownRefresh": true
 }

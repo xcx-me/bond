@@ -75,12 +75,10 @@ Component({
 				uid = saleList[0].user_id
 				bondId = saleList[0].bond_id
 			} else {
-				this.setData({
+				this.triggerEvent('showSaleEvent', {
 					saleList: saleList,
 					bondSimpleName: bondSimpleName
 				})
-				this.saleDialog = this.selectComponent('#sale-dialog')
-				this.saleDialog.showDialog()
 				return true
 			}
 		} else {
@@ -154,21 +152,6 @@ Component({
 	_confirmDelEvent: function () {
 		this.triggerEvent('doDeleteBondEvent', this.deleteBondName)
 		this.deleteDialog.hideDialog();
-	},
-
-	_cancelSelectSaleEvent:function () {
-		this.saleDialog.hideDialog()
-	},
-
-	_confirmSelectSaleEvent: function (e) {
-		let index = e.detail
-		let sale = this.data.saleList[index] || ''
-		if (sale) {
-			let uid = sale.user_id
-			let bondId = sale.bond_id
-			this.toDetail(this.data.from, uid, bondId, this.data.bondSimpleName)
-		}
-		this.saleDialog.hideDialog()
 	},
 
 	hiddenModifyPallet() {

@@ -39,7 +39,7 @@
   font-size: small;
 }
 .sale-dialog-container {
-  z-index: 99;
+  z-index: 997;
   position: fixed;
   left: 0;
   right: 0;
@@ -49,13 +49,19 @@
   height: 100%;
 }
 .sale-dialog-container .wx-dialog-mask {
+  z-index: 998;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   background-color: #000000;
   opacity: 0.3;
 }
 .sale-dialog-container .wx-dialog-main {
-  z-index: 9999;
+  z-index: 999;
   position: absolute;
   width: 450rpx;
   top: 10%;

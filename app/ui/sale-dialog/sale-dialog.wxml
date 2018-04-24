@@ -1,6 +1,6 @@
 <!--app/ui/dialog/sale-dialog/sale-dialog.wxml-->
 <import src="../../template/seller-info/seller-template.wxml" />
-<view class='wx-dialog-container sale-dialog-container' hidden="{{!isShow}}">
+<view class='wx-dialog-container sale-dialog-container' style='height: {{winHeight}}px' hidden="{{!isShow}}">
 	<view class='wx-dialog-mask'></view>
 	<view class='wx-dialog-main'>
 		<view class='wx-dialog-title'>{{ title }}</view>

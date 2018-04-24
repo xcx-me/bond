@@ -27,7 +27,10 @@ Page({
 		bondList: [],
 		loading: true,
 		loadMore: false,
-		intervalTimer: 0
+		intervalTimer: 0,
+		isShowMask: false,
+		bondSimpleName: '',
+		saleList: []
 	},
 
 	initFilter: function (bondStatus) {
@@ -45,12 +48,66 @@ Page({
 		}
 	},
 
-	_onFilter: function (e) {
+	onDoFilter: function (e) {
 		let filterValue = Object.assign(this.data.filterValue, e.detail)
 		this.setData({
+			isShowMask: false,
 			filterValue: filterValue
 		})
 		this.getBondList()
+	},
+
+	onShowFilterEvent: function (e) {
+		this.setData({
+			isShowMask: e.detail
+		})
+	},
+
+	onShowSaleEvent: function (e) {
+		console.log('onShowSaleEvent...', e)
+		this.setData({
+			saleList: e.detail.saleList,
+			bondSimpleName: e.detail.bondSimpleName,
+			isShowMask: true
+		})
+		this.saleDialog = this.selectComponent('#sale-dialog')
+		this.saleDialog.showDialog()
+	},
+
+	_cancelSelectSaleEvent:function () {
+		this.saleDialog.hideDialog()
+		this.setData({
+			isShowMask: false
+		})
+	},
+
+	_confirmSelectSaleEvent: function (e) {
+		let index = e.detail
+		let sale = this.data.saleList[index] || ''
+		this.saleDialog.hideDialog()
+		this.setData({
+			isShowMask: false
+		})
+		if (sale) {
+			let uid = sale.user_id
+			let bondId = sale.bond_id
+			this.toDetail(uid, bondId, this.data.bondSimpleName)
+		}
+	},
+
+	toDetail: function (uid, bondId, bondSimpleName) {
+		if (this.data.isClicking) {
+			return 
+		}
+		this.data.isClicking = true
+		request(config.NEW_BOND.accumulateClick, {user_id: uid, bond_simple_name: bondSimpleName})
+		let that = this
+		setTimeout(()=>{
+			that.data.isClicking = false
+			let url = '/app/page/bond-detail/bond-detail?bid=' + bondId +'&uid=' + uid
+			console.log('to detail...', url)
+			wx.navigateTo({url: url})
+		}, 200)
 	},
 
 	getBondList (OperationType) { // 询量
@@ -201,6 +258,9 @@ Page({
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function () {
+		if (this.data.isShowMask) {
+			return
+		}
 		wx.showNavigationBarLoading() // 在标题栏中显示加载
 		let lastData = this.data
 		// 13

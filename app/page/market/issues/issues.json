@@ -1,8 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-	"Filter": "../filter/filter",
-	"DateBar": "../date-bar/date-bar",
-	"BondListDisplay": "../../../ui/bond-list-display/bond-list-display"
-  }
-}

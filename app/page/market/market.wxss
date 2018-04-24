@@ -1,34 +1,33 @@
 /* app/page/market/market.wxss */
-.market-tab {
+.market-page {
+  width: 100%;
+}
+.market-page .market-tab {
   width: 100%;
   border-bottom: 2rpx solid #D8D8D8;
   text-align: center;
   line-height: 80rpx;
   background-color: #FFFFFF;
 }
-.market-tab-list {
+.market-page .market-tab-list {
   font-size: 30rpx;
   display: inline-block;
   width: 13.33%;
   padding: 0 10%;
   color: #000000;
 }
-.loading-more {
-  height: 80rpx;
-  line-height: 80rpx;
-  color: #888888;
-  font-size: 32rpx;
-  text-align: center;
-}
-.on {
+.market-page .on {
   color: #2196F3;
   border-bottom: 5rpx solid #2196F3;
 }
-.swiper-tab-box {
+.market-page .swiper-tab-box {
   display: block;
   width: 100%;
   height: 100%;
 }
-.swiper-tab-box .stage-pallet {
+.market-page .swiper-tab-box .stage-pallet {
   height: calc(100% - 90rpx);
+}
+.market-page.fixed {
+  position: fixed;
 }

@@ -20,18 +20,6 @@
 		bind:confirmEvent="_confirmDelEvent">
 	</Dialog>	
 </view>
-
-<view class="dialog-container">
-	<SaleDialog id='sale-dialog'
-		title='销售经理'
-		saleList='{{saleList}}'
-		cancelText='取消'
-		confirm='确认'
-		bind:cancelEvent="_cancelSelectSaleEvent"
-		bind:confirmEvent="_confirmSelectSaleEvent">
-	</SaleDialog>	
-</view>
-
 <view class='operator-pallet' hidden='{{!isShowModifyPallet}}' style='top:{{modifyPalletTop}}px;'>
 	<view class='operator-item' catchtap='onModifySaleInfo'><image src='/app/asset/image/qtrade/modify_24.svg'/><text>修改销售信息</text></view>
 	<view class='operator-item' catchtap='onModifyBondDetail'><image src='/app/asset/image/qtrade/modify_24.svg'/><text>修改债券详情</text></view>
