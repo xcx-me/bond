@@ -13,6 +13,12 @@
   padding: 0 10%;
   color: #000000;
 }
+.loading-more {
+	height: 80rpx;
+	line-height: 80rpx;
+	text-align: center;
+	font-size: 32rpx;
+}
 .on {
   color: #2196F3;
   border-bottom: 5rpx solid #2196F3;
