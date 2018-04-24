@@ -126,13 +126,19 @@ Page({
 	 */
 	onLoad: function (options) {
 		// wx.redirectTo({url: '../user-detail-form/user-detail-form'})
+
+		// Below code is to fix an issue that last user entered charactor will stay in the mobile number field. 
+		let descriptors = this.data.descriptors
+		this.setData({
+			descriptors: descriptors
+		})
 	},
 
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
 	onReady: function () {
-
+		
 	},
 
 	/**

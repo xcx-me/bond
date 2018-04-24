@@ -1,4 +1,6 @@
-// app/ui/form-viewer-editor/picture-upload-input/picture-upload-input.js
+const SOURCE_TYPE_CAMERA = 'camera'
+const SOURCE_TYPE_ALBUM = 'album'
+
 Component({
 	/**
 	 * 组件的属性列表
@@ -33,20 +35,26 @@ Component({
 	 * 组件的方法列表
 	 */
 	methods: {
-		useCamera: function () {
-			console.log('user camera')
+		preview: function () {
+			wx.previewImage({
+				urls: [this.properties.value] // 需要预览的图片http链接列表
+			})
+		},
+
+		deletePicture: function () {
+			this.triggerEvent('change', {
+				fieldName: this.properties.fieldName,
+				value: ''
+			})
+		},
+
+		chooseImage: function (sourceType) {
 			let host = this
 			wx.chooseImage({
 				count: 1, // 默认9
 				sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-				sourceType: ['camera'], // 可以指定来源是相册还是相机，默认二者都有
+				sourceType: [sourceType],
 				success: function (res) {
-					// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-					// var tempFilePaths = res.tempFilePaths
-					//console.log('tempFilePaths', tempFilePaths)
-
-					// console.log('host.properties.fieldName', host.properties.fieldName)
-
 					host.triggerEvent('change', {
 						fieldName: host.properties.fieldName,
 						value: res.tempFilePaths[0]
@@ -55,18 +63,14 @@ Component({
 			})
 		},
 
-		useAlbum: function () {
-			console.log('user album')
-		},
-
 		showActionSheet: function () {
 			let host = this
 			wx.showActionSheet({
 				itemList: ['拍照', '从手机相册选择'],
 				success: function (res) {
 					console.log(res.tapIndex)
-					res.tapIndex === 0 && host.useCamera()
-					res.tapIndex === 1 && host.useAlbum()
+					res.tapIndex === 0 && host.chooseImage(SOURCE_TYPE_CAMERA)
+					res.tapIndex === 1 && host.chooseImage(SOURCE_TYPE_ALBUM)
 				},
 				fail: function (res) {
 					console.log(res.errMsg)

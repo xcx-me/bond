@@ -70,6 +70,13 @@ Page({
 				value: '',
 				mandatory: true,
 				placeholder: '请输入公司邮箱'
+			},
+			{
+				fieldName: TRADER_CERTIFICATE,
+				uiType: UiType.PICTURE_UPLOAD_INPUT,
+				label: '交易员资格证',
+				mandatory: false,
+				value: 'http://test.qtrade.com.cn/card/da26cad0fada42582dfe2453c5777277.jpg'
 			}
 		],
 		disabledOfSubmitButton: true
@@ -77,9 +84,6 @@ Page({
 
 	onChangeDescriptors: function (e) {
 		let descriptors = e.detail.descriptors
-
-		console.log('descriptor.......', descriptors)
-
 		this.setData({
 			descriptors: descriptors
 		})
