@@ -18,7 +18,7 @@
 		</view>
 	</view>
 	<loading wx:if='{{loading}}'>加载中</loading>
-	<swiper wx:if='{{!loading}}' current-item-id='{{currentTabId}}' class='content' duration='300' style='height: {{winHeight}}px' bindchange="bindChangeTab">
+	<swiper wx:if='{{!loading}}' current-item-id='{{currentTabId}}' class='content' duration='300' autoplay='{{false}}' style='height: {{winHeight}}px' bindchange="bindChangeTab">
 		<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
 			<swiper-item item-id='{{tabId}}'>
 				<scroll-view class='pallet' scroll-y scroll-top='{{scrollTop}}' data-itemid='{{tabId}}' >
