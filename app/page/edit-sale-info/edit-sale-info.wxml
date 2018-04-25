@@ -44,5 +44,5 @@
 		</block>
 	</view>
 	<button class='btn-save {{isSubmitDisabled ? "disabled" : ""}}' hover-class='button-hover' type='primary' disabled="{{isSubmitDisabled}}" bindtap='onFormSubmit'>保存</button>
-	<WarningText isShow='{{warningShowText}}' toolTips='{{warningText}}' />
+	<WarningText isShow='{{warningShowText}}' />
 </view>

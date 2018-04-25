@@ -4,15 +4,28 @@ Component({
 		isShow: {
 			type: Boolean,
 			type: false,
+			observer: function (newValue, oldValue) {
+				if (newValue) {
+					this.setData({
+						visible: true
+					})
+					setTimeout(() => {
+						this.setData({
+							visible: false
+						})
+						this.properties.isShow = false
+					}, 1500)
+				}
+			}
 		},
 		toolTips: {
 			type: String,
-			value: '这是错误提示文本信息'
+			value: '格式输入错误，请重新输入'
 		}
 	},
 
 	data: {
-
+		visible: false
 	},
 
 	methods: {

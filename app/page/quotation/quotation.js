@@ -91,12 +91,6 @@ Page({
 			warningShowText: true,
 			highlightItem: highLightFlag
 		})
-
-		setTimeout(() => {
-			this.setData({
-				warningShowText: false
-			})
-		}, 2000)
 	},
 
 	sendQuoteRequest: function (params) {

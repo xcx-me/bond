@@ -1,5 +1,5 @@
 
 
-<view class='warning-text' wx:if='{{isShow}}'>
+<view class='warning-text' wx:if='{{visible}}'>
 	<text>{{toolTips}}</text>
 </view>

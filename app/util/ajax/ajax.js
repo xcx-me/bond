@@ -81,6 +81,22 @@ function request (configuration, data) {
 	})
 }
 
+function requestUploadFile (url, filePath, success) {
+	const uploadTask = wx.uploadFile({
+		url: Environment.withDomain(url),
+		filePath: filePath,
+		name: 'file',
+		header: {
+			'cookie': parseCookieToString()
+		},
+		formData: {},
+		success: success
+	})
+	return uploadTask
+}
+
 module.exports = {
-	request: request
+	request: request,
+	parseCookieToString: parseCookieToString,
+	requestUploadFile: requestUploadFile
 }

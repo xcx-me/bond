@@ -1,5 +1,9 @@
+const {requestUploadFile} = require('../../../util/ajax/ajax')
+
 const SOURCE_TYPE_CAMERA = 'camera'
 const SOURCE_TYPE_ALBUM = 'album'
+
+const uploadUrl = '/appletree/upload_card.do'
 
 Component({
 	/**
@@ -28,7 +32,7 @@ Component({
 	 * 组件的初始数据
 	 */
 	data: {
-
+		progress: -1
 	},
 
 	/**
@@ -42,6 +46,7 @@ Component({
 		},
 
 		deletePicture: function () {
+			if (this.data.progress !== -1) return
 			this.triggerEvent('change', {
 				fieldName: this.properties.fieldName,
 				value: ''
@@ -59,6 +64,23 @@ Component({
 						fieldName: host.properties.fieldName,
 						value: res.tempFilePaths[0]
 					})
+
+					const uploadTask = requestUploadFile('/appletree/upload_card.do', res.tempFilePaths[0], (res) => {
+						host.triggerEvent('change', {
+							fieldName: host.properties.fieldName,
+							value: JSON.parse(res.data).card_url
+						})
+						host.setData({
+							// value -1 means to hide the progress number.
+							progress: -1
+						})
+					})
+
+					uploadTask.onProgressUpdate((res) => {
+						host.setData({
+							progress: res.progress
+						})
+					})
 				}
 			})
 		},
@@ -68,7 +90,6 @@ Component({
 			wx.showActionSheet({
 				itemList: ['拍照', '从手机相册选择'],
 				success: function (res) {
-					console.log(res.tapIndex)
 					res.tapIndex === 0 && host.chooseImage(SOURCE_TYPE_CAMERA)
 					res.tapIndex === 1 && host.chooseImage(SOURCE_TYPE_ALBUM)
 				},

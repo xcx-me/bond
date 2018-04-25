@@ -1,27 +1,15 @@
-<wxs module='ClassNamesUtil'>
-	var ClassNames = require('../../util/classnames/classnames.wxs')
-	module.exports = {
-		getMobileVerificationCodeButtonClassNames: function (disabled) {
-			return ClassNames('mobile-verification-code-button', disabled ? 'disabled' : '')	
-		},
-		getSubmitButtonClassNames: function (disabled) {
-			return ClassNames('qtrade-button', 'submit', disabled ? 'disabled' : '')
-		}
-	}
-</wxs>
-
 <view class='mobile-form'>
 	<view class='description'>已在电脑端认证的用户，验证手机后即可快速绑定</view>
 	<view class='form-section'>
 		<form-viewer-editor descriptors='{{descriptors}}' bind:changeDescriptors='onChangeDescriptors' />
-		<view class='{{ClassNamesUtil.getMobileVerificationCodeButtonClassNames(disabledOfMobileVerificationCodeButton)}}' bindtap='handleGetMobileVerificationCode'>
+		<view class='mobile-verification-code-button {{disabledOfMobileVerificationCodeButton ? "disabled" : ""}}' bindtap='handleGetMobileVerificationCode'>
 			{{labelOfMobileVerificationCodeButton}}
 		</view>
 	</view>
 	<view class='control-area'>
 		<button type='primary'
 			bindtap='doSubmit'
-			class='{{ClassNamesUtil.getSubmitButtonClassNames(disabledOfSubmitButton)}}'>
+			class='qtrade-button submit {{disabledOfSubmitButton ? "disabled" : ""}}'>
 			下一步
 		</button>
 	</view>

@@ -28,6 +28,10 @@ Component({
 			type: String,
 			value: 'text'
 		},
+		hasWarning: {
+			type: Boolean,
+			value: false
+		},
 		mandatory: {
 			type: Boolean,
 			value: false

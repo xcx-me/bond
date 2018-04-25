@@ -34,6 +34,11 @@ Component({
 			this.triggerEvent('changeDescriptors', {
 				descriptors: descriptors
 			})
+			this.triggerEvent('changeDescriptorsAfter', {
+				fieldName: e.detail.fieldName,
+				value: e.detail.value,
+				descriptors: descriptors
+			})
 		}
 	}
 })
