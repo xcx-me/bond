@@ -214,7 +214,7 @@ Page({
 			lastData.loadMore = true
 			this.setData(lastData)
 			setTimeout(() => {
-				this.getBondList(getApp().data.bindscrolltolower)
+				// this.getBondList(getApp().data.bindscrolltolower)
 			}, 1000)
 		}
 	},
