@@ -1,21 +1,15 @@
-<wxs module='ClassNamesUtil'>
-	var ClassNames = require('../../util/classnames/classnames.wxs')
-	module.exports = {
-		getSubmitButtonClassNames: function (disabled) {
-			return ClassNames('qtrade-button', 'submit', disabled ? 'disabled' : '')
-		}
-	}
-</wxs>
-
 <view class='user-detail-form'>
+	<WarningText isShow='{{hasAdvancedValidationError}}' />
 	<view class='description'>加*的选项为必填项</view>
 	<view class='form-section'>
-		<form-viewer-editor descriptors='{{descriptors}}' bind:changeDescriptors='onChangeDescriptors' />
+		<form-viewer-editor descriptors='{{descriptors}}'
+			bind:changeDescriptors='onChangeDescriptors'
+			bind:changeDescriptorsAfter='onChangeDescriptorsAfter' />
 	</view>
 	<view class='control-area'>
 		<button type='primary'
 			bindtap='doSubmit'
-			class='{{ClassNamesUtil.getSubmitButtonClassNames(disabledOfSubmitButton)}}'>
+			class='qtrade-button submit {{disabledOfSubmitButton ? "disabled" : ""}}'>
 			下一步
 		</button>
 	</view>

@@ -34,3 +34,9 @@
   top: -19rpx;
   left: 137rpx;
 }
+.picture-upload-input-component .image-area .progress {
+  position: absolute;
+  top: 60rpx;
+  left: 48rpx;
+  color: #CCCCCC;
+}
