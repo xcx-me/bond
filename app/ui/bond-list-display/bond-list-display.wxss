@@ -23,16 +23,16 @@
 .blank-signal-tpl {
   background: #EFEFF4;
   text-align: center;
-}
-.blank-signal-tpl.board,
-.blank-signal-tpl.store {
   margin-top: 140rpx;
+}
+.blank-signal-tpl.detail {
+  margin-top: 0;
 }
 .bond-list-component .bond-list-item {
   margin-top: 20rpx;
 }
 .operator-pallet {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 140rpx;
   width: 356rpx;

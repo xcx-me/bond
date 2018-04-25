@@ -5,7 +5,15 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+	isShow: {
+		type: Boolean,
+		value: false,
+		observer: function(newVal, oldVal) {
+			if (!newVal) {
+				this.initFilter()
+			}	
+		}
+	}
   },
 
   /**
@@ -38,16 +46,15 @@ Component({
 		this.triggerEvent('showFilterEvent', true)
 	},
 
-	onHideFilter: function() {
-		let filterConfig = this.data.filterConfig
-		filterConfig.map((filter, index) => {
-			filter.isShow = false
-		})
-	
+	initFilter: function () {
+		let filterConfig = JSON.parse(JSON.stringify(filter.defaultConfig))
 		this.setData({
 			filterConfig: filterConfig,
 		})
+	},
 
+	onHideFilter: function() {
+		this.initFilter()
 		this.triggerEvent('showFilterEvent', false)
 	},
 

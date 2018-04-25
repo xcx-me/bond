@@ -12,7 +12,8 @@ Page({
 		intervalTimer: 0,
 		bondListType: getType.ADMIN,
 		bondListStatus: getStatus.INIT,
-		isPostionFixed: false
+		isPostionFixed: false,
+		isModifying: false
 	},
 
 	createQuotation: function () {
@@ -23,6 +24,9 @@ Page({
 				wx.navigateTo({url: '../mobile-form/mobile-form'})
 				return
 			}
+			this.setData({
+				isModifying: false
+			})
 			wx.navigateTo({url: '../quotation/quotation'})
 		})
 	},
@@ -38,12 +42,6 @@ Page({
 				isStoreRegistered: isStoreRegistered,
 				loading: false
 			})
-		})
-	},
-
-	onUpdateBondListEvent: function () {
-		this.setData({
-			bondListStatus: getStatus.ENDLOADED
 		})
 	},
 
@@ -66,6 +64,9 @@ Page({
 		this.data.intervalTimer = setInterval(() => {
 			redPoint.setTabBarRedDot()
 		}, 1000 * 60)
+		wx.pageScrollTo({
+			scrollTop: 0
+		})
 		this.isStoreOpened()
 	},
 
@@ -73,8 +74,7 @@ Page({
 	onHide: function () {
 		clearInterval(this.data.intervalTimer)
 		this.setData({
-			loading: !this.data.isStoreRegistered,
-			bondListStatus: null
+			loading: !this.data.isStoreRegistered
 		})
 	},
 

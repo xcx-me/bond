@@ -48,7 +48,7 @@
   width: 100%;
   position: fixed;
   left: 0;
-  top: 80rpx;
+  top: 165rpx;
   z-index: 1;
   padding: 0;
   background: #FFFFFF;

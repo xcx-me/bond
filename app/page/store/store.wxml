@@ -10,7 +10,7 @@
 		bindevent='onUpdateStoreDetail'/> 
 	</view>
 	<view class='store-bond-list' wx:if='{{!loading}}'>
-		<BondList type='{{bondListType}}' status='{{bondListStatus}}' uid='{{uid}}' userId='{{userId}}' isMyStore='{{false}}' bind:updateEvent='onUpdateBondListEvent'/>
+		<BondList type='{{bondListType}}' status='{{bondListStatus}}' uid='{{uid}}' userId='{{userId}}' isMyStore='{{false}}'/>
 	</view>
 	<ShareButton wx:if='{{userId !== "0"}}'/>
 </view>
