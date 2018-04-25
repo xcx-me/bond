@@ -39,7 +39,8 @@ Component({
 	tabIdList:['bond-list', 'dynamic'],
 	currentTabId: 'bond-list',
 	winHeight: '',
-	isShowRedPoint: false
+	dynamicTotal: 0,
+	scrollTop: 0
   },
 
   ready: function () {
@@ -82,14 +83,10 @@ Component({
 		}
 	},
 
-	onUpdateRedPointEvent: function(e) {
+	onUpdateDynamicEvent: function(e) {
 		this.setData({
-			isShowRedPoint: e.detail
+			dynamicTotal: e.detail.total
 		})
-	},
-
-	onUpdateBondListEvent: function (e) {
-		this.triggerEvent('updateEvent', getStatus.ENDLOADED)
 	},
 
 	topLoad: function(e) {
@@ -99,8 +96,5 @@ Component({
 	bindDownLoad: function(e) {
 		this.triggerEvent('updateEvent', getStatus.LOADMORE)
 	},
-	scroll: function(e) {
-		console.log('scroll...')
-	}
   }
 })

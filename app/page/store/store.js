@@ -27,13 +27,7 @@ Page({
 			loading: false
 		})
 	},
-
-	onUpdateBondListEvent: function () {
-		this.setData({
-			bondListStatus: getStatus.ENDLOADED
-		})
-	},
-
+	
   	onLoad: function (options) {
 		let uid = options.uid
 		this.setData({
@@ -65,7 +59,7 @@ Page({
    */
   onHide: function () {
     this.setData({
-		bondListStatus: null,
+		// bondListStatus: null,
 		needUpdate: false
 	})
   },

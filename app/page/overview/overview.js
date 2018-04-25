@@ -19,9 +19,11 @@ Page({
 	isStoreOpened: function () {
 		service.isStoreOpened((result) => {
 			// result.data.retdata.is_myshop_opened = 0 // for debug
+			console.log('overview...', result)
 			this.setData({
 				isStoreRegistered: String(result.data.retdata.is_myshop_opened) === '1',
-				needUpdate: true
+				needUpdate: true,
+				bondListStatus: getStatus.INIT
 			})
 		})
 	},

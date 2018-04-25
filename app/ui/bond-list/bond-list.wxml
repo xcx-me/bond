@@ -5,6 +5,7 @@
 	<BondListDisplay from='{{from}}'
 					isMine='{{isMine}}'
 					loading='{{firstLoading}}'
+					isModifying='{{isModifying}}'
 					bondList='{{bondList}}'
 					uid='{{uid}}'
 					userId='{{userId}}' 
@@ -14,7 +15,7 @@
 		<view class="icon"></view>
 		<view class="tips"><text>正在努力加载...</text></view>
 	</view>
-	<view class="loading-over" hidden="{{!overLoaded}}">
+	<view class="loading-over" hidden="{{!overLoaded || bondList.length === 0}}">
 		<template is='lineTextLineTpl' data='{{title: "没有更多了"}}'></template>
 	</view>
 </view>

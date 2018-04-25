@@ -1,6 +1,5 @@
 // app/ui/list/bond-list/bond-list.js
-const { request } = require('../../util/ajax/ajax')
-const config = require('../../util/ajax/config')
+const navigate = require('../../util/navigate/navigate')
 
 Component({
   /**
@@ -9,10 +8,7 @@ Component({
   properties: {
 	bondList: {
 		type: Array,
-		value: [],
-		observer: function(newVal, oldVal) {
-			//
-		}
+		value: []
 	},
 	userId: {
 		type: String,
@@ -29,7 +25,16 @@ Component({
 	isMine: {
 		type: Boolean,
 		value: false
-	}
+	},
+	isModifying: {
+		type: Boolean,
+		value: false,
+		observer: function(newVal, oldVal) {
+			if (!newVal) {
+				this.hiddenModifyPallet()
+			}
+		}
+	},
   },
 
   /**
@@ -42,8 +47,7 @@ Component({
 	modifyPalletTop: 0,
 	winHeight: 0,
 	rpx: 0,
-	modifyIndex: 0,
-	isClicking: false
+	modifyIndex: 0
   },
 
 
@@ -68,7 +72,7 @@ Component({
 		let bondId = ''
 		let bondSimpleName = bond ? bond.bond_simple_name : ''
 		
-		if (from === 'board') {
+		if (from === 'market') {
 			let isQtrade = String(bond.is_qtrade) === '1'
 			let saleList = bond.sale_array
 			if (isQtrade || saleList.length === 1) {
@@ -90,36 +94,31 @@ Component({
 	},
 
 	toDetail: function (from, uid, bondId, bondSimpleName) {
-		if (this.data.isClicking) {
-			return 
-		}
-		this.data.isClicking = true
 		this.hiddenModifyPallet()
-		request(config.NEW_BOND.accumulateClick, {user_id: uid, bond_simple_name: bondSimpleName})
-		
-		let that = this
-		setTimeout(()=>{
-			that.data.isClicking = false
-			let virtualUid = this.data.isMine ? '0' : uid
-			let url = '/app/page/bond-detail/bond-detail?bid=' + bondId +'&uid=' + virtualUid
-			from === 'detail' ? wx.redirectTo({url: url}) : wx.navigateTo({url: url})
-		}, 200)
+		navigate.toBondDetail(from, this.data.isMine, uid, bondId, bondSimpleName)
 	},
 
 	onModifyBondEvent: function(e) {
-		let offsetTop = e.detail.offsetTop - 40 * this.data.rpx
-		if (offsetTop > this.data.winHeight - 30) {
-			offsetTop = this.data.winHeight - 50
-		}
-
-		this.setData({
-			isShowModifyPallet: true,
-			modifyPalletTop: offsetTop,
-			bondSimpleName: e.detail.bondSimpleName,
-			bondId: e.detail.bondId
-		})
-		
-		this.triggerEvent('modifyBondEvent', e.detail)
+		let that = this
+		wx.createSelectorQuery().selectViewport().scrollOffset(function(res){
+			let index = e.detail.index 
+			let itemHeight = 250 * that.data.rpx
+			let marginTop = 128* that.data.rpx
+			let offsetTop = index * itemHeight  + marginTop 
+			if (offsetTop > res.scrollTop + that.data.winHeight - 50) {
+				offsetTop = res.scrollTop + that.data.winHeight- 50
+			}
+			
+			that.data.isModifying = true
+			that.setData({
+				isShowModifyPallet: true,
+				modifyPalletTop: offsetTop,
+				bondSimpleName: e.detail.bondSimpleName,
+				bondId: e.detail.bondId
+			})
+			
+			that.triggerEvent('modifyBondEvent', e.detail)
+		}).exec()
 	},
 
 	onModifySaleInfo: function() {
