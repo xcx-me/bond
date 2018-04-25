@@ -13,6 +13,7 @@ Page({
 		isOpenMyShop: true, // 是否开店
 		isEditEntry: false, // 是否是债券编辑入口
 		sendQuoteData: {}, // 发布报价参数
+		isSubmitting: false,
 		submitQuoteBtnEnable: false,
 		warningShowText: false,
 		warningText: '格式输入错误，请重新输入',
@@ -33,8 +34,6 @@ Page({
 
 	handleSendQuote () { // 发布报价
 		let submitData = this.data.sendQuoteData
-
-		// console.log(submitData)
 
 		if (JSON.stringify(submitData) !== '{}') {
 			this.validate(submitData) && this.sendQuoteRequest(submitData)
@@ -94,14 +93,25 @@ Page({
 	},
 
 	sendQuoteRequest: function (params) {
+		this.setData({
+			isSubmitting: true
+		})
+
 		request(config.NEW_BOND.sendBond, params).then((result) => {
 			if (String(result.data.ret) === '0') {
-				Toast.showToast('发布报价成功！', 'success')
-				setTimeout(() => {
+				Toast.showToast('发布成功')
+				this.setData({
+					isSubmitting: false,
+					submitQuoteBtnEnable: false
+				})
+				setTimeout(()=>{
 					wx.navigateBack()
-				}, 2000)
+				}, 1500)
 			} else {
 				Toast.showToast(result.data.retmsg)
+				this.setData({
+					isSubmitting: false
+				})
 			}
 		}).catch(() => {
 			Toast.showToast('请求错误')
@@ -114,9 +124,6 @@ Page({
 			sendQuoteData: detail,
 			submitQuoteBtnEnable: detail.bond_simple_name !=='' && (detail.left_benefit !=='' || detail.right_benefit !=='') && detail.subject_rating !=='' && detail.facility_rating !=='' && detail.deadline !=='' && detail.issue_total !==''
 		})
-
-		// console.log('isShowBTn: ', this.data.submitQuoteBtnEnable)
-		// console.log('_changeValue....', detail)
 	},
 
 	_changeHighLight: function (e) {
@@ -128,7 +135,6 @@ Page({
 	},
 
 	_changePageScrollFixed: function (e) {
-		// console.log('page scroll falg', e.detail)
 		this.setData({
 			fixedPage: e.detail
 		})

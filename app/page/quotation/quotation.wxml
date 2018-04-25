@@ -7,9 +7,9 @@
 			bind:changeFixedPageScroll='_changePageScrollFixed'
 		/>  
 
-		<button class='margin-bottom submit-quotation-btn {{submitQuoteBtnEnable ? "" : "submit-quote-unenable"}}'
-			type='primary' disabled='{{!submitQuoteBtnEnable}}' bindtap='handleSendQuote'>
-			发布
+		<button class='margin-bottom submit-quotation-btn {{submitQuoteBtnEnable || isSubmitting ? "" : "submit-quote-unenable"}}'
+			type='primary' disabled='{{!submitQuoteBtnEnable || isSubmitting}}' bindtap='handleSendQuote'>
+			{{isSubmitting ? '正在提交...' : '发布'}}
 		</button>
 
 		<WarningText isShow='{{warningShowText}}' />
