@@ -212,6 +212,7 @@
   background-color: #EFEFF4;
   border-bottom: 1rpx solid #E5E5E5;
   box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.175);
+  color: #B2B2B2;
 }
 .bond-form-editor .simple-name-associate view {
   padding: 20rpx 60rpx;
@@ -230,7 +231,7 @@
   opacity: 0.3;
 }
 .bond-form-editor .simple-name-associate .highlight-color {
-  color: #f04134;
+  color: #000000;
 }
 .bond-form-editor .show-name-list {
   display: block;
