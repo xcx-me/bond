@@ -11,9 +11,9 @@
 			/>
 		</view>
 		<!-- 简称联想列表 -->
-		<view class='simple-name-associate {{ascNameListOpen ? "show-name-list" : "hide-name-list"}}'>
+		<view class='simple-name-associate show-name-list' wx:if='{{ascNameListOpen}}'>
 			<scroll-view style="max-height: 540rpx;" scroll-y >
-				<view wx:for='{{simpleNameList}}' wx:for-item='simpleNameItem' wx:key='index' data-bond-name='{{simpleNameItem.value}}' bindtap='checkAscBondName'>
+				<view wx:for='{{simpleNameList}}' wx:for-item='simpleNameItem' wx:key='value' data-bond-name='{{simpleNameItem.value}}' bindtap='checkAscBondName'>
 					<block wx:for='{{simpleNameItem.list}}' wx:for-item='item' wx:key='index' >
 						<text wx:if='{{item.tag}}' class='highlight-color'>{{item.value}}</text>
 						<text wx:else>{{item.value}}</text>

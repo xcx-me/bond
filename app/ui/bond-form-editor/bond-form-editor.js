@@ -69,7 +69,8 @@ Component({
 			let formData = this.data.formData
 			formData.bond_simple_name = e.detail.value
 			this.setData({
-				formData: formData
+				formData: formData,
+				ascNameListOpen: false
 			})
 
 			let currentTime = new Date().getTime()
@@ -340,6 +341,7 @@ Component({
 				let resultData = result.data.retdata.array
 				if (curName !=='' && resultData.length > 0) {
 					let nameArray = this.parseAscBondSimpleName(curName, resultData)
+					console.log(nameArray)
 					this.setData({
 						ascNameListOpen: true,
 						simpleNameList: nameArray
