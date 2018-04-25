@@ -38,17 +38,12 @@
 
 		.wx-dialog-title {
     		overflow: hidden;
-			// padding: 5rpx 15rpx;
 			padding: 25rpx 30rpx;
-			// background-color: #f2f6fd;
 			background-color: transparent;
 			border-bottom: 1rpx solid #E5E5E5;
 		}
 
 		.wx-dialog-content {
-			// max-height: 400rpx;
-			// overflow: auto;
-			// width: 450rpx;
 			max-height: 400rpx;
 			overflow: auto;
 			width: 420rpx;
@@ -56,14 +51,8 @@
 
 			.radio {
 				.item {
-					// float: left;
-					// padding: 10rpx 0;
-					// width: 450rpx;
-					// overflow: hidden;
-					// position: relative;
 					float: left;
 					padding: 10rpx 0;
-					/* width: 450rpx; */
 					width: 100%;
 					overflow: hidden;
 					position: relative;
@@ -86,8 +75,10 @@
 					}
 	
 					radio {
+						visibility: hidden;
 						position: absolute;
 						right: 20rpx;
+						z-index: 999;
 					}
 
 					.icon-checked-radio {
@@ -136,14 +127,8 @@
 			text-align: center;
 
 			.wx-dialog-btn {
-				// float: left;
-				// height: 60rpx;
-				// border: 1rpx solid #DDDDDD;
-				// border-radius: 2rpx;
 				float: left;
 				width: 50%;
-				/* height: 60rpx; */
-				/* border: 1rpx solid #DDDDDD; */
 				border-radius: 0;
 				background-color: transparent;
 				color: #000000;

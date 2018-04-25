@@ -9,7 +9,8 @@
   				<label class="radio {{bondId != '' && bondId == index ? 'c1' : 'c2'}}" wx:for='{{saleList}}' wx:for-item='sale'  wx:for-index='index' wx:key='bond_id'>
 					<view class='item'>
 						<template is='sellerInfoTpl' data='{{faceUrl: sale.face_url, isVUser:"1", userName: sale.sale_name, companyName: sale.company_name}}'></template>
-						<radio value="{{index}}" checked="{{sale.checked}}"></radio>
+						<radio value="{{index}}" checked="{{bondId != '' && bondId == index ? true : false}}"></radio>
+						<button class="icon-checked-radio {{bondId != '' && bondId == index ? 'checked' : ''}}"><span /></button>
 					</view>
   				</label>
 			</radio-group>
