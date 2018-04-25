@@ -88,11 +88,6 @@ Page({
 				warningShowText: true,
 				hightlight: true
 			})
-			setTimeout(() =>{
-				this.setData({
-					warningShowText: false
-				})
-			}, 1500)
 			return
 		}
 

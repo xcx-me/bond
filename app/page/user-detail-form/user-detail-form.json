@@ -1,5 +1,6 @@
 {
 	"usingComponents": {
-		"form-viewer-editor": "../../ui/form-viewer-editor/form-viewer-editor"
+		"form-viewer-editor": "../../ui/form-viewer-editor/form-viewer-editor",
+		"WarningText": "../../ui/warning-text/warning-text"
 	}
 }

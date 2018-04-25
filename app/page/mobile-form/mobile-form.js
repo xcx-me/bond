@@ -12,6 +12,15 @@ const MAX_LENGTH_OF_MOBILE_VALIDATION_CODE = 4
 const PERIOD = 60
 const DAFAULT_LABEL = '获取验证码'
 
+const basicValidators = {
+	[MOBILE_NUMBER]: (value) => {
+		return value.length === MAX_LENGTH_OF_MOBILE_NUMBER
+	},
+	[MOBILE_VALIDATION_CODE]: (value) => {
+		return value.length === MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
+	}
+}
+
 Page({
 	/**
 	 * 页面的初始数据
@@ -43,32 +52,12 @@ Page({
 		disabledOfSubmitButton: true
 	},
 
-	validators: {
-		[MOBILE_NUMBER]: (value) => {
-			return value.length === MAX_LENGTH_OF_MOBILE_NUMBER
-		},
-		[MOBILE_VALIDATION_CODE]: (value) => {
-			return value.length === MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
-		}
-	},
-
-	doBasicValidation: function (descriptors, fieldName) {
-		let matchedDescriptor = FormViewerEditorUtil.findDescriptorByFieldName(descriptors, fieldName)
-		return this.validators[fieldName](matchedDescriptor.value)
-	},
-
-	doBasicValidationForAllFields: function (descriptors) {
-		return descriptors.every((item) => {
-			return this.doBasicValidation(descriptors, item.fieldName)
-		})
-	},
-
 	onChangeDescriptors: function (e) {
 		let descriptors = e.detail.descriptors
 		this.setData({
 			descriptors: descriptors,
-			disabledOfMobileVerificationCodeButton: this.timer ? true : !this.doBasicValidation(descriptors, MOBILE_NUMBER),
-			disabledOfSubmitButton: !this.doBasicValidationForAllFields(descriptors)
+			disabledOfMobileVerificationCodeButton: this.timer ? true : !FormViewerEditorUtil.doBasicValidation(descriptors, MOBILE_NUMBER, basicValidators),
+			disabledOfSubmitButton: !FormViewerEditorUtil.doBasicValidationForAllFields(descriptors, basicValidators)
 		})
 	},
 
@@ -113,7 +102,6 @@ Page({
 
 	doSubmit: function () {
 		if (this.data.disabledOfSubmitButton) return
-
 		let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
 
 		console.log('submissionObject', submissionObject)

@@ -12,7 +12,7 @@
 			{{isSubmitting ? '正在提交...' : '发布'}}
 		</button>
 
-		<WarningText isShow='{{warningShowText}}' toolTips='{{warningText}}' />
+		<WarningText isShow='{{warningShowText}}' />
 	</view>
 
 	<view class="quotaion-open-shop" wx:else>

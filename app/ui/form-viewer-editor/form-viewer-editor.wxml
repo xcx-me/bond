@@ -13,6 +13,7 @@
 			placeholder='{{item.placeholder}}'
 			maxlength='{{item.maxlength}}'
 			type='{{item.type}}'
+			hasWarning='{{item.hasWarning}}'
 			mandatory='{{item.mandatory}}'
 			bind:change='onChange' />
 	</block>

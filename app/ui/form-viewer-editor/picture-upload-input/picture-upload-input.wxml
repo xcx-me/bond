@@ -4,8 +4,9 @@
 		<text>{{label}}</text>
 	</view>
 	<view class='upload-button-area' bindtap='showActionSheet' wx:if='{{!value}}'>+</view>
-	<view class='image-area'>
-		<image class='picture' src='{{value}}' bindtap='preview' wx:if='{{value}}' />
-		<image class='deletion' bindtap='deletePicture' wx:if='{{value}}' src='/app/asset/image/qtrade/close_32.svg' />
+	<view class='image-area' wx:if='{{value}}'>
+		<image class='picture' src='{{value}}' bindtap='preview' />
+		<image class='deletion' bindtap='deletePicture' src='/app/asset/image/qtrade/close_32.svg' />
+		<view class='progress' wx:if='{{progress !== -1}}'>{{progress + '%'}}</view>
 	</view>
 </view>
