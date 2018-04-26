@@ -1,1 +1,1 @@
-<button type='primary' class='qtrade-button {{skin}} {{disabled ? "disabled" : ""}}' bindtap='handleTap'>{{label}}</button>
+<button type='primary' class='qtrade-button {{skin}} {{disabled ? "disabled" : ""}}' catchtap='handleTap'>{{label}}</button>

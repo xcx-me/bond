@@ -16,5 +16,15 @@
 			hasWarning='{{item.hasWarning}}'
 			mandatory='{{item.mandatory}}'
 			bind:change='onChange' />
+		<auto-complete-text-input wx:if='{{item.uiType === "AUTO_COMPLETE_TEXT_INPUT"}}'
+			value='{{item.value}}'
+			label='{{item.label}}'
+			fieldName='{{item.fieldName}}'
+			placeholder='{{item.placeholder}}'
+			maxlength='{{item.maxlength}}'
+			type='{{item.type}}'
+			hasWarning='{{item.hasWarning}}'
+			mandatory='{{item.mandatory}}'
+			bind:change='onChange' />
 	</block>
 </view>

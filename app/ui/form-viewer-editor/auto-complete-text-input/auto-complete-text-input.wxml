@@ -1,0 +1,18 @@
+<view class='auto-complete-text-input-component'>
+	<view class='label-area'>
+		<text class='star' wx:if='{{mandatory}}'>*</text>
+		<text>{{label}}</text>
+	</view>
+	<input class='input-field {{hasWarning ? "warning" : ""}}' value='{{value}}'
+		bindinput='handleInputChange'
+		placeholder='{{placeholder}}'
+		maxlength='{{maxlength ? maxlength : -1}}'
+		type='{{type}}'
+		data-field-name='{{fieldName}}' />
+	<AutoComplete
+		nameListVisible='{{ascNameListOpen}}'
+		memberList='{{simpleNameList}}'
+		bind:onHandleSelectItem='_selectAssociateBondName'
+		bind:onHandleCloseList='_closeAssociateList'
+	/>
+</view>

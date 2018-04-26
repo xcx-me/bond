@@ -1,4 +1,3 @@
-// app/ui/form-viewer-editor/text-input/text-input.js
 Component({
 	/**
 	 * 组件的属性列表
