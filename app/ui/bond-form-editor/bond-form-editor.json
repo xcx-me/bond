@@ -1,3 +1,6 @@
 {
-	"component": true
+	"component": true,
+	"usingComponents": {
+		"AutoComplete": "../auto-complete/auto-complete"
+	}
 }

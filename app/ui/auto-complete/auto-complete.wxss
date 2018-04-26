@@ -1,0 +1,37 @@
+.auto-complete-component {
+  display: block;
+  z-index: 99;
+  position: absolute;
+  left: 0;
+  top: 88rpx;
+  width: calc(100% + 30rpx);
+  padding-top: 10rpx;
+  margin-left: -30rpx;
+  background-color: #EFEFF4;
+  border-bottom: 1rpx solid #E5E5E5;
+  box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.175);
+  color: #B2B2B2;
+}
+.auto-complete-component .auto-complete-scroll-view {
+  z-index: 999;
+  max-height: 540rpx;
+}
+.auto-complete-component view {
+  padding: 20rpx 60rpx;
+  margin-left: -30rpx;
+  border-bottom: 1rpx solid #EFEFF4;
+  background-color: #FFFFFF;
+}
+.auto-complete-component .close-mask {
+  z-index: 998;
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.3;
+}
+.auto-complete-component .highlight-color {
+  color: #000000;
+}
