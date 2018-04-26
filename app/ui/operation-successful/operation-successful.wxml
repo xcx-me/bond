@@ -1,0 +1,6 @@
+<view class='register-store-complete'>
+	<image class='reviewing' src='/app/asset/image/qtrade/wait_for_186.svg' />
+	<view class='title'>审核中</view>
+	<view class='description'>您提交的资料正在审核中，请耐心等待</view>
+	<qtrade-button label='继续' bind:click='doNext' />
+</view>

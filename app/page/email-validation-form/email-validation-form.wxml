@@ -1,2 +1,27 @@
-<!--app/page/email-validation-form/email-validation-form.wxml-->
-<text>app/page/email-validation-form/email-validation-form.wxml</text>
+<view class='email-validation-form'>
+	<view class='description'>
+		<text>验证邮件已发至您的邮箱：</text>
+		<text class='highlight'>32233665533@qq.com</text>
+		<text>\n请任选一种方式完成邮箱认证：</text>
+	</view>
+
+	<view class='section'>
+		<view class='title'><text class='number-label'>➀</text>邮箱验证码验证帐号</view>
+		<view class='form-section'>
+			<form-viewer-editor descriptors='{{descriptors}}' bind:changeDescriptors='onChangeDescriptors' />
+			<view class='mobile-verification-code-button' bindtap='handleGetMobileVerificationCode'>
+				重发验证码
+			</view>
+		</view>
+		<view class='control-area'>
+			<qtrade-button label='下一步' bind:click='doSubmit' disabled='{{disabledOfSubmitButton}}' />
+		</view>
+	</view>
+
+	<view class='section'>
+		<view class='title'><text class='number-label'>➁</text>点击邮件链接验证帐号</view>
+		<view class='control-area'>
+			<qtrade-button label='下一步' bind:click='verifyEmailComplete' skin='submit-white' />
+		</view>
+	</view>
+</view>

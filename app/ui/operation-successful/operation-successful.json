@@ -1,0 +1,6 @@
+{
+	"component": true,
+	"usingComponents": {
+		"qtrade-button": "../qtrade-button/qtrade-button"
+	}
+}

@@ -1,4 +1,3 @@
-<!--app/page/register-store-complete/register-store-complete.wxml-->
 <view class='register-store-complete'>
 	<view class="icon-pallet">
 		<icon type='success' size='93'/>

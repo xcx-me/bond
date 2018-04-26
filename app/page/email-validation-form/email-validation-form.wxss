@@ -1,1 +1,36 @@
-/* app/page/email-validation-form/email-validation-form.wxss */
+.email-validation-form .description {
+  font-size: 28rpx;
+  padding: 20rpx;
+  color: #888888;
+  display: block;
+}
+.email-validation-form .description .highlight {
+  color: black;
+}
+.email-validation-form .section {
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+  background-color: white;
+}
+.email-validation-form .section .title {
+  font-size: 34rpx;
+  padding: 20rpx;
+}
+.email-validation-form .section .title .number-label {
+  font-size: 40rpx;
+  padding-right: 10rpx;
+}
+.email-validation-form .section .form-section {
+  position: relative;
+}
+.email-validation-form .section .form-section .mobile-verification-code-button {
+  font-size: 34rpx;
+  border-left: 1px solid #E5E5E5;
+  position: absolute;
+  top: 0rpx;
+  right: 0;
+  padding: 24rpx;
+}
+.email-validation-form .section .control-area {
+  margin: 40rpx 0 20rpx;
+}
