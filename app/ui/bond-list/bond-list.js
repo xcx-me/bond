@@ -38,6 +38,7 @@ Component({
 			type: Number,
 			value: getStatus.INIT,
 			observer: function(newVal, oldVal) {
+				console.log('bond-list status', newVal, oldVal, this.data.from)
 				if (newVal !== getStatus.ENDLOADED) {
 					this.getBondList(this.data.type, newVal)
 				}

@@ -5,11 +5,12 @@ Component({
    * 组件的属性列表
    */
   properties: {
-	isShow: {
-		type: Boolean,
+	tabId: {
+		type: String,
 		value: false,
 		observer: function(newVal, oldVal) {
-			if (!newVal) {
+			console.log(newVal, oldVal)
+			if (newVal) {
 				this.initFilter()
 			}	
 		}
@@ -21,7 +22,8 @@ Component({
    */
   data: {
 	filterConfig: JSON.parse(JSON.stringify(filter.defaultConfig)),
-	filterValue: {}
+	filterValue: {},
+	selectIndex: 0
   },
 
   ready: function () {
@@ -40,6 +42,7 @@ Component({
 		})
 	
 		this.setData({
+			selectIndex: selectIndex,
 			filterConfig: filterConfig,
 		})
 

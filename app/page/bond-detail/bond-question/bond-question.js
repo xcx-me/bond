@@ -6,6 +6,10 @@ Component({
 	},
 
   	properties: {
+		currentTabId: {
+			type: String,
+			value: ''
+		},
 		bondId: {
 			type: String,
 			value: ''
@@ -13,6 +17,10 @@ Component({
 		userId: {
 			type: String,
 			value: ''
+		},
+		loadingStoreDetail: {
+			type: Boolean,
+			value: false,
 		},
 		needUpdate: {
 			type: Boolean,

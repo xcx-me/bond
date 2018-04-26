@@ -6,7 +6,11 @@ Component({
    * 组件的属性列表
    */
   properties: {
-	isStoreRegistered: {
+	needUpdate: {
+		type: Boolean,
+		value: false
+	},
+	isRegistered: {
 		type: Boolean,
 		value: false
 	},
@@ -25,10 +29,6 @@ Component({
 	userId: {
 		type: String,
 		value: ''
-	},
-	needUpdate: {
-		type: Boolean,
-		value: false
 	}
   },
 
@@ -65,7 +65,8 @@ Component({
 	bindChangeTab: function (e) {
 		let currentTabId = e.detail.currentItemId
 		this.setData({
-			currentTabId: currentTabId
+			currentTabId: currentTabId,
+			scrollTop: 0
 		})
 	},
 
@@ -84,16 +85,19 @@ Component({
 	},
 
 	onUpdateDynamicEvent: function(e) {
+		console.log('my-store onUpdateDynamicEvent')
 		this.setData({
 			dynamicTotal: e.detail.total
 		})
 	},
 
 	topLoad: function(e) {
+		console.log('my-store topLoad')
 		this.triggerEvent('updateEvent', getStatus.FRESH)
 	},
 
 	bindDownLoad: function(e) {
+		console.log('my-store bindDownLoad')
 		this.triggerEvent('updateEvent', getStatus.LOADMORE)
 	},
   }

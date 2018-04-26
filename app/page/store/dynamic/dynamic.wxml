@@ -1,9 +1,8 @@
 <!--app/ui/store/dynamic/dynamic.wxml-->
 <import src='../../../template/blank-signal/blank-signal.wxml'/>
-
-<view class='store-dynamic-component'>
-	<loading wx:if="{{loading}}">加载中</loading>
-	<view wx:if="{{!loading && !emptyData}}" class='dynamic-list'>
+<loading hidden="{{!loading}}">加载中...</loading>
+<view wx:if='{{!loading}}' class='store-dynamic-component'>
+	<view wx:if="{{!emptyData}}" class='dynamic-list'>
 		<block wx:for="{{dynamicList}}" wx:for-index="index" wx:for-item="dynamic" wx:key="bond_id">
 			<view class='dynamic-item' data-index='{{index}}' bindtap='clickDynamic'>
 				<view class='item-content'>
@@ -15,7 +14,7 @@
 			</view>
 		</block>
 	</view>
-	<view wx:elif="{{!loading && emptyData}}" class='no-dynamic-list'>
+	<view wx:else class='no-dynamic-list'>
 		<template is='blankSignalTpl' data='{{prompt: "暂无动态", from: "store"}}'></template>
 	</view>
 </view>

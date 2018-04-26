@@ -12,7 +12,6 @@ module.exports = {
 		let virtualUid = isMine ? '0' : uid
 		let url = '/app/page/bond-detail/bond-detail?bid=' + bondId +'&uid=' + virtualUid
 		let that = this
-		console.log('toBondDetail...', url)
 		if (from === 'detail') {
 			wx.redirectTo({
 				url: url, 
@@ -29,4 +28,16 @@ module.exports = {
 			})
 		}
 	},
+
+	toBondDetailByShare: function (uid, bondId, tabId) {
+		wx.navigateTo({
+			url: '/app/page/bond-detail/bond-detail?from=share&bid=' + bondId +'&uid=' + uid + '&tid=' + tabId
+		})
+	},
+
+	toStoreByShare: function(uid) {
+		wx.navigateTo({
+			url: '/app/page/store/store?from=share&uid=' + uid
+		})
+	}
 }

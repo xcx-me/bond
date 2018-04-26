@@ -36,6 +36,3 @@
   width: 100%;
   height: calc(100% - 44rpx);
 }
-.administration-page.fixed {
-  position: fixed;
-}

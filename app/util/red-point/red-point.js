@@ -25,4 +25,16 @@ module.exports ={
 			}
 		})
 	},
+
+	startTabBarRedDot: function () {
+		this.setTabBarRedDot()
+		let intervalTimer = setInterval(() => {
+			this.setTabBarRedDot()
+		}, 1000 * 60)
+		return intervalTimer
+	},
+
+	stopTabBarRedDot: function (intervalTimer) {
+		clearInterval(intervalTimer)
+	}
 }
