@@ -278,7 +278,7 @@ Component({
 						specificOpenFlag: resultData.specific_items,
 						specificSelectFlag: resultData.specific_items !=='' ? converson.parseToObject(resultData.specific_items.split('|')) : converson.parseToObject([])
 					})
-					this.triggerEvent('changeValueEvent', formData)
+					this.triggerEvent('changeValueEvent', resultData)
 				} else {
 					let formData = JSON.parse(JSON.stringify(formConfig.defaultFormData))
 					formData.bond_simple_name = this.data.formData.bond_simple_name
@@ -300,6 +300,7 @@ Component({
 						specificOpenFlag: false,
 						specificSelectFlag: converson.parseToObject([])
 					})
+					this.triggerEvent('changeValueEvent', formData)
 				}
 			})
 		},
@@ -331,9 +332,14 @@ Component({
 				return result
 			}
 			ascBondSimpleNameList.map((item) => {
-				let bondSimpleName = item.bond_simple_name
-				let valueList = bondSimpleName.split(curName)
 				let newValueList = []
+				let bondSimpleName = item.bond_simple_name
+				let lowerBondSimpleName = bondSimpleName.toLowerCase()
+				let valueList = lowerBondSimpleName.split(curName.toLowerCase())
+				let positionStart = lowerBondSimpleName.indexOf(curName.toLowerCase())
+				let positionEnd = positionStart + curName.length
+				let highlightValue = bondSimpleName.slice(positionStart, positionEnd)
+
 				valueList.map((value, index) => {
 					newValueList.push({
 						value: value,
@@ -341,7 +347,7 @@ Component({
 					})
 					if (index < valueList.length - 1) {
 						newValueList.push({
-							value: curName,
+							value: highlightValue,
 							tag: 1
 						})
 					}
@@ -351,6 +357,7 @@ Component({
 					list: newValueList
 				})
 			})
+
 			return result
 		},
 
