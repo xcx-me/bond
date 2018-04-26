@@ -77,6 +77,9 @@
 .filter-component .filter-item .filter-pallet .filter-pallet-checkbox checkbox-group .checkbox-wrapper .checkbox checkbox {
   margin-right: 12rpx;
 }
+.filter-component .filter-item .filter-pallet .filter-pallet-checkbox checkbox-group .checkbox-wrapper .checkbox .value {
+  color: #000000;
+}
 .filter-component .filter-item .filter-pallet .filter-pallet-checkbox checkbox-group .checkbox-wrapper.odd .checkbox {
   border-right: 1rpx solid #E5E5E5;
 }
