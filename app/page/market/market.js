@@ -29,6 +29,7 @@ Page({
 		bondList: [],
 		loading: true,
 		loadMore: false,
+		// scrollTop: 0,
 		intervalTimer: 0,
 		isShowFilter: false,
 		isShowMask: false,
@@ -196,8 +197,8 @@ Page({
 		})
 	},
 
+	// 上拉加载
 	bindDownLoad: function(e) {
-		// console.log('market bindDownLoad.....', this.data)
 		let lastData = this.data
 		if (lastData.filterValue.current_page < lastData.filterValue.max_page) {
 			lastData.filterValue.current_page++
@@ -205,9 +206,10 @@ Page({
 			lastData.loading = false
 			lastData.loadMore = true
 			this.setData(lastData)
-			setTimeout(() => {
-				// this.getBondList(getApp().data.bindscrolltolower)
-			}, 1000)
+			// setTimeout(() => {
+			// 	this.getBondList(getApp().data.bindscrolltolower)
+			// }, 1000)
+			this.getBondList(getApp().data.bindscrolltolower)
 		}
 	},
 
