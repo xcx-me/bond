@@ -19,6 +19,10 @@ Component({
 	from: {
 		type: String,
 		value: ''
+	},
+	index: {
+		type: Number,
+		value: 0	
 	}
   },
 
@@ -48,7 +52,7 @@ Component({
 		let name = e.currentTarget.dataset.name
 		let bondSimpleName = e.currentTarget.dataset.bondname
 		if (name === 'icon-modify') {
-			this.triggerEvent('modifyBondEvent', {bondSimpleName: bondSimpleName, offsetTop: e.detail.y, bondId: this.data.bondInfo.bond_id})
+			this.triggerEvent('modifyBondEvent', {bondSimpleName: bondSimpleName, index:this.data.index, bondId: this.data.bondInfo.bond_id})
 		} else if (name === 'icon-delete') {
 			this.triggerEvent('deleteBondEvent', bondSimpleName)
 		}

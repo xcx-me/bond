@@ -30,6 +30,10 @@ Component({
 			type: Number,
 			value: getType.OTHERS
 		},
+		isModifying: {
+			type: Boolean,
+			value: false
+		},
 		status: {
 			type: Number,
 			value: getStatus.INIT,
@@ -63,13 +67,9 @@ Component({
 		getBondList: function (type, status) {
 			if (status === getStatus.LOADMORE && this.data.overLoaded) {
 				return 
-			}
-
-			if (status === getStatus.FRESH) {
+			}else if (status === getStatus.FRESH) {
 				wx.showNavigationBarLoading()
-			}
-
-			if (status === getStatus.LOADMORE) {
+			}else if (status === getStatus.LOADMORE) {
 				this.setData({
 					moreLoading: true
 				})
@@ -107,7 +107,7 @@ Component({
 					wx.stopPullDownRefresh() // 停止下拉刷新
 				}
 
-				this.triggerEvent('updateEvent')
+				this.data.status = getStatus.ENDLOADED
 			})	
 		},
 

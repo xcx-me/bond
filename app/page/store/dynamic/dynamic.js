@@ -8,8 +8,8 @@ Component({
 			type: Boolean,
 			value: false,
 			observer: function(newVal, oldVal) {
-				this.getDynamicList()
 				if (newVal && !oldVal) {
+					this.getDynamicList()
 					this.setDynamicTimer()
 				}
 			}
@@ -36,7 +36,7 @@ Component({
 					emptyData: dataList.length === 0
 				})
 
-				this.triggerEvent('updateRedPointEvent', dataList.length > 0)
+				this.triggerEvent('updateEvent', {total: dataList.length})
 			})
 		},
 

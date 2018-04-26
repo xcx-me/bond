@@ -69,7 +69,6 @@
   margin-left: -225rpx;
   background-color: #FFFFFF;
   border-radius: 4rpx;
-  max-height: 400rpx;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-title {
   overflow: hidden;
@@ -99,10 +98,10 @@
   font-size: small;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item radio {
-  visibility: hidden;
   position: absolute;
   right: 20rpx;
   z-index: 999;
+  opacity: 0;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item .icon-checked-radio {
   width: 60rpx;

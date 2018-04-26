@@ -15,14 +15,14 @@
 	<loading wx:if='{{loading}}'>加载中...</loading>
 
 	<view hidden='{{loading}}' >
-		<swiper current-item-id='{{currentTabId}}' class='swiper-tab-box' duration='300' style='height: {{winHeight}}px' bindchange='bindChangeTab'>
+		<Filter bind:doFilterEvent='onDoFilter' isShow='{{isShowFilter}}' bind:showFilterEvent='onShowFilterEvent'/>
+		<DateBar wx:if='{{currentTabId === "issues"}}' bind:onFilterEvent='onDoFilter' />
+		<swiper current-item-id='{{currentTabId}}' class='swiper-tab-box' duration='300' style='height: {{currentTabId === "issues" ? winIssuesHeight :  winHeight}}px' bindchange='bindChangeTab'>
 			<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
 				<swiper-item item-id='{{tabId}}'> 
-					<Filter wx:if='{{tabId === currentTabId}}' bind:doFilterEvent='onDoFilter' bind:showFilterEvent='onShowFilterEvent'/>
-					<DateBar wx:if='{{tabId === currentTabId && tabId === "issues"}}' bind:onFilterEvent='onDoFilter' />
-					<scroll-view wx:if='{{tabId === currentTabId}}'class='stage-pallet' scroll-y='{{!isShowMask}}' bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll" bindtouchmove="ballMoveEvent">
+					<scroll-view wx:if='{{tabId === currentTabId}}'class='stage-pallet' scroll-y='{{!isShowMask}}' style='max-height: {{currentTabId === "issues" ? winIssuesHeight :  winHeight}}px' bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll" bindtouchmove="ballMoveEvent">
 						<BondListDisplay
-							from='board'
+							from='market'
 							isMine='{{false}}'
 							bondList='{{bondList}}'
 							uid=''

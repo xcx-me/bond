@@ -2,6 +2,7 @@
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const common = require('../../util/common')
+const navigate = require('../../util/navigate/navigate')
 const redPoint = require('../../util/red-point/red-point')
 Page({
 	/**
@@ -10,6 +11,7 @@ Page({
 	data: {
 		winWidth: 0,
 		winHeight: 0,
+		winIssuesHeight: 0,
 		tabIdList: ['consultation', 'announcement', 'issues'],
 		currentTabId: 'consultation',
 		filterValue: {
@@ -27,7 +29,9 @@ Page({
 		bondList: [],
 		loading: true,
 		loadMore: false,
+		// scrollTop: 0,
 		intervalTimer: 0,
+		isShowFilter: false,
 		isShowMask: false,
 		bondSimpleName: '',
 		saleList: []
@@ -51,6 +55,7 @@ Page({
 	onDoFilter: function (e) {
 		let filterValue = Object.assign(this.data.filterValue, e.detail)
 		this.setData({
+			isShowFilter: false,
 			isShowMask: false,
 			filterValue: filterValue
 		})
@@ -59,6 +64,7 @@ Page({
 
 	onShowFilterEvent: function (e) {
 		this.setData({
+			isShowFilter: e.detail,
 			isShowMask: e.detail
 		})
 	},
@@ -91,23 +97,8 @@ Page({
 		if (sale) {
 			let uid = sale.user_id
 			let bondId = sale.bond_id
-			this.toDetail(uid, bondId, this.data.bondSimpleName)
+			navigate.toBondDetail('market', false, uid, bondId, this.data.bondSimpleName)
 		}
-	},
-
-	toDetail: function (uid, bondId, bondSimpleName) {
-		if (this.data.isClicking) {
-			return 
-		}
-		this.data.isClicking = true
-		request(config.NEW_BOND.accumulateClick, {user_id: uid, bond_simple_name: bondSimpleName})
-		let that = this
-		setTimeout(()=>{
-			that.data.isClicking = false
-			let url = '/app/page/bond-detail/bond-detail?bid=' + bondId +'&uid=' + uid
-			console.log('to detail...', url)
-			wx.navigateTo({url: url})
-		}, 200)
 	},
 
 	getBondList (OperationType) { // 询量
@@ -169,7 +160,8 @@ Page({
 			success: function(res) {
 				that.setData({
 					winWidth: res.windowWidth,
-					winHeight: res.windowHeight - (res.windowWidth / 750 * 80)
+					winHeight: res.windowHeight - (res.windowWidth / 750 * 80),
+					winIssuesHeight: res.windowHeight - (res.windowWidth / 750 * 160)
 				})
 			}
 		})
@@ -190,6 +182,7 @@ Page({
 		lastData.currentTabId = currentTabId
 		lastData.loading = true
 		lastData.filterValue = this.initFilter(bondStatus)
+		lastData.isShowFilter = false
 		this.setData(lastData)
 		this.getBondList()
 	},
@@ -204,8 +197,8 @@ Page({
 		})
 	},
 
+	// 上拉加载
 	bindDownLoad: function(e) {
-		// console.log('market bindDownLoad.....', this.data)
 		let lastData = this.data
 		if (lastData.filterValue.current_page < lastData.filterValue.max_page) {
 			lastData.filterValue.current_page++
@@ -213,9 +206,10 @@ Page({
 			lastData.loading = false
 			lastData.loadMore = true
 			this.setData(lastData)
-			setTimeout(() => {
-				// this.getBondList(getApp().data.bindscrolltolower)
-			}, 1000)
+			// setTimeout(() => {
+			// 	this.getBondList(getApp().data.bindscrolltolower)
+			// }, 1000)
+			this.getBondList(getApp().data.bindscrolltolower)
 		}
 	},
 

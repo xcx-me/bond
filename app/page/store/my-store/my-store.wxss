@@ -32,9 +32,6 @@
   top: 15px;
   margin-left: 7rpx;
 }
-.my-store-component .content scroll-view {
-  height: 100%;
-}
 .my-store-component .content .other-bond-list {
   margin-top: 10rpx;
 }

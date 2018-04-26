@@ -23,10 +23,10 @@
 .blank-signal-tpl {
   background: #EFEFF4;
   text-align: center;
-}
-.blank-signal-tpl.board,
-.blank-signal-tpl.store {
   margin-top: 140rpx;
+}
+.blank-signal-tpl.detail {
+  margin-top: 0;
 }
 .store-dynamic-component .dynamic-item {
   position: relative;
