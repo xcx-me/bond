@@ -7,6 +7,6 @@
 			bind:changeDescriptorsAfter='onChangeDescriptorsAfter' />
 	</view>
 	<view class='control-area'>
-		<qtrade-button label='下一步' bind:click='doSubmit' disabled='{{disabledOfSubmitButton}}' />
+		<qtrade-button label='下一步' bindtap='doSubmit' disabled='{{disabledOfSubmitButton}}' />
 	</view>
 </view>

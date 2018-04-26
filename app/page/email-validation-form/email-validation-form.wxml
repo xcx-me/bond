@@ -14,14 +14,14 @@
 			</view>
 		</view>
 		<view class='control-area'>
-			<qtrade-button label='下一步' bind:click='doSubmit' disabled='{{disabledOfSubmitButton}}' />
+			<qtrade-button label='下一步' bindtap='doSubmit' disabled='{{disabledOfSubmitButton}}' />
 		</view>
 	</view>
 
 	<view class='section'>
 		<view class='title'><text class='number-label'>➁</text>点击邮件链接验证帐号</view>
 		<view class='control-area'>
-			<qtrade-button label='下一步' bind:click='verifyEmailComplete' skin='submit-white' />
+			<qtrade-button label='下一步' bindtap='verifyEmailComplete' skin='submit-white' />
 		</view>
 	</view>
 </view>

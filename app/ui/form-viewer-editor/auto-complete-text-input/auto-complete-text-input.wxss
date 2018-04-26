@@ -1,0 +1,16 @@
+.auto-complete-text-input-component {
+  border-bottom: 1rpx solid #E5E5E5;
+  font-size: 34rpx;
+  display: flex;
+  padding: 10px;
+  position: relative;
+}
+.auto-complete-text-input-component .label-area {
+  width: 204rpx;
+}
+.auto-complete-text-input-component .label-area .star {
+  color: #E64340;
+}
+.auto-complete-text-input-component .input-field.warning {
+  color: orange;
+}

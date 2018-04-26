@@ -30,7 +30,7 @@ Component({
 	 */
 	methods: {
 		handleTap: function (e) {
-			this.triggerEvent('click', e.detail)
+			this.triggerEvent('tap', e.detail)
 		}
 	}
 })

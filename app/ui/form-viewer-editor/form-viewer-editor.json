@@ -2,6 +2,7 @@
 	"component": true,
 	"usingComponents": {
 		"text-input": "../../ui/form-viewer-editor/text-input/text-input",
+		"auto-complete-text-input": "../../ui/form-viewer-editor/auto-complete-text-input/auto-complete-text-input",
 		"picture-upload-input": "../../ui/form-viewer-editor/picture-upload-input/picture-upload-input",
 		"form-viewer-editor": "../../ui/form-viewer-editor/form-viewer-editor"
 	}

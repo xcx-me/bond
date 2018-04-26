@@ -16,6 +16,9 @@ const basicValidators = {
 	[PERSONAL_PHOTO]: (value) => {
 		return value.length > 0
 	},
+	[AGENCY_NAME]: (value) => {
+		return value.length > 0
+	},
 	[REAL_NAME]: (value) => {
 		return value.length > 0
 	},
@@ -42,6 +45,14 @@ Page({
 				label: '名片照',
 				mandatory: true,
 				value: ''
+			},
+			{
+				fieldName: AGENCY_NAME,
+				uiType: UiType.AUTO_COMPLETE_TEXT_INPUT,
+				label: '机构名',
+				value: '',
+				mandatory: true,
+				placeholder: '请输入机构名'
 			},
 			{
 				fieldName: REAL_NAME,
@@ -158,7 +169,7 @@ Page({
 		this.setData({
 			descriptors: this.data.descriptors
 		})
-		wx.redirectTo({url: '../email-validation-form/email-validation-form'})
+		// wx.redirectTo({url: '../email-validation-form/email-validation-form'})
 	},
 
 	/**

@@ -7,7 +7,7 @@
 		</view>
 	</view>
 	<view class='control-area'>
-		<qtrade-button label='下一步' bind:click='doSubmit' disabled='{{disabledOfSubmitButton}}' />
+		<qtrade-button label='下一步' bindtap='doSubmit' disabled='{{disabledOfSubmitButton}}' />
 	</view>
 	<view class='agreement-area'>
 		<text>点击认证或绑定表示同意</text>
