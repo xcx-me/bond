@@ -1,3 +1,5 @@
+<import src='../../template/line-text-line/line-text-line.wxml' />
+
 <view class='market-page {{isShowMask ? "fixed" : ""}}'>
 	<!-- 市场页 -->
 	<view class='market-tab'>
@@ -20,7 +22,7 @@
 		<swiper current-item-id='{{currentTabId}}' class='swiper-tab-box' duration='300' style='height: {{currentTabId === "issues" ? winIssuesHeight :  winHeight}}px' bindchange='bindChangeTab'>
 			<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
 				<swiper-item item-id='{{tabId}}'> 
-					<scroll-view wx:if='{{tabId === currentTabId}}'class='stage-pallet' scroll-y='{{!isShowMask}}' style='max-height: {{currentTabId === "issues" ? winIssuesHeight :  winHeight}}px' bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll" bindtouchmove="ballMoveEvent">
+					<scroll-view wx:if='{{tabId === currentTabId}}'class='stage-pallet' scroll-y='{{!isShowMask}}' style='max-height: {{currentTabId === "issues" ? winIssuesHeight :  winHeight}}px' bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" bindscroll="scroll" bindtouchmove="ballMoveEvent" scroll-top="{{null}}">
 						<BondListDisplay
 							from='market'
 							isMine='{{false}}'
@@ -50,4 +52,8 @@
 		<view class="icon"></view>
 		<view class="tips"><text>正在加载</text></view>
 	</view>
+
+	<!-- <view class="loading-over" hidden="{{filterValue.current_page != filterValue.max_page}}">
+		<template is='lineTextLineTpl' data='{{title: "没有更多了"}}'></template>
+	</view> -->
 </view>

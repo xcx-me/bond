@@ -10,6 +10,12 @@
 	}
 
 	.filter-item {
+		&.active {
+			.label {
+				color: #2196F3;
+			}
+		}
+
 		float: left;
 		width: calc(~'33.33% - 30rpx');
 		padding: 0 10rpx;
@@ -39,7 +45,7 @@
 
 		.icon-up-arrow {
 			position: relative;
-			top: -26rpx;
+			top: -20rpx;
 			left: 6rpx;
 			height: 0;
 			width: 0;
@@ -52,7 +58,6 @@
 			width: 100%;
 			position: fixed;
 			left: 0;
-			top: 165rpx;
 			z-index: 1;
 			padding: 0;
 			background: #FFFFFF;
@@ -79,6 +84,10 @@
 
 							checkbox {
 								margin-right: 12rpx;
+							}
+
+							.value {
+								color: #000000;
 							}
 						}
 
@@ -164,12 +173,12 @@
 
 			.filter-item-pallet {
 				background: #FFFFFF;
-				border: 1px solid #D8D8D8;
-				border-bottom: 1px solid #FFFFFF;
+				border: 1rpx solid #D8D8D8;
+				border-bottom: 10rpx solid #FFFFFF;
 				border-radius: 0;
 				border-top-left-radius: 8rpx;
-				border-top-right-radius: 8rpx;	
-				padding-bottom:11rpx;
+				border-top-right-radius: 8rpx;
+				margin-bottom: -1rpx;
 			}			
 		}
 	}

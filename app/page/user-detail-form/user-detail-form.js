@@ -154,7 +154,11 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-
+		// Below code is to fix an issue that last user entered charactor will stay in the mobile number field. 
+		this.setData({
+			descriptors: this.data.descriptors
+		})
+		wx.redirectTo({url: '../email-validation-form/email-validation-form'})
 	},
 
 	/**
