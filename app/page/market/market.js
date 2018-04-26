@@ -29,7 +29,7 @@ Page({
 		bondList: [],
 		loading: true,
 		loadMore: false,
-		// scrollTop: 0,
+		// scrollTop: '',
 		intervalTimer: 0,
 		isShowFilter: false,
 		isShowMask: false,
@@ -124,9 +124,9 @@ Page({
 				
 				lastData.bondList = result.data.retdata.bond_array
 				this.setData(lastData)
-				wx.pageScrollTo({
-					scrollTop: 0
-				})
+				// wx.pageScrollTo({
+				// 	scrollTop: 0
+				// })
 				
 				if (OperationType === getApp().data.onPullDownRefresh) {
 					wx.hideNavigationBarLoading() // 完成停止加载
@@ -199,6 +199,7 @@ Page({
 
 	// 上拉加载
 	bindDownLoad: function(e) {
+		// console.log(e)
 		let lastData = this.data
 		if (lastData.filterValue.current_page < lastData.filterValue.max_page) {
 			lastData.filterValue.current_page++
@@ -215,7 +216,9 @@ Page({
 
 	topLoad: function(e) {},
 
-	scroll: function(e) {},
+	scroll: function(e) {
+		// console.log(e)
+	},
 
 	ballMoveEvent: function(e) { // 此处函数不起作用，到时候记得将html代码中绑定的函数解绑
 		console.log('我被拖动了.....', e)

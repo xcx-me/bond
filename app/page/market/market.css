@@ -1,4 +1,26 @@
 /* app/page/market/market.wxss */
+.line-text-line-tpl {
+  background: #EFEFF4;
+  margin: 30rpx 0;
+  text-align: center;
+}
+.line-text-line-tpl .line {
+  background: #D8D8D8;
+  margin-top: 4rpx;
+  display: inline-block;
+  width: 100rpx;
+  height: 1rpx;
+  vertical-align: middle;
+}
+.line-text-line-tpl .title {
+  display: inline-block;
+  background: #EFEFF4;
+  padding: 0 30rpx;
+  position: relative;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  color: #888888;
+}
 .market-page {
   width: 100%;
 }
@@ -6,21 +28,22 @@
   width: 100%;
   border-bottom: 2rpx solid #D8D8D8;
   text-align: center;
-  line-height: 80rpx;
+  line-height: 77rpx;
   background-color: #FFFFFF;
 }
 .market-page .market-tab-list {
   font-size: 30rpx;
   display: inline-block;
   width: 13.33%;
+  height: 78rpx;
   padding: 0 10%;
   color: #000000;
 }
-.market-page .loading-more {
+.market-page .loading-more,
+.market-page .loading-over {
   text-align: center;
   height: 80rpx;
   line-height: 80rpx;
-  color: #888888;
   font-size: 32rpx;
 }
 .market-page .on {
@@ -31,9 +54,6 @@
   display: block;
   width: 100%;
   height: 100%;
-}
-.market-page .swiper-tab-box .stage-pallet {
-  height: calc(100% - 90rpx);
 }
 .market-page.fixed {
   position: fixed;
