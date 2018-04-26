@@ -1,0 +1,12 @@
+<!-- auto complete page -->
+<view class='auto-complete-component' wx:if='{{nameListVisible}}'>
+	<scroll-view class='auto-complete-scroll-view' scroll-y >
+		<view wx:for='{{memberList}}' wx:for-item='autoCompleteItem' wx:key='value' data-member-name='{{autoCompleteItem.value}}' bindtap='onHandleSelect'>
+			<block wx:for='{{autoCompleteItem.list}}' wx:for-item='item' wx:key='index' >
+				<text wx:if='{{item.tag}}' class='highlight-color'>{{item.value}}</text>
+				<text wx:else>{{item.value}}</text>
+			</block>
+		</view>
+	</scroll-view>
+	<view class='close-mask' bindtap='onHandleClose'></view>
+</view>

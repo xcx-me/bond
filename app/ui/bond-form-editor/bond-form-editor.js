@@ -24,7 +24,6 @@ Component({
 		formData: JSON.parse(JSON.stringify(formConfig.defaultFormData)),
 
 		ascNameListOpen: false, 
-		// simpleNameList: JSON.parse(JSON.stringify(formConfig.simpleName)),
 		simpleNameList: [],
 
 		// 时间
@@ -61,7 +60,7 @@ Component({
 	},
 
 	ready: function() {
-		this.associateBondDetails(this.data.bondSimpleName)
+		this.bondDetailsAssociate(this.data.bondSimpleName)
 	},
 
 	methods: {
@@ -69,15 +68,16 @@ Component({
 			let formData = this.data.formData
 			formData.bond_simple_name = e.detail.value
 			this.setData({
-				formData: formData
+				formData: formData,
+				ascNameListOpen: false
 			})
 
 			let currentTime = new Date().getTime()
 			this.timeStamp_ = currentTime
 			setTimeout(() => {
 				if (this.timeStamp_ - currentTime === 0) {
-					this.associateBondDetails(e.detail.value) // 债券详情联想
-					this.ascBondSimpleName(e.detail.value) // 债券简称列表联想
+					this.bondDetailsAssociate(e.detail.value) // 债券详情联想
+					this.bondSimpleNameAssociate(e.detail.value) // 债券简称列表联想
 				}
 			}, 1000)
 
@@ -255,7 +255,7 @@ Component({
 		},
 
 		// 获取债券详情
-		associateBondDetails: function (bondSimpleName) {
+		bondDetailsAssociate: function (bondSimpleName) {
 			service.getBondAssociate(bondSimpleName, (result)=>{
 				let resultData = result.data.retdata
 				if (Object.keys(resultData).length > 0) {
@@ -304,12 +304,32 @@ Component({
 			})
 		},
 
-		parseAscBondSimpleName: function(curName, ascBondSimpleNameList) {
+		// 债券简称联想
+		bondSimpleNameAssociate: function (curName) {
+			service.getBondSimpleName(curName, (result) => {
+				let resultData = result.data.retdata.array
+				if (curName !=='' && resultData.length > 0) {
+					let nameArray = this.parseAssociateBondSimpleName(curName, resultData)
+					this.setData({
+						ascNameListOpen: true,
+						simpleNameList: nameArray
+					})
+					this.triggerEvent('changeFixedPageScroll', true)
+				} else {
+					this.setData({
+						ascNameListOpen: false,
+						simpleNameList: []
+					})
+					this.triggerEvent('changeFixedPageScroll', false)
+				}
+			})
+		},
+
+		parseAssociateBondSimpleName: function(curName, ascBondSimpleNameList) {
 			let result = []
 			if (curName === '') {
 				return result
 			}
-
 			ascBondSimpleNameList.map((item) => {
 				let bondSimpleName = item.bond_simple_name
 				let valueList = bondSimpleName.split(curName)
@@ -334,36 +354,16 @@ Component({
 			return result
 		},
 
-		// 债券简称联想
-		ascBondSimpleName: function (curName) {
-			service.getBondSimpleName(curName, (result) => {
-				let resultData = result.data.retdata.array
-				if (curName !=='' && resultData.length > 0) {
-					let nameArray = this.parseAscBondSimpleName(curName, resultData)
-					this.setData({
-						ascNameListOpen: true,
-						simpleNameList: nameArray
-					})
-					this.triggerEvent('changeFixedPageScroll', true)
-				} else {
-					this.setData({
-						ascNameListOpen: false,
-						simpleNameList: []
-					})
-					this.triggerEvent('changeFixedPageScroll', false)
-				}
-			})
+		_closeAssociateList: function () {
+			this.hideAssociateNameList()
 		},
 
-		closeAssociateList: function () {
-			this.setData({
-				ascNameListOpen: false,
-			})
-			this.triggerEvent('changeFixedPageScroll', false)
+		_selectAssociateBondName: function (e) {
+			this.bondDetailsAssociate(e.detail)
+			this.hideAssociateNameList()
 		},
 
-		checkAscBondName: function (e) {
-			this.associateBondDetails(e.currentTarget.dataset.bondName)
+		hideAssociateNameList: function () {
 			this.setData({
 				ascNameListOpen: false,
 				simpleNameList: []
