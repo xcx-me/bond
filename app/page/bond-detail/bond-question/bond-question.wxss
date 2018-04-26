@@ -88,7 +88,7 @@
 }
 .bond-question .question-list .question-item .answer-list .icon-up-rectangle {
   position: absolute;
-  top: -18rpx;
+  top: -16rpx;
   left: 40rpx;
   height: 0px;
   width: 0px;

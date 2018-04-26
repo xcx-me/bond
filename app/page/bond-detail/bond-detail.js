@@ -22,7 +22,10 @@ Page({
 		isAnswering: false,
 		bondList: [],
 		storeDetail: {},
-		loading: true,
+		loadingDetail: true,
+		loadingQuestion: true,
+		loadingStoreDetail: true,
+		loadingBondList: true,
 		scrollTop: 0
 	},
 
@@ -53,7 +56,7 @@ Page({
 				isMyStore: isMyStore,
 				userId: detail.user_id,
 				storeDetail: detail,
-				loading:false,
+				loadingStoreDetail: false,
 				needUpdate: true
 			})
 
@@ -65,7 +68,8 @@ Page({
   	getQuestionTotal: function () {
 		service.getQuestionTotal(this.data.bondId, (result)=> {
 			this.setData({
-				questionTotal: result.data.retdata.ask_num > 99 ?  '99+' : result.data.retdata.ask_num
+				questionTotal: result.data.retdata.ask_num > 99 ?  '99+' : result.data.retdata.ask_num,
+				loadingQuestion: false
 			})
 		})
 	},
@@ -79,6 +83,7 @@ Page({
 			type: this.data.isMyStore && this.data.uid === '0' ? 3 : 4
 		}, (result) => {
 			this.setData({
+				loadingBondList: false,
 				bondList: result.data.retdata.bond_list
 			})
 		})
@@ -107,6 +112,7 @@ Page({
 
 	onGetBondSimpleNameEvent: function (e) {
 		this.setData({
+			loadingDetail: false,
 			bondSimpleName: e.detail
 		})
 	},

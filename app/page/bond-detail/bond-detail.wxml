@@ -17,20 +17,20 @@
 			</view>
 		</view>
 	</view>
-	<loading wx:if='{{loading}}'>加载中</loading>
-	<swiper wx:if='{{!loading}}' current-item-id='{{currentTabId}}' class='content' duration='300' autoplay='{{false}}' style='height: {{winHeight}}px' bindchange="bindChangeTab">
+	<swiper current-item-id='{{currentTabId}}' class='content' duration='300' autoplay='{{false}}' style='height: {{winHeight}}px' bindchange="bindChangeTab">
 		<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
 			<swiper-item item-id='{{tabId}}'>
 				<scroll-view class='pallet' scroll-y scroll-top='{{scrollTop}}' data-itemid='{{tabId}}' >
-					<BondInfo wx:if='{{tabId==="detail"}}' bondId='{{bondId}}' isMyStore='{{isMyStore}}' bind:getBondSimpleNameEvent='onGetBondSimpleNameEvent'/>
-					<BondQuestion wx:if='{{tabId==="question"}}' bondId='{{bondId}}' userId='{{userId}}' needUpdate='{{needUpdate}}' bind:updateTotalEvent='onUpdateQuestionTotalEvent'/>
+					<BondInfo wx:if='{{tabId==="detail"}}' currentTabId='{{currentTabId}}' loadingStoreDetail='{{loadingStoreDetail}}' bondId='{{bondId}}' isMyStore='{{isMyStore}}' bind:getBondSimpleNameEvent='onGetBondSimpleNameEvent'/>
+					<BondQuestion wx:if='{{tabId==="question"}}' currentTabId='{{currentTabId}}' loadingStoreDetail='{{loadingStoreDetail}}' bondId='{{bondId}}' userId='{{userId}}' needUpdate='{{needUpdate}}' bind:updateTotalEvent='onUpdateQuestionTotalEvent'/>
 					<StoreDetail wx:if='{{tabId==="store"}}'
+						currentTabId='{{currentTabId}}'
 						userId='{{uid}}'
 						isRegistered='{{true}}'
 						detail='{{storeDetail}}'
 						bindevent='{{null}}'
 					/> 
-					<OtherBonds isMyStore='{{isMyStore}}' bondId='{{bondId}}' uid='{{uid}}' userId='{{userId}}' bondList='{{bondList}}' />
+					<OtherBonds wx:if='{{!loadingBondList && ((currentTabId === "detail" && !loadingDetail) || (currentTabId === "question" && !loadingQuestion) || (currentTabId === "store" && !loadingStoreDetail))}}' isMyStore='{{isMyStore}}' bondId='{{bondId}}' uid='{{uid}}' userId='{{userId}}' bondList='{{bondList}}' />
 				</scroll-view>
 			</swiper-item>
 		</block>

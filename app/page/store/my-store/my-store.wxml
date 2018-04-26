@@ -9,17 +9,17 @@
 		</view>
 	</view>
 	<swiper current-item-id='{{currentTabId}}' class='content' duration='300' autoplay='{{false}}' style='height: {{winHeight}}px' bindchange="bindChangeTab">
-			<swiper-item item-id='bond-list'>
-				<scroll-view class='pallet bond-list-pallet' style="max-height: {{winHeight}}px" scroll-y scroll-top='{{needUpdate ? 0 : scrollTop}}' bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad">
-					<StoreRegister wx:if='{{!isStoreRegistered}}' type='pallet'/>
-					<BondList wx:if='{{isStoreRegistered}}' type='{{bondListType}}' status='{{bondListStatus}}' from='store' isMine='{{true}}' uid='{{uid}}' userId='{{userId}}'/>
-				</scroll-view>
-			</swiper-item>
-			<swiper-item item-id='dynamic'>
-				<scroll-view class='pallet dynamic-pallet' style="max-height: {{winHeight}}px" scroll-y scroll-top='{{needUpdate ? 0 : scrollTop}}'>
-					<StoreDynamic needUpdate='{{needUpdate}}' bind:updateEvent='onUpdateDynamicEvent'/>
-				</scroll-view>
-			</swiper-item>
+		<swiper-item item-id='bond-list'>
+			<scroll-view class='pallet bond-list-pallet' style="max-height: {{winHeight}}px" scroll-y scroll-top='{{scrollTop}}' bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad">
+				<StoreRegister wx:if='{{!isRegistered}}' type='pallet'/>
+				<BondList wx:if='{{isRegistered}}' type='{{bondListType}}' status='{{bondListStatus}}' from='store' isMine='{{true}}' uid='{{uid}}' userId='{{userId}}'/>
+			</scroll-view>
+		</swiper-item>
+		<swiper-item item-id='dynamic'>
+			<scroll-view class='pallet dynamic-pallet' style="max-height: {{winHeight}}px" scroll-y scroll-top='{{scrollTop}}'>
+				<StoreDynamic needUpdate='{{needUpdate}}' bind:updateEvent='onUpdateDynamicEvent'/>
+			</scroll-view>
+		</swiper-item>
 	</swiper>
 	<ShareButton />
 </view>

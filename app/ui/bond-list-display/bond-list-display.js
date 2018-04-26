@@ -35,6 +35,14 @@ Component({
 			}
 		}
 	},
+	moreLoading: {
+		type: Boolean,
+		value: false
+	},
+	overLoaded: {
+		type: Boolean,
+		value: false
+	}
   },
 
   /**

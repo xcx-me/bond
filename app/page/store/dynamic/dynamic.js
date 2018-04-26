@@ -4,16 +4,6 @@ let timeId = null
 
 Component({
  	properties: {
-		needUpdate: {
-			type: Boolean,
-			value: false,
-			observer: function(newVal, oldVal) {
-				if (newVal && !oldVal) {
-					this.getDynamicList()
-					this.setDynamicTimer()
-				}
-			}
-		}
   	},
 
   	data: {
@@ -23,7 +13,8 @@ Component({
   	},
 
   	ready: function () {
-		// console.log('ready dynamic....')
+		this.getDynamicList()
+		this.setDynamicTimer()
 	},
 
 	methods: {

@@ -1,6 +1,6 @@
 <!--app/page/bond-detail/bond-question/bond-question.wxml-->
-<loading wx:if='{{loading}}'>加载中...</loading>
-<view class='bond-question' hidden='{{loading}}'>
+
+<view class='bond-question' wx:if='{{!loadingStoreDetail && !loading && currentTabId === "question"}}'>
 	<view class='header'>
 		<text class='title'>该债券共有{{questionList.length}}个问题</text>
 		<button class='btn-ask' size='mini' type='primary' bindtap='onAsk'>去提问</button>
@@ -22,5 +22,6 @@
 		</block>
 	</view>
 </view>
+<loading wx:else>加载中...</loading>
 
 

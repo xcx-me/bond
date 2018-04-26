@@ -5,13 +5,14 @@ const {getStatus, getType} = require('../../util/type/bond-list')
 
 Page({
 	data: {
+		loadedStoreRegistered: false,
+		loadedStoreDetail: false,
 		isStoreRegistered: false, // 是否开店
+		needUpdateDetail: false,
+		needUpdateStore: false,
 		uid: '0',
 		userId: '0',
 		userName: '',
-		isQtrade: false,
-		loading: true,
-		needUpdate: false,
 		bondListType: getType.MYSTORE,
 		bondListStatus: getStatus.INIT
 	},
@@ -19,25 +20,22 @@ Page({
 	isStoreOpened: function () {
 		service.isStoreOpened((result) => {
 			// result.data.retdata.is_myshop_opened = 0 // for debug
-			console.log('overview...', result)
 			this.setData({
 				isStoreRegistered: String(result.data.retdata.is_myshop_opened) === '1',
-				needUpdate: true,
-				bondListStatus: getStatus.INIT
+				loadedStoreRegistered: true,
+				needUpdateDetail: true
 			})
 		})
 	},
 
 	onUpdateStoreDetail: function (e) {
 		let detail = e.detail
-		let isMyStore = String(detail.is_myself) === '1' && String(this.data.uid) === '0'
 		this.setData({
-			isMyStore: isMyStore,
-			isQtrade: String(detail.is_qtrade) === '1',
 			userId: detail.user_id,
 			userName: detail.sale_name,
-			loading: false,
-			needUpdate: false
+			loadedStoreDetail: true,
+			needUpdateStore: true,
+			bondListStatus: this.data.loadedStoreDetail ? getStatus.FRESH : getStatus.INIT
 		})
 	},
 
@@ -45,10 +43,6 @@ Page({
 		this.setData({
 			bondListStatus: e.detail
 		})
-	},
-
-	initData: function () {
-		this.isStoreOpened()
 	},
 
 	doShareStore: function (userId) {
@@ -73,7 +67,7 @@ Page({
 	 */
 	onShow: function () {
 		redPoint.hideTabBarRedDot()
-		this.initData()
+		this.isStoreOpened()
 	},
 
 	/**
@@ -81,8 +75,9 @@ Page({
 	 */
 	onHide: function () {
 		this.setData({
-			needUpdate: false,
-			loading: !this.data.isStoreRegistered
+			needUpdateDetail: false,
+			needUpdateStore: false,
+			bondListStatus: getStatus.ENDLOADED
 		})
 	},
 
@@ -97,9 +92,7 @@ Page({
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function () {
-		console.log('overview onPullDownRefresh.....')
 		this.setData({
-			needUpdate: true,
 			bondListStatus: getStatus.FRESH
 		})
 	},
@@ -108,6 +101,7 @@ Page({
 	 * 页面上拉触底事件的处理函数
 	 */
 	onReachBottom: function () {
+		console.log('onReachBottom.....')
 		this.setData({
 			bondListStatus: getStatus.LOADMORE
 		})
@@ -117,13 +111,6 @@ Page({
 	 * 用户点击右上角分享
 	 */
 	onShareAppMessage: function (ops) {
-		if (ops.from === 'button') {
-			//
-			// console.log('button')
-		} else {
-			//
-		}
-
 		let userId = this.data.userId
 		let path = '/app/page/market/market?to=store&uid=' + userId
 		let that = this

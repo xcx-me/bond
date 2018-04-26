@@ -1,15 +1,26 @@
 <!--app/ui/list/bond-list/bond-list.wxml-->
 <import src="../../template/blank-signal/blank-signal.wxml" />
-<view class='bond-list-component' bindtouchmove='onTouchMove'>
-	<block wx:for='{{bondList}}' wx:for-item='bondItem' wx:for-index='index' wx:key='bond_simple_name'>
-		<view class='bond-list-item' id='item-{{index}}' bindtap='doClickBond' data-index='{{index}}'>
-			<SingleBond isMine='{{isMine}}' from='{{from}}' index='{{index}}' bondInfo='{{bondItem}}' bondId='{{bondItem.bond_id||""}}' bind:deleteBondEvent='onDeleteBondEvent' bind:modifyBondEvent='onModifyBondEvent'/>
-		</view>
-	</block>
-	<view wx:if="{{!loading && bondList.length === 0}}" class='no-bond-list'>
-		<template is='blankSignalTpl' data='{{prompt: "暂无债券", from: from}}'></template>
+<import src='../../template/line-text-line/line-text-line.wxml' />
+<view class='bond-list-display-component' bindtouchmove='onTouchMove'>
+	<view wx:if='{{bondList.length > 0}}'>
+		<block wx:for='{{bondList}}' wx:for-item='bondItem' wx:for-index='index' wx:key='bond_simple_name'>
+			<view class='bond-list-item' id='item-{{index}}' bindtap='doClickBond' data-index='{{index}}'>
+				<SingleBond isMine='{{isMine}}' from='{{from}}' index='{{index}}' bondInfo='{{bondItem}}' bondId='{{bondItem.bond_id||""}}' bind:deleteBondEvent='onDeleteBondEvent' bind:modifyBondEvent='onModifyBondEvent'/>
+			</view>
+		</block>
+	</view>
+	<view wx:else class='no-bond-list'>
+		<template is='blankSignalTpl' data='{{prompt: from === "detail" ? "暂无更多债券": "暂无债券", from: from}}'></template>
 	</view>
 </view>
+<view class="loading-more" hidden="{{!moreLoading}}">
+	<view class="icon"></view>
+	<view class="tips"><text>正在努力加载...</text></view>
+</view>
+	<view class="loading-over" hidden="{{!overLoaded || bondList.length === 0}}">
+	<template is='lineTextLineTpl' data='{{title: "没有更多了"}}'></template>
+</view>
+
 <view class="dialog-container">
 	<Dialog id='delete-dialog'
 		title='温馨提示'

@@ -1,21 +1,16 @@
 <!--app/ui/bond-list/bond-list.wxml-->
-<import src='../../template/line-text-line/line-text-line.wxml' />
 <loading wx:if='{{firstLoading}}'>加载中...</loading>
 <view hidden='{{firstLoading}}' class='bond-list-component'>
-	<BondListDisplay from='{{from}}'
-					isMine='{{isMine}}'
-					loading='{{firstLoading}}'
-					isModifying='{{isModifying}}'
-					bondList='{{bondList}}'
-					uid='{{uid}}'
-					userId='{{userId}}' 
-					bind:doDeleteBondEvent='onDoDeleteBondEvent' bind:willDeleteBondEvent='onWillDeleteBondEvent'/>
-
-	<view class="loading-more" hidden="{{!moreLoading}}">
-		<view class="icon"></view>
-		<view class="tips"><text>正在努力加载...</text></view>
-	</view>
-	<view class="loading-over" hidden="{{!overLoaded || bondList.length === 0}}">
-		<template is='lineTextLineTpl' data='{{title: "没有更多了"}}'></template>
-	</view>
+	<BondListDisplay 
+		from='{{from}}'
+		isMine='{{isMine}}'
+		moreLoading='{{moreLoading}}'
+		overLoaded='{{overLoaded}}'
+		isModifying='{{isModifying}}'
+		bondList='{{bondList}}'
+		uid='{{uid}}'
+		userId='{{userId}}' 
+		bind:doDeleteBondEvent='onDoDeleteBondEvent' 
+		bind:willDeleteBondEvent='onWillDeleteBondEvent'
+	/>
 </view>

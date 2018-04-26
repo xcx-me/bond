@@ -60,6 +60,9 @@ Component({
 		* 内部私有方法建议以下划线开头
 		* triggerEvent 用于触发事件
 		*/
+		onDoNothing() {
+
+		},
 		_cancelEvent() {
 			//触发取消回调
 			this.triggerEvent("cancelEvent")

@@ -12,7 +12,7 @@ Page({
 		intervalTimer: 0,
 		bondListType: getType.ADMIN,
 		bondListStatus: getStatus.INIT,
-		isPostionFixed: false,
+		isDeleting: false,
 		isModifying: false
 	},
 
@@ -27,7 +27,8 @@ Page({
 			this.setData({
 				isModifying: false
 			})
-			wx.navigateTo({url: '../quotation/quotation'})
+			console.log('createQuotation....... to /app/page/quotation/quotation', getCurrentPages())
+			wx.navigateTo({url: '/app/page/quotation/quotation'})
 		})
 	},
 
@@ -46,8 +47,9 @@ Page({
 	},
 
 	onDeleteBondEvent: function (e) {
+		console.log(e.detail)
 		this.setData({
-			isPostionFixed: e.detail
+			isDeleting: e.detail
 		})
 	},
 
@@ -60,19 +62,13 @@ Page({
 	},
 
 	onShow: function () {
-		redPoint.setTabBarRedDot()
-		this.data.intervalTimer = setInterval(() => {
-			redPoint.setTabBarRedDot()
-		}, 1000 * 60)
-		wx.pageScrollTo({
-			scrollTop: 0
-		})
+		this.data.intervalTimer = redPoint.startTabBarRedDot()
 		this.isStoreOpened()
 	},
 
 
 	onHide: function () {
-		clearInterval(this.data.intervalTimer)
+		redPoint.stopTabBarRedDot(this.data.intervalTimer)
 		this.setData({
 			loading: !this.data.isStoreRegistered
 		})
@@ -89,7 +85,8 @@ Page({
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function (e) {
-		if (this.data.isPostionFixed) {
+		console.log('onPullDownRefresh..', this.data.isDeleting)
+		if (this.data.isDeleting) {
 			return
 		}
 		this.setData({
@@ -101,7 +98,7 @@ Page({
 	 * 页面上拉触底事件的处理函数
 	 */
 	onReachBottom: function (e) {
-		if (this.data.isPostionFixed) {
+		if (this.data.isDeleting) {
 			return
 		}
 		this.setData({

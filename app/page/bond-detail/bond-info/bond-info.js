@@ -9,11 +9,19 @@ Component({
 	  },
 
 	properties: {
+		currentTabId: {
+			type: String,
+			value: ''
+		},
 		bondId: {
 			type: String,
 			value: ''
 		},
 		isMyStore: {
+			type: Boolean,
+			value: false,
+		},
+		loadingStoreDetail: {
 			type: Boolean,
 			value: false,
 		},

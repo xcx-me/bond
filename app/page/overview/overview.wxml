@@ -1,13 +1,25 @@
-
-<view class='overview-page page-wrapper'>
+<view wx:if='{{loadedStoreRegistered}}'class='overview-page page-wrapper'>
 	<StoreDetail navigatorUrl='../my-configuration/my-configuration' 
 		userId='{{uid}}'
 		isRegistered='{{isStoreRegistered}}'
-		needUpdate='{{needUpdate}}' 
+		needUpdate='{{needUpdateDetail}}' 
 		bindevent='onUpdateStoreDetail'
 	/>
-	<view class='store-pallet' hidden='{{loading}}'>
-		<MyStore isStoreRegistered='{{isStoreRegistered}}' bondListType='{{bondListType}}' bondListStatus='{{bondListStatus}}' uid='{{uid}}' userId='{{userId}}' needUpdate='{{needUpdate}}' bind:updateEvent='onUpdateBondListStatusEvent'/>
+	<view wx:if='{{loadedStoreDetail}}' class='store-pallet'>
+		<MyStore 
+			isRegistered='{{isStoreRegistered}}'
+			bondListType='{{bondListType}}'
+			bondListStatus='{{bondListStatus}}'
+			uid='{{uid}}'
+			userId='{{userId}}'
+			needUpdate='{{needUpdateStore}}' 
+			bind:updateEvent='onUpdateBondListStatusEvent'/>
+	</view>
+	<view wx:else class='loading-store-detail'>
+		<loading>加载中...</loading>
 	</view>
 	<ShareButton wx:if='{{isStoreRegistered}}'/>
+</view>
+<view wx:else class='loading-store-registered'>
+	<loading>加载中...</loading>
 </view>

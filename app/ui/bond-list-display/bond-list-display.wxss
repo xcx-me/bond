@@ -28,8 +28,15 @@
 .blank-signal-tpl.detail {
   margin-top: 0;
 }
-.bond-list-component .bond-list-item {
+.bond-list-display-component .bond-list-item {
   margin-top: 20rpx;
+}
+.bond-list-display-component .loading-more,
+.bond-list-display-component .loading-over {
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
 }
 .operator-pallet {
   position: absolute;

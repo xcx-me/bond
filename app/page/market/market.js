@@ -4,6 +4,17 @@ const config = require('../../util/ajax/config')
 const common = require('../../util/common')
 const navigate = require('../../util/navigate/navigate')
 const redPoint = require('../../util/red-point/red-point')
+const initFilterValue = {
+	bond_type: 0,
+	deadline: 0,
+	subject_rating: 0,
+	date: common.formatDate(new Date()),
+	key: '',
+	bond_status: '1',
+	current_page: 1,
+	max_page: 1,
+	page_size: 10
+}
 Page({
 	/**
 	 * 页面的初始数据
@@ -14,48 +25,25 @@ Page({
 		winIssuesHeight: 0,
 		tabIdList: ['consultation', 'announcement', 'issues'],
 		currentTabId: 'consultation',
-		filterValue: {
-			bond_type: 0,
-			deadline: 0,
-			subject_rating: 0,
-			date: common.formatDate(new Date()),
-			key: '',
-			// 
-			bond_status: '1',
-			current_page: 1,
-			max_page: 1,
-			page_size: 10
-		},
+		filterValue: JSON.parse(JSON.stringify(initFilterValue)),
 		bondList: [],
 		loading: true,
-		loadMore: false,
-		// scrollTop: '',
+		moreLoading: false,
 		intervalTimer: 0,
-		isShowFilter: false,
 		isShowMask: false,
 		bondSimpleName: '',
 		saleList: []
 	},
 
 	initFilter: function (bondStatus) {
-		return {
-			bond_type: 0,
-			deadline: 0,
-			subject_rating: 0,
-			date: common.formatDate(new Date()),
-			key: '',
-			// 
-			bond_status: bondStatus,
-			current_page: 1,
-			max_page: 1,
-			page_size: 10
-		}
+		let filterValue = JSON.parse(JSON.stringify(initFilterValue))
+		filterValue.bond_status = bondStatus
+		return filterValue
 	},
 
 	onDoFilter: function (e) {
 		let filterValue = Object.assign(this.data.filterValue, e.detail)
 		this.setData({
-			isShowFilter: false,
 			isShowMask: false,
 			filterValue: filterValue
 		})
@@ -64,13 +52,11 @@ Page({
 
 	onShowFilterEvent: function (e) {
 		this.setData({
-			isShowFilter: e.detail,
 			isShowMask: e.detail
 		})
 	},
 
 	onShowSaleEvent: function (e) {
-		console.log('onShowSaleEvent...', e)
 		this.setData({
 			saleList: e.detail.saleList,
 			bondSimpleName: e.detail.bondSimpleName,
@@ -113,7 +99,7 @@ Page({
 				lastData.filterValue.max_page = maxPage
 				// 13
 				lastData.loading = false
-				lastData.loadMore = false
+				lastData.moreLoading = false
 
 				if (OperationType === getApp().data.bindscrolltolower) {
 					lastData.bondList = lastData.bondList.concat(result.data.retdata.bond_array)
@@ -124,9 +110,9 @@ Page({
 				
 				lastData.bondList = result.data.retdata.bond_array
 				this.setData(lastData)
-				// wx.pageScrollTo({
-				// 	scrollTop: 0
-				// })
+				wx.pageScrollTo({
+					scrollTop: 0
+				})
 				
 				if (OperationType === getApp().data.onPullDownRefresh) {
 					wx.hideNavigationBarLoading() // 完成停止加载
@@ -142,13 +128,9 @@ Page({
 	onLoad: function (options) {
 		let to = options.to 
 		if (to === 'store') {
-			wx.navigateTo({
-				url: '/app/page/store/store?from=share&uid=' + options.uid
-			})
+			navigate.toStoreByShare(options.uid)
 		} else if (to === 'bond-detail') {
-			wx.navigateTo({
-				url: '/app/page/bond-detail/bond-detail?from=share&bid=' + options.bid +'&uid=' + options.uid + '&tid=' + options.tid
-			})
+			navigate.toBondDetailByShare(options.uid, options.bid, options.tid)
 		}
 		
 		this.getBondList()
@@ -161,7 +143,7 @@ Page({
 				that.setData({
 					winWidth: res.windowWidth,
 					winHeight: res.windowHeight - (res.windowWidth / 750 * 80),
-					winIssuesHeight: res.windowHeight - (res.windowWidth / 750 * 160)
+					winIssuesHeight: res.windowHeight - (res.windowWidth / 750 * 200)
 				})
 			}
 		})
@@ -182,7 +164,6 @@ Page({
 		lastData.currentTabId = currentTabId
 		lastData.loading = true
 		lastData.filterValue = this.initFilter(bondStatus)
-		lastData.isShowFilter = false
 		this.setData(lastData)
 		this.getBondList()
 	},
@@ -197,30 +178,25 @@ Page({
 		})
 	},
 
-	// 上拉加载
 	bindDownLoad: function(e) {
+		// console.log('market bindDownLoad.....', this.data)
 		let lastData = this.data
 		if (lastData.filterValue.current_page < lastData.filterValue.max_page) {
 			lastData.filterValue.current_page++
 			// 13
 			lastData.loading = false
-			lastData.loadMore = true
+			lastData.moreLoading = true
 			this.setData(lastData)
-			// setTimeout(() => {
-			// 	this.getBondList(getApp().data.bindscrolltolower)
-			// }, 1000)
 			this.getBondList(getApp().data.bindscrolltolower)
 		}
 	},
 
 	topLoad: function(e) {},
 
-	scroll: function(e) {
-		// console.log(e)
-	},
+	scroll: function(e) {},
 
 	ballMoveEvent: function(e) { // 此处函数不起作用，到时候记得将html代码中绑定的函数解绑
-		console.log('我被拖动了.....', e)
+		// console.log('我被拖动了.....', e)
 	},
 
 	/**
@@ -232,17 +208,14 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-		redPoint.setTabBarRedDot()
-		this.data.intervalTimer = setInterval(() => {
-			redPoint.setTabBarRedDot()
-		}, 1000 * 60)
+		this.data.intervalTimer = redPoint.startTabBarRedDot()
 	},
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
 	onHide: function () {
-		clearInterval(this.data.intervalTimer)
+		redPoint.stopTabBarRedDot(this.data.intervalTimer)
 	},
 
 	/**

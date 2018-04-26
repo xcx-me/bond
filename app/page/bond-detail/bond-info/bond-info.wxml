@@ -8,8 +8,8 @@
 		}
 	}
 </wxs>
-<loading wx:if='{{loading}}'>加载中...</loading>
-<view class='bond-info-component' hidden='{{loading}}'>
+
+<view class='bond-info-component' wx:if='{{!loadingStoreDetail && !loading && currentTabId === "detail"}}'>
 	<view class='info-item sale'>
 		<BondSaleInfo isMyStore='{{isMyStore}}' bondSaleInfo='{{bondInfo.sale_info}}' isQtrade='{{bondInfo.is_qtrade === "1"}}' fieldList='{{bondInfoFieldList.sale}}'/>
 	</view>
@@ -28,3 +28,4 @@
 		<BondAttached nameList='{{bondInfoUtil.parse(bondInfo.attached_names, "|")}}' urlList='{{bondInfoUtil.parse(bondInfo.attached_urls, "|")}}'/>
 	</view>
 </view>
+<loading wx:else>加载中...</loading>

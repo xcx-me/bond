@@ -105,6 +105,10 @@ Page({
 					submitQuoteBtnEnable: false
 				})
 				setTimeout(()=>{
+					var pages = getCurrentPages(),//获取页面栈
+					currpage = pages[pages.length - 1], //当前页面
+					prevPage = pages[pages.length - 2]; //上一个页面（父页面）
+					console.log(currpage, prevPage)
 					wx.navigateBack()
 				}, 1500)
 			} else {
