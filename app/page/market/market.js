@@ -199,7 +199,6 @@ Page({
 
 	// 上拉加载
 	bindDownLoad: function(e) {
-		// console.log(e)
 		let lastData = this.data
 		if (lastData.filterValue.current_page < lastData.filterValue.max_page) {
 			lastData.filterValue.current_page++
