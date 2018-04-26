@@ -16,7 +16,8 @@
         "app/page/edit-sale-info/edit-sale-info",
         "app/page/mobile-form/mobile-form",
         "app/page/user-detail-form/user-detail-form",
-        "app/page/email-validation-form/email-validation-form"
+        "app/page/email-validation-form/email-validation-form",
+        "app/page/user-detail-submission-complete/user-detail-submission-complete"
     ],
     "window": {
         "backgroundTextStyle": "light",

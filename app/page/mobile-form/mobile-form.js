@@ -1,5 +1,4 @@
 const UiType = require('../../ui/form-viewer-editor/ui-type')
-
 const FormViewerEditorUtil = require('../../ui/form-viewer-editor/form-viewer-editor-util')
 const RegexpUtil = require('../../util/regexp-util/regexp-util')
 const Toast = require('../../util/toast/toast')
@@ -113,13 +112,12 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		// wx.redirectTo({url: '../user-detail-form/user-detail-form'})
-
 		// Below code is to fix an issue that last user entered charactor will stay in the mobile number field. 
-		let descriptors = this.data.descriptors
 		this.setData({
-			descriptors: descriptors
+			descriptors: this.data.descriptors
 		})
+
+		wx.redirectTo({url: '../user-detail-form/user-detail-form'})
 	},
 
 	/**

@@ -1,0 +1,14 @@
+.register-store-complete {
+  text-align: center;
+}
+.register-store-complete .reviewing {
+  height: 186rpx;
+  margin: 80rpx 0 50rpx;
+}
+.register-store-complete .title {
+  font-size: 40rpx;
+}
+.register-store-complete .description {
+  font-size: 30rpx;
+  margin: 40rpx 0;
+}
