@@ -31,14 +31,6 @@ Component({
 			type: Number,
 			value: getType.OTHERS
 		},
-		isDeleting: {
-			type: Boolean,
-			value: false
-		},
-		isModifying: {
-			type: Boolean,
-			value: false
-		},
 		status: {
 			type: Number,
 			value: getStatus.INIT,
@@ -125,10 +117,6 @@ Component({
 				this.updateBondList(status, retBondList, limit)
 				this.updataStatus(status)
 			})
-		},
-
-		onWillDeleteBondEvent: function (e) {
-			this.triggerEvent('deleteEvent', true)
 		},
 
 		onDoDeleteBondEvent: function (e) {

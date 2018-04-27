@@ -64,14 +64,14 @@ Component({
 
 		onFormSubmit: function(e) {
 			let content = this.data.content
-			this.setData({
-				isSubmitting: true
-			})
 			if (content.replace(/(^\s*)|(\s*$)/g, '').length === 0) {
 				this.setData({
 					errTips: '输入为空'
 				})
 			}else {
+				this.setData({
+					isSubmitting: true
+				})
 				if (this.data.isAsk) {
 					request(config.NEW_BOND.askQuestion, {
 						bond_simple_name: this.data.bondSimpleName,

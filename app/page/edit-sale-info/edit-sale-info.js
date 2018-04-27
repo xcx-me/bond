@@ -15,6 +15,7 @@ Page({
 			{name: 'sale_type', label: '销售方式', types:[{name:'sale_type', formType: 'checkbox', items: [{label: '分销', value: '1'},{label: '上市', value: '2'}]}]}
 		],
 		isSubmitDisabled: true,
+		isSubmitting: '',
 		loading: true,
 		saveValue: {
 			little_left: '',
@@ -93,8 +94,21 @@ Page({
 			return
 		}
 
-		request(config.NEW_BOND.modNewBondDetail, this.data.saveValue).then((result) => {
-			wx.navigateBack()
+		this.setData({
+			isSubmitting: true
+		})
+
+		request(config.NEW_BOND.modNewBondDetail, this.data.saveValue, true).then((result) => {
+			this.setData({
+				isSubmitting: false
+			})
+			if (String(result.ret) === '0') {
+				wx.navigateBack()
+			}
+		}).catch(()=> {
+			this.setData({
+				isSubmitting: false
+			})
 		})
 	},
 

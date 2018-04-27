@@ -10,7 +10,7 @@
 			<i class='icon-right-arrow' />
 		</view>
 		<view class='bond-list-pallet'>
-			<BondList type='{{bondListType}}' status='{{bondListStatus}}' from='admin' isMine='{{true}}' uid='0' userId='0' isModifying='{{isModifying}}' isDeleting='{{isDeleting}}' bind:deleteEvent='onDeleteBondEvent'/>
+			<BondList type='{{bondListType}}' status='{{bondListStatus}}' from='admin' isMine='{{true}}' uid='0' userId='0'/>
 		</view>
 	</block>
 </view>

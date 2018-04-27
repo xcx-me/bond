@@ -1,8 +1,8 @@
-// app/page/administration/administration.js
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const redPoint = require('../../util/red-point/red-point')
 const {getStatus, getType} = require('../../util/type/bond-list')
+const Authentication = require('../../util/authentication/authentication')
 
 Page({
 	data: {
@@ -11,21 +11,10 @@ Page({
 		intervalTimer: 0,
 		bondListType: getType.ADMIN,
 		bondListStatus: getStatus.INIT,
-		isDeleting: false,
-		isModifying: false
 	},
 
 	createQuotation: function () {
-		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
-			// result.data = {ret: '0', retmsg: 'OK', retdata: {enable: true, v: flase, audit: false}}
-			// result.retdata.v = false
-			if (!result.retdata.v) {
-				wx.navigateTo({url: '../mobile-form/mobile-form'})
-				return
-			}
-			this.setData({
-				isModifying: false
-			})
+		Authentication.checkAuthentication(() => {
 			wx.navigateTo({url: '/app/page/quotation/quotation'})
 		})
 	},
@@ -46,12 +35,6 @@ Page({
 		})
 	},
 
-	onDeleteBondEvent: function (e) {
-		this.setData({
-			isDeleting: e.detail
-		})
-	},
-
 	onLoad: function (options) {
 
 	},
@@ -69,9 +52,7 @@ Page({
 	onHide: function () {
 		redPoint.stopTabBarRedDot(this.data.intervalTimer)
 		this.setData({
-			loading: !this.data.isStoreRegistered,
-			isModifying: false,
-			isDeleting: false
+			loading: !this.data.isStoreRegistered
 		})
 	},
 
@@ -86,9 +67,6 @@ Page({
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function (e) {
-		if (this.data.isDeleting) {
-			return
-		}
 		this.setData({
 			bondListStatus: getStatus.FRESH
 		})
@@ -98,9 +76,6 @@ Page({
 	 * 页面上拉触底事件的处理函数
 	 */
 	onReachBottom: function (e) {
-		if (this.data.isDeleting) {
-			return
-		}
 		this.setData({
 			bondListStatus: getStatus.LOADMORE
 		})

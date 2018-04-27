@@ -111,10 +111,13 @@ Page({
 			request(config.USER_REGISTER.activateMobile, {
 				mobile: submissionObject.mobileNumber,
 				code: submissionObject.mobileValidationCode
-			}).then((result) => {
+			}, true).then((result) => {
+				result.retdata = {
+					is_new: false
+				}
 				result.retdata.is_new
 					? wx.redirectTo({url: '../user-detail-form/user-detail-form'})
-					: wx.redirectTo({url: '../user-detail-form/user-detail-form'})
+					: wx.redirectTo({url: '../user-register-complete/user-register-complete'})
 			})
 		}
 	},

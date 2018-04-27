@@ -1,7 +1,7 @@
 <!--app/ui/list/bond-list/bond-list.wxml-->
 <import src="../../template/blank-signal/blank-signal.wxml" />
 <import src='../../template/line-text-line/line-text-line.wxml' />
-<view class='bond-list-display-component' bindtouchmove='onTouchMove'>
+<view class='bond-list-display-component'>
 	<view wx:if='{{bondList.length > 0}}'>
 		<block wx:for='{{bondList}}' wx:for-item='bondItem' wx:for-index='index' wx:key='bond_simple_name'>
 			<view class='bond-list-item' id='item-{{index}}' bindtap='doClickBond' data-index='{{index}}'>
@@ -21,16 +21,6 @@
 	<template is='lineTextLineTpl' data='{{title: "没有更多了"}}'></template>
 </view>
 
-<view class="dialog-container">
-	<Dialog id='delete-dialog'
-		title='温馨提示'
-		content='请确定是否删除该债券？'
-		cancelText='取消'
-		confirm='确认'
-		bind:cancelEvent="_cancelDelEvent"
-		bind:confirmEvent="_confirmDelEvent">
-	</Dialog>	
-</view>
 <view class='operator-pallet' hidden='{{!isShowModifyPallet}}' style='top:{{modifyPalletTop}}px;'>
 	<view class='operator-item' catchtap='onModifySaleInfo'><image src='/app/asset/image/qtrade/modify_24.svg'/><text>修改销售信息</text></view>
 	<view class='operator-item' catchtap='onModifyBondDetail'><image src='/app/asset/image/qtrade/modify_24.svg'/><text>修改债券详情</text></view>
