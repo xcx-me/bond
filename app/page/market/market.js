@@ -112,11 +112,7 @@ Page({
 			if (status === getStatus.LOADMORE) {
 				wx.hideLoading()
 				return
-			} 
-			
-			wx.pageScrollTo({
-				scrollTop: 0
-			})
+			}
 			
 			if (status === getStatus.FRESH) {
 				wx.hideNavigationBarLoading() // 完成停止加载
