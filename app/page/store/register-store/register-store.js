@@ -1,5 +1,5 @@
 // app/page/store/register-store/register-store.js
-const commonUtil = require('../../../util/common')
+const toast = require('../../../util/toast/toast')
 const service = require('../../../util/service/service')
 Component({
   /**
@@ -28,7 +28,7 @@ Component({
 				url: '/app/page/register-store-complete/register-store-complete'
 			})
 		}, () => {
-			commonUtil.showToast('操作失败，请稍后再试', 'none', 1000)
+			toast.showFailedToast()
 		})
   	},
   }

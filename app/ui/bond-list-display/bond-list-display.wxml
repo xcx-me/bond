@@ -17,7 +17,7 @@
 	<view class="icon"></view>
 	<view class="tips"><text>正在加载</text></view>
 </view>
-	<view class="loading-over" hidden="{{!overLoaded || bondList.length === 0}}">
+<view class="loading-over" hidden="{{!overLoaded || bondList.length === 0}}">
 	<template is='lineTextLineTpl' data='{{title: "没有更多了"}}'></template>
 </view>
 
