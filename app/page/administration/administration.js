@@ -1,7 +1,6 @@
 // app/page/administration/administration.js
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
-const service = require('../../util/service/service')
 const redPoint = require('../../util/red-point/red-point')
 const {getStatus, getType} = require('../../util/type/bond-list')
 
@@ -19,8 +18,8 @@ Page({
 	createQuotation: function () {
 		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
 			// result.data = {ret: '0', retmsg: 'OK', retdata: {enable: true, v: flase, audit: false}}
-			result.data.retdata.v = false
-			if (!result.data.retdata.v) {
+			result.retdata.v = false
+			if (!result.retdata.v) {
 				wx.navigateTo({url: '../mobile-form/mobile-form'})
 				return
 			}
@@ -33,6 +32,7 @@ Page({
 
 	isStoreOpened: function () {
 		request(config.NEW_BOND.isStoreOpened, {}).then((result) => {
+			console.log('isStoreOpened...', result)
 			let retData = result.retdata
 			let isStoreRegistered = String(retData.is_myshop_opened) === '1'
 			wx.setNavigationBarTitle({

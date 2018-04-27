@@ -1,5 +1,7 @@
 // app/ui/bond-list/bond-list.js
 const service = require('../../util/service/service')
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
 const {getStatus, getType} = require('../../util/type/bond-list')
 Component({
   /**
@@ -42,7 +44,6 @@ Component({
 			type: Number,
 			value: getStatus.INIT,
 			observer: function(newVal, oldVal) {
-				console.log('bond-list status', newVal, oldVal, this.data.from)
 				if (newVal !== getStatus.ENDLOADED) {
 					this.getBondList(this.data.type, newVal)
 				}
@@ -80,21 +81,16 @@ Component({
 				})
 			}
 
-			let bondId = type === getType.OTHERS ? this.data.bondId : ''
-			let userId = type === getType.MYOTHERS || type === getType.OTHERS ? this.data.userId : ''
-			let offset = status === getStatus.LOADMORE ? this.data.page * this.data.pageSize : 0
 			let limit = status === getStatus.UPDATE ? Math.max(this.data.bondList.length, this.data.pageSize) : this.data.pageSize
-		
 			let postData = {
-				bond_id: bondId,
-				user_id: userId,
-				offset: offset,
+				bond_id: type === getType.OTHERS ? this.data.bondId : '',
+				user_id: type === getType.MYOTHERS || type === getType.OTHERS ? this.data.userId : '',
+				offset: status === getStatus.LOADMORE ? this.data.page * this.data.pageSize : 0,
 				limit: limit,
 				type: type
 			}
-			
-			service.getBondList(postData, (result) => {
-				let retBondList = result.data.retdata.bond_list
+			request(config.NEW_BOND.newBondList, postData).then((result) => {
+				let retBondList = result.retdata.bond_list
 				let bondList = status === getStatus.LOADMORE ? this.data.bondList.concat(retBondList) : retBondList
 				let overLoaded = retBondList.length < limit
 				let page = status === getStatus.INIT || status === getStatus.FRESH ? 0 : this.data.page
@@ -111,9 +107,8 @@ Component({
 					wx.hideNavigationBarLoading() // 完成停止加载
 					wx.stopPullDownRefresh() // 停止下拉刷新
 				}
-
 				this.data.status = getStatus.ENDLOADED
-			})	
+			})
 		},
 
 		onWillDeleteBondEvent: function (e) {
