@@ -51,6 +51,7 @@
   width: 100%;
   position: fixed;
   left: 0;
+  margin-top: -3rpx;
   z-index: 1;
   padding: 0;
   background: #FFFFFF;

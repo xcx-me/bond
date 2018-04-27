@@ -9,7 +9,6 @@ Component({
 		type: Boolean,
 		value: false,
 		observer: function(newVal, oldVal) {
-			console.log('filter isShow....', newVal, oldVal)
 			if (!newVal) {
 				this.initFilter()
 			}	
@@ -19,7 +18,6 @@ Component({
 		type: String,
 		value: false,
 		observer: function(newVal, oldVal) {
-			console.log('filter tabId....', newVal, oldVal)
 			if (newVal) {
 				this.initFilter()
 			}	
@@ -31,6 +29,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+	prevFilterConfig: JSON.parse(JSON.stringify(filter.defaultConfig)),
 	filterConfig: JSON.parse(JSON.stringify(filter.defaultConfig)),
 	filterValue: {},
 	selectIndex: 0
@@ -46,7 +45,7 @@ Component({
   methods: {
 	onShowFilter: function (e) {
 		let selectIndex = e.currentTarget.dataset.index
-		let filterConfig = this.data.filterConfig
+		let filterConfig = JSON.parse(JSON.stringify(this.data.prevFilterConfig))
 		filterConfig.map((filter, index) => {
 			filter.isShow = String(index) === String(selectIndex)
 		})
@@ -66,32 +65,7 @@ Component({
 		})
 	},
 
-	onHideFilter: function() {
-		this.initFilter()
-		this.triggerEvent('showFilterEvent', false)
-	},
-
 	checkboxChange: function (e) {
-		// let index = e.currentTarget.dataset.index
-		// let filterConfig = this.data.filterConfig
-		// filterConfig[index].values.map((item) => {
-		// 	item.isSelected = false
-		// })
-
-		// let valueList = e.detail.value
-		// let len = valueList.length
-		// if (len === 0 || valueList[len - 1] === '0') {
-		// 	filterConfig[index].values[0].isSelected = true
-		// } else {
-		// 	valueList.map((value) => {
-		// 		filterConfig[index].values[parseInt(value)].isSelected = value !== '0'
-		// 	})
-		// }
-				
-		// this.setData({
-		// 	curSelectList: valueList,
-		// 	filterConfig: filterConfig
-		// })
 	},
 
 	clickFilterOption: function (e) {
@@ -148,11 +122,22 @@ Component({
 		})
 		
 		this.setData({
+			prevFilterConfig: JSON.parse(JSON.stringify(filterConfig)),
 			filterConfig: filterConfig,
 			filterValue: filterValue
 		})
 
 		this.triggerEvent('doFilterEvent', filterValue)
+	},
+
+	onCancel: function (e) {
+		let filterConfig = JSON.parse(JSON.stringify(this.data.prevFilterConfig))
+		let index = e.currentTarget.dataset.index
+		filterConfig[index].isShow = false	
+		this.setData({
+			filterConfig: filterConfig
+		})
+		this.triggerEvent('doFilterEvent', null)
 	}
   }
 })
