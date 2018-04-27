@@ -1,1 +1,5 @@
-<operation-successful />
+<operation-successful
+	imagePath='/app/asset/image/qtrade/wait_for_186.svg'
+	title='审核中'
+	description='您提交的资料正在审核中，请耐心等待'
+	buttonLabel='继续' />

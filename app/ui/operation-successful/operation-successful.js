@@ -4,7 +4,22 @@ Component({
 	 * 组件的属性列表
 	 */
 	properties: {
-
+		title: {
+			type: String,
+			value: ''
+		},
+		description: {
+			type: String,
+			value: ''			
+		},
+		buttonLabel: {
+			type: String,
+			value: ''				
+		},
+		imagePath: {
+			type: String,
+			value: ''				
+		}
 	},
 
 	/**
