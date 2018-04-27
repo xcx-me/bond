@@ -43,17 +43,23 @@ Page({
 	},
 
 	onDoFilter: function (e) {
-		let filterValue = Object.assign(this.data.filterValue, e.detail)
-		this.setData({
-			isShowMask: false,
-			filterValue: filterValue
-		})
-		this.getBondList()
+		if (e.detail) {
+			let filterValue = Object.assign(this.data.filterValue, e.detail)
+			this.setData({
+				isShowMask: false,
+				filterValue: filterValue
+			})
+			this.getBondList()
+		} else {
+			this.setData({
+				isShowMask: false
+			})
+		}
 	},
 
 	onShowFilterEvent: function (e) {
 		this.setData({
-			isShowFilter: true,
+			isShowFilter: e.detail,
 			isShowMask: e.detail
 		})
 	},
@@ -219,6 +225,7 @@ Page({
 	onHide: function () {
 		redPoint.stopTabBarRedDot(this.data.intervalTimer)
 		this.setData({
+			isShowMask: false,
 			isShowFilter: false
 		})
 	},

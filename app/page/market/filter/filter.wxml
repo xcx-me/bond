@@ -25,14 +25,14 @@
 									<checkbox value="{{optionIndex}}" checked="{{item.isSelected}}" disabled='{{optionIndex === 0 && item.isSelected}}' color='#2196F3'/><text class='value'>{{item.title}}</text>
 								</view>
 							</view>
-						</block>s
+						</block>
 					</checkbox-group>
 				</scroll-view>
 				<view class='filter-pallet-btn'>
 					<view class='btn btn-reset' bindtap='onReset' data-index='{{index}}'><text>重置</text></view>
 					<view class='btn btn-confirm' bindtap='onConfirm' data-index='{{index}}'><text>确定</text></view>
 				</view>
-				<view class='filter-mask' catchtap='onHideFilter'></view>
+				<view class='filter-mask' catchtap='onCancel' data-index='{{index}}'></view>
 			</view>
 		</view>
 	</block>
