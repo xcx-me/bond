@@ -11,15 +11,10 @@ Page({
 		intervalTimer: 0,
 		bondListType: getType.ADMIN,
 		bondListStatus: getStatus.INIT,
-		isDeleting: false,
-		isModifying: false
 	},
 
 	createQuotation: function () {
 		Authentication.checkAuthentication(() => {
-			this.setData({
-				isModifying: false
-			})
 			wx.navigateTo({url: '/app/page/quotation/quotation'})
 		})
 	},
@@ -40,12 +35,6 @@ Page({
 		})
 	},
 
-	onDeleteBondEvent: function (e) {
-		this.setData({
-			isDeleting: e.detail
-		})
-	},
-
 	onLoad: function (options) {
 
 	},
@@ -63,9 +52,7 @@ Page({
 	onHide: function () {
 		redPoint.stopTabBarRedDot(this.data.intervalTimer)
 		this.setData({
-			loading: !this.data.isStoreRegistered,
-			isModifying: false,
-			isDeleting: false
+			loading: !this.data.isStoreRegistered
 		})
 	},
 
@@ -80,9 +67,6 @@ Page({
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function (e) {
-		if (this.data.isDeleting) {
-			return
-		}
 		this.setData({
 			bondListStatus: getStatus.FRESH
 		})
@@ -92,9 +76,6 @@ Page({
 	 * 页面上拉触底事件的处理函数
 	 */
 	onReachBottom: function (e) {
-		if (this.data.isDeleting) {
-			return
-		}
 		this.setData({
 			bondListStatus: getStatus.LOADMORE
 		})

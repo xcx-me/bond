@@ -1,5 +1,4 @@
 // app/page/bond-detail/other-bonds/other-bonds.js
-const service = require('../../../util/service/service')
 Component({
   properties: {
 	bondId: {

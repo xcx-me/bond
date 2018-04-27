@@ -1,6 +1,4 @@
 // app/page/ask/ask.js
-const service = require('../../util/service/service')
-
 Page({
 
   /**

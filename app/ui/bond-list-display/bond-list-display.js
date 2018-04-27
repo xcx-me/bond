@@ -1,5 +1,6 @@
 // app/ui/list/bond-list/bond-list.js
 const navigate = require('../../util/navigate/navigate')
+const Authentication = require('../../util/authentication/authentication')
 
 Component({
   /**
@@ -25,27 +26,6 @@ Component({
 	isMine: {
 		type: Boolean,
 		value: false
-	},
-	isDeleting: {
-		type: Boolean,
-		value: false,
-		observer: function(newVal, oldVal) {
-			console.log('bond-list-display isDeleting .... ', newVal)
-			if (!newVal) {
-				this.hiddenDeleteDialog()
-			} else {
-				this.showDeleteDialog()
-			}
-		}
-	},
-	isModifying: {
-		type: Boolean,
-		value: false,
-		observer: function(newVal, oldVal) {
-			if (!newVal) {
-				this.hiddenModifyPallet()
-			}
-		}
 	},
 	moreLoading: {
 		type: Boolean,
@@ -114,78 +94,68 @@ Component({
 	},
 
 	toDetail: function (from, uid, bondId, bondSimpleName) {
-		this.hiddenModifyPallet()
 		navigate.toBondDetail(from, this.data.isMine, uid, bondId, bondSimpleName)
 	},
 
 	onModifyBondEvent: function(e) {
-		let that = this
-		wx.createSelectorQuery().selectViewport().scrollOffset(function(res){
-			let index = e.detail.index 
-			let itemHeight = 250 * that.data.rpx
-			let marginTop = 128* that.data.rpx
-			let offsetTop = index * itemHeight  + marginTop 
-			if (offsetTop > res.scrollTop + that.data.winHeight - 50) {
-				offsetTop = res.scrollTop + that.data.winHeight- 50
-			}
-			
-			that.data.isModifying = true
-			that.setData({
-				isShowModifyPallet: true,
-				modifyPalletTop: offsetTop,
-				bondSimpleName: e.detail.bondSimpleName,
-				bondId: e.detail.bondId
-			})
-			
-			that.triggerEvent('modifyBondEvent', e.detail)
-		}).exec()
+		this.showModifyModal(e.detail.bondSimpleName, e.detail.bondId)
 	},
 
-	onModifySaleInfo: function() {
-		this.hiddenModifyPallet()
-		wx.navigateTo({
-			url: '/app/page/edit-sale-info/edit-sale-info?bid=' + this.data.bondId
+	showModifyModal: function (bondSimpleName, bondId) {
+		Authentication.checkAuthentication(() => {
+			let that = this
+			wx.showActionSheet({
+				itemList: ['修改销售信息', '修改债券详情'],
+				success: function(res) {
+					if (res.tapIndex === 0) {
+						that.onModifySaleInfo(bondId)
+					} else if (res.tapIndex === 1) {
+						that.onModifyBondDetail(bondSimpleName)
+					}
+				},
+				fail: function(res) {
+				}
+			})
 		})
 	},
 
-	onModifyBondDetail: function() {
-		this.hiddenModifyPallet()
-		wx.navigateTo({
-			url: '/app/page/quotation/quotation?bname=' + this.data.bondSimpleName
+	onModifySaleInfo: function(bondId) {
+		Authentication.checkAuthentication(() => {
+			wx.navigateTo({
+				url: '/app/page/edit-sale-info/edit-sale-info?bid=' + bondId
+			})
+		})
+	},
+
+	onModifyBondDetail: function(bondSimpleName) {
+		Authentication.checkAuthentication(() => {
+			wx.navigateTo({
+				url: '/app/page/quotation/quotation?bname=' + bondSimpleName
+			})
 		})
 	},
 
 	onDeleteBondEvent: function (e) {
-		this.hiddenModifyPallet()
-		this.deleteBondName = e.detail
-		this.triggerEvent('willDeleteBondEvent')
+		this.showDeleteModal(e.detail)
 	},
 
-	showDeleteDialog() {
-		this.deleteDialog = this.selectComponent('#delete-dialog')
-		this.deleteDialog.showDialog()
-	},
-  
-	hiddenDeleteDialog() {
-		this.deleteDialog.hideDialog()
-	},
+	showDeleteModal(bondSimpleName) {
+		Authentication.checkAuthentication(() => {
+			let that = this
+			wx.showModal({
+				content: '请确定是否删除该债券？',
+				confirmColor: '#2196F3',
+				success: function (res) {
+					if (res.confirm) {
+						that.triggerEvent('doDeleteBondEvent', bondSimpleName)
+					}
 
-	_cancelDelEvent: function () {
-		this.triggerEvent('doDeleteBondEvent', '')
-	},
-  
-	_confirmDelEvent: function () {
-		this.triggerEvent('doDeleteBondEvent', this.deleteBondName)
-	},
-
-	hiddenModifyPallet() {
-		this.setData({
-			isShowModifyPallet: false
+					if (res.cancel) {
+						that.triggerEvent('doDeleteBondEvent', '')
+					}
+				}
+			}) 
 		})
-	},
-
-	onTouchMove: function() {
-		this.hiddenModifyPallet()
 	}
   }
 })

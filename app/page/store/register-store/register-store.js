@@ -1,6 +1,7 @@
 // app/page/store/register-store/register-store.js
 const toast = require('../../../util/toast/toast')
-const service = require('../../../util/service/service')
+const { request } = require('../../../util/ajax/ajax')
+const config = require('../../../util/ajax/config')
 Component({
   /**
    * 组件的属性列表
@@ -23,11 +24,11 @@ Component({
    */
   methods: {
 	doOpenStore: function() {
-		service.doOpenStore((result) => {
+		request(config.NEW_BOND.openMyShop, {}).then((result) => {
 			wx.navigateTo({
 				url: '/app/page/register-store-complete/register-store-complete'
 			})
-		}, () => {
+		}).catch(()=>{
 			toast.showFailedToast()
 		})
   	},

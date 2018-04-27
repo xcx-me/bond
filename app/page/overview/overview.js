@@ -1,5 +1,6 @@
 // app/page/overview/overview.js
-const service = require('../../util/service/service')
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
 const redPoint = require('../../util/red-point/red-point')
 const {getStatus, getType} = require('../../util/type/bond-list')
 
@@ -18,10 +19,10 @@ Page({
 	},
 
 	isStoreOpened: function () {
-		service.isStoreOpened((result) => {
-			// result.data.retdata.is_myshop_opened = 0 // for debug
+		request(config.NEW_BOND.isStoreOpened, {}).then((result) => {
+			// result.retdata.is_myshop_opened = 0 // for debug
 			this.setData({
-				isStoreRegistered: String(result.data.retdata.is_myshop_opened) === '1',
+				isStoreRegistered: String(result.retdata.is_myshop_opened) === '1',
 				loadedStoreRegistered: true,
 				needUpdateDetail: true
 			})
@@ -46,7 +47,7 @@ Page({
 	},
 
 	doShareStore: function (userId) {
-		service.doShareStore(userId, '', () => {}, () => {})
+		request(config.USER_TRACKING.accumulateShare,{user_id: userId, bond_simple_name: ''})
 	},
 
 	/**

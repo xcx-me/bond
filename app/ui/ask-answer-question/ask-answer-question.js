@@ -1,5 +1,7 @@
 // app/ui/ask-answer-question/ask-answer-question.js
-const service = require('../../util/service/service')
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
+
 const toast = require('../../util/toast/toast')
 Component({
 	properties: {
@@ -62,24 +64,36 @@ Component({
 
 		onFormSubmit: function(e) {
 			let content = this.data.content
-			this.setData({
-				isSubmitting: true
-			})
 			if (content.replace(/(^\s*)|(\s*$)/g, '').length === 0) {
 				this.setData({
 					errTips: '输入为空'
 				})
 			}else {
+				this.setData({
+					isSubmitting: true
+				})
 				if (this.data.isAsk) {
-					service.doAsk(this.data.bondSimpleName, this.data.content, this.data.userId, (result)=>{
-						this.onSuccess()
-					}, (result) => {
+					request(config.NEW_BOND.askQuestion, {
+						bond_simple_name: this.data.bondSimpleName,
+						content: this.data.content,
+						shop_user_id: this.data.userId
+					}, true).then((result)=>{
+						if(String(result.ret) === '0') {
+							this.onSuccess()
+						} else {
+							this.onFailed(result)
+						}
+					}).catch(()=>{
 						this.onFailed(result)
 					})
 				} else {
-					service.doAnswer(this.data.askId, this.data.content, (result)=>{
-						this.onSuccess()
-					}, (result) => {
+					request(config.NEW_BOND.answerQuestion, {ask_id: askId, content: content}, true).then((result) => {
+						if(String(result.ret) === '0') {
+							this.onSuccess()
+						} else {
+							this.onFailed(result)
+						}
+					}).catch(()=>{
 						this.onFailed(result)
 					})
 				}

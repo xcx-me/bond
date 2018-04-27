@@ -1,5 +1,6 @@
 // app/ui/store/dynamic/dynamic.js
-const service = require('../../../util/service/service')
+const { request } = require('../../../util/ajax/ajax')
+const config = require('../../../util/ajax/config')
 let timeId = null
 
 Component({
@@ -27,8 +28,8 @@ Component({
 
 	methods: {
 		getDynamicList: function () {
-			service.getStoreDynamic((result) => {
-				let dataList = result.data.retdata.dynamic_tips
+			request(config.NEW_BOND.news, {}).then((result) => {
+				let dataList = result.retdata.dynamic_tips
 				this.setData({
 					dynamicList: dataList,
 					loading: false,
@@ -60,7 +61,7 @@ Component({
 		},
 
 		clearDynamicTip: function (bondSimpleName) {
-			service.deleteStoreDynamic(bondSimpleName,()=>{}, ()=>{})
+			request(config.NEW_BOND.deleteNews, {bond_simple_name: bondSimpleName})
 		},
 
 		navigateToBondDetail(bondId) {

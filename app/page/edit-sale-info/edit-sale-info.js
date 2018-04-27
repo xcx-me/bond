@@ -1,5 +1,6 @@
 // app/page/edit-sale-info/edit-sale-info.js
-const service = require('../../util/service/service')
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
 Page({
 
 	/**
@@ -14,6 +15,7 @@ Page({
 			{name: 'sale_type', label: '销售方式', types:[{name:'sale_type', formType: 'checkbox', items: [{label: '分销', value: '1'},{label: '上市', value: '2'}]}]}
 		],
 		isSubmitDisabled: true,
+		isSubmitting: '',
 		loading: true,
 		saveValue: {
 			little_left: '',
@@ -27,15 +29,16 @@ Page({
 	},
 
 	getSaleInfo: function(bondId) {
-		service.getSaleInfo(bondId, (result)=>{
+		request(config.NEW_BOND.getSaleInfo, {bond_id: bondId}).then((result)=>{
+			let retData =  result.retdata
 			this.setData({
-				saleInfo: result.data.retdata,
+				saleInfo: retData,
 				saveValue: {
-					bond_simple_name: result.data.retdata.bond_simple_name,
-					little_left: result.data.retdata.little_left,
-					little_right: result.data.retdata.little_right,
-					early_end: result.data.retdata.early_end,
-					sale_type: result.data.retdata.sale_type
+					bond_simple_name: retData.bond_simple_name,
+					little_left: retData.little_left,
+					little_right: retData.little_right,
+					early_end: retData.early_end,
+					sale_type: retData.sale_type
 				},
 				loading: false
 			})
@@ -91,8 +94,21 @@ Page({
 			return
 		}
 
-		service.modNewBondDetail(this.data.saveValue, (result) => {
-			wx.navigateBack()
+		this.setData({
+			isSubmitting: true
+		})
+
+		request(config.NEW_BOND.modNewBondDetail, this.data.saveValue, true).then((result) => {
+			this.setData({
+				isSubmitting: false
+			})
+			if (String(result.ret) === '0') {
+				wx.navigateBack()
+			}
+		}).catch(()=> {
+			this.setData({
+				isSubmitting: false
+			})
 		})
 	},
 

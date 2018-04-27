@@ -1,5 +1,7 @@
 // app/page/bond-detail/bond-answer/bond-answer.js
-const service = require('../../../util/service/service')
+const { request } = require('../../../util/ajax/ajax')
+const config = require('../../../util/ajax/config')
+const Authentication = require('../../../util/authentication/authentication')
 
 Component({
 	options: {
@@ -28,9 +30,11 @@ Component({
    */
   methods: {
 	onThumb: function (e) {
-		let answerId = e.currentTarget.dataset.id
-		service.doThumb(answerId, ()=>{
-			this.triggerEvent('thumbEvent')
+		Authentication.checkAuthentication(() => {
+			let answerId = e.currentTarget.dataset.id
+			request(config.NEW_BOND.thumbQuestion, {answer_id: answerId}).then((result)=>{
+				this.triggerEvent('thumbEvent')
+			})
 		})
 	}
   }

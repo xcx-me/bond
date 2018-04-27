@@ -1,6 +1,7 @@
 // components/Dialog/dialog.js
 var detail =require('../../../util/store/detail.js')
-const service = require('../../../util/service/service')
+const { request } = require('../../../util/ajax/ajax')
+const config = require('../../../util/ajax/config')
 
 Component({
 	options: {
@@ -80,28 +81,27 @@ Component({
 
 		getStoreDetail: function (userId) {
 			if (this.data.isRegistered) { // 已开店
-				service.getStoreDetail(userId, (result) => {
-					this.updateStoreDetail(result.data.retdata)
-				}, () => {
+				request(config.NEW_BOND.storeDetail, {user_id: userId}).then((result) => {
+					this.updateStoreDetail(result.retdata)
 				})
 			} else { // 未开店
-				service.getCardInfo((result) => {
+				request(config.NEW_BOND.cardInfo, {}).then((result) => {
 					let detail = {
 						is_myself: '1',
 						is_qtrade: '2',
-						face_url: result.data.faceurl,
-						v_user: result.data.iscomfirmed,
+						face_url: result.faceurl,
+						v_user: result.iscomfirmed,
 						share_num: '0',
 						click_num: '0',
 						onsale_bond: '0',
 						history_bond: '0',
 						user_id: '0',
 						url: this.data.navigatorUrl,
-						sale_name: result.data.realname,
-						company_simple_name: result.data.company.simpleName
+						sale_name: result.realname,
+						company_simple_name: result.company.simpleName
 					}
-					// result.data.iscomfirmed = 2 // for debug
-					if (result.data.iscomfirmed === '1') { //已认证
+					// result.iscomfirmed = 2 // for debug
+					if (result.iscomfirmed === '1') { //已认证
 						this.updateStoreDetail(detail)
 					} else {  // 未认证，获取微信昵称和头像
 						let that = this
