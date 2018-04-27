@@ -97,8 +97,8 @@ Page({
 			isSubmitting: true
 		})
 
-		request(config.NEW_BOND.sendBond, params).then((result) => {
-			if (String(result.data.ret) === '0') {
+		request(config.NEW_BOND.sendBond, params, true).then((result) => {
+			if (String(result.ret) === '0') {
 				Toast.showToast('发布成功')
 				this.setData({
 					isSubmitting: false,
@@ -112,13 +112,16 @@ Page({
 					wx.navigateBack()
 				}, 1500)
 			} else {
-				Toast.showToast(result.data.retmsg)
+				Toast.showToast(result.retmsg)
 				this.setData({
 					isSubmitting: false
 				})
 			}
 		}).catch(() => {
 			Toast.showToast('请求错误')
+			this.setData({
+				isSubmitting: false
+			})
 		})
 	},
 

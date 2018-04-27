@@ -1,16 +1,16 @@
 <loading wx:if='{{loading}}'>加载中...</loading>
 <view class='administration-page' wx:if='{{!loading}}'>
-		<block wx:if='{{!isStoreRegistered}}'>
-			<StoreRegister type='page' />
-		</block>
-		<block wx:else>
-			<view class='to-quotation' bindtap='createQuotation'>
-				<image src='../../asset/image/qtrade/release_36.svg' />
-				<text>发布报价</text>
-				<i class='icon-right-arrow' />
-			</view>
-			<view class='bond-list-pallet'>
-				<BondList type='{{bondListType}}' status='{{bondListStatus}}' from='admin' isMine='{{true}}' uid='0' userId='0' isModifying='{{isModifying}}' isDeleting='{{isDeleting}}' bind:deleteEvent='onDeleteBondEvent'/>
-			</view>
-		</block>
+	<block wx:if='{{!isStoreRegistered}}'>
+		<StoreRegister type='page' />
+	</block>
+	<block wx:else>
+		<view class='to-quotation' bindtap='createQuotation'>
+			<image src='../../asset/image/qtrade/release_36.svg' />
+			<text>发布报价</text>
+			<i class='icon-right-arrow' />
+		</view>
+		<view class='bond-list-pallet'>
+			<BondList type='{{bondListType}}' status='{{bondListStatus}}' from='admin' isMine='{{true}}' uid='0' userId='0' isModifying='{{isModifying}}' isDeleting='{{isDeleting}}' bind:deleteEvent='onDeleteBondEvent'/>
+		</view>
+	</block>
 </view>

@@ -52,13 +52,12 @@ Component({
   methods: {
 	getBondDetail: function () {
 		request(config.NEW_BOND.newBondDetail, {bond_id: this.data.bondId}).then((result) => {
-			if (String(result.data.ret) === '0') {
-				this.setData({
-					loading: false,
-					bondInfo: result.data.retdata
-				})
-				this.triggerEvent('getBondSimpleNameEvent', result.data.retdata.bond_simple_name)
-			}
+			let retData = result.retdata
+			this.setData({
+				loading: false,
+				bondInfo: retData
+			})
+			this.triggerEvent('getBondSimpleNameEvent', retData.bond_simple_name)
 		})
 	}
   }

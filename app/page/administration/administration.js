@@ -18,7 +18,7 @@ Page({
 	createQuotation: function () {
 		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
 			// result.data = {ret: '0', retmsg: 'OK', retdata: {enable: true, v: flase, audit: false}}
-			result.retdata.v = false
+			// result.retdata.v = false
 			if (!result.retdata.v) {
 				wx.navigateTo({url: '../mobile-form/mobile-form'})
 				return

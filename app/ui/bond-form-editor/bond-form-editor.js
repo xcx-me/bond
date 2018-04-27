@@ -1,6 +1,7 @@
 
 var dateTimePicker = require('../../util/date-time-picker/date-time-picker')
-const service = require('../../util/service/service')
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
 const formConfig = require('./form-config/form-config')
 const converson = require('../../util/converson/converson')
 
@@ -254,10 +255,11 @@ Component({
 			this.triggerEvent('changeValueEvent', formData)
 		},
 
+
 		// 获取债券详情
 		bondDetailsAssociate: function (bondSimpleName) {
-			service.getBondAssociate(bondSimpleName, (result)=>{
-				let resultData = result.data.retdata
+			request(config.NEW_BOND.associateBond, {bond_simple_name: bondSimpleName}).then((result)=>{
+				let resultData = result.retdata
 				if (Object.keys(resultData).length > 0) {
 					resultData.bond_simple_name = bondSimpleName
 					this.setData({
@@ -307,8 +309,8 @@ Component({
 
 		// 债券简称联想
 		bondSimpleNameAssociate: function (curName) {
-			service.getBondSimpleName(curName, (result) => {
-				let resultData = result.data.retdata.array
+			request(config.NEW_BOND.associateBondName, {bond_msg: curName}).then((result) => {
+				let resultData = result.retdata.array
 				if (curName !=='' && resultData.length > 0) {
 					let nameArray = this.parseAssociateBondSimpleName(curName, resultData)
 					this.setData({

@@ -1,5 +1,6 @@
 // app/page/store/store.js
-const service = require('../../util/service/service')
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
 const {getStatus, getType} = require('../../util/type/bond-list')
 
 Page({
@@ -91,7 +92,7 @@ Page({
 	},
 
 	doShareStore: function (userId) {
-		service.doShareStore(userId, '', () => {}, () => {})
+		request(config.USER_TRACKING.accumulateShare,{user_id: userId, bond_simple_name: bondSimpleName})
 	},
   	/**
    	* 用户点击右上角分享

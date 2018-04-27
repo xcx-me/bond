@@ -1,4 +1,5 @@
-const service = require('../../../util/service/service')
+const { request } = require('../../../util/ajax/ajax')
+const config = require('../../../util/ajax/config')
 
 Component({
 	/**
@@ -71,8 +72,8 @@ Component({
 		},
 
 		bondSimpleNameAssociate: function (curName) {
-			service.getBondSimpleName(curName, (result) => {
-				let resultData = result.data.retdata.array
+			request(config.NEW_BOND.associateBondName, {bond_msg: curName}).then((result) => {
+				let resultData = result.retdata.array
 				if (curName !=='' && resultData.length > 0) {
 					console.log('has itmes..')
 					let nameArray = this.parseAssociateBondSimpleName(curName, resultData)

@@ -1,5 +1,6 @@
 // app/page/detail/detail.js
-const service = require('../../util/service/service')
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
 Page({
 	options: {
 		multipleSlots: true // 在组件定义时的选项中启用多slot支持
@@ -49,8 +50,8 @@ Page({
 	},
 
 	getStoreDetail: function (uid) {
-		service.getStoreDetail(uid, (result) => {
-			let detail = result.data.retdata
+		request(config.NEW_BOND.storeDetail, {user_id: uid}).then((result) => {
+			let detail = result.retdata
 			let isMyStore = String(detail.is_myself) === '1' && String(uid) === '0'
 			this.setData({
 				isMyStore: isMyStore,
@@ -66,25 +67,26 @@ Page({
 	},
 
   	getQuestionTotal: function () {
-		service.getQuestionTotal(this.data.bondId, (result)=> {
+		request(config.NEW_BOND.questionTotalQuery, {bond_id: this.data.bondId}).then((result)=> {
+			let askTotal = result.retdata.ask_num
 			this.setData({
-				questionTotal: result.data.retdata.ask_num > 99 ?  '99+' : result.data.retdata.ask_num,
+				questionTotal: askTotal > 99 ?  '99+' : askTotal,
 				loadingQuestion: false
 			})
 		})
 	},
 
 	getBondList: function () {
-		service.getBondList({
+		request(config.NEW_BOND.newBondList, {
 			bond_id: this.data.bondId,
 			user_id: this.data.userId,
 			offset: 0,
 			limit: 3,
 			type: this.data.isMyStore && this.data.uid === '0' ? 3 : 4
-		}, (result) => {
+		}).then((result) => {
 			this.setData({
 				loadingBondList: false,
-				bondList: result.data.retdata.bond_list
+				bondList: result.retdata.bond_list
 			})
 		})
 	},
@@ -96,9 +98,9 @@ Page({
 	},
 
 	updateStoreDetail: function(userId) {
-		service.getStoreDetail(userId, (result) => {
+		request(config.NEW_BOND.storeDetail, {user_id: userId}).then((result) => {
 			this.setData({
-				storeDetail: result.data.retdata
+				storeDetail: result.retdata
 			})
 		})
 	},
@@ -119,9 +121,9 @@ Page({
 
 	doShareStore: function (userId,bondSimpleName) {
 		this.clearStoreDetail()
-		service.doShareStore(userId,bondSimpleName, () => {
+		request(config.USER_TRACKING.accumulateShare,{user_id: userId, bond_simple_name: bondSimpleName}).then((result) => {
 			this.updateStoreDetail(this.data.uid)
-		}, () => {})	
+		})
 	},
 	
   /**
