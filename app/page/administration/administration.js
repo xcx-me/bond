@@ -1,8 +1,8 @@
-// app/page/administration/administration.js
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const redPoint = require('../../util/red-point/red-point')
 const {getStatus, getType} = require('../../util/type/bond-list')
+const Authentication = require('../../util/authentication/authentication')
 
 Page({
 	data: {
@@ -16,13 +16,7 @@ Page({
 	},
 
 	createQuotation: function () {
-		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
-			// result.data = {ret: '0', retmsg: 'OK', retdata: {enable: true, v: flase, audit: false}}
-			result.retdata.v = false
-			if (!result.retdata.v) {
-				wx.navigateTo({url: '../mobile-form/mobile-form'})
-				return
-			}
+		Authentication.checkAuthentication(() => {
 			this.setData({
 				isModifying: false
 			})

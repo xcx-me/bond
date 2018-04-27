@@ -1,0 +1,5 @@
+<operation-successful
+	imagePath='/app/asset/image/qtrade/binding_success_186.svg'
+	title='绑定成功'
+	description='您在电脑端已认证，现已为您快速完成绑定'
+	buttonLabel='完成' />
