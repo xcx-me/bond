@@ -30,45 +30,34 @@ module.exports = {
 			url: '/qtrade_bond/api/activateemail/resend.do',
 			method: GET
 		},
-
 		// Edit mobile
-
 		getMobileForSubmitInfo: {
-			// url: '/qtrade_bond/api/user/getmobileforsubmitinfo.do',
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/user/getmobileforsubmitinfo.do',
 			method: GET
 		},
 		getMobileVerificationCodeForConfirm: {
-			// url: '/qtrade_bond/api/submitinfo/mobileverifycode1.do',
-			url: '/qtrade_im/daily_checkin.do',
-			method: POST
+			url: '/qtrade_bond/api/submitinfo/mobileverifycode1.do',
+			method: GET
 		},
 		validateMobileForConfirm: {
-			// url: '/qtrade_bond/api/submitinfo/validatemobile.do',
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/submitinfo/validatemobile.do',
 			method: POST
 		},
 		getMobileVerificationCodeForRenew: {
-			// url: '/qtrade_bond/api/submitinfo/mobileverifycode2.do',
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/submitinfo/mobileverifycode2.do',
 			method: POST
 		},
 		modifyMobile: {
-			// url: '/qtrade_bond/api/submitinfo/modifymobile.do',
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/submitinfo/modifymobile.do',
 			method: POST
 		},
-
 		// Edit user info
-
 		getUserInfoForEdit: {
-			// url: '/qtrade_bond/api/user/getuserinfo2.do',
-			url: '/qtrade_im/daily_checkin.do',
-			method: POST
+			url: '/qtrade_bond/api/user/getuserinfo2.do',
+			method: GET
 		},
 		submitUserInfoForEdit: {
-			// url: '/qtrade_bond/api/submitinfo/submit.do',
-			url: '/qtrade_im/daily_checkin.do',
+			url: '/qtrade_bond/api/submitinfo/submit.do',
 			method: POST
 		}
 	},
