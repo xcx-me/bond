@@ -30,6 +30,7 @@ Page({
 		loading: true,
 		moreLoading: false,
 		intervalTimer: 0,
+		isShowFilter: false,
 		isShowMask: false,
 		bondSimpleName: '',
 		saleList: []
@@ -52,6 +53,7 @@ Page({
 
 	onShowFilterEvent: function (e) {
 		this.setData({
+			isShowFilter: true,
 			isShowMask: e.detail
 		})
 	},
@@ -216,6 +218,9 @@ Page({
 	 */
 	onHide: function () {
 		redPoint.stopTabBarRedDot(this.data.intervalTimer)
+		this.setData({
+			isShowFilter: false
+		})
 	},
 
 	/**

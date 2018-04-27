@@ -22,10 +22,10 @@
 						<block wx:for="{{filterItem.values}}" wx:for-item='item' wx:for-index='optionIndex' wx:key="optionIndex">
 							<view class='checkbox-wrapper {{optionIndex%2? "even" : "odd"}}' bindtap='clickFilterOption' data-index='{{index}}' data-optionindex='{{optionIndex}}'>
 								<view class='checkbox'>
-									<checkbox wx:key="" value="{{optionIndex}}" checked="{{item.isSelected}}" disabled='{{optionIndex === 0 && item.isSelected}}' color='#2196F3'/><text class='value'>{{item.title}}</text>
+									<checkbox value="{{optionIndex}}" checked="{{item.isSelected}}" disabled='{{optionIndex === 0 && item.isSelected}}' color='#2196F3'/><text class='value'>{{item.title}}</text>
 								</view>
 							</view>
-						</block>
+						</block>s
 					</checkbox-group>
 				</scroll-view>
 				<view class='filter-pallet-btn'>

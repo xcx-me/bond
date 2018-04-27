@@ -8,7 +8,7 @@
 		/>  
 
 		<button class='margin-bottom submit-quotation-btn {{submitQuoteBtnEnable || isSubmitting ? "" : "submit-quote-unenable"}}'
-			type='primary' disabled='{{!submitQuoteBtnEnable || isSubmitting}}' bindtap='handleSendQuote'>
+			type='primary' loading='{{isSubmitting}}' disabled='{{!submitQuoteBtnEnable || isSubmitting}}' bindtap='handleSendQuote'>
 			{{isSubmitting ? '正在提交...' : '发布'}}
 		</button>
 

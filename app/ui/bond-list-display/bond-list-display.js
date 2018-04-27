@@ -26,6 +26,18 @@ Component({
 		type: Boolean,
 		value: false
 	},
+	isDeleting: {
+		type: Boolean,
+		value: false,
+		observer: function(newVal, oldVal) {
+			console.log('bond-list-display isDeleting .... ', newVal)
+			if (!newVal) {
+				this.hiddenDeleteDialog()
+			} else {
+				this.showDeleteDialog()
+			}
+		}
+	},
 	isModifying: {
 		type: Boolean,
 		value: false,
@@ -145,20 +157,25 @@ Component({
 
 	onDeleteBondEvent: function (e) {
 		this.hiddenModifyPallet()
-		this.triggerEvent('willDeleteBondEvent')
 		this.deleteBondName = e.detail
+		this.triggerEvent('willDeleteBondEvent')
+	},
+
+	showDeleteDialog() {
 		this.deleteDialog = this.selectComponent('#delete-dialog')
 		this.deleteDialog.showDialog()
 	},
   
+	hiddenDeleteDialog() {
+		this.deleteDialog.hideDialog()
+	},
+
 	_cancelDelEvent: function () {
 		this.triggerEvent('doDeleteBondEvent', '')
-		this.deleteDialog.hideDialog();
 	},
   
 	_confirmDelEvent: function () {
 		this.triggerEvent('doDeleteBondEvent', this.deleteBondName)
-		this.deleteDialog.hideDialog();
 	},
 
 	hiddenModifyPallet() {
