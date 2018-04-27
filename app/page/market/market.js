@@ -201,7 +201,9 @@ Page({
 
 	topLoad: function(e) {},
 
-	scroll: function(e) {},
+	scroll: function(e) {
+		// console.log(e)
+	},
 
 	ballMoveEvent: function(e) { // 此处函数不起作用，到时候记得将html代码中绑定的函数解绑
 		// console.log('我被拖动了.....', e)
