@@ -60,7 +60,9 @@ Component({
 
 	initFilter: function () {
 		let filterConfig = JSON.parse(JSON.stringify(filter.defaultConfig))
+		let prevFilterConfig = JSON.parse(JSON.stringify(filter.defaultConfig))
 		this.setData({
+			prevFilterConfig: prevFilterConfig,
 			filterConfig: filterConfig,
 		})
 	},

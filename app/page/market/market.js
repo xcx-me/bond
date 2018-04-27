@@ -4,6 +4,8 @@ const config = require('../../util/ajax/config')
 const common = require('../../util/common')
 const navigate = require('../../util/navigate/navigate')
 const redPoint = require('../../util/red-point/red-point')
+const {getStatus} = require('../../util/type/bond-list')
+
 const initFilterValue = {
 	bond_type: 0,
 	deadline: 0,
@@ -95,38 +97,31 @@ Page({
 		}
 	},
 
-	getBondList (OperationType) { // 询量
+	getBondList (status) { // 询量
 		request(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
-			if (String(result.data.ret) === '0') {
-				let lastData = this.data
+			let lastData = this.data
+			let {total: retTotal, bond_array: retBondList} = result.retdata
+			let maxPage = Number(retTotal) > Number(lastData.filterValue.page_size) ? Math.ceil(retTotal / lastData.filterValue.page_size) : 1 // 最大页数
 
-				let maxPage = 1 // 最大页数
-				if (Number(result.data.retdata.total) > Number(lastData.filterValue.page_size)) {
-					maxPage = Math.ceil(result.data.retdata.total / lastData.filterValue.page_size)
-				}
-				lastData.filterValue.max_page = maxPage
-				// 13
-				lastData.loading = false
-				lastData.moreLoading = false
+			lastData.filterValue.max_page = maxPage
+			lastData.loading = false
+			lastData.moreLoading = false
+			lastData.bondList = status === getStatus.LOADMORE ? lastData.bondList.concat(retBondList) : retBondList
+			this.setData(lastData)
 
-				if (OperationType === getApp().data.bindscrolltolower) {
-					lastData.bondList = lastData.bondList.concat(result.data.retdata.bond_array)
-					this.setData(lastData)
-					wx.hideLoading()
-					return
-				}
-				
-				lastData.bondList = result.data.retdata.bond_array
-				this.setData(lastData)
-				wx.pageScrollTo({
-					scrollTop: 0
-				})
-				
-				if (OperationType === getApp().data.onPullDownRefresh) {
-					wx.hideNavigationBarLoading() // 完成停止加载
-					wx.stopPullDownRefresh() // 停止下拉刷新
-				}
-			}
+			if (status === getStatus.LOADMORE) {
+				wx.hideLoading()
+				return
+			} 
+			
+			wx.pageScrollTo({
+				scrollTop: 0
+			})
+			
+			if (status === getStatus.FRESH) {
+				wx.hideNavigationBarLoading() // 完成停止加载
+				wx.stopPullDownRefresh() // 停止下拉刷新
+			}		
 		})
 	},
 
@@ -191,11 +186,10 @@ Page({
 		let lastData = this.data
 		if (lastData.filterValue.current_page < lastData.filterValue.max_page) {
 			lastData.filterValue.current_page++
-			// 13
 			lastData.loading = false
 			lastData.moreLoading = true
 			this.setData(lastData)
-			this.getBondList(getApp().data.bindscrolltolower)
+			this.getBondList(getStatus.LOADMORE)
 		}
 	},
 
@@ -245,13 +239,13 @@ Page({
 			return
 		}
 		wx.showNavigationBarLoading() // 在标题栏中显示加载
+
 		let lastData = this.data
-		// 13
 		lastData.loading = true
 		lastData.filterValue.current_page = 1
 		lastData.filterValue.max_page = 1
 		this.setData(lastData)
-		this.getBondList(getApp().data.onPullDownRefresh)
+		this.getBondList(getStatus.FRESH)
 	},
 
 	/**

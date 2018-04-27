@@ -26,7 +26,7 @@ function centralErrorProcessor (result, resolve, handleErrorByUser) {
 		}
 		// TODO: The reason we still need below 2 lines of code is
 		// currently we still need to handle this case: String(result.ret) === '-3'.
-		resolve(result)
+		resolve(result.data)
 		return
 	}
 	resolve(result.data)

@@ -32,8 +32,9 @@ Page({
 	},
 
 	isStoreOpened: function () {
-		service.isStoreOpened((result) => {
-			let isStoreRegistered = String(result.data.retdata.is_myshop_opened) === '1'
+		request(config.NEW_BOND.isStoreOpened, {}).then((result) => {
+			let retData = result.retdata
+			let isStoreRegistered = String(retData.is_myshop_opened) === '1'
 			wx.setNavigationBarTitle({
 				title: isStoreRegistered ? 'QTrade一级债' : '开店申请'
 			})
