@@ -10,7 +10,7 @@
 					<view class='item'>
 						<template is='sellerInfoTpl' data='{{faceUrl: sale.face_url, isVUser:"1", userName: sale.sale_name, companyName: sale.company_name}}'></template>
 						<radio value="{{index}}" checked="{{bondId != '' && bondId == index ? true : false}}"></radio>
-						<button class="icon-checked-radio {{bondId != '' && bondId == index ? 'checked' : ''}}"><span /></button>
+						<view class="icon-checked-radio {{bondId != '' && bondId == index ? 'checked' : ''}}"><span /></view>
 					</view>
   				</label>
 			</radio-group>
@@ -20,7 +20,6 @@
 				icon-checked-radio
 
 				<radio value="{{index}}" checked="{{bondId != '' && bondId == index ? true : false}}" hidden></radio>
-				<button class="icon-checked-radio {{bondId != '' && bondId == index ? 'checked' : ''}}"><span /></button>
 			</block> -->
 		</view>
 		<view class='wx-dialog-footer'>

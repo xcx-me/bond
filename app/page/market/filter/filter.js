@@ -64,6 +64,7 @@ Component({
 		this.setData({
 			prevFilterConfig: prevFilterConfig,
 			filterConfig: filterConfig,
+			prevFilterConfig: prevFilterConfig
 		})
 	},
 
