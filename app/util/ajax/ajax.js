@@ -4,16 +4,44 @@ const config = require('../ajax/config')
 const APPLETREE_KEY = 'appletree_key'
 const StringUtil = require('../string-util/string-util')
 const wxPromise = require('../wx-promise/wx-promise')
+const Toast = require('../toast/toast')
 const isLocalhost = true
 
-function ajax (configuration, data, cookie) {
+function centralErrorProcessor (result, resolve, handleErrorByUser) {
+	if (handleErrorByUser) {
+		resolve(result.data)
+		return
+	}
+	if (result.data && result.data.hasOwnProperty('ret')) {
+		if (String(result.data.ret) === '-1') {
+			return
+		}
+		if (String(result.data.ret) === '-2') {
+			Toast.showToast(result.data.retmsg)
+			return
+		}
+		if (String(result.data.ret) === '0') {
+			resolve(result.data)
+			return
+		}
+		// TODO: The reason we still need below 2 lines of code is
+		// currently we still need to handle this case: String(result.ret) === '-3'.
+		resolve(result)
+		return
+	}
+	resolve(result.data)
+}
+
+function ajax (configuration, data, cookie, handleErrorByUser = false) {
 	let url = Environment.withDomain(configuration.url)
 	return new Promise((resolve, reject) => {
 		wx.request({
 			url: url,
 			method: configuration.method,
 			data: data,
-			success: resolve,
+			success: (result) => {
+				centralErrorProcessor(result, resolve, handleErrorByUser)
+			},
 			fail: reject,
 			header: {
 				'content-type': 'application/x-www-form-urlencoded', // Original value is 'application/json'
@@ -73,10 +101,10 @@ function wxLogin (done) {
 	})
 }
 
-function request (configuration, data) {
+function request (configuration, data, handleErrorByUser = false) {
 	return new Promise((resolve, reject) => {
 		signon(() => {
-			ajax(configuration, data, parseCookieToString()).then(resolve).catch(reject)
+			ajax(configuration, data, parseCookieToString(), handleErrorByUser).then(resolve).catch(reject)
 		})
 	})
 }
@@ -97,6 +125,5 @@ function requestUploadFile (url, filePath, success) {
 
 module.exports = {
 	request: request,
-	parseCookieToString: parseCookieToString,
 	requestUploadFile: requestUploadFile
 }

@@ -2,6 +2,8 @@ const UiType = require('../../ui/form-viewer-editor/ui-type')
 const FormViewerEditorUtil = require('../../ui/form-viewer-editor/form-viewer-editor-util')
 const RegexpUtil = require('../../util/regexp-util/regexp-util')
 const Toast = require('../../util/toast/toast')
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
 
 const MOBILE_NUMBER = 'mobileNumber'
 const MOBILE_VALIDATION_CODE = 'mobileValidationCode'
@@ -103,9 +105,18 @@ Page({
 		if (this.data.disabledOfSubmitButton) return
 		let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
 
-		console.log('submissionObject', submissionObject)
+		console.log('submissionObject...', submissionObject)
 
-		this.validateMobileFormat() && wx.redirectTo({url: '../user-detail-form/user-detail-form'})
+		if (this.validateMobileFormat()) {
+			request(config.USER_REGISTER.activateMobile, {
+				mobile: submissionObject.mobileNumber,
+				code: submissionObject.mobileValidationCode
+			}).then((result) => {
+				result.retdata.is_new
+					? wx.redirectTo({url: '../user-detail-form/user-detail-form'})
+					: wx.redirectTo({url: '../user-detail-form/user-detail-form'})
+			})
+		}
 	},
 
 	/**
@@ -117,7 +128,7 @@ Page({
 			descriptors: this.data.descriptors
 		})
 
-		wx.redirectTo({url: '../user-detail-form/user-detail-form'})
+		// wx.redirectTo({url: '../user-detail-form/user-detail-form'})
 	},
 
 	/**
