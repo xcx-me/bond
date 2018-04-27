@@ -5,11 +5,21 @@ Component({
    * 组件的属性列表
    */
   properties: {
+	isShow: {
+		type: Boolean,
+		value: false,
+		observer: function(newVal, oldVal) {
+			console.log('filter isShow....', newVal, oldVal)
+			if (!newVal) {
+				this.initFilter()
+			}	
+		}
+	},
 	tabId: {
 		type: String,
 		value: false,
 		observer: function(newVal, oldVal) {
-			console.log(newVal, oldVal)
+			console.log('filter tabId....', newVal, oldVal)
 			if (newVal) {
 				this.initFilter()
 			}	

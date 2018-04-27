@@ -30,6 +30,10 @@ Component({
 			type: Number,
 			value: getType.OTHERS
 		},
+		isDeleting: {
+			type: Boolean,
+			value: false
+		},
 		isModifying: {
 			type: Boolean,
 			value: false

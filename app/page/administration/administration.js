@@ -27,7 +27,6 @@ Page({
 			this.setData({
 				isModifying: false
 			})
-			console.log('createQuotation....... to /app/page/quotation/quotation', getCurrentPages())
 			wx.navigateTo({url: '/app/page/quotation/quotation'})
 		})
 	},
@@ -47,7 +46,6 @@ Page({
 	},
 
 	onDeleteBondEvent: function (e) {
-		console.log(e.detail)
 		this.setData({
 			isDeleting: e.detail
 		})
@@ -70,7 +68,9 @@ Page({
 	onHide: function () {
 		redPoint.stopTabBarRedDot(this.data.intervalTimer)
 		this.setData({
-			loading: !this.data.isStoreRegistered
+			loading: !this.data.isStoreRegistered,
+			isModifying: false,
+			isDeleting: false
 		})
 	},
 
@@ -85,7 +85,6 @@ Page({
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function (e) {
-		console.log('onPullDownRefresh..', this.data.isDeleting)
 		if (this.data.isDeleting) {
 			return
 		}

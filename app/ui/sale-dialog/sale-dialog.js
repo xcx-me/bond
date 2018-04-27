@@ -44,7 +44,6 @@ Component({
 		wx.getSystemInfo({
 			success: function(res) {
 				let height = res.windowHeight
-				console.log('sale-dialog...', height)
 				that.setData({
 					winHeight: height
 				})

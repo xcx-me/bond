@@ -16,7 +16,7 @@
 	<loading wx:if='{{loading}}'>加载中...</loading>
 
 	<view hidden='{{loading}}' >
-		<Filter bind:doFilterEvent='onDoFilter' tabId='{{currentTabId}}' bind:showFilterEvent='onShowFilterEvent'/>
+		<Filter bind:doFilterEvent='onDoFilter' tabId='{{currentTabId}}' isShow='{{isShowFilter}}' bind:showFilterEvent='onShowFilterEvent'/>
 		<DateBar wx:if='{{currentTabId === "issues"}}' bind:onFilterEvent='onDoFilter' />
 		<swiper current-item-id='{{currentTabId}}' class='swiper-tab-box' duration='300' style='height: {{currentTabId === "issues" ? winIssuesHeight :  winHeight}}px' bindchange='bindChangeTab'>
 			<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>

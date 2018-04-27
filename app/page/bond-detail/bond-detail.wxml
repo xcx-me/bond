@@ -21,8 +21,8 @@
 		<block wx:for='{{tabIdList}}' wx:for-item='tabId' wx:key='index'>
 			<swiper-item item-id='{{tabId}}'>
 				<scroll-view class='pallet' scroll-y scroll-top='{{scrollTop}}' data-itemid='{{tabId}}' >
-					<BondInfo wx:if='{{tabId==="detail"}}' currentTabId='{{currentTabId}}' loadingStoreDetail='{{loadingStoreDetail}}' bondId='{{bondId}}' isMyStore='{{isMyStore}}' bind:getBondSimpleNameEvent='onGetBondSimpleNameEvent'/>
-					<BondQuestion wx:if='{{tabId==="question"}}' currentTabId='{{currentTabId}}' loadingStoreDetail='{{loadingStoreDetail}}' bondId='{{bondId}}' userId='{{userId}}' needUpdate='{{needUpdate}}' bind:updateTotalEvent='onUpdateQuestionTotalEvent'/>
+					<BondInfo wx:if='{{tabId==="detail"}}' loadingStoreDetail='{{loadingStoreDetail}}' bondId='{{bondId}}' isMyStore='{{isMyStore}}' bind:getBondSimpleNameEvent='onGetBondSimpleNameEvent'/>
+					<BondQuestion wx:if='{{tabId==="question"}}' loadingStoreDetail='{{loadingStoreDetail}}' bondId='{{bondId}}' userId='{{userId}}' needUpdate='{{needUpdate}}' bind:updateTotalEvent='onUpdateQuestionTotalEvent'/>
 					<StoreDetail wx:if='{{tabId==="store"}}'
 						currentTabId='{{currentTabId}}'
 						userId='{{uid}}'

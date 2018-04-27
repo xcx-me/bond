@@ -85,19 +85,16 @@ Component({
 	},
 
 	onUpdateDynamicEvent: function(e) {
-		console.log('my-store onUpdateDynamicEvent')
 		this.setData({
 			dynamicTotal: e.detail.total
 		})
 	},
 
 	topLoad: function(e) {
-		console.log('my-store topLoad')
 		this.triggerEvent('updateEvent', getStatus.FRESH)
 	},
 
 	bindDownLoad: function(e) {
-		console.log('my-store bindDownLoad')
 		this.triggerEvent('updateEvent', getStatus.LOADMORE)
 	},
   }

@@ -6,6 +6,7 @@
 		isMine='{{isMine}}'
 		moreLoading='{{moreLoading}}'
 		overLoaded='{{overLoaded}}'
+		isDeleting='{{isDeleting}}'
 		isModifying='{{isModifying}}'
 		bondList='{{bondList}}'
 		uid='{{uid}}'

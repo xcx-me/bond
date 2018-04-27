@@ -9,7 +9,7 @@
 	}
 </wxs>
 
-<view class='bond-info-component' wx:if='{{!loadingStoreDetail && !loading && currentTabId === "detail"}}'>
+<view class='bond-info-component' wx:if='{{!loadingStoreDetail && !loading}}'>
 	<view class='info-item sale'>
 		<BondSaleInfo isMyStore='{{isMyStore}}' bondSaleInfo='{{bondInfo.sale_info}}' isQtrade='{{bondInfo.is_qtrade === "1"}}' fieldList='{{bondInfoFieldList.sale}}'/>
 	</view>
