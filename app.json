@@ -4,7 +4,7 @@
         "app/page/overview/overview",
         "app/page/administration/administration",
         "app/page/store/store",
-        "app/page/my-configuration/my-configuration",
+		"app/page/my-configuration/my-configuration",
         "app/page/protocol/protocol",
         "app/page/register-store-complete/register-store-complete",
         "app/page/bond-detail/bond-detail",
