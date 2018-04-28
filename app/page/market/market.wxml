@@ -3,13 +3,13 @@
 	<!-- 市场页 -->
 	<view class='market-tab'>
 		<view class='market-tab-list' data-tid='consultation' catchtap='switchNav'>
-			<view class="{{currentTabId === 'consultation' ? 'on' : ''}}" >询量</view>
+			<view class="{{currentTabId === 'consultation' ? 'on' : 'off'}}" >询量</view>
 		</view>
 		<view class="market-tab-list" data-tid='announcement' catchtap='switchNav'>
-			<view class="{{currentTabId === 'announcement' ? 'on' : ''}}" >公告</view>
+			<view class="{{currentTabId === 'announcement' ? 'on' : 'off'}}" >公告</view>
 		</view>
 		<view class="market-tab-list" data-tid='issues' catchtap='switchNav'>
-			<view class="{{currentTabId === 'issues' ? 'on' : ''}}">发行</view>
+			<view class="{{currentTabId === 'issues' ? 'on' : 'off'}}">发行</view>
 		</view>
 	</view>
 
