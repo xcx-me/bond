@@ -1,24 +1,27 @@
 const { request } = require('../ajax/ajax')
 const config = require('../ajax/config')
 
+const stepUrls = [
+	'../mobile-form/mobile-form',
+	'../user-detail-form/user-detail-form',
+	'../email-validation-form/email-validation-form'
+]
+
 module.exports = {
 	checkAuthentication(done) {
 		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
-			// result.retdata.v = false
-			// result.retdata.reg = 1
+			result.retdata.v = false
+			result.retdata.reg = 1
 
 			if (!result.retdata.v) {
-				if (result.retdata.reg === 0 || result.retdata.reg === 1 || result.retdata.reg === 2) {
+				if ([0, 1, 2].indexOf(result.retdata.reg) >= 0) {
 					wx.showModal({
 						title: '认证中',
 						content: '您的认证尚未完成，请点击查看',
 						confirmColor: '#2196F3',
+						confirmText: '去认证',
 						success: function (res) {
-							if (res.confirm) {
-								result.retdata.reg === 0 && wx.navigateTo({url: '../mobile-form/mobile-form'})
-								result.retdata.reg === 1 && wx.navigateTo({url: '../user-detail-form/user-detail-form'})
-								result.retdata.reg === 2 && wx.navigateTo({url: '../email-validation-form/email-validation-form'})
-							}
+							res.confirm && wx.navigateTo({url: stepUrls[result.retdata.reg]})
 						}
 					})
 					return

@@ -1,5 +1,6 @@
 const { request } = require('../../../util/ajax/ajax')
 const config = require('../../../util/ajax/config')
+const AutoCompleteTextInputUtil = require('./auto-complete-text-input-util')
 
 Component({
 	/**
@@ -11,8 +12,12 @@ Component({
 			value: ''
 		},
 		value: {
-			type: String,
-			value: ''
+			type: Object,
+			value: {
+				text: '',
+				agencyName: '',
+				agencyId: ''
+			}
 		},
 		label: {
 			type: String,
@@ -61,23 +66,41 @@ Component({
 			this.timeStamp_ = currentTime
 			setTimeout(() => {
 				if (this.timeStamp_ - currentTime === 0) {
+					console.log('e.detail.value', e.detail.value)
 					this.bondSimpleNameAssociate(e.detail.value) // 债券简称列表联想
 				}
 			}, 1000)
 
 			this.triggerEvent('change', {
 				fieldName: e.currentTarget.dataset.fieldName,
-				value: e.detail.value
+				value: {
+					text: e.detail.value,
+					agencyName: '',
+					agencyId: ''
+				}
 			})
 		},
 
 		bondSimpleNameAssociate: function (curName) {
-			request(config.NEW_BOND.associateBondName, {bond_msg: curName}).then((result) => {
-				let resultData = result.retdata.array
-				if (curName !=='' && resultData.length > 0) {
-					console.log('has itmes..')
-					let nameArray = this.parseAssociateBondSimpleName(curName, resultData)
+			let host = this
 
+			request(config.GETAGENCY_LIST, {key_word: curName}).then((result) => {
+				
+				let resultData = result.org_list
+
+				console.log('resultData.....', resultData)
+
+				resultData.forEach((item) => {
+					item.bond_simple_name = item.name
+				})
+
+				host.matchedList = resultData
+
+				console.log('set host.matchedList', host.matchedList)
+
+				if (curName !=='' && resultData.length > 0) {
+					console.log('resultData', resultData)
+					let nameArray = AutoCompleteTextInputUtil.parseAssociateBondSimpleName(curName, resultData)
 					console.log('nameArray', nameArray)
 
 					this.setData({
@@ -96,48 +119,22 @@ Component({
 			})
 		},
 
-		parseAssociateBondSimpleName: function(curName, ascBondSimpleNameList) {
-			let result = []
-			if (curName === '') {
-				return result
-			}
-			ascBondSimpleNameList.map((item) => {
-				let newValueList = []
-				let bondSimpleName = item.bond_simple_name
-				let lowerBondSimpleName = bondSimpleName.toLowerCase()
-				let valueList = lowerBondSimpleName.split(curName.toLowerCase())
-				let positionStart = lowerBondSimpleName.indexOf(curName.toLowerCase())
-				let positionEnd = positionStart + curName.length
-				let highlightValue = bondSimpleName.slice(positionStart, positionEnd)
-
-				valueList.map((value, index) => {
-					newValueList.push({
-						value: value,
-						tag: 0
-					})
-					if (index < valueList.length - 1) {
-						newValueList.push({
-							value: highlightValue,
-							tag: 1
-						})
-					}
-				})
-				result.push({
-					value: bondSimpleName,
-					list: newValueList
-				})
+		_selectAssociateBondName: function (e) {
+			let matchedItem = this.matchedList.find((item) => {
+				return item.name === e.detail
 			})
 
-			return result
-		},
+			console.log('matched item', matchedItem)
 
-		bondDetailsAssociate: function (bondSimpleName) {
-			// TODO: get list.
-		},
+			this.triggerEvent('change', {
+				fieldName: this.properties.fieldName,
+				value: {
+					text: matchedItem.name,
+					agencyName: matchedItem.simple_name,
+					agencyId: matchedItem.id
+				}
+			})
 
-		_selectAssociateBondName: function (e) {
-			console.log('e.detail', e.detail)
-			this.bondDetailsAssociate(e.detail)
 			this.hideAssociateNameList()
 		},
 
