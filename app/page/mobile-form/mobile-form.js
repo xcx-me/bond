@@ -109,7 +109,6 @@ Page({
 	doSubmit: function () {
 		if (this.data.disabledOfSubmitButton) return
 		if (this.validateMobileFormat()) {
-			console.log('do ok submit.')
 			let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
 			request(config.USER_REGISTER.activateMobile, {
 				mobile: submissionObject.mobileNumber,
