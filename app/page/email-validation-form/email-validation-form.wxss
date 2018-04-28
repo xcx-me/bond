@@ -29,7 +29,8 @@
   position: absolute;
   top: 0rpx;
   right: 0;
-  padding: 24rpx;
+  padding: 20rpx;
+  height: 48rpx;
 }
 .email-validation-form .section .control-area {
   margin: 40rpx 0 20rpx;

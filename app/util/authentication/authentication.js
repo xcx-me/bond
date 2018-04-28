@@ -11,7 +11,7 @@ module.exports = {
 	checkAuthentication(done) {
 		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
 			// result.retdata.v = false
-			// result.retdata.reg = 2
+			// result.retdata.reg = 0
 
 			if (!result.retdata.v) {
 				if ([0, 1, 2].indexOf(result.retdata.reg) >= 0) {

@@ -13,7 +13,8 @@
   position: absolute;
   top: 0rpx;
   right: 0;
-  padding: 24rpx;
+  padding: 20rpx;
+  height: 48rpx;
 }
 .mobile-form .form-section .mobile-verification-code-button.disabled {
   color: grey;
