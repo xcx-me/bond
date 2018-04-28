@@ -1,14 +1,26 @@
-<view>
-	<view wx:for='{{configurations}}' wx:key='key'>
+<view class='user-info'>
+	<view wx:for='{{configurations}}' wx:key='key' class='info-wrapper'>
 		<block>
-			<navigator url='{{item.url}}'>
-				<text>{{item.label}}</text>
-				<text wx:if='{{item.detailText}}'>{{item.detailText}}</text>
-				<text wx:if='{{item.unreadNumber > 0}}'>{{item.unreadNumber}}</text>
+			<navigator url='{{item.url}}' class='{{item.label === "修改其他资料" ? "navigator navigator-none": "navigator"}}'>
+				<text class='label-info'>{{item.label}}</text>
+				<text wx:if='{{item.detailText}}' class='detail-info'>{{item.detailText}}</text>
+				<i class='icon-right-arrow'></i>
+				<!-- <text wx:if='{{item.unreadNumber > 0}}'>{{item.unreadNumber}}</text> -->
 			</navigator>
 		</block>
 	</view>
-    <button type='primary' bindtap='navigateBack'>返回</button>
-	<button type='primary' bindtap='doExampleRequest'>示例请求</button>
-	<button open-type='contact'>联系客服</button>
+    <!-- <button type='primary' bindtap='navigateBack'>返回</button>
+	<button type='primary' bindtap='doExampleRequest'>示例请求</button> -->
+	<view class='contact-service' bindtap="openServiceNumbers">
+		<button>联系客服</button>
+		<i class='icon-right-arrow'></i>
+	</view>
+	<view class='service-detail {{isShow ? "show-number" : "hide-number"}}'>
+		<view>
+			<view class='qq'>客服QQ：916273703</view>
+			<view class='calling' bindtap='calling'>客服电话：0755-86707342</view>
+		</view>
+		<view bindtap='closeServiceNumbers' class="cancel">取消</view>
+	</view>
+	<view class='close-mask {{isShow ? "show-number" : "hide-number"}}'></view>
 </view>
