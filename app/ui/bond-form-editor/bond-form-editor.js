@@ -313,7 +313,7 @@ Component({
 			request(config.NEW_BOND.associateBondName, {bond_msg: curName}).then((result) => {
 				let resultData = result.retdata.array
 				if (curName !=='' && resultData.length > 0) {
-					let nameArray = AutoCompleteTextInputUtil.parseAssociateBondSimpleName(curName, resultData)
+					let nameArray = AutoCompleteTextInputUtil.parseAssociateBondSimpleName(curName, resultData, 'bond_simple_name')
 					this.setData({
 						ascNameListOpen: true,
 						simpleNameList: nameArray

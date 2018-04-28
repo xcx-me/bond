@@ -27,7 +27,7 @@ Component({
 			type: String,
 			value: ''
 		},
-		maxlength: {
+		maxLength: {
 			type: Number,
 			value: -1
 		},
@@ -66,13 +66,12 @@ Component({
 			this.timeStamp_ = currentTime
 			setTimeout(() => {
 				if (this.timeStamp_ - currentTime === 0) {
-					console.log('e.detail.value', e.detail.value)
 					this.bondSimpleNameAssociate(e.detail.value) // 债券简称列表联想
 				}
 			}, 1000)
 
 			this.triggerEvent('change', {
-				fieldName: e.currentTarget.dataset.fieldName,
+				fieldName: this.properties.fieldName,
 				value: {
 					text: e.detail.value,
 					agencyName: '',
@@ -81,35 +80,19 @@ Component({
 			})
 		},
 
+		// TODO: please rename these methods.
 		bondSimpleNameAssociate: function (curName) {
 			let host = this
-
-			request(config.GETAGENCY_LIST, {key_word: curName}).then((result) => {
-				
-				let resultData = result.org_list
-
-				console.log('resultData.....', resultData)
-
-				resultData.forEach((item) => {
-					item.bond_simple_name = item.name
-				})
-
-				host.matchedList = resultData
-
-				console.log('set host.matchedList', host.matchedList)
-
-				if (curName !=='' && resultData.length > 0) {
-					console.log('resultData', resultData)
-					let nameArray = AutoCompleteTextInputUtil.parseAssociateBondSimpleName(curName, resultData)
-					console.log('nameArray', nameArray)
-
+			request(config.USER_REGISTER.getAgencyList, {key_word: curName}).then((result) => {
+				host.matchedList = result.org_list
+				if (curName !=='' && host.matchedList.length > 0) {
+					let nameArray = AutoCompleteTextInputUtil.parseAssociateBondSimpleName(curName, host.matchedList, 'name')
 					this.setData({
 						ascNameListOpen: true,
 						simpleNameList: nameArray
 					})
 					this.triggerEvent('changeFixedPageScroll', true)
 				} else {
-					console.log('has no itmes..')
 					this.setData({
 						ascNameListOpen: false,
 						simpleNameList: []
@@ -123,9 +106,6 @@ Component({
 			let matchedItem = this.matchedList.find((item) => {
 				return item.name === e.detail
 			})
-
-			console.log('matched item', matchedItem)
-
 			this.triggerEvent('change', {
 				fieldName: this.properties.fieldName,
 				value: {
@@ -134,7 +114,6 @@ Component({
 					agencyId: matchedItem.id
 				}
 			})
-
 			this.hideAssociateNameList()
 		},
 

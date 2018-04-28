@@ -1,5 +1,7 @@
 const UiType = require('../../ui/form-viewer-editor/ui-type')
 const FormViewerEditorUtil = require('../../ui/form-viewer-editor/form-viewer-editor-util')
+const { request } = require('../../util/ajax/ajax')
+const config = require('../../util/ajax/config')
 
 const EMAIL_VALIDATION_CODE = 'emailValidationCode'
 const MAX_LENGTH_OF_MOBILE_VALIDATION_CODE = 4
@@ -24,9 +26,10 @@ Page({
 				value: '',
 				type: 'number',
 				placeholder: '请填写验证码',
-				maxlength: MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
+				maxLength: MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
 			},
 		],
+		qq: '',
 		disabledOfSubmitButton: true
 	},
 
@@ -39,40 +42,53 @@ Page({
 	},
 
 	handleGetMobileVerificationCode: function () {
-		console.log('resend...')
+		request(config.USER_REGISTER.resendEmail, {})
 	},
 
 	doSubmit: function () {
 		if (this.data.disabledOfSubmitButton) return
-		console.log('do submit..')
-
-		// let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
-
-		// console.log('submissionObject', submissionObject)
-
-		// this.validateMobileFormat() && wx.redirectTo({url: '../user-detail-form/user-detail-form'})
-
-		wx.redirectTo({url: '../user-detail-submission-complete/user-detail-submission-complete'})
+		let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
+		request(config.USER_REGISTER.verifyQQEmailCode, {
+			code: submissionObject.emailValidationCode
+		}).then((result) => {
+			wx.redirectTo({url: '../user-detail-submission-complete/user-detail-submission-complete'})
+		})
 	},
 
 	verifyEmailComplete: function () {
-		console.log('verify email complete..')
+		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
+			if (result.retdata.reg === 3) {
+				wx.redirectTo({url: '../user-detail-submission-complete/user-detail-submission-complete'})
+				return
+			}
+			wx.showModal({
+				content: '你还没有验证你的邮箱，请单击邮件中的链接进行验证。',
+				confirmText: '确定',
+				confirmColor: '#2196F3',
+				showCancel: false
+			})
+		})
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		this.setData({
-			descriptors: this.data.descriptors
-		})
+		// this.setData({
+		// 	descriptors: this.data.descriptors
+		// })
 	},
 
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
 	onReady: function () {
-
+		this.setData({
+			descriptors: this.data.descriptors
+		})
+		request(config.USER_REGISTER.getUserInfo, {}).then((result) => {
+			this.setData({qq: result.retdata.user.qq})
+		})
 	},
 
 	/**

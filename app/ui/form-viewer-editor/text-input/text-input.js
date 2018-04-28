@@ -19,7 +19,7 @@ Component({
 			type: String,
 			value: ''
 		},
-		maxlength: {
+		maxLength: {
 			type: Number,
 			value: -1
 		},
@@ -50,7 +50,7 @@ Component({
 	methods: {
 		handleInputChange: function (e) {
 			this.triggerEvent('change', {
-				fieldName: e.currentTarget.dataset.fieldName,
+				fieldName: this.properties.fieldName,
 				value: e.detail.value
 			})
 		}

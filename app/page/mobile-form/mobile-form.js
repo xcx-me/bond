@@ -35,7 +35,7 @@ Page({
 				value: '',
 				type: 'number',
 				placeholder: '输入手机号',
-				maxlength: MAX_LENGTH_OF_MOBILE_NUMBER
+				maxLength: MAX_LENGTH_OF_MOBILE_NUMBER
 			},
 			{
 				fieldName: MOBILE_VALIDATION_CODE,
@@ -44,7 +44,7 @@ Page({
 				value: '',
 				type: 'number',
 				placeholder: '输入验证码',
-				maxlength: MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
+				maxLength: MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
 			},
 		],
 		disabledOfMobileVerificationCodeButton: true,
@@ -107,17 +107,16 @@ Page({
 
 	doSubmit: function () {
 		if (this.data.disabledOfSubmitButton) return
-		let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
-
 		if (this.validateMobileFormat()) {
+			let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
 			request(config.USER_REGISTER.activateMobile, {
 				mobile: submissionObject.mobileNumber,
 				code: submissionObject.mobileValidationCode
-			}, true).then((result) => {
+			}).then((result) => {
 				// TODO: below code is mock data for development only.
-				result.retdata = {
-					is_new: true
-				}
+				// result.retdata = {
+				// 	is_new: true
+				// }
 				result.retdata.is_new
 					? wx.redirectTo({url: '../user-detail-form/user-detail-form'})
 					: wx.redirectTo({url: '../user-register-complete/user-register-complete'})
