@@ -3,7 +3,7 @@
 		<text class='star' wx:if='{{mandatory}}'>*</text>
 		<text>{{label}}</text>
 	</view>
-	<input class='input-field {{hasWarning ? "warning" : ""}}' value='{{value}}'
+	<input class='input-field {{hasWarning ? "warning" : ""}}' value='{{value.text}}'
 		bindinput='handleInputChange'
 		placeholder='{{placeholder}}'
 		maxlength='{{maxlength ? maxlength : -1}}'

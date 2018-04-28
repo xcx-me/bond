@@ -50,7 +50,11 @@ Page({
 				fieldName: AGENCY_NAME,
 				uiType: UiType.AUTO_COMPLETE_TEXT_INPUT,
 				label: '机构名',
-				value: '',
+				value: {
+					text: '',
+					agencyName: '',
+					agencyId: ''
+				},
 				mandatory: true,
 				placeholder: '请输入机构名'
 			},
@@ -166,9 +170,7 @@ Page({
 	 */
 	onLoad: function (options) {
 		// Below code is to fix an issue that last user entered charactor will stay in the mobile number field. 
-		this.setData({
-			descriptors: this.data.descriptors
-		})
+		console.log('on load...')
 		// wx.redirectTo({url: '../email-validation-form/email-validation-form'})
 	},
 
@@ -176,14 +178,17 @@ Page({
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
 	onReady: function () {
-
+		console.log('on ready...')
+		this.setData({
+			descriptors: this.data.descriptors
+		})
 	},
 
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-
+		console.log('on show...')
 	},
 
 	/**

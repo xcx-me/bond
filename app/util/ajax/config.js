@@ -1,6 +1,11 @@
 const {GET, POST} = require('./method')
 
 module.exports = {
+	// TODO: please add one more layer.
+	GETAGENCY_LIST: { // 获取机构列表
+		url: '/appletree/getorginfolist.do',
+		method: POST
+	},
 	USER_REGISTER: {
 		getUserStatus: {
 			url: '/qtrade_bond/api/user/getuserstatus.do',

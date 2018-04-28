@@ -4,6 +4,7 @@ const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const formConfig = require('./form-config/form-config')
 const converson = require('../../util/converson/converson')
+const AutoCompleteTextInputUtil = require('../../ui/form-viewer-editor/auto-complete-text-input/auto-complete-text-input-util')
 
 Component({
 	properties: {
@@ -312,7 +313,7 @@ Component({
 			request(config.NEW_BOND.associateBondName, {bond_msg: curName}).then((result) => {
 				let resultData = result.retdata.array
 				if (curName !=='' && resultData.length > 0) {
-					let nameArray = this.parseAssociateBondSimpleName(curName, resultData)
+					let nameArray = AutoCompleteTextInputUtil.parseAssociateBondSimpleName(curName, resultData)
 					this.setData({
 						ascNameListOpen: true,
 						simpleNameList: nameArray
@@ -326,41 +327,6 @@ Component({
 					this.triggerEvent('changeFixedPageScroll', false)
 				}
 			})
-		},
-
-		parseAssociateBondSimpleName: function(curName, ascBondSimpleNameList) {
-			let result = []
-			if (curName === '') {
-				return result
-			}
-			ascBondSimpleNameList.map((item) => {
-				let newValueList = []
-				let bondSimpleName = item.bond_simple_name
-				let lowerBondSimpleName = bondSimpleName.toLowerCase()
-				let valueList = lowerBondSimpleName.split(curName.toLowerCase())
-				let positionStart = lowerBondSimpleName.indexOf(curName.toLowerCase())
-				let positionEnd = positionStart + curName.length
-				let highlightValue = bondSimpleName.slice(positionStart, positionEnd)
-
-				valueList.map((value, index) => {
-					newValueList.push({
-						value: value,
-						tag: 0
-					})
-					if (index < valueList.length - 1) {
-						newValueList.push({
-							value: highlightValue,
-							tag: 1
-						})
-					}
-				})
-				result.push({
-					value: bondSimpleName,
-					list: newValueList
-				})
-			})
-
-			return result
 		},
 
 		_closeAssociateList: function () {

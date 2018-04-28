@@ -98,22 +98,25 @@ Page({
 
 	handleGetMobileVerificationCode: function () {
 		if (this.data.disabledOfMobileVerificationCodeButton) return
-		this.validateMobileFormat()
+		if (this.validateMobileFormat()){
+			request(config.USER_REGISTER.getMobileVerificationCode, {
+				mobile: FormViewerEditorUtil.findDescriptorByFieldName(this.data.descriptors, MOBILE_NUMBER).value
+			})
+		}
 	},
 
 	doSubmit: function () {
 		if (this.data.disabledOfSubmitButton) return
 		let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
 
-		console.log('submissionObject...', submissionObject)
-
 		if (this.validateMobileFormat()) {
 			request(config.USER_REGISTER.activateMobile, {
 				mobile: submissionObject.mobileNumber,
 				code: submissionObject.mobileValidationCode
 			}, true).then((result) => {
+				// TODO: below code is mock data for development only.
 				result.retdata = {
-					is_new: false
+					is_new: true
 				}
 				result.retdata.is_new
 					? wx.redirectTo({url: '../user-detail-form/user-detail-form'})
