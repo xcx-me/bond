@@ -7,11 +7,14 @@ module.exports = {
 		ascBondSimpleNameList.map((item) => {
 			let newValueList = []
 			let bondSimpleName = item.bond_simple_name
+			let lowerCurrentName = curName.toLowerCase()
 			let lowerBondSimpleName = bondSimpleName.toLowerCase()
-			let valueList = lowerBondSimpleName.split(curName.toLowerCase())
-			let positionStart = lowerBondSimpleName.indexOf(curName.toLowerCase())
-			let positionEnd = positionStart + curName.length
-			let highlightValue = bondSimpleName.slice(positionStart, positionEnd)
+			let valueList = lowerBondSimpleName.split(lowerCurrentName)
+
+			let findedStrs = new Array()
+			this.subStrPosition(lowerBondSimpleName, lowerCurrentName).forEach((value, index) => {
+				findedStrs.push(bondSimpleName.slice(value, value + curName.length))
+			})
 
 			valueList.map((value, index) => {
 				newValueList.push({
@@ -20,7 +23,7 @@ module.exports = {
 				})
 				if (index < valueList.length - 1) {
 					newValueList.push({
-						value: highlightValue,
+						value: findedStrs[index],
 						tag: 1
 					})
 				}
@@ -32,5 +35,15 @@ module.exports = {
 		})
 
 		return result
+	},
+
+	subStrPosition: function (str, subStr){
+		let positions = new Array() 
+		let pos = str.indexOf(subStr)
+		while (pos > -1 ) {
+			positions.push(pos)
+			pos = str.indexOf(subStr, pos + 1)
+		}
+		return positions
 	}
 }
