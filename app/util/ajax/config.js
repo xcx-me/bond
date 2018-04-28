@@ -64,6 +64,10 @@ module.exports = {
 		submitUserInfoForEdit: {
 			url: '/qtrade_bond/api/submitinfo/submit.do',
 			method: POST
+		},
+		getAgencyList: { // 获取机构列表
+			url: '/appletree/getorginfolist.do',
+			method: POST
 		}
 	},
 	EXAMPLE: {

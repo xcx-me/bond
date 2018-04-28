@@ -1,7 +1,7 @@
 <view class='email-validation-form'>
 	<view class='description'>
 		<text>验证邮件已发至您的邮箱：</text>
-		<text class='highlight'>32233665533@qq.com</text>
+		<text class='highlight'>{{qq}}@qq.com</text>
 		<text>\n请任选一种方式完成邮箱认证：</text>
 	</view>
 

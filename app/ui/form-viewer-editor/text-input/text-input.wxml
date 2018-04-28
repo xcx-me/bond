@@ -6,7 +6,6 @@
 	<input class='input-field {{hasWarning ? "warning" : ""}}' value='{{value}}'
 		bindinput='handleInputChange'
 		placeholder='{{placeholder}}'
-		maxlength='{{maxlength ? maxlength : -1}}'
-		type='{{type}}'
-		data-field-name='{{fieldName}}' />
+		maxlength='{{maxLength ? maxLength : -1}}'
+		type='{{type}}' />
 </view>

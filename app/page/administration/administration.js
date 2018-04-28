@@ -21,7 +21,6 @@ Page({
 
 	isStoreOpened: function () {
 		request(config.NEW_BOND.isStoreOpened, {}).then((result) => {
-			console.log('isStoreOpened...', result)
 			let retData = result.retdata
 			let isStoreRegistered = String(retData.is_myshop_opened) === '1'
 			wx.setNavigationBarTitle({

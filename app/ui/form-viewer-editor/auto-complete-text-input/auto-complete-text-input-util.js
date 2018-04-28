@@ -1,12 +1,12 @@
 module.exports = {
-	parseAssociateBondSimpleName: function(curName, ascBondSimpleNameList) {
+	parseAssociateBondSimpleName: function(curName, ascBondSimpleNameList, keyFieldName) {
 		let result = []
 		if (curName === '') {
 			return result
 		}
 		ascBondSimpleNameList.map((item) => {
 			let newValueList = []
-			let bondSimpleName = item.bond_simple_name
+			let bondSimpleName = item[keyFieldName]
 			let lowerCurrentName = curName.toLowerCase()
 			let lowerBondSimpleName = bondSimpleName.toLowerCase()
 			let valueList = lowerBondSimpleName.split(lowerCurrentName)
