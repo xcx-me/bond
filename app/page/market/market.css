@@ -46,6 +46,9 @@
   line-height: 80rpx;
   font-size: 32rpx;
 }
+.market-page .off {
+  border-bottom: 5rpx solid transparent;
+}
 .market-page .on {
   color: #2196F3;
   border-bottom: 5rpx solid #2196F3;
