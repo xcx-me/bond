@@ -88,26 +88,28 @@ Page({
 	validateMobileFormat: function () {
 		let mobileNumberDescriptor = FormViewerEditorUtil.findDescriptorByFieldName(this.data.descriptors, MOBILE_NUMBER)
 		if (RegexpUtil.isPhoneNumber(mobileNumberDescriptor.value)) {
-			this.updateLabel()
 			return true
 		}
 		Toast.showToast('手机号码格式不正确，请重新输入')
-		this.setLabelByCondition(false)
 		return false
 	},
 
 	handleGetMobileVerificationCode: function () {
 		if (this.data.disabledOfMobileVerificationCodeButton) return
 		if (this.validateMobileFormat()){
+			this.updateLabel()
 			request(config.USER_REGISTER.getMobileVerificationCode, {
 				mobile: FormViewerEditorUtil.findDescriptorByFieldName(this.data.descriptors, MOBILE_NUMBER).value
 			})
+			return
 		}
+		this.setLabelByCondition(false)
 	},
 
 	doSubmit: function () {
 		if (this.data.disabledOfSubmitButton) return
 		if (this.validateMobileFormat()) {
+			console.log('do ok submit.')
 			let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
 			request(config.USER_REGISTER.activateMobile, {
 				mobile: submissionObject.mobileNumber,
