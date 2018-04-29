@@ -9,8 +9,6 @@
 			</navigator>
 		</block>
 	</view>
-    <!-- <button type='primary' bindtap='navigateBack'>返回</button>
-	<button type='primary' bindtap='doExampleRequest'>示例请求</button> -->
 	<view class='contact-service' bindtap="openServiceNumbers">
 		<button>联系客服</button>
 		<i class='icon-right-arrow'></i>

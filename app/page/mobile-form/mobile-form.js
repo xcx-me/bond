@@ -5,6 +5,7 @@ const Toast = require('../../util/toast/toast')
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const MobileFormModelCreate = require('./mobile-form-model-create')
+const MobileFormModelConfirm = require('./mobile-form-model-confirm')
 
 const MOBILE_NUMBER = 'mobileNumber'
 const MOBILE_VALIDATION_CODE = 'mobileValidationCode'
@@ -107,15 +108,19 @@ Page({
 		}
 	},
 
+	getInitialDescriptors (type) {
+		if (type === 'confirm') return new MobileFormModelConfirm().getDescriptors()
+		return new MobileFormModelCreate().getDescriptors()
+	},
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
 		console.log('options', options)
-
 		// Below code is to fix an issue that last user entered charactor will stay in the mobile number field. 
 		this.setData({
-			descriptors: new MobileFormModelCreate().getDescriptors()
+			descriptors: this.getInitialDescriptors(options.type)
 		})
 
 		// wx.redirectTo({url: '../user-detail-form/user-detail-form'})
