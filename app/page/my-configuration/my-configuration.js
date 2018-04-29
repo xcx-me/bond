@@ -3,7 +3,6 @@ const config = require('../../util/ajax/config')
 
 const KEY_mobile = 'editMobile'
 const KEY_EDIT_USER_INFO = 'editUserInfo'
-//const KEY_SYSTEM_NOTICE = 'systemNotice'
 
 Page({
 
@@ -12,7 +11,7 @@ Page({
 			{
 				key: KEY_mobile,
 				label: '修改手机',
-				url: '../mobile-form/mobile-form',
+				url: '../mobile-form/mobile-form?type=confirm',
 				detailText: ''
 			},
 			{
@@ -21,34 +20,9 @@ Page({
 				url: '../user-info/user-info',
 				detailText: ''
 			}
-			// {
-			// 	key: KEY_SYSTEM_NOTICE,
-			// 	label: '系统消息',
-			// 	url: '../notice/notice',
-			// 	showRedPoint: true,
-			// 	unreadNumber: 0
-			// }
 		],
-		isShow:false,
+		isShow: false,
 		serviceNumber: '0755-86707342'
-	},
-
-	navigateBack: function () {
-		wx.navigateBack()
-	},
-
-	doExampleRequest: function () {
-		request(config.EXAMPLE.getSometing, {}).then((result) => {
-			wx.showToast({
-				title: '请求成功',
-				icon: 'success',
-				mask: true,
-				duration: 2000
-			})
-			console.log('request success', result)
-		}).catch((error) => {
-			// Do something...
-		})
 	},
 
 	/**
@@ -59,7 +33,7 @@ Page({
 	},
 
 	getMobileNumber: function () {
-		request(config.USER_REGISTER.getMobileForSubmitInfo,{}).then((result) => {
+		request(config.USER_REGISTER.getMobileForSubmitInfo, {}).then((result) => {
 			let configurations = this.data.configurations
 
 			let configuration = configurations.find((item) => {
@@ -67,7 +41,7 @@ Page({
 			})
 
 			configuration.detailText = result.retdata.mobile
-			
+
 			this.setData({
 				configurations: configurations
 			})
@@ -75,8 +49,8 @@ Page({
 	},
 
 	getUserIsAuthenticated: function () {
-		request(config.USER_REGISTER.getUserStatus,{}).then((result) => {
-			let configurations =  this.data.configurations;
+		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
+			let configurations = this.data.configurations;
 			let configuration = configurations.find((item) => {
 				return item.key === KEY_EDIT_USER_INFO
 			})
@@ -109,7 +83,7 @@ Page({
 				console.log("拨打电话失败！")
 			}
 		})
-		},
+	},
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */

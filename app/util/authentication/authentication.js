@@ -2,7 +2,7 @@ const { request } = require('../ajax/ajax')
 const config = require('../ajax/config')
 
 const stepUrls = [
-	'../mobile-form/mobile-form',
+	'../mobile-form/mobile-form?type=create',
 	'../user-detail-form/user-detail-form',
 	'../email-validation-form/email-validation-form'
 ]
@@ -10,8 +10,8 @@ const stepUrls = [
 module.exports = {
 	checkAuthentication(done) {
 		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
-			// result.retdata.v = false
-			// result.retdata.reg = 0
+			result.retdata.v = false
+			result.retdata.reg = 0
 
 			if (!result.retdata.v) {
 				if ([0, 1, 2].indexOf(result.retdata.reg) >= 0) {
