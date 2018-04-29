@@ -7,6 +7,7 @@ const config = require('../../util/ajax/config')
 
 const MOBILE_NUMBER = 'mobileNumber'
 const MOBILE_VALIDATION_CODE = 'mobileValidationCode'
+
 const MAX_LENGTH_OF_MOBILE_NUMBER = 11
 const MAX_LENGTH_OF_MOBILE_VALIDATION_CODE = 4
 
@@ -129,6 +130,8 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		console.log('options', options)
+
 		// Below code is to fix an issue that last user entered charactor will stay in the mobile number field. 
 		this.setData({
 			descriptors: this.data.descriptors
