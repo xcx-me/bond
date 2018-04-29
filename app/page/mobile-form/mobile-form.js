@@ -4,9 +4,12 @@ const RegexpUtil = require('../../util/regexp-util/regexp-util')
 const Toast = require('../../util/toast/toast')
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
+const MobileFormModelCreate = require('./mobile-form-model-create')
+const MobileFormModelConfirm = require('./mobile-form-model-confirm')
 
 const MOBILE_NUMBER = 'mobileNumber'
 const MOBILE_VALIDATION_CODE = 'mobileValidationCode'
+
 const MAX_LENGTH_OF_MOBILE_NUMBER = 11
 const MAX_LENGTH_OF_MOBILE_VALIDATION_CODE = 4
 
@@ -27,29 +30,9 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-		descriptors: [
-			{
-				fieldName: MOBILE_NUMBER,
-				uiType: UiType.TEXT_INPUT,
-				label: '手机号',
-				value: '',
-				type: 'number',
-				placeholder: '输入手机号',
-				maxLength: MAX_LENGTH_OF_MOBILE_NUMBER
-			},
-			{
-				fieldName: MOBILE_VALIDATION_CODE,
-				uiType: UiType.TEXT_INPUT,
-				label: '验证码',
-				value: '',
-				type: 'number',
-				placeholder: '输入验证码',
-				maxLength: MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
-			},
-		],
+		descriptors: [],
 		disabledOfMobileVerificationCodeButton: true,
 		labelOfMobileVerificationCodeButton: DAFAULT_LABEL,
-
 		disabledOfSubmitButton: true
 	},
 
@@ -109,7 +92,6 @@ Page({
 	doSubmit: function () {
 		if (this.data.disabledOfSubmitButton) return
 		if (this.validateMobileFormat()) {
-			console.log('do ok submit.')
 			let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
 			request(config.USER_REGISTER.activateMobile, {
 				mobile: submissionObject.mobileNumber,
@@ -126,13 +108,19 @@ Page({
 		}
 	},
 
+	getInitialDescriptors (type) {
+		if (type === 'confirm') return new MobileFormModelConfirm().getDescriptors()
+		return new MobileFormModelCreate().getDescriptors()
+	},
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		console.log('options', options)
 		// Below code is to fix an issue that last user entered charactor will stay in the mobile number field. 
 		this.setData({
-			descriptors: this.data.descriptors
+			descriptors: this.getInitialDescriptors(options.type)
 		})
 
 		// wx.redirectTo({url: '../user-detail-form/user-detail-form'})
