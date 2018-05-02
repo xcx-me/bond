@@ -3,5 +3,5 @@
 		"form-viewer-editor": "../../ui/form-viewer-editor/form-viewer-editor",
 		"qtrade-button": "../../ui/qtrade-button/qtrade-button"
 	},
-	"navigationBarTitleText": "填写手机号"
+	"navigationBarTitleText": ""
 }
