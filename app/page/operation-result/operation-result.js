@@ -54,6 +54,10 @@ Page({
 			description: operationResult.description,
 			buttonLabel: operationResult.buttonLabel
 		})
+
+		wx.setNavigationBarTitle({
+			title: operationResult.title
+		})
 	},
 
 	/**

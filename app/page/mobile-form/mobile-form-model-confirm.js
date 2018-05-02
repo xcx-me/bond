@@ -12,9 +12,6 @@ const MAX_LENGTH_OF_MOBILE_NUMBER = 11
 const MAX_LENGTH_OF_MOBILE_VALIDATION_CODE = 4
 
 const basicValidators = {
-	[MOBILE_NUMBER]: (value) => {
-		return value.length === MAX_LENGTH_OF_MOBILE_NUMBER
-	},
 	[MOBILE_VALIDATION_CODE]: (value) => {
 		return value.length === MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
 	}
