@@ -2,6 +2,8 @@
 const toast = require('../../../util/toast/toast')
 const { request } = require('../../../util/ajax/ajax')
 const config = require('../../../util/ajax/config')
+const Authentication = require('../../../util/authentication/authentication')
+
 Component({
   /**
    * 组件的属性列表
@@ -24,12 +26,14 @@ Component({
    */
   methods: {
 	doOpenStore: function() {
-		request(config.NEW_BOND.openMyShop, {}).then((result) => {
-			wx.navigateTo({
-				url: '/app/page/register-store-complete/register-store-complete'
+		Authentication.checkAuthentication(() => {
+			request(config.NEW_BOND.openMyShop, {}).then((result) => {
+				wx.navigateTo({
+					url: '/app/page/register-store-complete/register-store-complete'
+				})
+			}).catch(()=>{
+				toast.showFailedToast()
 			})
-		}).catch(()=>{
-			toast.showFailedToast()
 		})
   	},
   }
