@@ -5,7 +5,7 @@ const APPLETREE_KEY = 'appletree_key'
 const StringUtil = require('../string-util/string-util')
 const wxPromise = require('../wx-promise/wx-promise')
 const Toast = require('../toast/toast')
-const isLocalhost = true
+const isLocalhost = false
 
 function centralErrorProcessor (result, resolve, handleErrorByUser) {
 	if (handleErrorByUser) {
@@ -82,7 +82,7 @@ function signon (done) {
 function wxLogin (done) {
 	wxPromise.login().then((loginResult) => {
 		wxPromise.getSetting().then((result) => {
-			result.authSetting['scope.userInfo'] && wxPromise.getUserInfo().then((secret) => {
+			wxPromise.getUserInfo().then((secret) => {
 				ajax(config.AUTHENTICATION.getAppletreeKey, {
 					code: loginResult.code,
 					userInfo: JSON.stringify(secret.userInfo),
@@ -92,7 +92,7 @@ function wxLogin (done) {
 					iv: secret.iv
 				}).then((result) => {
 					console.log('ANTHENTICATION: get appletree key success')
-					let appletreeKey = result.data.retdata.appletree_key
+					let appletreeKey = result.retdata.appletree_key
 					wx.setStorageSync(APPLETREE_KEY, appletreeKey)
 					done()
 				})
