@@ -4,7 +4,7 @@
         "app/page/overview/overview",
         "app/page/administration/administration",
         "app/page/store/store",
-		"app/page/my-configuration/my-configuration",
+        "app/page/my-configuration/my-configuration",
         "app/page/protocol/protocol",
         "app/page/register-store-complete/register-store-complete",
         "app/page/bond-detail/bond-detail",
@@ -17,8 +17,7 @@
         "app/page/mobile-form/mobile-form",
         "app/page/user-detail-form/user-detail-form",
         "app/page/email-validation-form/email-validation-form",
-        "app/page/user-detail-submission-complete/user-detail-submission-complete",
-        "app/page/user-register-complete/user-register-complete"
+        "app/page/operation-result/operation-result"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -28,13 +27,13 @@
         "backgroundColor": "#EFEFF4"
     },
     "tabBar": {
-		"selectedColor": "#2196F3",
+        "selectedColor": "#2196F3",
         "list": [
             {
                 "pagePath": "app/page/market/market",
                 "iconPath": "app/asset/image/tabbar/market.png",
                 "selectedIconPath": "app/asset/image/tabbar/market_active.png",
-				"text": "市场"
+                "text": "市场"
             },
             {
                 "pagePath": "app/page/administration/administration",

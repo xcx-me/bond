@@ -5,6 +5,7 @@
 	</view>
 	<input class='input-field {{hasWarning ? "warning" : ""}}' value='{{value}}'
 		bindinput='handleInputChange'
+		disabled='{{disabled}}'
 		placeholder='{{placeholder}}'
 		maxlength='{{maxLength ? maxLength : -1}}'
 		type='{{type}}' />
