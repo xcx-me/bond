@@ -178,22 +178,35 @@ Page({
 	},
 
 	bindDownLoad: function(e) {
-		// console.log('market bindDownLoad.....', this.data)
 		let lastData = this.data
+		if (lastData.moreLoading) { // 正在加载中
+			return
+		}
+		// lastData.loading = false
 		if (lastData.filterValue.current_page < lastData.filterValue.max_page) {
 			lastData.filterValue.current_page++
 			lastData.loading = false
 			lastData.moreLoading = true
 			this.setData(lastData)
-			this.getBondList(getStatus.LOADMORE)
-		}
+			this.setData(lastData, function () {
+				// 此处最好写回调，并且有延时函数效果更佳
+				setTimeout(() => {
+					this.getBondList(getStatus.LOADMORE)
+				}, 1000)
+			})
+			// setTimeout(() => {
+			// 	this.getBondList(getStatus.LOADMORE)
+			// }, 1000)
+			// this.getBondList(getStatus.LOADMORE)
+		}// else {
+		// 	lastData.moreLoading = false
+		// 	this.setData(lastData)
+		// }
 	},
 
 	topLoad: function(e) {},
 
-	scroll: function(e) {
-		// console.log(e)
-	},
+	scroll: function(e) {},
 
 	ballMoveEvent: function(e) { // 此处函数不起作用，到时候记得将html代码中绑定的函数解绑
 		// console.log('我被拖动了.....', e)

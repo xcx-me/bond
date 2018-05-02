@@ -27,7 +27,7 @@
 							isMine='{{false}}'
 							bondList='{{bondList}}'
 							moreLoading='{{moreLoading}}'
-							overLoaded='{{filterValue.current_page === filterValue.max_page}}'
+							overLoaded='{{!moreLoading && filterValue.current_page === filterValue.max_page}}'
 							uid=''
 							userId=''
 							bind:showSaleEvent='onShowSaleEvent'
