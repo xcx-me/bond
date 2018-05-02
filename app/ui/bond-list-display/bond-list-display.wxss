@@ -40,6 +40,27 @@
   font-family: PingFangSC-Regular;
   color: #888888;
 }
+.loading-more .icon,
+.loading-more .tips {
+  float: left;
+}
+.loading-more .icon {
+  width: calc(50% - 30rpx);
+}
+.loading-more .icon button {
+  float: right;
+  padding-left: 0;
+  padding-right: 10rpx;
+  margin-top: 5rpx;
+  font-size: inherit;
+  border: 0;
+}
+.loading-more .tips {
+  width: calc(50% + 30rpx);
+}
+.loading-more .tips text {
+  float: left;
+}
 .operator-pallet {
   position: absolute;
   top: 0;

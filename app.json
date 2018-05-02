@@ -28,12 +28,13 @@
         "backgroundColor": "#EFEFF4"
     },
     "tabBar": {
+		"selectedColor": "#2196F3",
         "list": [
             {
                 "pagePath": "app/page/market/market",
                 "iconPath": "app/asset/image/tabbar/market.png",
                 "selectedIconPath": "app/asset/image/tabbar/market_active.png",
-                "text": "市场"
+				"text": "市场"
             },
             {
                 "pagePath": "app/page/administration/administration",
