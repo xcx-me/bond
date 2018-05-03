@@ -6,24 +6,13 @@ const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const MobileFormModelCreate = require('./mobile-form-model-create')
 const MobileFormModelConfirm = require('./mobile-form-model-confirm')
+const MobileFormModelRenew = require('./mobile-form-model-renew')
 
 const MOBILE_NUMBER = 'mobileNumber'
 const MOBILE_VALIDATION_CODE = 'mobileValidationCode'
-
 const MAX_LENGTH_OF_MOBILE_NUMBER = 11
 const MAX_LENGTH_OF_MOBILE_VALIDATION_CODE = 4
-
-const PERIOD = 60
 const DAFAULT_LABEL = '获取验证码'
-
-const basicValidators = {
-	[MOBILE_NUMBER]: (value) => {
-		return value.length === MAX_LENGTH_OF_MOBILE_NUMBER
-	},
-	[MOBILE_VALIDATION_CODE]: (value) => {
-		return value.length === MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
-	}
-}
 
 Page({
 	/**
@@ -37,107 +26,62 @@ Page({
 	},
 
 	onChangeDescriptors: function (e) {
-		let descriptors = e.detail.descriptors
-		this.setData({
-			descriptors: descriptors,
-			disabledOfMobileVerificationCodeButton: this.timer ? true : !FormViewerEditorUtil.doBasicValidation(descriptors, MOBILE_NUMBER, basicValidators),
-			disabledOfSubmitButton: !FormViewerEditorUtil.doBasicValidationForAllFields(descriptors, basicValidators)
-		})
-	},
-
-	setLabelByCondition (disabled, counter) {
-		this.setData({
-			disabledOfMobileVerificationCodeButton: disabled,
-			labelOfMobileVerificationCodeButton: disabled ? `${counter}秒后重发` : DAFAULT_LABEL
-		})
-	},
-
-	updateLabel () {
-		this.setLabelByCondition(true, PERIOD)
-		let counter = PERIOD
-		this.timer = setInterval(() => {
-			counter--
-			if (counter === 0) {
-				clearInterval(this.timer)
-				this.timer = undefined
-				counter = PERIOD
-				this.setLabelByCondition(false)
-				return
-			}
-			this.setLabelByCondition(true, counter)
-		}, 1000)
-	},
-
-	validateMobileFormat: function () {
-		let mobileNumberDescriptor = FormViewerEditorUtil.findDescriptorByFieldName(this.data.descriptors, MOBILE_NUMBER)
-		if (RegexpUtil.isPhoneNumber(mobileNumberDescriptor.value)) {
-			return true
-		}
-		Toast.showToast('手机号码格式不正确，请重新输入')
-		return false
+		this.model.handleChangeDescriptors(e)
 	},
 
 	handleGetMobileVerificationCode: function () {
 		if (this.data.disabledOfMobileVerificationCodeButton) return
-		if (this.validateMobileFormat()){
-			this.updateLabel()
-			request(config.USER_REGISTER.getMobileVerificationCode, {
-				mobile: FormViewerEditorUtil.findDescriptorByFieldName(this.data.descriptors, MOBILE_NUMBER).value
-			})
+		if (this.model.validateMobileFormat(this.data.descriptors)) {
+			this.model.updateLabel()
+			this.model.getMobileVerificationCode()
 			return
 		}
-		this.setLabelByCondition(false)
+		this.model.setLabelByCondition(false)
 	},
 
 	doSubmit: function () {
 		if (this.data.disabledOfSubmitButton) return
-		if (this.validateMobileFormat()) {
+		if (this.model.validateMobileFormat(this.data.descriptors)) {
 			let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
-			request(config.USER_REGISTER.activateMobile, {
-				mobile: submissionObject.mobileNumber,
-				code: submissionObject.mobileValidationCode
-			}).then((result) => {
-				// TODO: below code is mock data for development only.
-				// result.retdata = {
-				// 	is_new: true
-				// }
-				result.retdata.is_new
-					? wx.redirectTo({url: '../user-detail-form/user-detail-form'})
-					: wx.redirectTo({url: '../user-register-complete/user-register-complete'})
-			})
+			this.model.doSubmit(submissionObject)
 		}
 	},
 
-	getInitialDescriptors (type) {
-		if (type === 'confirm') return new MobileFormModelConfirm().getDescriptors()
-		return new MobileFormModelCreate().getDescriptors()
+	getMobileFormModel(options) {
+		if (options.type === 'confirm') return new MobileFormModelConfirm(this, options)
+		if (options.type === 'renew') return new MobileFormModelRenew(this, options)
+		return new MobileFormModelCreate(this, options)
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		console.log('options', options)
-		// Below code is to fix an issue that last user entered charactor will stay in the mobile number field. 
+		this.model = this.getMobileFormModel(options)
+
 		this.setData({
-			descriptors: this.getInitialDescriptors(options.type)
+			descriptors: this.model.getDescriptors(),
+			visibleDescription: this.model.getVisibleDescription(),
+			disabledOfMobileVerificationCodeButton: this.model.getInitialDisabledOfMobileVerificationCodeButton()
 		})
 
-		// wx.redirectTo({url: '../user-detail-form/user-detail-form'})
+		wx.setNavigationBarTitle({
+			title: this.model.getNavigationBarTitle()
+		})
 	},
 
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
 	onReady: function () {
-		
+		this.model.ready()
 	},
 
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-		
+
 	},
 
 	/**

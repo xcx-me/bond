@@ -10,7 +10,7 @@ describe('FormViewerEditorUtil', () => {
 		{
 			fieldName: QQ_NUMBER,
 			label: 'QQ',
-			value: '555',
+			value: '',
 			mandatory: true,
 			hasWarning: true,
 			placeholder: '请输入QQ号'

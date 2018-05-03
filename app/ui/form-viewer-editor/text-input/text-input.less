@@ -2,7 +2,7 @@
 	border-bottom: 1rpx solid #E5E5E5;
 	font-size: 34rpx;
 	display: flex;
-	padding: 20rpx;
+	padding: 20rpx 20rpx 20rpx 0;
 	height: 48rpx;
 	
 	.label-area {
@@ -11,11 +11,23 @@
 		.star {
 			color: #E64340;
 		}
+
+		&.disabled {
+			color: #888888;
+
+			.star {
+				color: #888888;
+			}
+		}
 	}
 
 	.input-field {
 		&.warning {
 			color: orange;
+		}
+
+		&.disabled {
+			color: #888888;
 		}
 	}
 }

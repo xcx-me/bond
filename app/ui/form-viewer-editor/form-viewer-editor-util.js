@@ -21,6 +21,7 @@ function parseAllFieldsToSubmissionObject (descriptors) {
 	return submissionObject
 }
 
+// TODO: need to switch line 1 and line 2.
 function doBasicValidation (descriptors, fieldName, validators) {
 	let matchedDescriptor = findDescriptorByFieldName(descriptors, fieldName)
 	if (!validators[fieldName]) return true

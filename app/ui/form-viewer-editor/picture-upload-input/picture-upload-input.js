@@ -25,6 +25,10 @@ Component({
 		mandatory: {
 			type: Boolean,
 			value: false
+		},
+		disabled: {
+			type: Boolean,
+			value: false
 		}
 	},
 
@@ -46,6 +50,8 @@ Component({
 		},
 
 		deletePicture: function () {
+			if (this.properties.disabled) return
+
 			if (this.data.progress !== -1) return
 			this.triggerEvent('change', {
 				fieldName: this.properties.fieldName,
@@ -86,6 +92,7 @@ Component({
 		},
 
 		showActionSheet: function () {
+			if (this.properties.disabled) return
 			let host = this
 			wx.showActionSheet({
 				itemList: ['拍照', '从手机相册选择'],
@@ -93,9 +100,7 @@ Component({
 					res.tapIndex === 0 && host.chooseImage(SOURCE_TYPE_CAMERA)
 					res.tapIndex === 1 && host.chooseImage(SOURCE_TYPE_ALBUM)
 				},
-				fail: function (res) {
-					console.log(res.errMsg)
-				}
+				fail: function (res) {}
 			})
 		}
 	}

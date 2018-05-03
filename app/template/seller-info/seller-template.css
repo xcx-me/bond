@@ -1,0 +1,40 @@
+.seller-info-tpl {
+  overflow: hidden;
+}
+.seller-info-tpl view {
+  position: relative;
+  float: left;
+}
+.seller-info-tpl view.image {
+  margin-right: 20rpx;
+}
+.seller-info-tpl .face-url {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 100%;
+  position: relative;
+}
+.seller-info-tpl .v-user {
+  position: absolute;
+  bottom: 0;
+  right: -16rpx;
+  padding: 18rpx;
+}
+.seller-info-tpl .zhucheng {
+  position: absolute;
+  bottom: 5rpx;
+  right: -3rpx;
+  width: 26rpx;
+  height: 26rpx;
+  background: #E64340;
+  border-radius: 100%;
+}
+.seller-info-tpl .under-line {
+  font-size: 0;
+}
+.seller-info-tpl .user-name {
+  font-size: x-large;
+}
+.seller-info-tpl .company-name {
+  font-size: small;
+}

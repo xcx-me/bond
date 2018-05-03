@@ -1,13 +1,19 @@
 .picture-upload-input-component {
   border-bottom: 1rpx solid #E5E5E5;
   font-size: 34rpx;
-  padding: 10px;
+  padding: 20rpx 20rpx 20rpx 0;
 }
 .picture-upload-input-component .label-area {
   width: 204rpx;
 }
 .picture-upload-input-component .label-area .star {
   color: #E64340;
+}
+.picture-upload-input-component .label-area.disabled {
+  color: #888888;
+}
+.picture-upload-input-component .label-area.disabled .star {
+  color: #888888;
 }
 .picture-upload-input-component .upload-button-area {
   margin-top: 10rpx;

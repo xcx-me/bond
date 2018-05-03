@@ -1,6 +1,5 @@
 {
 	"usingComponents": {
 		"operation-successful": "../../ui/operation-successful/operation-successful"
-	},
-	"navigationBarTitleText": "审核中"
+	}
 }

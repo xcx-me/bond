@@ -1,6 +1,0 @@
-{
-	"usingComponents": {
-		"operation-successful": "../../ui/operation-successful/operation-successful"
-	},
-	"navigationBarTitleText": "绑定成功"
-}

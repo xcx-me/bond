@@ -27,6 +27,10 @@ Component({
 			type: String,
 			value: 'text'
 		},
+		disabled: {
+			type: Boolean,
+			value: false
+		},
 		hasWarning: {
 			type: Boolean,
 			value: false

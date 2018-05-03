@@ -64,7 +64,7 @@
 }
 .filter-component .filter-item .filter-pallet .filter-pallet-checkbox {
   padding-left: 30rpx;
-  max-height: 599rpx;
+  max-height: 549rpx;
 }
 .filter-component .filter-item .filter-pallet .filter-pallet-checkbox checkbox-group .checkbox-wrapper {
   float: left;

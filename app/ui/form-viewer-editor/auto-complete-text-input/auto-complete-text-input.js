@@ -42,6 +42,10 @@ Component({
 		mandatory: {
 			type: Boolean,
 			value: false
+		},
+		disabled: {
+			type: Boolean,
+			value: false
 		}
 	},
 

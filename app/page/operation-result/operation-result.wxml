@@ -1,0 +1,5 @@
+<operation-successful
+	imagePath='{{imagePath}}'
+	title='{{title}}'
+	description='{{description}}'
+	buttonLabel='{{buttonLabel}}' />

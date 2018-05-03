@@ -51,14 +51,14 @@ Page({
 		request(config.USER_REGISTER.verifyQQEmailCode, {
 			code: submissionObject.emailValidationCode
 		}).then((result) => {
-			wx.redirectTo({url: '../user-detail-submission-complete/user-detail-submission-complete'})
+			wx.redirectTo({ url: '../operation-result/operation-result?type=auditInProgress' })
 		})
 	},
 
 	verifyEmailComplete: function () {
 		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
 			if (result.retdata.reg === 3) {
-				wx.redirectTo({url: '../user-detail-submission-complete/user-detail-submission-complete'})
+				wx.redirectTo({ url: '../operation-result/operation-result?type=auditInProgress' })
 				return
 			}
 			wx.showModal({
