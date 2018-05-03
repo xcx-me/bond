@@ -18,6 +18,7 @@
 }
 .user-detail-form .form-section {
   background-color: white;
+  padding-left: 30rpx;
 }
 .user-detail-form .control-area {
   margin: 60rpx 0;
