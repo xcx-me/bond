@@ -44,7 +44,7 @@ Page({
 
 	validate (submitData) {
 		let result = true
-		if (Number(submitData.left_benefit) > Number(submitData.right_benefit)) { // 参考收益
+		if (Number(submitData.left_benefit) >= Number(submitData.right_benefit)) { // 参考收益
 			this.showWraningText('benefit')
 			result = false
 		}
@@ -52,7 +52,7 @@ Page({
 			this.showWraningText('subject_rating')
 			result = false
 		}
-		if (!this.checkRatingFormat(submitData.facility_rating)) { // 债项评级
+		if (submitData.facility_rating !=='' && !this.checkRatingFormat(submitData.facility_rating)) { // 债项评级
 			this.showWraningText('facility_rating')
 			result = false
 		}
@@ -108,7 +108,7 @@ Page({
 					var pages = getCurrentPages(),//获取页面栈
 					currpage = pages[pages.length - 1], //当前页面
 					prevPage = pages[pages.length - 2]; //上一个页面（父页面）
-					console.log(currpage, prevPage)
+					// console.log(currpage, prevPage)
 					wx.navigateBack()
 				}, 1500)
 			} else {
@@ -129,7 +129,7 @@ Page({
 		let detail = e.detail
 		this.setData({
 			sendQuoteData: detail,
-			submitQuoteBtnEnable: detail.bond_simple_name !=='' && (detail.left_benefit !=='' || detail.right_benefit !=='') && detail.subject_rating !=='' && detail.facility_rating !=='' && detail.deadline !=='' && detail.issue_total !==''
+			submitQuoteBtnEnable: detail.bond_simple_name !=='' && (detail.left_benefit !=='' || detail.right_benefit !=='') && detail.subject_rating !=='' && detail.deadline !=='' && detail.issue_total !==''
 		})
 	},
 
