@@ -3,7 +3,7 @@
 		<view class='image'>
 			<image class='face-url' src='{{faceUrl === "loading" ? "" : faceUrl || "/app/asset/image/qtrade/icon-default.png"}}' />
 			<!-- <icon hidden class='v-user' wx:if='{{isVUser === "1"}}' style='background: transparent url("{{vUrl}}") no-repeat 0 0; background-size: 100rpx;'/> -->
-			<icon class='zhucheng' wx:if='{{isZhuCheng === "2"}}' />
+			<icon class='zhucheng' wx:if='{{userId !== "qtrade" && isZhuCheng === "2"}}' />
 		</view>
 		<view class='name'>
 			<text class='user-name' wx:if='{{userName}}'>{{userName}}</text>

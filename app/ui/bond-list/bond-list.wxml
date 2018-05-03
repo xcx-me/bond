@@ -9,6 +9,6 @@
 		bondList='{{bondList}}'
 		uid='{{uid}}'
 		userId='{{userId}}' 
-		bind:doDeleteBondEvent='onDoDeleteBondEvent' 
+		bind:doDeleteBondEvent='onDoDeleteBondEvent'
 	/>
 </view>

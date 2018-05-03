@@ -60,6 +60,9 @@ Page({
 	},
 
 	onShowFilterEvent: function (e) {
+		let lastData = this.data
+		lastData.filterValue.current_page = 1 // 首页数据
+		lastData.filterValue.max_page = 1
 		this.setData({
 			isShowFilter: e.detail,
 			isShowMask: e.detail
