@@ -11,6 +11,10 @@ module.exports = {
 		return /^[1-9]\d{4,11}$/.test(value)
 	},
 
+	isDeskPhoneNumber (value) {
+		return /^(0\d{2,3}-\d{7,8})$/.test(value)
+	},
+
 	isValidationCode: function (value) {
 		return /^\d{4}$/.test(value)
 	}

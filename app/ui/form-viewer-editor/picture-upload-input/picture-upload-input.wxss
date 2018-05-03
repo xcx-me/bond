@@ -9,6 +9,12 @@
 .picture-upload-input-component .label-area .star {
   color: #E64340;
 }
+.picture-upload-input-component .label-area.disabled {
+  color: #888888;
+}
+.picture-upload-input-component .label-area.disabled .star {
+  color: #888888;
+}
 .picture-upload-input-component .upload-button-area {
   margin-top: 10rpx;
   color: #CCCCCC;

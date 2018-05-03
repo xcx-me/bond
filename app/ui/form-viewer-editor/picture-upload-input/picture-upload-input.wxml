@@ -1,5 +1,5 @@
 <view class='picture-upload-input-component'>
-	<view class='label-area'>
+	<view class='label-area {{disabled ? "disabled" : ""}}'>
 		<text class='star' wx:if='{{mandatory}}'>*</text>
 		<text>{{label}}</text>
 	</view>

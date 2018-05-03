@@ -1,3 +1,16 @@
+.user-detail-form .notification {
+  font-size: 28rpx;
+  padding: 20rpx;
+  color: #FAA61A;
+  background-color: #FDFCEC;
+}
+.user-detail-form .notification image {
+  width: 30rpx;
+  height: 30rpx;
+  position: relative;
+  top: 5rpx;
+  padding: 0 5rpx;
+}
 .user-detail-form .description {
   font-size: 28rpx;
   padding: 20rpx;

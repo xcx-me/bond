@@ -11,6 +11,15 @@
 .text-input-component .label-area .star {
   color: #E64340;
 }
+.text-input-component .label-area.disabled {
+  color: #888888;
+}
+.text-input-component .label-area.disabled .star {
+  color: #888888;
+}
 .text-input-component .input-field.warning {
   color: orange;
+}
+.text-input-component .input-field.disabled {
+  color: #888888;
 }

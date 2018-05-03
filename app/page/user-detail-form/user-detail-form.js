@@ -4,6 +4,9 @@ const RegexpUtil = require('../../util/regexp-util/regexp-util')
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const StringUtil = require('../../util/string-util/string-util')
+const UserDetailFormModelReviewing = require('./user-detail-form-model-reviewing')
+const UserDetailFormModelRenew = require('./user-detail-form-model-renew')
+const UserDetailFormModelCreate = require('./user-detail-form-model-create')
 
 const PERSONAL_PHOTO = 'personalPhoto'
 const AGENCY_NAME = 'agencyName'
@@ -15,118 +18,26 @@ const DESK_PHONE_NUMBER = 'deskPhoneNumber'
 const COMPANY_EMAIL = 'companyEmail'
 const TRADER_CERTIFICATE = 'traderCertificate'
 
-const basicValidators = {
-	[PERSONAL_PHOTO]: (value) => {
-		return !StringUtil.isNullOrEmpty(value)
-	},
-	[AGENCY_NAME]: (value) => {
-		return !StringUtil.isNullOrEmpty(value.agencyId)
-	},
-	[REAL_NAME]: (value) => {
-		return !StringUtil.isNullOrEmpty(value)
-	},
-	[QQ_NUMBER]: (value) => {
-		return !StringUtil.isNullOrEmpty(value)
-	}
-}
-
-const advancedValidators = {
-	[QQ_NUMBER]: (value) => {
-		return RegexpUtil.isQQNumber(value)
-	}
-}
-
 Page({
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		descriptors: [
-			{
-				fieldName: PERSONAL_PHOTO,
-				uiType: UiType.PICTURE_UPLOAD_INPUT,
-				label: '名片照',
-				mandatory: true,
-				value: ''
-			},
-			{
-				fieldName: AGENCY_NAME,
-				uiType: UiType.AUTO_COMPLETE_TEXT_INPUT,
-				label: '机构名',
-				value: {
-					text: '',
-					agencyName: '',
-					agencyId: ''
-				},
-				mandatory: true,
-				placeholder: '请输入机构名'
-			},
-			{
-				fieldName: REAL_NAME,
-				uiType: UiType.TEXT_INPUT,
-				label: '真实姓名',
-				value: '',
-				mandatory: true,
-				placeholder: '请输入姓名'
-			},
-			{
-				fieldName: QQ_NUMBER,
-				uiType: UiType.TEXT_INPUT,
-				label: 'QQ',
-				value: '555',
-				mandatory: true,
-				hasWarning: false,
-				placeholder: '请输入QQ号'
-			},
-			{
-				fieldName: DEPARTMENT_NAME,
-				uiType: UiType.TEXT_INPUT,
-				label: '所在部门',
-				value: '',
-				mandatory: false,
-				placeholder: '请输入部门'
-			},
-			{
-				fieldName: POSITION,
-				uiType: UiType.TEXT_INPUT,
-				label: '职位',
-				value: '',
-				mandatory: false,
-				placeholder: '请输入职位'
-			},
-			{
-				fieldName: DESK_PHONE_NUMBER,
-				uiType: UiType.TEXT_INPUT,
-				label: '座机号码',
-				value: '',
-				mandatory: false,
-				placeholder: '请输入座机号'
-			},
-			{
-				fieldName: COMPANY_EMAIL,
-				uiType: UiType.TEXT_INPUT,
-				label: '公司邮箱',
-				value: '',
-				mandatory: false,
-				placeholder: '请输入公司邮箱'
-			},
-			{
-				fieldName: TRADER_CERTIFICATE,
-				uiType: UiType.PICTURE_UPLOAD_INPUT,
-				label: '交易员资格证',
-				mandatory: false,
-				value: 'http://test.qtrade.com.cn/card/da26cad0fada42582dfe2453c5777277.jpg'
-			}
-		],
+		descriptors: [],
 		hasAdvancedValidationError: false,
-		disabledOfSubmitButton: true
+		disabledOfSubmitButton: true,
+
+		visibleNotification: false,
+		notificationText: '',
+
+		visibleControlArea: true
 	},
 
 	onChangeDescriptors: function (e) {
 		let descriptors = e.detail.descriptors
 		this.setData({
 			descriptors: descriptors,
-			disabledOfSubmitButton: !FormViewerEditorUtil.doBasicValidationForAllFields(descriptors, basicValidators)
+			disabledOfSubmitButton: !FormViewerEditorUtil.doBasicValidationForAllFields(descriptors, this.model.getBasicValidators())
 		})
 	},
 
@@ -142,7 +53,7 @@ Page({
 	},
 
 	doAdvancedValidation: function () {
-		let advancedProblemFieldNames = FormViewerEditorUtil.getAdvancedProblemFieldNames(this.data.descriptors, advancedValidators)
+		let advancedProblemFieldNames = FormViewerEditorUtil.getAdvancedProblemFieldNames(this.data.descriptors, this.model.getAdvancedValidators())
 		if (advancedProblemFieldNames.length === 0) {
 			this.setData({
 				hasAdvancedValidationError: false
@@ -165,34 +76,40 @@ Page({
 		if (this.data.disabledOfSubmitButton) return
 		if (this.doAdvancedValidation()) {
 			let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
-			request(config.USER_REGISTER.submitUserInfo, {
-				real_name: submissionObject.realName,
-				qq: submissionObject.qqNumber,
-				company: submissionObject.agencyName.agencyId,
-				position: submissionObject.position,
-				phone: submissionObject.deskPhoneNumber,
-				department: submissionObject.departmentName,
-				email: submissionObject.companyEmail,
-				card_url: submissionObject.personalPhoto,
-				certificate: submissionObject.traderCertificate
-			}).then((result) => {
-				wx.redirectTo({url: '../email-validation-form/email-validation-form'})
-			})
+			this.model.doSubmit(submissionObject)
 		}
+	},
+
+	getUserDetailFormModel (options) {
+		if (options.type === 'reviewing') return new UserDetailFormModelReviewing(this)
+		if (options.type === 'renew') return new UserDetailFormModelRenew(this)
+		return new UserDetailFormModelCreate(this)
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		
+		this.model = this.getUserDetailFormModel(options)
+
+		this.setData({
+			descriptors: this.model.getDescriptors(),
+			visibleNotification: this.model.getVisibleNotification(),
+			notificationText: this.model.getNotificationText(),
+			visibleControlArea: this.model.getVisibleControlArea()
+		})
+
+		wx.setNavigationBarTitle({
+			title: this.model.getNavigationBarTitle()
+		})
 	},
 
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
 	onReady: function () {
-		request(config.USER_REGISTER.getUserInfo, {}).then((result) => {
+		// config.USER_REGISTER.getUserInfo
+		request(this.model.getUrlConfig(), {}).then((result) => {
 			let user = result.retdata.user
 
 			let descriptors = this.data.descriptors
@@ -212,7 +129,7 @@ Page({
 
 			this.setData({
 				descriptors: descriptors,
-				disabledOfSubmitButton: !FormViewerEditorUtil.doBasicValidationForAllFields(descriptors, basicValidators)
+				disabledOfSubmitButton: !FormViewerEditorUtil.doBasicValidationForAllFields(descriptors, this.getBasicValidators())
 			})
 		})
 	},

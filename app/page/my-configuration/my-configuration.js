@@ -4,25 +4,44 @@ const config = require('../../util/ajax/config')
 const KEY_mobile = 'editMobile'
 const KEY_EDIT_USER_INFO = 'editUserInfo'
 
+const configurations = [
+	{
+		key: KEY_mobile,
+		label: '修改手机',
+		urlFunction: function () {
+			wx.navigateTo({
+				url: '../mobile-form/mobile-form?type=confirm'
+			})
+		},
+		detailText: ''
+	},
+	{
+		key: KEY_EDIT_USER_INFO,
+		label: '修改其他资料',
+		urlFunction: function () {
+			request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
+				wx.navigateTo({
+					url: `../user-detail-form/user-detail-form?type=${result.retdata.audit ? 'reviewing' : 'renew'}`
+				})
+			})
+		},
+		detailText: ''
+	}
+]
+
 Page({
 
 	data: {
-		configurations: [
-			{
-				key: KEY_mobile,
-				label: '修改手机',
-				url: '../mobile-form/mobile-form?type=confirm',
-				detailText: ''
-			},
-			{
-				key: KEY_EDIT_USER_INFO,
-				label: '修改其他资料',
-				url: '../user-info/user-info',
-				detailText: ''
-			}
-		],
+		configurations: configurations,
 		isShow: false,
 		serviceNumber: '0755-86707342'
+	},
+
+	openUrl (e) {
+		let matchedConfiguration = configurations.find((item) => {
+			return item.key === e.currentTarget.dataset.keyName
+		})
+		matchedConfiguration.urlFunction()
 	},
 
 	/**
@@ -90,7 +109,6 @@ Page({
 	onReady: function () {
 		this.getMobileNumber();
 		this.getUserIsAuthenticated();
-		console.log("zzz")
 	},
 
 	/**

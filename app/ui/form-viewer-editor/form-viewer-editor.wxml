@@ -5,6 +5,7 @@
 			label='{{item.label}}'
 			fieldName='{{item.fieldName}}'
 			mandatory='{{item.mandatory}}'
+			disabled='{{item.disabled}}'
 			bind:change='onChange' />
 		<text-input wx:if='{{item.uiType === "TEXT_INPUT"}}'
 			value='{{item.value}}'
@@ -26,6 +27,7 @@
 			type='{{item.type}}'
 			hasWarning='{{item.hasWarning}}'
 			mandatory='{{item.mandatory}}'
+			disabled='{{item.disabled}}'
 			bind:change='onChange' />
 	</block>
 </view>
