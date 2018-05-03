@@ -11,10 +11,17 @@ module.exports = {
 			let lowerBondSimpleName = bondSimpleName.toLowerCase()
 			let valueList = lowerBondSimpleName.split(lowerCurrentName)
 
+			// console.log(bondSimpleName)
+			// let stayStrs = new Array()
+			// this.stayStrPosition(bondSimpleName, curName).forEach((value, index) =>{
+			// 	console.log('---stayStrPosition:', value)
+			// 	// stayStrs.push(bondSimpleName.slice(start, value))
+			// })
+			// // console.log('=========stayStrs:', stayStrs)
+
 			let findedStrs = new Array()
-			this.subStrPosition(lowerBondSimpleName, lowerCurrentName).forEach((value, index) => {
-				findedStrs.push(bondSimpleName.slice(value, value + curName.length))
-			})
+			let regexp = new RegExp(curName, 'gi')
+			findedStrs = bondSimpleName.match(regexp)
 
 			valueList.map((value, index) => {
 				newValueList.push({
@@ -37,13 +44,15 @@ module.exports = {
 		return result
 	},
 
-	subStrPosition: function (str, subStr){
-		let positions = new Array() 
-		let pos = str.indexOf(subStr)
-		while (pos > -1 ) {
-			positions.push(pos)
-			pos = str.indexOf(subStr, pos + 1)
-		}
-		return positions
-	}
+	// stayStrPosition: function (str, subStr) {
+	// 	cutStr.forEach((cutStrItem, index) =>{
+	// 		// stays = str.split(item)
+	// 		str.split(cutStrItem).forEach((item, index) => {
+	// 			stays.push(item[0])
+	// 		})
+	// 		console.log(stays)
+	// 	})
+
+	// 	return stays
+	// },
 }

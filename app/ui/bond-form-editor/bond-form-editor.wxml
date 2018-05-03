@@ -35,26 +35,6 @@
 		</view>
 	</view>
 
-	<!-- 主/债评级 -->
-	<view class='bond-rate row-item'>
-		<view class='label-area'><span class='star-span'>*</span>主体评级</view>
-		<view class='editor-area'>
-			<input class='{{highlight["subject_rating"] ? "highlight-color" : ""}}'
-				type='text' bindinput='changeValue' data-input-name='subject_rating'
-				value='{{formData.subject_rating}}' placeholder='AAA+/AA+' placeholder-class='color-gray'
-			/>
-		</view>
-	</view>
-	<view class='bond-rate row-item'>
-		<view class='label-area'><span class='star-span'>*</span>债项评级</view>
-		<view class='editor-area'>
-			<input class='{{highlight["facility_rating"] ? "highlight-color" : ""}}'
-				type='text' bindinput='changeValue' data-input-name='facility_rating'
-				value='{{formData.facility_rating}}' placeholder='AAA+/AA+' placeholder-class='color-gray'
-			/>
-		</view>
-	</view>
-
 	<!-- 发行期限 -->
 	<view class='reference-income row-item'>
 		<view class='label-area'><span class='star-span'>*</span>发行期限</view>
@@ -73,6 +53,26 @@
 			<input
 				type='digit' bindinput='changeValue' data-input-name='issue_total'
 				value='{{formData.issue_total}}' maxlength='15'
+			/>
+		</view>
+	</view>
+
+	<!-- 主/债评级 -->
+	<view class='bond-rate row-item'>
+		<view class='label-area'><span class='star-span'>*</span>主体评级</view>
+		<view class='editor-area'>
+			<input class='{{highlight["subject_rating"] ? "highlight-color" : ""}}'
+				type='text' bindinput='changeValue' data-input-name='subject_rating'
+				value='{{formData.subject_rating}}' placeholder='AAA+/AA+' placeholder-class='color-gray' maxlength='15'
+			/>
+		</view>
+	</view>
+	<view class='bond-rate row-item'>
+		<view class='label-area'>债项评级</view>
+		<view class='editor-area'>
+			<input class='{{highlight["facility_rating"] ? "highlight-color" : ""}}'
+				type='text' bindinput='changeValue' data-input-name='facility_rating'
+				value='{{formData.facility_rating}}' placeholder='AAA+/AA+' placeholder-class='color-gray' maxlength='15'
 			/>
 		</view>
 	</view>
