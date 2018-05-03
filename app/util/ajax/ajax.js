@@ -5,7 +5,7 @@ const APPLETREE_KEY = 'appletree_key'
 const StringUtil = require('../string-util/string-util')
 const wxPromise = require('../wx-promise/wx-promise')
 const Toast = require('../toast/toast')
-const isLocalhost = false
+const isLocalhost = true
 
 function centralErrorProcessor (result, resolve, handleErrorByUser) {
 	if (handleErrorByUser) {
