@@ -55,7 +55,7 @@ module.exports = class UserDetailFormModelCreate extends UserDetailFormModel {
 				fieldName: this.QQ_NUMBER,
 				uiType: UiType.TEXT_INPUT,
 				label: 'QQ',
-				value: '555',
+				value: '',
 				mandatory: true,
 				hasWarning: false,
 				placeholder: '请输入QQ号'
@@ -130,6 +130,9 @@ module.exports = class UserDetailFormModelCreate extends UserDetailFormModel {
 			},
 			[this.DESK_PHONE_NUMBER]: (value) => {
 				return StringUtil.isNullOrEmpty(value) || RegexpUtil.isDeskPhoneNumber(value)
+			},
+			[this.COMPANY_EMAIL]: (value) => {
+				return StringUtil.isNullOrEmpty(value) || RegexpUtil.isEmail(value)
 			}
 		}
 	}

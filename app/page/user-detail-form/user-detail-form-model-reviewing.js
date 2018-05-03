@@ -55,7 +55,7 @@ module.exports = class UserDetailFormModelReviewing extends UserDetailFormModel 
 				fieldName: this.QQ_NUMBER,
 				uiType: UiType.TEXT_INPUT,
 				label: 'QQ',
-				value: '555',
+				value: '',
 				disabled: true,
 				mandatory: true,
 				hasWarning: false,

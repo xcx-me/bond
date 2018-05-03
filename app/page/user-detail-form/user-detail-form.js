@@ -129,7 +129,7 @@ Page({
 
 			this.setData({
 				descriptors: descriptors,
-				disabledOfSubmitButton: !FormViewerEditorUtil.doBasicValidationForAllFields(descriptors, this.getBasicValidators())
+				disabledOfSubmitButton: !FormViewerEditorUtil.doBasicValidationForAllFields(descriptors, this.model.getBasicValidators())
 			})
 		})
 	},

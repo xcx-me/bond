@@ -2,6 +2,7 @@ const UserDetailFormModel = require('./user-detail-form-model')
 const UiType = require('../../ui/form-viewer-editor/ui-type')
 const config = require('../../util/ajax/config')
 const { request } = require('../../util/ajax/ajax')
+const RegexpUtil = require('../../util/regexp-util/regexp-util')
 const StringUtil = require('../../util/string-util/string-util')
 
 module.exports = class UserDetailFormModelRenew extends UserDetailFormModel {
@@ -54,7 +55,7 @@ module.exports = class UserDetailFormModelRenew extends UserDetailFormModel {
 				fieldName: this.QQ_NUMBER,
 				uiType: UiType.TEXT_INPUT,
 				label: 'QQ',
-				value: '555',
+				value: '',
 				mandatory: true,
 				disabled: true,
 				hasWarning: false,
@@ -124,6 +125,9 @@ module.exports = class UserDetailFormModelRenew extends UserDetailFormModel {
 		return {
 			[this.DESK_PHONE_NUMBER]: (value) => {
 				return StringUtil.isNullOrEmpty(value) || RegexpUtil.isDeskPhoneNumber(value)
+			},
+			[this.COMPANY_EMAIL]: (value) => {
+				return StringUtil.isNullOrEmpty(value) || RegexpUtil.isEmail(value)
 			}
 		}
 	}
