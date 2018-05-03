@@ -1,10 +1,10 @@
 const UiType = require('../../ui/form-viewer-editor/ui-type')
 const FormViewerEditorUtil = require('../../ui/form-viewer-editor/form-viewer-editor-util')
-const RegexpUtil = require('../../util/regexp-util/regexp-util')
-const Toast = require('../../util/toast/toast')
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
+const RegexpUtil = require('../../util/regexp-util/regexp-util')
 const MobileFormModel = require('./mobile-form-model')
+const Toast = require('../../util/toast/toast')
 
 const MOBILE_NUMBER = 'mobileNumber'
 const MOBILE_VALIDATION_CODE = 'mobileValidationCode'
@@ -24,7 +24,7 @@ const basicValidators = {
 const PERIOD = 60
 const DAFAULT_LABEL = '获取验证码'
 
-module.exports = class MobileFormModelCreate extends MobileFormModel {
+module.exports = class MobileFormModelRenew extends MobileFormModel {
 	constructor (host, options) {
 		super(host, options)
 	}
@@ -34,18 +34,46 @@ module.exports = class MobileFormModelCreate extends MobileFormModel {
 	}
 
 	doSubmit (submissionObject) {
-		request(config.USER_REGISTER.activateMobile, {
+		request(config.USER_REGISTER.modifyMobile, {
 			mobile: submissionObject.mobileNumber,
-			code: submissionObject.mobileValidationCode
-		}).then((result) => {
-			result.retdata.is_new
-				? wx.redirectTo({ url: '../user-detail-form/user-detail-form' })
-				: wx.redirectTo({ url: '../operation-result/operation-result?type=bindComplete' })
+			code: submissionObject.mobileValidationCode,
+			sign: this.options.sign
+		}, true).then((result) => {
+			if (result.ret === -2) {
+				if (result.retmsg === '1') {
+					wx.showModal({
+						content: '验证码输入间隔时间太长，请重新验证',
+						confirmColor: '#2196F3',
+						showCancel: false,
+						success: function (res) {
+							wx.navigateBack()
+						}
+					})
+					return
+				}
+				if (result.retmsg === '2') {
+					wx.showModal({
+						content: '请使用全新的手机号码',
+						confirmColor: '#2196F3',
+						showCancel: false
+					})
+					return
+				}
+				if (result.retmsg === '3') {
+					wx.showModal({
+						content: '该手机号已被其他用户绑定',
+						confirmColor: '#2196F3',
+						showCancel: false
+					})
+					return
+				}
+			}
+			wx.redirectTo({ url: '../operation-result/operation-result?type=editComplete' })
 		})
 	}
 
 	getMobileVerificationCode () {
-		request(config.USER_REGISTER.getMobileVerificationCode, {
+		request(config.USER_REGISTER.getMobileVerificationCodeForRenew, {
 			mobile: FormViewerEditorUtil.findDescriptorByFieldName(this.host.data.descriptors, MOBILE_NUMBER).value
 		})
 	}
@@ -88,20 +116,19 @@ module.exports = class MobileFormModelCreate extends MobileFormModel {
 
 	setLabelByCondition (disabled, counter) {
 		this.host.setData({
-			disabledOfMobileVerificationCodeButton: disabled,
 			labelOfMobileVerificationCodeButton: disabled ? `${counter}秒后重发` : DAFAULT_LABEL
 		})
 	}
 	//
 
 	getNavigationBarTitle () {
-		return '填写手机号'
+		return '填写新手机号'
 	}
 
 	ready () {}
 
 	getVisibleDescription () {
-		return true
+		return false
 	}
 
 	getDescriptors () {
@@ -109,7 +136,7 @@ module.exports = class MobileFormModelCreate extends MobileFormModel {
 			{
 				fieldName: MOBILE_NUMBER,
 				uiType: UiType.TEXT_INPUT,
-				label: '手机号',
+				label: '新手机号',
 				value: '',
 				type: 'number',
 				placeholder: '输入手机号',

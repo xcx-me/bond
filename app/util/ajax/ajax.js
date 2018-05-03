@@ -14,6 +14,7 @@ function centralErrorProcessor (result, resolve, handleErrorByUser) {
 	}
 	if (result.data && result.data.hasOwnProperty('ret')) {
 		if (String(result.data.ret) === '-1') {
+			Toast.showToast(result.data.retmsg)
 			return
 		}
 		if (String(result.data.ret) === '-2') {
@@ -82,7 +83,7 @@ function signon (done) {
 function wxLogin (done) {
 	wxPromise.login().then((loginResult) => {
 		wxPromise.getSetting().then((result) => {
-			result.authSetting['scope.userInfo'] && wxPromise.getUserInfo().then((secret) => {
+			wxPromise.getUserInfo().then((secret) => {
 				ajax(config.AUTHENTICATION.getAppletreeKey, {
 					code: loginResult.code,
 					userInfo: JSON.stringify(secret.userInfo),
@@ -92,7 +93,7 @@ function wxLogin (done) {
 					iv: secret.iv
 				}).then((result) => {
 					console.log('ANTHENTICATION: get appletree key success')
-					let appletreeKey = result.data.retdata.appletree_key
+					let appletreeKey = result.retdata.appletree_key
 					wx.setStorageSync(APPLETREE_KEY, appletreeKey)
 					done()
 				})

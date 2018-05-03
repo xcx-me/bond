@@ -3,7 +3,7 @@ const config = require('../ajax/config')
 
 const stepUrls = [
 	'../mobile-form/mobile-form?type=create',
-	'../user-detail-form/user-detail-form',
+	'../user-detail-form/user-detail-form?type=create',
 	'../email-validation-form/email-validation-form'
 ]
 

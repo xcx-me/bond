@@ -1,12 +1,16 @@
 <view class='user-detail-form'>
 	<WarningText isShow='{{hasAdvancedValidationError}}' />
+	<view class='notification' wx:if='{{visibleNotification}}'>
+		<image src='../../asset/image/qtrade/attention_orange_32.svg' />
+		<text>{{notificationText}}</text>
+	</view>
 	<view class='description'>加*的选项为必填项</view>
 	<view class='form-section'>
 		<form-viewer-editor descriptors='{{descriptors}}'
 			bind:changeDescriptors='onChangeDescriptors'
 			bind:changeDescriptorsAfter='onChangeDescriptorsAfter' />
 	</view>
-	<view class='control-area'>
+	<view class='control-area' wx:if='{{visibleControlArea}}'>
 		<qtrade-button label='下一步' bindtap='doSubmit' disabled='{{disabledOfSubmitButton}}' />
 	</view>
 </view>

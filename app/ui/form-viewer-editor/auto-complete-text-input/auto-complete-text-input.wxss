@@ -2,7 +2,7 @@
   border-bottom: 1rpx solid #E5E5E5;
   font-size: 34rpx;
   display: flex;
-  padding: 10px;
+  padding: 20rpx 20rpx 20rpx 0;
   position: relative;
 }
 .auto-complete-text-input-component .label-area {
@@ -11,6 +11,15 @@
 .auto-complete-text-input-component .label-area .star {
   color: #E64340;
 }
+.auto-complete-text-input-component .label-area.disabled {
+  color: #888888;
+}
+.auto-complete-text-input-component .label-area.disabled .star {
+  color: #888888;
+}
 .auto-complete-text-input-component .input-field.warning {
   color: orange;
+}
+.auto-complete-text-input-component .input-field.disabled {
+  color: #888888;
 }

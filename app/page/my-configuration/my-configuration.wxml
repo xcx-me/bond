@@ -1,12 +1,11 @@
 <view class='user-info'>
 	<view wx:for='{{configurations}}' wx:key='key' class='info-wrapper'>
 		<block>
-			<navigator url='{{item.url}}' class='{{item.label === "修改其他资料" ? "navigator navigator-none": "navigator"}}'>
+			<view data-key-name='{{item.key}}' bindtap='openUrl' class='{{item.label === "修改其他资料" ? "navigator navigator-none": "navigator"}}'>
 				<text class='label-info'>{{item.label}}</text>
 				<text wx:if='{{item.detailText}}' class='detail-info'>{{item.detailText}}</text>
 				<i class='icon-right-arrow'></i>
-				<!-- <text wx:if='{{item.unreadNumber > 0}}'>{{item.unreadNumber}}</text> -->
-			</navigator>
+			</view>
 		</block>
 	</view>
 	<view class='contact-service' bindtap="openServiceNumbers">

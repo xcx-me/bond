@@ -91,11 +91,15 @@
   border-bottom: 1rpx solid #E5E5E5;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item .seller-info-tpl {
+  width: 100%;
   float: left;
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item .seller-info-tpl .user-name,
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item .seller-info-tpl .under-line {
   font-size: small;
+}
+.sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item .seller-info-tpl .name {
+  width: calc(100% - 180rpx);
 }
 .sale-dialog-container .wx-dialog-main .wx-dialog-content .radio .item radio {
   position: absolute;

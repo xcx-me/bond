@@ -22,6 +22,7 @@
 }
 .email-validation-form .section .form-section {
   position: relative;
+  padding-left: 30rpx;
 }
 .email-validation-form .section .form-section .mobile-verification-code-button {
   font-size: 34rpx;
