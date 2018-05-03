@@ -16,6 +16,12 @@ const operationResults = {
 		title: '绑定成功',
 		description: '您在电脑端已认证，现已为您快速完成绑定',
 		buttonLabel: '完成'
+	},
+	submissionComplete: {
+		imagePath: '/app/asset/image/qtrade/wait_for_186.svg',
+		title: '提交成功',
+		description: '我们将尽快为您完成审核',
+		buttonLabel: '继续'
 	}
 }
 

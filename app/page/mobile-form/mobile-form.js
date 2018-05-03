@@ -26,24 +26,24 @@ Page({
 	},
 
 	onChangeDescriptors: function (e) {
-		this.mobileFormModel.handleChangeDescriptors(e)
+		this.model.handleChangeDescriptors(e)
 	},
 
 	handleGetMobileVerificationCode: function () {
 		if (this.data.disabledOfMobileVerificationCodeButton) return
-		if (this.mobileFormModel.validateMobileFormat(this.data.descriptors)) {
-			this.mobileFormModel.updateLabel()
-			this.mobileFormModel.getMobileVerificationCode()
+		if (this.model.validateMobileFormat(this.data.descriptors)) {
+			this.model.updateLabel()
+			this.model.getMobileVerificationCode()
 			return
 		}
-		this.mobileFormModel.setLabelByCondition(false)
+		this.model.setLabelByCondition(false)
 	},
 
 	doSubmit: function () {
 		if (this.data.disabledOfSubmitButton) return
-		if (this.mobileFormModel.validateMobileFormat(this.data.descriptors)) {
+		if (this.model.validateMobileFormat(this.data.descriptors)) {
 			let submissionObject = FormViewerEditorUtil.parseAllFieldsToSubmissionObject(this.data.descriptors)
-			this.mobileFormModel.doSubmit(submissionObject)
+			this.model.doSubmit(submissionObject)
 		}
 	},
 
@@ -57,16 +57,16 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		this.mobileFormModel = this.getMobileFormModel(options)
+		this.model = this.getMobileFormModel(options)
 
 		this.setData({
-			descriptors: this.mobileFormModel.getDescriptors(),
-			visibleDescription: this.mobileFormModel.getVisibleDescription(),
-			disabledOfMobileVerificationCodeButton: this.mobileFormModel.getInitialDisabledOfMobileVerificationCodeButton()
+			descriptors: this.model.getDescriptors(),
+			visibleDescription: this.model.getVisibleDescription(),
+			disabledOfMobileVerificationCodeButton: this.model.getInitialDisabledOfMobileVerificationCodeButton()
 		})
 
 		wx.setNavigationBarTitle({
-			title: this.mobileFormModel.getNavigationBarTitle()
+			title: this.model.getNavigationBarTitle()
 		})
 	},
 
@@ -74,7 +74,7 @@ Page({
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
 	onReady: function () {
-		this.mobileFormModel.ready()
+		this.model.ready()
 	},
 
 	/**

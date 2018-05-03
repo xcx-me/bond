@@ -11,6 +11,15 @@
 .auto-complete-text-input-component .label-area .star {
   color: #E64340;
 }
+.auto-complete-text-input-component .label-area.disabled {
+  color: #888888;
+}
+.auto-complete-text-input-component .label-area.disabled .star {
+  color: #888888;
+}
 .auto-complete-text-input-component .input-field.warning {
   color: orange;
+}
+.auto-complete-text-input-component .input-field.disabled {
+  color: #888888;
 }

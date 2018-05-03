@@ -54,6 +54,7 @@ module.exports = class MobileFormModelConfirm extends MobileFormModel {
 		})
 	}
 
+	// TODO: need to extract counting button to a component.
 	updateLabel () {
 		this.setLabelByCondition(true, PERIOD)
 		let counter = PERIOD
