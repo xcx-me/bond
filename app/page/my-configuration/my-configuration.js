@@ -73,19 +73,23 @@ Page({
 			let configuration = configurations.find((item) => {
 				return item.key === KEY_EDIT_USER_INFO
 			})
-			result.retdata.v === true ? configuration.detailText = '已认证' : '未认证'
-
+			configuration.detailText = result.retdata.v ? '已认证' : '未认证'
 			this.setData({
 				configurations: configurations
-			}, () => {
-				console.log(configurations)
 			})
 		})
 	},
 	openServiceNumbers: function () {
-		this.setData({
-			isShow: true
+		let host = this
+		wx.showActionSheet({
+			itemList: ['客服QQ：916273703', '客服电话：0755-86707342'],
+			success: function (res) {
+				res.tapIndex === 0 && ''
+				res.tapIndex === 1 && host.calling()
+			},
+			fail: function (res) {}
 		})
+
 	},
 	closeServiceNumbers: function () {
 		this.setData({

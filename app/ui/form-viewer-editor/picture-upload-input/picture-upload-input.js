@@ -100,9 +100,7 @@ Component({
 					res.tapIndex === 0 && host.chooseImage(SOURCE_TYPE_CAMERA)
 					res.tapIndex === 1 && host.chooseImage(SOURCE_TYPE_ALBUM)
 				},
-				fail: function (res) {
-					console.log(res.errMsg)
-				}
+				fail: function (res) {}
 			})
 		}
 	}

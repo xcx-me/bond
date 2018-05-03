@@ -12,12 +12,4 @@
 		<button>联系客服</button>
 		<i class='icon-right-arrow'></i>
 	</view>
-	<view class='service-detail {{isShow ? "show-number" : "hide-number"}}'>
-		<view>
-			<view class='qq'>客服QQ：916273703</view>
-			<view class='calling' bindtap='calling'>客服电话：0755-86707342</view>
-		</view>
-		<view bindtap='closeServiceNumbers' class="cancel">取消</view>
-	</view>
-	<view class='close-mask {{isShow ? "show-number" : "hide-number"}}'></view>
 </view>
