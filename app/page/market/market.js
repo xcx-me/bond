@@ -1,10 +1,8 @@
-const { requestWithoutSignon } = require('../../util/ajax/ajax')
+const { request, requestWithoutSignon } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const common = require('../../util/common')
 const navigate = require('../../util/navigate/navigate')
 const {getStatus} = require('../../util/type/bond-list')
-
-const app = getApp()
 
 const initFilterValue = {
 	bond_type: 0,
@@ -100,8 +98,8 @@ Page({
 		}
 	},
 
-	getBondList (status) { // 询量
-		requestWithoutSignon(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
+	getBondList (status=undefined, requestType=request) { // 询量
+		requestType(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
 			let lastData = this.data
 			let {total: retTotal, bond_array: retBondList} = result.retdata
 			let maxPage = Number(retTotal) > Number(lastData.filterValue.page_size) ? Math.ceil(retTotal / lastData.filterValue.page_size) : 1 // 最大页数
@@ -135,8 +133,8 @@ Page({
 			navigate.toBondDetailByShare(options.uid, options.bid, options.tid)
 		}
 		
-		app.userInfoReadyCallbacks.push(() => {
-			this.getBondList()
+		getApp().delayedCallbacks.push(() => {
+			this.getBondList(undefined, requestWithoutSignon)
 		})
 
 		var that = this;
@@ -223,10 +221,16 @@ Page({
 	 */
 	onReady: function () {},
 
+	hasHiddenPage: false,
+
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
+		if (this.hasHiddenPage) {
+			this.getBondList()
+			this.hasHiddenPage = false
+		}
 	},
 
 	/**
@@ -237,6 +241,8 @@ Page({
 			isShowMask: false,
 			isShowFilter: false
 		})
+
+		this.hasHiddenPage = true
 	},
 
 	/**

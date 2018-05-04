@@ -11,7 +11,8 @@ module.exports = {
 	getSetting: function () {
 		return new Promise((resolve, reject) => {
 			wx.getSetting({
-				success: resolve
+				success: resolve,
+				fail: reject
 			})
 		})
 	},
@@ -28,6 +29,25 @@ module.exports = {
 	getUserInfo: function () {
 		return new Promise((resolve, reject) => {
 			wx.getUserInfo({
+				success: resolve,
+				fail: reject
+			})
+		})
+	},
+
+	openSetting: function () {
+		return new Promise((resolve, reject) => {
+			wx.openSetting({
+				success: resolve,
+				fail: reject
+			})
+		})
+	},
+
+	authorize: function () {
+		return new Promise((resolve, reject) => {
+			wx.authorize({
+				scope: 'scope.userInfo',
 				success: resolve,
 				fail: reject
 			})
