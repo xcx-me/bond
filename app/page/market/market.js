@@ -1,9 +1,7 @@
-// app/page/market/market.js
-const { request } = require('../../util/ajax/ajax')
+const { request, requestWithoutSignon } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const common = require('../../util/common')
 const navigate = require('../../util/navigate/navigate')
-const redPoint = require('../../util/red-point/red-point')
 const {getStatus} = require('../../util/type/bond-list')
 
 const initFilterValue = {
@@ -100,8 +98,8 @@ Page({
 		}
 	},
 
-	getBondList (status) { // 询量
-		request(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
+	getBondList (status=undefined, requestType=request) { // 询量
+		requestType(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
 			let lastData = this.data
 			let {total: retTotal, bond_array: retBondList} = result.retdata
 			let maxPage = Number(retTotal) > Number(lastData.filterValue.page_size) ? Math.ceil(retTotal / lastData.filterValue.page_size) : 1 // 最大页数
@@ -135,7 +133,10 @@ Page({
 			navigate.toBondDetailByShare(options.uid, options.bid, options.tid)
 		}
 		
-		this.getBondList()
+		getApp().delayedCallbacks.push(() => {
+			this.getBondList(undefined, requestWithoutSignon)
+		})
+
 		var that = this;
 		/** 
 		 * 获取系统信息 
@@ -220,22 +221,28 @@ Page({
 	 */
 	onReady: function () {},
 
+	hasHiddenPage: false,
+
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-		this.data.intervalTimer = redPoint.startTabBarRedDot()
+		if (this.hasHiddenPage) {
+			this.getBondList()
+			this.hasHiddenPage = false
+		}
 	},
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
 	onHide: function () {
-		redPoint.stopTabBarRedDot(this.data.intervalTimer)
 		this.setData({
 			isShowMask: false,
 			isShowFilter: false
 		})
+
+		this.hasHiddenPage = true
 	},
 
 	/**

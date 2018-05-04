@@ -1,8 +1,8 @@
-// app/page/overview/overview.js
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
-const redPoint = require('../../util/red-point/red-point')
 const {getStatus, getType} = require('../../util/type/bond-list')
+
+const app = getApp()
 
 Page({
 	data: {
@@ -67,7 +67,9 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-		redPoint.hideTabBarRedDot()
+		app.globalData.canShowRedPoint = false
+		wx.hideTabBarRedDot({index: 2})
+
 		this.isStoreOpened()
 	},
 
@@ -75,6 +77,9 @@ Page({
 	 * 生命周期函数--监听页面隐藏
 	 */
 	onHide: function () {
+		app.globalData.canShowRedPoint = true
+		app.globalData.visibleRedPoint && wx.showTabBarRedDot({index: 2})
+
 		this.setData({
 			needUpdateDetail: false,
 			needUpdateStore: false,
