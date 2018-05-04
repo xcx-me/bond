@@ -1,10 +1,10 @@
-// app/page/market/market.js
-const { request } = require('../../util/ajax/ajax')
+const { requestWithoutSignon } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const common = require('../../util/common')
 const navigate = require('../../util/navigate/navigate')
-const redPoint = require('../../util/red-point/red-point')
 const {getStatus} = require('../../util/type/bond-list')
+
+const app = getApp()
 
 const initFilterValue = {
 	bond_type: 0,
@@ -101,7 +101,7 @@ Page({
 	},
 
 	getBondList (status) { // 询量
-		request(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
+		requestWithoutSignon(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
 			let lastData = this.data
 			let {total: retTotal, bond_array: retBondList} = result.retdata
 			let maxPage = Number(retTotal) > Number(lastData.filterValue.page_size) ? Math.ceil(retTotal / lastData.filterValue.page_size) : 1 // 最大页数
@@ -135,7 +135,10 @@ Page({
 			navigate.toBondDetailByShare(options.uid, options.bid, options.tid)
 		}
 		
-		this.getBondList()
+		app.userInfoReadyCallbacks.push(() => {
+			this.getBondList()
+		})
+
 		var that = this;
 		/** 
 		 * 获取系统信息 
@@ -224,14 +227,12 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-		this.data.intervalTimer = redPoint.startTabBarRedDot()
 	},
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
 	onHide: function () {
-		redPoint.stopTabBarRedDot(this.data.intervalTimer)
 		this.setData({
 			isShowMask: false,
 			isShowFilter: false

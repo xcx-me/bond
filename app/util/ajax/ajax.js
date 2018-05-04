@@ -13,16 +13,12 @@ function centralErrorProcessor (result, resolve, handleErrorByUser) {
 		return
 	}
 	if (result.data && result.data.hasOwnProperty('ret')) {
-		if (String(result.data.ret) === '-1') {
-			Toast.showToast(result.data.retmsg)
-			return
-		}
-		if (String(result.data.ret) === '-2') {
-			Toast.showToast(result.data.retmsg)
-			return
-		}
 		if (String(result.data.ret) === '0') {
 			resolve(result.data)
+			return
+		}
+		if (String(result.data.ret) === '-1' || String(result.data.ret) === '-2') {
+			Toast.showToast(result.data.retmsg)
 			return
 		}
 		// TODO: The reason we still need below 2 lines of code is
@@ -67,17 +63,19 @@ function signon (done) {
 	}
 	
 	let appletreeKey = wx.getStorageSync(APPLETREE_KEY)
+
 	if (StringUtil.isNullOrEmpty(appletreeKey)) {
 		console.log('ANTHENTICATION: appletree key is invalid')
 		wxLogin(done)
-	} else {
-		wxPromise.checkSession().then(() => {
-			console.log('ANTHENTICATION: check session success')
-			done()
-		}).catch((error) => {
-			wxLogin(done)
-		})
+		return
 	}
+
+	wxPromise.checkSession().then(() => {
+		done()
+	}).catch((error) => {
+		console.log('ANTHENTICATION: check session failed. Try login again. ')
+		wxLogin(done)
+	})
 }
 
 function wxLogin (done) {
@@ -92,7 +90,7 @@ function wxLogin (done) {
 					encryptedData: secret.encryptedData,
 					iv: secret.iv
 				}).then((result) => {
-					console.log('ANTHENTICATION: get appletree key success')
+					console.log('ANTHENTICATION: get appletree key ok')
 					let appletreeKey = result.retdata.appletree_key
 					wx.setStorageSync(APPLETREE_KEY, appletreeKey)
 					done()
@@ -107,6 +105,12 @@ function request (configuration, data, handleErrorByUser = false) {
 		signon(() => {
 			ajax(configuration, data, parseCookieToString(), handleErrorByUser).then(resolve).catch(reject)
 		})
+	})
+}
+
+function requestWithoutSignon (configuration, data, handleErrorByUser = false) {
+	return new Promise((resolve, reject) => {
+		ajax(configuration, data, parseCookieToString(), handleErrorByUser).then(resolve).catch(reject)
 	})
 }
 
@@ -126,5 +130,7 @@ function requestUploadFile (url, filePath, success) {
 
 module.exports = {
 	request: request,
-	requestUploadFile: requestUploadFile
+	requestWithoutSignon: requestWithoutSignon,
+	requestUploadFile: requestUploadFile,
+	signon: signon
 }

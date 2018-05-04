@@ -2,7 +2,8 @@ module.exports = {
 	login: function () {
 		return new Promise((resolve, reject) => {
 			wx.login({
-				success: resolve
+				success: resolve,
+				fail: reject
 			})
 		})
 	},
@@ -27,7 +28,8 @@ module.exports = {
 	getUserInfo: function () {
 		return new Promise((resolve, reject) => {
 			wx.getUserInfo({
-				success: resolve
+				success: resolve,
+				fail: reject
 			})
 		})
 	}
