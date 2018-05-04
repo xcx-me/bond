@@ -66,36 +66,66 @@ function signon (done) {
 
 	if (StringUtil.isNullOrEmpty(appletreeKey)) {
 		console.log('ANTHENTICATION: appletree key is invalid')
-		wxLogin(done)
+		doLogin(done)
 		return
 	}
 
-	wxPromise.checkSession().then(() => {
-		done()
-	}).catch((error) => {
+	wxPromise.checkSession().then(done).catch((error) => {
 		console.log('ANTHENTICATION: check session failed. Try login again. ')
-		wxLogin(done)
+		doLogin(done)
 	})
 }
 
-function wxLogin (done) {
+function getAppletreeKey (code, done) {
+	wxPromise.getUserInfo().then((secret) => {
+		ajax(config.AUTHENTICATION.getAppletreeKey, {
+			code: code,
+			userInfo: JSON.stringify(secret.userInfo),
+			rawData: secret.rawData,
+			signature: secret.signature,
+			encryptedData: secret.encryptedData,
+			iv: secret.iv
+		}).then((result) => {
+			console.log('ANTHENTICATION: get appletree key ok')
+			let appletreeKey = result.retdata.appletree_key
+			wx.setStorageSync(APPLETREE_KEY, appletreeKey)
+			done()
+		})
+	}).catch((error) => {
+		console.log('getUserInfo fail: ', error)
+	})
+}
+
+function showAuthorizeModal(loginResult, done) {
+	wx.showModal({
+		title: '用户未授权',
+		content: '如需正常使用，请在“设置”中选中“使用我的用户信息”',
+		showCancel: false,
+		confirmColor: '#2196F3',
+		success: function (res) {
+			res.confirm && wxPromise.openSetting().then(() => {
+				getAppletreeKey(loginResult.code, done)
+			}).catch((error) => {
+				console.log('openSetting fail: ', error)
+			})
+		}
+	})
+}
+
+function doLogin (done) {
 	wxPromise.login().then((loginResult) => {
 		wxPromise.getSetting().then((result) => {
-			wxPromise.getUserInfo().then((secret) => {
-				ajax(config.AUTHENTICATION.getAppletreeKey, {
-					code: loginResult.code,
-					userInfo: JSON.stringify(secret.userInfo),
-					rawData: secret.rawData,
-					signature: secret.signature,
-					encryptedData: secret.encryptedData,
-					iv: secret.iv
-				}).then((result) => {
-					console.log('ANTHENTICATION: get appletree key ok')
-					let appletreeKey = result.retdata.appletree_key
-					wx.setStorageSync(APPLETREE_KEY, appletreeKey)
-					done()
-				})
+			if (result.authSetting['scope.userInfo']) {
+				getAppletreeKey(loginResult.code, done)
+				return
+			}
+			wxPromise.authorize().then(() => {
+				getAppletreeKey(loginResult.code, done)
+			}).catch(() => {
+				showAuthorizeModal(loginResult, done)
 			})
+		}).catch((error) => {
+			console.log('getSetting fail: ', error)
 		})
 	})
 }
@@ -108,6 +138,11 @@ function request (configuration, data, handleErrorByUser = false) {
 	})
 }
 
+// Only these requests that will run automatically when page is loaded or showed require this method. 
+// You can use this method like this:
+// getApp().delayedCallbacks.push(() => {
+//     requestWithoutSignon(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {})
+// })
 function requestWithoutSignon (configuration, data, handleErrorByUser = false) {
 	return new Promise((resolve, reject) => {
 		ajax(configuration, data, parseCookieToString(), handleErrorByUser).then(resolve).catch(reject)

@@ -3,15 +3,13 @@ const config = require('./app/util/ajax/config')
 
 App({
 	onLaunch: function () {
-		console.log('on launch...')
-
-		this.userInfoReadyCallbacks.push(() => {
+		this.delayedCallbacks.push(() => {
 			this.displayRedPoint()
 		})
 
 		signon(() => {
-			while (this.userInfoReadyCallbacks.length > 0) {
-				let callback = this.userInfoReadyCallbacks.shift()
+			while (this.delayedCallbacks.length > 0) {
+				let callback = this.delayedCallbacks.shift()
 				callback()
 			}
 		})
@@ -33,5 +31,5 @@ App({
 		canShowRedPoint: true
 	},
 
-	userInfoReadyCallbacks: []
+	delayedCallbacks: []
 })
