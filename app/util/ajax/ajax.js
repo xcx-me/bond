@@ -1,11 +1,9 @@
 const Promise = require('./es6-promise').Promise
 const Environment = require('./environment')
 const config = require('../ajax/config')
-const APPLETREE_KEY = 'appletree_key'
 const StringUtil = require('../string-util/string-util')
 const wxPromise = require('../wx-promise/wx-promise')
 const Toast = require('../toast/toast')
-const isLocalhost = false
 
 function centralErrorProcessor (result, resolve, handleErrorByUser) {
 	if (handleErrorByUser) {
@@ -30,10 +28,9 @@ function centralErrorProcessor (result, resolve, handleErrorByUser) {
 }
 
 function ajax (configuration, data, cookie, handleErrorByUser = false) {
-	let url = Environment.withDomain(configuration.url)
 	return new Promise((resolve, reject) => {
 		wx.request({
-			url: url,
+			url: Environment.parseToUrl(configuration.url),
 			method: configuration.method,
 			data: data,
 			success: (result) => {
@@ -48,21 +45,13 @@ function ajax (configuration, data, cookie, handleErrorByUser = false) {
 	})
 }
 
-function parseCookieToString () {
-	if (isLocalhost) {
-		wx.setStorageSync(APPLETREE_KEY, Environment.TARGET_SERVER.cookie.split('=')[1])
-		return Environment.TARGET_SERVER.cookie
-	}
-	return `${APPLETREE_KEY}=${wx.getStorageSync(APPLETREE_KEY)}`
-}
-
 function signon (done) {
-	if (isLocalhost) {
+	if (Environment.isLocalhost) {
 		done()
 		return
 	}
 	
-	let appletreeKey = wx.getStorageSync(APPLETREE_KEY)
+	let appletreeKey = wx.getStorageSync(Environment.APPLETREE_KEY)
 
 	if (StringUtil.isNullOrEmpty(appletreeKey)) {
 		console.log('ANTHENTICATION: appletree key is invalid')
@@ -87,8 +76,7 @@ function getAppletreeKey (code, done) {
 			iv: secret.iv
 		}).then((result) => {
 			console.log('ANTHENTICATION: get appletree key ok')
-			let appletreeKey = result.retdata.appletree_key
-			wx.setStorageSync(APPLETREE_KEY, appletreeKey)
+			wx.setStorageSync(Environment.APPLETREE_KEY, result.retdata.appletree_key)
 			done()
 		})
 	}).catch((error) => {
@@ -133,7 +121,7 @@ function doLogin (done) {
 function request (configuration, data, handleErrorByUser = false) {
 	return new Promise((resolve, reject) => {
 		signon(() => {
-			ajax(configuration, data, parseCookieToString(), handleErrorByUser).then(resolve).catch(reject)
+			ajax(configuration, data, Environment.parseCookieToString(), handleErrorByUser).then(resolve).catch(reject)
 		})
 	})
 }
@@ -145,17 +133,17 @@ function request (configuration, data, handleErrorByUser = false) {
 // })
 function requestWithoutSignon (configuration, data, handleErrorByUser = false) {
 	return new Promise((resolve, reject) => {
-		ajax(configuration, data, parseCookieToString(), handleErrorByUser).then(resolve).catch(reject)
+		ajax(configuration, data, Environment.parseCookieToString(), handleErrorByUser).then(resolve).catch(reject)
 	})
 }
 
 function requestUploadFile (url, filePath, success) {
 	const uploadTask = wx.uploadFile({
-		url: Environment.withDomain(url),
+		url: Environment.parseToUrl(url),
 		filePath: filePath,
 		name: 'file',
 		header: {
-			'cookie': parseCookieToString()
+			'cookie': Environment.parseCookieToString()
 		},
 		formData: {},
 		success: success
