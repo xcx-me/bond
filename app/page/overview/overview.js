@@ -78,7 +78,7 @@ Page({
 	 */
 	onHide: function () {
 		app.globalData.canShowRedPoint = true
-		app.globalData.visibleRedPoint && wx.showTabBarRedDot({index: 2})
+		getApp().displayRedPoint()
 
 		this.setData({
 			needUpdateDetail: false,
