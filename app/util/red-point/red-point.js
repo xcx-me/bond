@@ -16,7 +16,9 @@ module.exports = {
 
 	displayRedPoint: function () {
 		request(config.SYSTEM.unreadList, {}).then((result) => {
-			Number(result.unreadbondnum) > 0 && this.canShowRedPoint ? wx.showTabBarRedDot({index: 2}) : wx.hideTabBarRedDot({index: 2})
+			(Number(result.unreadbondnum) > 0 && this.canShowRedPoint)
+			? wx.showTabBarRedDot({index: 2})
+			: wx.hideTabBarRedDot({index: 2})
 		})
 	},
 
