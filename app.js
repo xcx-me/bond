@@ -3,12 +3,15 @@ const config = require('./app/util/ajax/config')
 const Environment = require('./app/util/ajax/environment')
 
 App({
+	signonComplete: false,
+
 	onLaunch: function () {
 		this.enqueueDelayedCallback(() => {
 			this.displayRedPoint()
 		})
 
 		signon(() => {
+			this.signonComplete = true
 			while (this.delayedCallbacks.length > 0) {
 				let callback = this.delayedCallbacks.shift()
 				callback()
@@ -33,7 +36,7 @@ App({
 	},
 
 	enqueueDelayedCallback: function (delayedCallback) {
-		if (Environment.isLocalhost) {
+		if (this.signonComplete || Environment.isLocalhost) {
 			delayedCallback()
 			return
 		}
