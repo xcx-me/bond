@@ -47,6 +47,7 @@ module.exports = class UserDetailFormModelReviewing extends UserDetailFormModel 
 				uiType: UiType.TEXT_INPUT,
 				label: '真实姓名',
 				value: '',
+				maxLength: 15,
 				disabled: true,
 				mandatory: true,
 				placeholder: '请输入姓名'
@@ -56,6 +57,7 @@ module.exports = class UserDetailFormModelReviewing extends UserDetailFormModel 
 				uiType: UiType.TEXT_INPUT,
 				label: 'QQ',
 				value: '',
+				maxLength: 11,
 				disabled: true,
 				mandatory: true,
 				hasWarning: false,
@@ -66,6 +68,7 @@ module.exports = class UserDetailFormModelReviewing extends UserDetailFormModel 
 				uiType: UiType.TEXT_INPUT,
 				label: '所在部门',
 				value: '',
+				maxLength: 15,
 				disabled: true,
 				mandatory: false,
 				placeholder: '请输入部门'
@@ -75,6 +78,7 @@ module.exports = class UserDetailFormModelReviewing extends UserDetailFormModel 
 				uiType: UiType.TEXT_INPUT,
 				label: '职位',
 				value: '',
+				maxLength: 15,
 				disabled: true,
 				mandatory: false,
 				placeholder: '请输入职位'

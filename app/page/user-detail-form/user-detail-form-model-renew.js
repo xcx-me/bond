@@ -48,6 +48,7 @@ module.exports = class UserDetailFormModelRenew extends UserDetailFormModel {
 				uiType: UiType.TEXT_INPUT,
 				label: '真实姓名',
 				value: '',
+				maxLength: 15,
 				mandatory: true,
 				placeholder: '请输入姓名'
 			},
@@ -56,6 +57,7 @@ module.exports = class UserDetailFormModelRenew extends UserDetailFormModel {
 				uiType: UiType.TEXT_INPUT,
 				label: 'QQ',
 				value: '',
+				maxLength: 11,
 				mandatory: true,
 				disabled: true,
 				hasWarning: false,
@@ -66,6 +68,7 @@ module.exports = class UserDetailFormModelRenew extends UserDetailFormModel {
 				uiType: UiType.TEXT_INPUT,
 				label: '所在部门',
 				value: '',
+				maxLength: 15,
 				mandatory: false,
 				placeholder: '请输入部门'
 			},
@@ -74,6 +77,7 @@ module.exports = class UserDetailFormModelRenew extends UserDetailFormModel {
 				uiType: UiType.TEXT_INPUT,
 				label: '职位',
 				value: '',
+				maxLength: 15,
 				mandatory: false,
 				placeholder: '请输入职位'
 			},
