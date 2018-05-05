@@ -102,7 +102,7 @@ Component({
 	},
 
 	showModifyModal: function (bondSimpleName, bondId) {
-		Authentication.checkAuthentication(() => {
+		Authentication.check(() => {
 			let that = this
 			wx.showActionSheet({
 				itemList: ['修改销售信息', '修改债券详情'],
@@ -120,7 +120,7 @@ Component({
 	},
 
 	onModifySaleInfo: function(bondId) {
-		Authentication.checkAuthentication(() => {
+		Authentication.check(() => {
 			wx.navigateTo({
 				url: '/app/page/edit-sale-info/edit-sale-info?bid=' + bondId
 			})
@@ -128,7 +128,7 @@ Component({
 	},
 
 	onModifyBondDetail: function(bondSimpleName) {
-		Authentication.checkAuthentication(() => {
+		Authentication.check(() => {
 			wx.navigateTo({
 				url: '/app/page/quotation/quotation?bname=' + bondSimpleName
 			})
@@ -140,7 +140,7 @@ Component({
 	},
 
 	showDeleteModal(bondSimpleName) {
-		Authentication.checkAuthentication(() => {
+		Authentication.check(() => {
 			let that = this
 			wx.showModal({
 				content: '请确定是否删除该债券？',

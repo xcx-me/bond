@@ -26,7 +26,7 @@ Component({
    */
   methods: {
 	doOpenStore: function() {
-		Authentication.checkAuthentication(() => {
+		Authentication.check(() => {
 			request(config.NEW_BOND.openMyShop, {}).then((result) => {
 				wx.navigateTo({
 					url: '/app/page/register-store-complete/register-store-complete'

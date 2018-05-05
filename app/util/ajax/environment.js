@@ -26,7 +26,7 @@ const isLocalhost = false
 
 const SERVER = {
 	domain: 'http://test.qtrade.com.cn',
-	cookie: 'appletree_key=2eb8cf0e7d914ca1d73bc9d03e41ee408872ed79' // lala
+	cookie: 'appletree_key=daaca481c4c9183d337a4acb462946414c27cbb8' // Anthony
 }
 
 function withDomain (path, domain) {
