@@ -3,6 +3,7 @@ const config = require('../../util/ajax/config')
 const common = require('../../util/common')
 const navigate = require('../../util/navigate/navigate')
 const {getStatus} = require('../../util/type/bond-list')
+const Delayer = require('../../util/ajax/delayer')
 
 const initFilterValue = {
 	bond_type: 0,
@@ -133,7 +134,7 @@ Page({
 			navigate.toBondDetailByShare(options.uid, options.bid, options.tid)
 		}
 		
-		getApp().enqueueDelayedCallback(() => {
+		Delayer.enqueueDelayedCallback(() => {
 			this.getBondList(undefined, requestWithoutSignon)
 		})
 
