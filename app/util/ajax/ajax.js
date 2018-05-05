@@ -126,17 +126,6 @@ function request (configuration, data, handleErrorByUser = false) {
 	})
 }
 
-// Only these requests that will run automatically when page is loaded or showed require this method. 
-// You can use this method like this:
-// getApp().delayedCallbacks.push(() => {
-//     requestWithoutSignon(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {})
-// })
-function requestWithoutSignon (configuration, data, handleErrorByUser = false) {
-	return new Promise((resolve, reject) => {
-		ajax(configuration, data, Environment.parseCookieToString(), handleErrorByUser).then(resolve).catch(reject)
-	})
-}
-
 function requestUploadFile (url, filePath, success) {
 	const uploadTask = wx.uploadFile({
 		url: Environment.parseToUrl(url),
@@ -153,7 +142,6 @@ function requestUploadFile (url, filePath, success) {
 
 module.exports = {
 	request: request,
-	requestWithoutSignon: requestWithoutSignon,
 	requestUploadFile: requestUploadFile,
 	signon: signon
 }
