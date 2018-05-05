@@ -1,4 +1,4 @@
-const { request, requestWithoutSignon } = require('../../util/ajax/ajax')
+const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const common = require('../../util/common')
 const navigate = require('../../util/navigate/navigate')
@@ -99,8 +99,8 @@ Page({
 		}
 	},
 
-	getBondList (status=undefined, requestType=request) { // 询量
-		requestType(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
+	getBondList () { // 询量
+		request(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
 			let lastData = this.data
 			let {total: retTotal, bond_array: retBondList} = result.retdata
 			let maxPage = Number(retTotal) > Number(lastData.filterValue.page_size) ? Math.ceil(retTotal / lastData.filterValue.page_size) : 1 // 最大页数
@@ -135,7 +135,7 @@ Page({
 		}
 		
 		Delayer.enqueueDelayedCallback(() => {
-			this.getBondList(undefined, requestWithoutSignon)
+			this.getBondList()
 		})
 
 		var that = this;

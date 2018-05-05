@@ -1,4 +1,4 @@
-const {requestWithoutSignon} = require('../ajax/ajax')
+const {request} = require('../ajax/ajax')
 const Delayer = require('../ajax/delayer')
 const config = require('../ajax/config')
 
@@ -11,11 +11,11 @@ module.exports = {
 		})
 		setInterval(() => {
 			this.displayRedPoint()
-		}, 1000 * 10)
+		}, 1000 * 60)
 	},
 
 	displayRedPoint: function () {
-		requestWithoutSignon(config.SYSTEM.unreadList, {}).then((result) => {
+		request(config.SYSTEM.unreadList, {}).then((result) => {
 			Number(result.unreadbondnum) > 0 && this.canShowRedPoint ? wx.showTabBarRedDot({index: 2}) : wx.hideTabBarRedDot({index: 2})
 		})
 	},
