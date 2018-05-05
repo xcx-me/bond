@@ -8,7 +8,7 @@ const stepUrls = [
 ]
 
 module.exports = {
-	checkAuthentication(done) {
+	check(done) {
 		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
 			if (!result.retdata.v) {
 				if (result.retdata.reg === 0) {
@@ -24,7 +24,7 @@ module.exports = {
 					return
 				}
 
-				if ([1, 2].indexOf(result.retdata.reg) >= 0) {
+				if (result.retdata.reg === 1 || result.retdata.reg === 2) {
 					wx.showModal({
 						title: '认证中',
 						content: '您的认证尚未完成，请点击按钮继续',

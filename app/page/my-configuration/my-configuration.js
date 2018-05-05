@@ -10,7 +10,7 @@ const configurations = [
 		key: KEY_mobile,
 		label: '修改手机',
 		urlFunction: function () {
-			Authentication.checkAuthentication(() => {
+			Authentication.check(() => {
 				wx.navigateTo({url: '../mobile-form/mobile-form?type=confirm'})
 			})
 		},
@@ -20,7 +20,7 @@ const configurations = [
 		key: KEY_EDIT_USER_INFO,
 		label: '修改其他资料',
 		urlFunction: function () {
-			Authentication.checkAuthentication(() => {
+			Authentication.check(() => {
 				request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
 					wx.navigateTo({url: `../user-detail-form/user-detail-form?type=${result.retdata.audit ? 'reviewing' : 'renew'}`})
 				})
