@@ -13,7 +13,7 @@ Page({
 	},
 
 	createQuotation: function () {
-		Authentication.checkAuthentication(() => {
+		Authentication.check(() => {
 			wx.navigateTo({url: '/app/page/quotation/quotation'})
 		})
 	},

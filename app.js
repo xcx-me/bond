@@ -1,9 +1,10 @@
 const {signon, requestWithoutSignon} = require('./app/util/ajax/ajax')
 const config = require('./app/util/ajax/config')
+const Environment = require('./app/util/ajax/environment')
 
 App({
 	onLaunch: function () {
-		this.delayedCallbacks.push(() => {
+		this.enqueueDelayedCallback(() => {
 			this.displayRedPoint()
 		})
 
@@ -26,9 +27,17 @@ App({
 		})
 	},
 
-	globalData:{
+	globalData: {
 		visibleRedPoint: false,
 		canShowRedPoint: true
+	},
+
+	enqueueDelayedCallback: function (delayedCallback) {
+		if (Environment.isLocalhost) {
+			delayedCallback()
+			return
+		}
+		this.delayedCallbacks.push(delayedCallback)
 	},
 
 	delayedCallbacks: []

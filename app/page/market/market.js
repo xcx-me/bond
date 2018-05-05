@@ -133,7 +133,7 @@ Page({
 			navigate.toBondDetailByShare(options.uid, options.bid, options.tid)
 		}
 		
-		getApp().delayedCallbacks.push(() => {
+		getApp().enqueueDelayedCallback(() => {
 			this.getBondList(undefined, requestWithoutSignon)
 		})
 
