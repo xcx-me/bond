@@ -4,6 +4,9 @@
 .bond-info-item-tpl .label {
   color: #999999;
 }
+.bond-info-item-tpl .value {
+  word-wrap: break-word;
+}
 .bond-info-item-tpl .icon {
   width: 24rpx;
   height: 24rpx;

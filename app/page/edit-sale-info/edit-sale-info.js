@@ -1,6 +1,7 @@
 // app/page/edit-sale-info/edit-sale-info.js
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
+const toast = require('../../util/toast/toast')
 Page({
 
 	/**
@@ -100,10 +101,15 @@ Page({
 
 		request(config.NEW_BOND.modNewBondDetail, this.data.saveValue, true).then((result) => {
 			this.setData({
-				isSubmitting: false
+				isSubmitting: false,
+				isSubmitDisabled: true,
+				saveValue: {}
 			})
 			if (String(result.ret) === '0') {
-				wx.navigateBack()
+				toast.showToast('提交成功')
+				setTimeout(()=>{
+					wx.navigateBack()
+				}, 1600)
 			}
 		}).catch(()=> {
 			this.setData({

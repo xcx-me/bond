@@ -2,6 +2,7 @@
 <view class='attached-component'>
 	<view class="header">
 		<text class="title">债券附件</text>
+		<text class='tips'>受微信小程序限制，无法打开压缩包</text>
 	</view>
 	<block wx:for='{{nameList}}' wx:for-item='name' wx:for-index="index" wx:key='index'>
 		<view class='attached-item' bindtap='doDownloadFile' data-url='{{urlList[index]}}'>

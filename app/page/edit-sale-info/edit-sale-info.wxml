@@ -43,6 +43,6 @@
 			</view>
 		</block>
 	</view>
-	<button class='btn-save {{isSubmitDisabled || isSubmitting ? "disabled" : ""}}'  loading='{{isSubmitting}}' hover-class='button-hover' type='primary' disabled="{{isSubmitDisabled || isSubmitting}}" bindtap='onFormSubmit'>保存{{isSubmitting ? '中...' : ''}}</button>
+	<button class='btn-save {{isSubmitDisabled || isSubmitting ? "disabled" : ""}}'  loading='{{isSubmitting}}' hover-class='button-hover' type='primary' disabled="{{isSubmitDisabled || isSubmitting}}" bindtap='onFormSubmit'>{{isSubmitting ? '提交中...' : '保存'}}</button>
 	<WarningText isShow='{{warningShowText}}' />
 </view>
