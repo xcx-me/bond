@@ -62,7 +62,7 @@ Page({
 				return
 			}
 			wx.showModal({
-				content: '你还没有验证你的邮箱，请单击邮件中的链接进行验证。',
+				content: '您还没有验证你的邮箱，请单击邮件中的链接进行验证。',
 				confirmText: '确定',
 				confirmColor: '#2196F3',
 				showCancel: false
