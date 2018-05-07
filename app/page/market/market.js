@@ -16,9 +16,11 @@ const initFilterValue = {
 	// max_page: 1,
 	page_size: 10,
 	last_timestamp: '',
+	bond_num_at_last_timestamp: '1', // 默认必填
 	p_type: '1',
 	total_left: 0
 }
+
 Page({
 	/**
 	 * 页面的初始数据
