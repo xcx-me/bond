@@ -35,6 +35,7 @@ Page({
 			userName: detail.sale_name,
 			loadedStoreDetail: true,
 			needUpdateStore: true,
+			needUpdateDetail: false,
 			bondListStatus: this.data.loadedStoreDetail ? getStatus.FRESH : getStatus.INIT
 		})
 	},
@@ -94,6 +95,7 @@ Page({
 	 */
 	onPullDownRefresh: function () {
 		this.setData({
+			needUpdateDetail: true,
 			bondListStatus: getStatus.FRESH
 		})
 	},

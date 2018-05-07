@@ -79,6 +79,22 @@ Component({
 			this.triggerEvent('event', detail)
 		},
 
+		getUserInfo: function (detail) {
+			let that = this
+			wx.getUserInfo({  
+				success: function(res){  
+					let userInfo = res.userInfo
+					detail.sale_name = userInfo.nickName
+					detail.face_url = userInfo.avatarUrl
+					detail.company_simple_name = '机构：--'
+					that.updateStoreDetail(detail)
+				},
+				fail: function (res){
+					that.updateStoreDetail(detail)
+				}
+			})  
+		},
+
 		getStoreDetail: function (userId) {
 			if (this.data.isRegistered) { // 已开店
 				request(config.NEW_BOND.storeDetail, {user_id: userId}).then((result) => {
@@ -100,23 +116,28 @@ Component({
 						sale_name: result.realname,
 						company_simple_name: result.company.simpleName
 					}
-					// result.iscomfirmed = 2 // for debug
+					result.iscomfirmed = 2 // for debug
 					if (result.iscomfirmed === '1') { //已认证
 						this.updateStoreDetail(detail)
 					} else {  // 未认证，获取微信昵称和头像
 						let that = this
-						wx.getUserInfo({  
-							success: function(res){  
-								let userInfo = res.userInfo
-								detail.sale_name = userInfo.nickName
-								detail.face_url = userInfo.avatarUrl
-								detail.company_simple_name = '机构：--'
-								that.updateStoreDetail(detail)
-							},
-							fail: function (res){
-								that.updateStoreDetail(detail)
+						wx.getSetting({
+							success(res) {
+								if (!res.authSetting['scope.userInfo']) {
+									wx.authorize({
+										scope: 'scope.userInfo',
+										success() {	
+											that.getUserInfo(detail)				
+										},
+										fail() {
+											// console.log('fail', err)
+										}
+									})
+								} else {
+									that.getUserInfo(detail)
+								}
 							}
-						})  
+						})
 					}
 				})
 			}
