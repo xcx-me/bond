@@ -104,7 +104,7 @@ Page({
 		}
 	},
 
-	getBondList () { // 询量
+	getBondList (status) { // 询量
 		request(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
 			let lastData = this.data
 			let {total: totalLeft, bond_array: retBondList, last_timestamp: lastTimestamp} = result.retdata
@@ -127,7 +127,7 @@ Page({
 				}
 			})
 			lastData.bondList = getNewArray
-
+			
 			this.setData(lastData)
 
 			if (status === getStatus.LOADMORE) {

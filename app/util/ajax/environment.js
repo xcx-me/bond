@@ -1,6 +1,6 @@
 const PRODUCTION_DOMAIN = 'http://test.qtrade.com.cn' // Please change to 'https://www.qtrade.com.cn' when doing production release.
 const APPLETREE_KEY = 'appletree_key'
-const isLocalhost = false
+const isLocalhost = true
 
 // ===============================================================================
 
