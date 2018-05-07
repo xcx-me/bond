@@ -1,40 +1,34 @@
+const {request} = require('../ajax/ajax')
+const Delayer = require('../ajax/delayer')
+const config = require('../ajax/config')
 
-const { request }=require('../ajax/ajax')
-const config=require('../ajax/config')
+module.exports = {
+	canShowRedPoint: true,
 
-module.exports ={
-	showTabBarRedDot: function () {
-		wx.showTabBarRedDot({
-			index: 2
-		})	
-	},
-
-	hideTabBarRedDot: function () {
-		wx.hideTabBarRedDot({
-			index: 2
+	startPolling: function () {
+		Delayer.enqueueDelayedCallback(() => {
+			this.displayRedPoint()
 		})
-	},
-
-	setTabBarRedDot: function () {
-		request(config.SYSTEM.unreadList, {}).then((result) => {
-			let isShowRedPoint = Number(result.data.unreadbondnum) > 0
-			if (isShowRedPoint) {
-				this.showTabBarRedDot()
-			} else {
-				this.hideTabBarRedDot()
-			}
-		})
-	},
-
-	startTabBarRedDot: function () {
-		this.setTabBarRedDot()
-		let intervalTimer = setInterval(() => {
-			this.setTabBarRedDot()
+		setInterval(() => {
+			this.displayRedPoint()
 		}, 1000 * 60)
-		return intervalTimer
 	},
 
-	stopTabBarRedDot: function (intervalTimer) {
-		clearInterval(intervalTimer)
+	displayRedPoint: function () {
+		request(config.SYSTEM.unreadList, {}).then((result) => {
+			(Number(result.unreadbondnum) > 0 && this.canShowRedPoint)
+			? wx.showTabBarRedDot({index: 2})
+			: wx.hideTabBarRedDot({index: 2})
+		})
+	},
+
+	hide: function () {
+		this.canShowRedPoint = false
+		wx.hideTabBarRedDot({index: 2})
+	},
+
+	show: function () {
+		this.canShowRedPoint = true
+		this.displayRedPoint()
 	}
 }

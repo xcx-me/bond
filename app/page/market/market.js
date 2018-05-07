@@ -1,10 +1,9 @@
-// app/page/market/market.js
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const common = require('../../util/common')
 const navigate = require('../../util/navigate/navigate')
-const redPoint = require('../../util/red-point/red-point')
 const {getStatus} = require('../../util/type/bond-list')
+const Delayer = require('../../util/ajax/delayer')
 
 const initFilterValue = {
 	bond_type: 0,
@@ -13,9 +12,12 @@ const initFilterValue = {
 	date: common.formatDate(new Date()),
 	key: '',
 	bond_status: '1',
-	current_page: 1,
-	max_page: 1,
-	page_size: 10
+	current_page: 1, // 必填，但是此处木有用途
+	// max_page: 1,
+	page_size: 10,
+	last_timestamp: '',
+	p_type: '1',
+	total_left: 0
 }
 Page({
 	/**
@@ -61,8 +63,10 @@ Page({
 
 	onShowFilterEvent: function (e) {
 		let lastData = this.data
-		lastData.filterValue.current_page = 1 // 首页数据
-		lastData.filterValue.max_page = 1
+		// lastData.filterValue.current_page = 1 // 首页数据
+		// lastData.filterValue.max_page = 1
+		lastData.filterValue.last_timestamp = ''
+		lastData.filterValue.total_left = 0
 		this.setData({
 			isShowFilter: e.detail,
 			isShowMask: e.detail
@@ -100,16 +104,30 @@ Page({
 		}
 	},
 
-	getBondList (status) { // 询量
+	getBondList () { // 询量
 		request(config.NEW_BOND.quotationBoard, this.data.filterValue).then((result) => {
 			let lastData = this.data
-			let {total: retTotal, bond_array: retBondList} = result.retdata
-			let maxPage = Number(retTotal) > Number(lastData.filterValue.page_size) ? Math.ceil(retTotal / lastData.filterValue.page_size) : 1 // 最大页数
+			let {total: totalLeft, bond_array: retBondList, last_timestamp: lastTimestamp} = result.retdata
+			// let maxPage = Number(retTotal) > Number(lastData.filterValue.page_size) ? Math.ceil(retTotal / lastData.filterValue.page_size) : 1 // 最大页数
 
-			lastData.filterValue.max_page = maxPage
+			// lastData.filterValue.max_page = maxPage
+			lastData.filterValue.last_timestamp = lastTimestamp
+			lastData.filterValue.total_left = totalLeft
 			lastData.loading = false
 			lastData.moreLoading = false
 			lastData.bondList = status === getStatus.LOADMORE ? lastData.bondList.concat(retBondList) : retBondList
+
+			let hash = {} // 数组去重
+			let len = lastData.bondList.length
+			let getNewArray = []
+			lastData.bondList.map((item, index) => {
+				if (!hash[lastData.bondList[index].bond_simple_name]) {
+					hash[lastData.bondList[index].bond_simple_name] = true
+					getNewArray.push(lastData.bondList[index])
+				}
+			})
+			lastData.bondList = getNewArray
+
 			this.setData(lastData)
 
 			if (status === getStatus.LOADMORE) {
@@ -135,7 +153,10 @@ Page({
 			navigate.toBondDetailByShare(options.uid, options.bid, options.tid)
 		}
 		
-		this.getBondList()
+		Delayer.enqueueDelayedCallback(() => {
+			this.getBondList()
+		})
+
 		var that = this;
 		/** 
 		 * 获取系统信息 
@@ -186,8 +207,27 @@ Page({
 			return
 		}
 		// lastData.loading = false
-		if (lastData.filterValue.current_page < lastData.filterValue.max_page) {
-			lastData.filterValue.current_page++
+		// if (lastData.filterValue.current_page < lastData.filterValue.max_page) {
+		// 	lastData.filterValue.current_page++
+		// 	lastData.loading = false
+		// 	lastData.moreLoading = true
+		// 	this.setData(lastData)
+		// 	this.setData(lastData, function () {
+		// 		// 此处最好写回调，并且有延时函数效果更佳
+		// 		setTimeout(() => {
+		// 			this.getBondList(getStatus.LOADMORE)
+		// 		}, 1000)
+		// 	})
+		// 	// setTimeout(() => {
+		// 	// 	this.getBondList(getStatus.LOADMORE)
+		// 	// }, 1000)
+		// 	// this.getBondList(getStatus.LOADMORE)
+		// }// else {
+		// 	lastData.moreLoading = false
+		// 	this.setData(lastData)
+		// }
+
+		if (Math.ceil(lastData.filterValue.total_left / lastData.filterValue.page_size) > 0) {
 			lastData.loading = false
 			lastData.moreLoading = true
 			this.setData(lastData)
@@ -197,14 +237,7 @@ Page({
 					this.getBondList(getStatus.LOADMORE)
 				}, 1000)
 			})
-			// setTimeout(() => {
-			// 	this.getBondList(getStatus.LOADMORE)
-			// }, 1000)
-			// this.getBondList(getStatus.LOADMORE)
-		}// else {
-		// 	lastData.moreLoading = false
-		// 	this.setData(lastData)
-		// }
+		}
 	},
 
 	topLoad: function(e) {},
@@ -220,22 +253,28 @@ Page({
 	 */
 	onReady: function () {},
 
+	hasHiddenPage: false,
+
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-		this.data.intervalTimer = redPoint.startTabBarRedDot()
+		if (this.hasHiddenPage) {
+			this.getBondList()
+			this.hasHiddenPage = false
+		}
 	},
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
 	onHide: function () {
-		redPoint.stopTabBarRedDot(this.data.intervalTimer)
 		this.setData({
 			isShowMask: false,
 			isShowFilter: false
 		})
+
+		this.hasHiddenPage = true
 	},
 
 	/**
@@ -254,8 +293,10 @@ Page({
 
 		let lastData = this.data
 		lastData.loading = true
-		lastData.filterValue.current_page = 1
-		lastData.filterValue.max_page = 1
+		// lastData.filterValue.current_page = 1
+		// lastData.filterValue.max_page = 1
+		lastData.filterValue.last_timestamp = ''
+		lastData.filterValue.total_left = 0
 		this.setData(lastData)
 		this.getBondList(getStatus.FRESH)
 	},

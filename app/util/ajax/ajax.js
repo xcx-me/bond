@@ -1,11 +1,9 @@
 const Promise = require('./es6-promise').Promise
 const Environment = require('./environment')
 const config = require('../ajax/config')
-const APPLETREE_KEY = 'appletree_key'
 const StringUtil = require('../string-util/string-util')
 const wxPromise = require('../wx-promise/wx-promise')
 const Toast = require('../toast/toast')
-const isLocalhost = false
 
 function centralErrorProcessor (result, resolve, handleErrorByUser) {
 	if (handleErrorByUser) {
@@ -13,16 +11,12 @@ function centralErrorProcessor (result, resolve, handleErrorByUser) {
 		return
 	}
 	if (result.data && result.data.hasOwnProperty('ret')) {
-		if (String(result.data.ret) === '-1') {
-			Toast.showToast(result.data.retmsg)
-			return
-		}
-		if (String(result.data.ret) === '-2') {
-			Toast.showToast(result.data.retmsg)
-			return
-		}
 		if (String(result.data.ret) === '0') {
 			resolve(result.data)
+			return
+		} 
+		if (String(result.data.ret) === '-1' || String(result.data.ret) === '-2') {
+			Toast.showToast(result.data.retmsg)
 			return
 		}
 		// TODO: The reason we still need below 2 lines of code is
@@ -34,10 +28,9 @@ function centralErrorProcessor (result, resolve, handleErrorByUser) {
 }
 
 function ajax (configuration, data, cookie, handleErrorByUser = false) {
-	let url = Environment.withDomain(configuration.url)
 	return new Promise((resolve, reject) => {
 		wx.request({
-			url: url,
+			url: Environment.parseToUrl(configuration.url),
 			method: configuration.method,
 			data: data,
 			success: (result) => {
@@ -52,52 +45,75 @@ function ajax (configuration, data, cookie, handleErrorByUser = false) {
 	})
 }
 
-function parseCookieToString () {
-	if (isLocalhost) {
-		wx.setStorageSync(APPLETREE_KEY, Environment.TARGET_SERVER.cookie.split('=')[1])
-		return Environment.TARGET_SERVER.cookie
-	}
-	return `${APPLETREE_KEY}=${wx.getStorageSync(APPLETREE_KEY)}`
-}
-
 function signon (done) {
-	if (isLocalhost) {
+	if (Environment.isLocalhost) {
 		done()
 		return
 	}
 	
-	let appletreeKey = wx.getStorageSync(APPLETREE_KEY)
+	let appletreeKey = wx.getStorageSync(Environment.APPLETREE_KEY)
+
 	if (StringUtil.isNullOrEmpty(appletreeKey)) {
-		// console.log('ANTHENTICATION: appletree key is invalid')
-		wxLogin(done)
-	} else {
-		wxPromise.checkSession().then(() => {
-			// console.log('ANTHENTICATION: check session success')
-			done()
-		}).catch((error) => {
-			wxLogin(done)
-		})
+		console.log('ANTHENTICATION: appletree key is invalid')
+		doLogin(done)
+		return
 	}
+
+	wxPromise.checkSession().then(done).catch((error) => {
+		console.log('ANTHENTICATION: check session failed. Try login again. ')
+		doLogin(done)
+	})
 }
 
-function wxLogin (done) {
+function getAppletreeKey (code, done) {
+	wxPromise.getUserInfo().then((secret) => {
+		ajax(config.AUTHENTICATION.getAppletreeKey, {
+			code: code,
+			userInfo: JSON.stringify(secret.userInfo),
+			rawData: secret.rawData,
+			signature: secret.signature,
+			encryptedData: secret.encryptedData,
+			iv: secret.iv
+		}).then((result) => {
+			console.log('ANTHENTICATION: get appletree key ok')
+			wx.setStorageSync(Environment.APPLETREE_KEY, result.retdata.appletree_key)
+			done()
+		})
+	}).catch((error) => {
+		console.log('getUserInfo fail: ', error)
+	})
+}
+
+function showAuthorizeModal(loginResult, done) {
+	wx.showModal({
+		title: '用户未授权',
+		content: '如需正常使用，请在“设置”中选中“使用我的用户信息”',
+		showCancel: false,
+		confirmColor: '#2196F3',
+		success: function (res) {
+			res.confirm && wxPromise.openSetting().then(() => {
+				getAppletreeKey(loginResult.code, done)
+			}).catch((error) => {
+				console.log('openSetting fail: ', error)
+			})
+		}
+	})
+}
+
+function doLogin (done) {
 	wxPromise.login().then((loginResult) => {
 		wxPromise.getSetting().then((result) => {
-			wxPromise.getUserInfo().then((secret) => {
-				ajax(config.AUTHENTICATION.getAppletreeKey, {
-					code: loginResult.code,
-					userInfo: JSON.stringify(secret.userInfo),
-					rawData: secret.rawData,
-					signature: secret.signature,
-					encryptedData: secret.encryptedData,
-					iv: secret.iv
-				}).then((result) => {
-					// console.log('ANTHENTICATION: get appletree key success')
-					let appletreeKey = result.retdata.appletree_key
-					wx.setStorageSync(APPLETREE_KEY, appletreeKey)
-					done()
-				})
+			if (result.authSetting['scope.userInfo']) {
+				getAppletreeKey(loginResult.code, done)
+				return
+			}
+			wxPromise.authorize().then(() => {
+				getAppletreeKey(loginResult.code, done)
+			}).catch(() => {
+				showAuthorizeModal(loginResult, done)
 			})
+		}).catch((error) => {
+			console.log('getSetting fail: ', error)
 		})
 	})
 }
@@ -105,18 +121,18 @@ function wxLogin (done) {
 function request (configuration, data, handleErrorByUser = false) {
 	return new Promise((resolve, reject) => {
 		signon(() => {
-			ajax(configuration, data, parseCookieToString(), handleErrorByUser).then(resolve).catch(reject)
+			ajax(configuration, data, Environment.parseCookieToString(), handleErrorByUser).then(resolve).catch(reject)
 		})
 	})
 }
 
 function requestUploadFile (url, filePath, success) {
 	const uploadTask = wx.uploadFile({
-		url: Environment.withDomain(url),
+		url: Environment.parseToUrl(url),
 		filePath: filePath,
 		name: 'file',
 		header: {
-			'cookie': parseCookieToString()
+			'cookie': Environment.parseCookieToString()
 		},
 		formData: {},
 		success: success
@@ -126,5 +142,6 @@ function requestUploadFile (url, filePath, success) {
 
 module.exports = {
 	request: request,
-	requestUploadFile: requestUploadFile
+	requestUploadFile: requestUploadFile,
+	signon: signon
 }

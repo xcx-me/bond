@@ -1,6 +1,5 @@
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
-const redPoint = require('../../util/red-point/red-point')
 const {getStatus, getType} = require('../../util/type/bond-list')
 const Authentication = require('../../util/authentication/authentication')
 
@@ -14,7 +13,7 @@ Page({
 	},
 
 	createQuotation: function () {
-		Authentication.checkAuthentication(() => {
+		Authentication.check(() => {
 			wx.navigateTo({url: '/app/page/quotation/quotation'})
 		})
 	},
@@ -43,13 +42,11 @@ Page({
 	},
 
 	onShow: function () {
-		this.data.intervalTimer = redPoint.startTabBarRedDot()
 		this.isStoreOpened()
 	},
 
 
 	onHide: function () {
-		redPoint.stopTabBarRedDot(this.data.intervalTimer)
 		this.setData({
 			loading: !this.data.isStoreRegistered
 		})

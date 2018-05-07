@@ -30,7 +30,7 @@ Component({
    */
   methods: {
 	onThumb: function (e) {
-		Authentication.checkAuthentication(() => {
+		Authentication.check(() => {
 			let answerId = e.currentTarget.dataset.id
 			request(config.NEW_BOND.thumbQuestion, {answer_id: answerId}).then((result)=>{
 				this.triggerEvent('thumbEvent')

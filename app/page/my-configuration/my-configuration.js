@@ -1,5 +1,6 @@
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
+const Authentication = require('../../util/authentication/authentication')
 
 const KEY_mobile = 'editMobile'
 const KEY_EDIT_USER_INFO = 'editUserInfo'
@@ -9,8 +10,8 @@ const configurations = [
 		key: KEY_mobile,
 		label: '修改手机',
 		urlFunction: function () {
-			wx.navigateTo({
-				url: '../mobile-form/mobile-form?type=confirm'
+			Authentication.check(() => {
+				wx.navigateTo({url: '../mobile-form/mobile-form?type=confirm'})
 			})
 		},
 		detailText: ''
@@ -19,9 +20,9 @@ const configurations = [
 		key: KEY_EDIT_USER_INFO,
 		label: '修改其他资料',
 		urlFunction: function () {
-			request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
-				wx.navigateTo({
-					url: `../user-detail-form/user-detail-form?type=${result.retdata.audit ? 'reviewing' : 'renew'}`
+			Authentication.check(() => {
+				request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
+					wx.navigateTo({url: `../user-detail-form/user-detail-form?type=${result.retdata.audit ? 'reviewing' : 'renew'}`})
 				})
 			})
 		},
@@ -79,6 +80,7 @@ Page({
 			})
 		})
 	},
+
 	openServiceNumbers: function () {
 		let host = this
 		wx.showActionSheet({
