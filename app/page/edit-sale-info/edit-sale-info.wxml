@@ -4,6 +4,9 @@
 		isChecked: function (checkBoxValue, values, splitChar) {
 			var valueList =  values && values !== 'undefined' ? values.split(splitChar) : []
 			for(var i=0; i < valueList.length;i++){
+				console.log(checkBoxValue)
+				console.log(valueList[i])
+				console.log(checkBoxValue === valueList[i])
 				if (checkBoxValue === valueList[i]) {
 					return true
 				}
