@@ -50,7 +50,7 @@ Page({
 		let value = e.detail.value
 		let saveValue = this.data.saveValue
 		let name = e.currentTarget.dataset.name
-
+		
 		if (name === 'little_left' || name === 'little_right') {
 			let reg = /^\d{0,2}(\.\d{0,4})?$/g
 			if (reg.test(value)) {
@@ -59,7 +59,9 @@ Page({
 				}
 				saveValue[name] = value
 			}
-		}else {
+		}else if (name === 'early_end') {
+			saveValue[name] = parseInt(value, 10)
+		} else {
 			saveValue[name] = value
 		}
 
@@ -103,7 +105,12 @@ Page({
 			this.setData({
 				isSubmitting: false,
 				isSubmitDisabled: true,
-				saveValue: {}
+				saveValue: {
+					little_left: '',
+					little_right: '',
+					early_end: '',
+					sale_type: ''
+				}
 			})
 			if (String(result.ret) === '0') {
 				toast.showToast('提交成功')
