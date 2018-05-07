@@ -14,7 +14,7 @@ function centralErrorProcessor (result, resolve, handleErrorByUser) {
 		if (String(result.data.ret) === '0') {
 			resolve(result.data)
 			return
-		}
+		} 
 		if (String(result.data.ret) === '-1' || String(result.data.ret) === '-2') {
 			Toast.showToast(result.data.retmsg)
 			return

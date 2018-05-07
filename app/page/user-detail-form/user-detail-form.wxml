@@ -1,4 +1,4 @@
-<view class='user-detail-form'>
+<view class='user-detail-form {{fixed ? "fixed-page" : ""}}'>
 	<WarningText isShow='{{hasAdvancedValidationError}}' />
 	<view class='notification' wx:if='{{visibleNotification}}'>
 		<image src='../../asset/image/qtrade/attention_orange_32.svg' />
@@ -6,7 +6,7 @@
 	</view>
 	<view class='description'>加*的选项为必填项</view>
 	<view class='form-section'>
-		<form-viewer-editor descriptors='{{descriptors}}'
+		<form-viewer-editor descriptors='{{descriptors}}' bind:changeFixedPageScroll='onChangeFixedPageScroll'
 			bind:changeDescriptors='onChangeDescriptors'
 			bind:changeDescriptorsAfter='onChangeDescriptorsAfter' />
 	</view>

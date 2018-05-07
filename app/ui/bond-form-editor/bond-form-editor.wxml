@@ -6,7 +6,7 @@
 	<view class='bond-simple-name row-item'>
 		<view class='label-area' style='{{isEditEntry ? "color: #888888" : ""}}'><span class='star-span'>*</span>债券简称</view>
 		<view class='editor-area'>
-			<input class='' type='text' bindinput='simpleNameChange' data-input-name='bond_simple_name' value='{{formData.bond_simple_name}}'
+			<input class='' type='text' bindinput='simpleNameChange' data-input-name='bond_simple_name' value='{{newSimpleName}}'
 				disabled='{{isEditEntry}}' style='{{isEditEntry ? "color: #888888" : ""}}' maxlength='15'
 			/>
 		</view>

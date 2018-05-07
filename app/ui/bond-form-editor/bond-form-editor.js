@@ -24,7 +24,7 @@ Component({
 
 	data: {
 		formData: JSON.parse(JSON.stringify(formConfig.defaultFormData)),
-
+		newSimpleName: '',// 解决input输入框在原生输入法下，拼音打字时闪烁(消失)的问题。
 		ascNameListOpen: false, 
 		simpleNameList: [],
 
@@ -261,11 +261,12 @@ Component({
 		bondDetailsAssociate: function (bondSimpleName) {
 			request(config.NEW_BOND.associateBond, {bond_simple_name: bondSimpleName}).then((result)=>{
 				let resultData = result.retdata
+
 				if (Object.keys(resultData).length > 0) {
 					resultData.bond_simple_name = bondSimpleName
 					this.setData({
 						formData: resultData,
-
+						newSimpleName: bondSimpleName,
 						enterpriseIndex: resultData.company_type && (resultData.company_type - 1), // 企业性质
 						issuanceMethodIndex: resultData.issue_way && (resultData.issue_way - 1), // 发行方式
 	
@@ -283,8 +284,6 @@ Component({
 					})
 					this.triggerEvent('changeValueEvent', resultData)
 				} else {
-					let formData = JSON.parse(JSON.stringify(formConfig.defaultFormData))
-					formData.bond_simple_name = this.data.formData.bond_simple_name
 					this.setData({
 						formData: formData,
 
@@ -312,15 +311,20 @@ Component({
 		bondSimpleNameAssociate: function (curName) {
 			request(config.NEW_BOND.associateBondName, {bond_msg: curName}).then((result) => {
 				let resultData = result.retdata.array
+
+				let formData = JSON.parse(JSON.stringify(formConfig.defaultFormData))
+				formData.bond_simple_name = curName
 				if (curName !=='' && resultData.length > 0) {
 					let nameArray = AutoCompleteTextInputUtil.parseAssociateBondSimpleName(curName, resultData, 'bond_simple_name')
 					this.setData({
+						formData: formData,
 						ascNameListOpen: true,
 						simpleNameList: nameArray
 					})
 					this.triggerEvent('changeFixedPageScroll', true)
 				} else {
 					this.setData({
+						formData: formData,
 						ascNameListOpen: false,
 						simpleNameList: []
 					})

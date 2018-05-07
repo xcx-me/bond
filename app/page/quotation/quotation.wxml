@@ -1,5 +1,5 @@
 
-<view class="send-quote-page {{fixedPage ? 'fixed' : ''}}">
+<view class='send-quote-page' style='{{fixedPage ? "position: fixed;" : ""}}'>
 	<view class="quotation-form" wx:if="{{isOpenMyShop}}">
 		<BondFormEditor isEditEntry='{{isEditEntry}}' highlight='{{highlightItem}}' bondSimpleName='{{bondSimpleName}}'
 			bind:changeValueEvent='_changeValue'
