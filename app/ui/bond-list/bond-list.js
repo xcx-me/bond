@@ -72,8 +72,8 @@ Component({
 		},
 
 		updataStatus: function(status) {
+			wx.hideNavigationBarLoading() // 完成停止加载
 			if (status === getStatus.FRESH) {
-				wx.hideNavigationBarLoading() // 完成停止加载
 				wx.stopPullDownRefresh() // 停止下拉刷新
 			}
 			this.data.status = getStatus.ENDLOADED	
