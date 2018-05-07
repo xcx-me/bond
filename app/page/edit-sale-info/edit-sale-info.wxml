@@ -32,7 +32,7 @@
 						<input class='{{formItem.postfix ? "has-postfix" : ""}} {{hightlight && (formItem.name ==="little_left" || formItem.name ==="little_right") ? "highlight-color" : ""}}'
 							wx:if='{{formItem.formType === "input"}}'
 							data-name='{{formItem.name}}' focus='{{index === 0}}' maxlength='{{formItem.maxlength}}'
-							type='{{formItem.type}}' value='{{saveValue[formItem.name]}}' placeholder='{{formItem.placeholder}}'
+							type='{{formItem.type}}' value='{{saleInfo[formItem.name]}}' placeholder='{{formItem.placeholder}}'
 							bindinput='onInput'
 						/>
 						<text class='postfix' wx:if='{{formItem.postfix}}'>{{formItem.postfix}}</text>
