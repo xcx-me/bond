@@ -57,11 +57,19 @@ Page({
 				if (value !== '' && value.substring(0, 1) === '.') {
 					value = ''
 				}
+				value = value.replace(/[^\d.]/g, '')
+				value = value.replace(/\.{2,}/g, '.')
+				value = value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.')
+				if (value.indexOf('.') < 0 && value !== '' && value.substring(0, 1) === '0' && value.length === 2) {
+					value = value.substring(1, value.length)
+				}
 				saveValue[name] = value
 			}
-		}else {
-			saveValue[name] = value
-		}
+		}else if (name === 'early_end') {
+            saveValue[name] = parseInt(value, 10)
+        } else {
+            saveValue[name] = value
+        }
 
 		if (value.length > 0) {
 			this.setData({
