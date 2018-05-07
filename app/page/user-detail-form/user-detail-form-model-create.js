@@ -116,7 +116,7 @@ module.exports = class UserDetailFormModelCreate extends UserDetailFormModel {
 				return !StringUtil.isNullOrEmpty(value)
 			},
 			[this.AGENCY_NAME]: (value) => {
-				return !StringUtil.isNullOrEmpty(value.agencyId)
+				return !StringUtil.isNullOrEmpty(value.text)
 			},
 			[this.REAL_NAME]: (value) => {
 				return !StringUtil.isNullOrEmpty(value)
@@ -129,6 +129,9 @@ module.exports = class UserDetailFormModelCreate extends UserDetailFormModel {
 
 	getAdvancedValidators () {
 		return {
+			[this.AGENCY_NAME]: (value) => {
+				return !StringUtil.isNullOrEmpty(value.agencyId)
+			},
 			[this.QQ_NUMBER]: (value) => {
 				return RegexpUtil.isQQNumber(value)
 			},
