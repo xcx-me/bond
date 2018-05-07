@@ -68,11 +68,11 @@ function signon (done) {
 	
 	let appletreeKey = wx.getStorageSync(APPLETREE_KEY)
 	if (StringUtil.isNullOrEmpty(appletreeKey)) {
-		console.log('ANTHENTICATION: appletree key is invalid')
+		// console.log('ANTHENTICATION: appletree key is invalid')
 		wxLogin(done)
 	} else {
 		wxPromise.checkSession().then(() => {
-			console.log('ANTHENTICATION: check session success')
+			// console.log('ANTHENTICATION: check session success')
 			done()
 		}).catch((error) => {
 			wxLogin(done)
@@ -92,7 +92,7 @@ function wxLogin (done) {
 					encryptedData: secret.encryptedData,
 					iv: secret.iv
 				}).then((result) => {
-					console.log('ANTHENTICATION: get appletree key success')
+					// console.log('ANTHENTICATION: get appletree key success')
 					let appletreeKey = result.retdata.appletree_key
 					wx.setStorageSync(APPLETREE_KEY, appletreeKey)
 					done()

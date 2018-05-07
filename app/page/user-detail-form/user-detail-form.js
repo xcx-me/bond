@@ -30,7 +30,15 @@ Page({
 		visibleNotification: false,
 		notificationText: '',
 
-		visibleControlArea: true
+		visibleControlArea: true,
+
+		fixed: false
+	},
+
+	onChangeFixedPageScroll: function (e) {
+		this.setData({
+			fixed: e.detail
+		})
 	},
 
 	onChangeDescriptors: function (e) {

@@ -95,13 +95,19 @@ Component({
 						ascNameListOpen: true,
 						simpleNameList: nameArray
 					})
-					this.triggerEvent('changeFixedPageScroll', true)
+					this.triggerEvent('changeFixedPageScroll', true, {
+						bubbles: true,
+						composed: true
+					})
 				} else {
 					this.setData({
 						ascNameListOpen: false,
 						simpleNameList: []
 					})
-					this.triggerEvent('changeFixedPageScroll', false)
+					this.triggerEvent('changeFixedPageScroll', false, {
+						bubbles: true,
+						composed: true
+					})
 				}
 			})
 		},
@@ -130,7 +136,10 @@ Component({
 				ascNameListOpen: false,
 				simpleNameList: []
 			})
-			this.triggerEvent('changeFixedPageScroll', false)
+			this.triggerEvent('changeFixedPageScroll', false, {
+				bubbles: true,
+				composed: true
+			})
 		},
 	}
 })
