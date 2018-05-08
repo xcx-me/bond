@@ -92,13 +92,8 @@ Page({
 	},
 
 	onFormSubmit: function(e) {
-<<<<<<< HEAD
 		let curValue = this.data.saveValue
 		if (Number(curValue.little_left) >= Number(curValue.little_right) && curValue.little_left !=='') {
-=======
-		let curValue = this.data.saleInfo
-		if (Number(curValue.little_left) > Number(curValue.little_right) && curValue.little_left !=='') {
->>>>>>> 6f5a2aa44684622c3fa3543606322fffd031245c
 			this.setData({
 				warningShowText: true,
 				hightlight: true
