@@ -8,5 +8,5 @@
 			</block>
 		</view>
 	</scroll-view>
-	<view class='close-mask' bindtap='onHandleClose'></view>
+	<view class='{{nameListVisible ? "close-mask" : "" }}' bindtap='onHandleClose'></view>
 </view>

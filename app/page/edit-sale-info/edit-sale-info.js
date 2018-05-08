@@ -92,8 +92,8 @@ Page({
 	},
 
 	onFormSubmit: function(e) {
-		let curValue = this.data.saleInfo
-		if (Number(curValue.little_left) > Number(curValue.little_right) && curValue.little_left !=='') {
+		let curValue = this.data.saveValue
+		if (Number(curValue.little_left) >= Number(curValue.little_right) && curValue.little_left !=='') {
 			this.setData({
 				warningShowText: true,
 				hightlight: true
