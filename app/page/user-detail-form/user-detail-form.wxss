@@ -31,7 +31,7 @@
   margin: 60rpx 0;
 }
 .fixed-page {
-  position: fixed;
+  position: relative;
   top: -400rpx !important;
   left: 0;
   right: 0;
