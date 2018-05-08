@@ -5,7 +5,7 @@
 	<block wx:for='{{from === "admin" ? adminBondFieldList : bondFieldList}}' wx:for-item='bondItem' wx:key='name'>
 		<view class='pallet clearfix {{bondItem.name}}'>
 			<block wx:for='{{bondItem.value}}' wx:for-item='item' wx:key='name'>
-				<view catchtap='doClickBondItem' wx:if='{{item.type === "operator"}}' data-name='{{item.name}}' data-bondname='{{bondInfo.bond_simple_name}}'>
+				<view class='operator-item' catchtap='doClickBondItem' wx:if='{{item.type === "operator"}}' data-name='{{item.name}}' data-bondname='{{bondInfo.bond_simple_name}}'>
 					<template is='bondInfoItemTpl' data='{{item: item, bondInfo: bondInfo, from: from, type: "single-bond"}}'></template>
 				</view>
 				<block wx:else>

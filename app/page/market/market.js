@@ -4,7 +4,7 @@ const common = require('../../util/common')
 const navigate = require('../../util/navigate/navigate')
 const {getStatus} = require('../../util/type/bond-list')
 const Delayer = require('../../util/ajax/delayer')
-
+const Click = require('../../util/click/click')
 const initFilterValue = {
 	bond_type: 0,
 	deadline: 0,
@@ -90,6 +90,7 @@ Page({
 		this.setData({
 			isShowMask: false
 		})
+		Click.enable()
 	},
 
 	_confirmSelectSaleEvent: function (e) {
@@ -99,6 +100,7 @@ Page({
 		this.setData({
 			isShowMask: false
 		})
+		Click.enable()
 		if (sale) {
 			let uid = sale.user_id
 			let bondId = sale.bond_id

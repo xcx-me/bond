@@ -2,6 +2,7 @@
 const { request } = require('../../../util/ajax/ajax')
 const config = require('../../../util/ajax/config')
 const Authentication = require('../../../util/authentication/authentication')
+const Click = require('../../../util/click/click')
 Component({
 	options: {
 		multipleSlots: true // 在组件定义时的选项中启用多slot支持
@@ -60,21 +61,31 @@ Component({
 		},
 
 		onAsk: function () {
-			Authentication.check(() => {
-				let url = '/app/page/ask/ask?bid=' + this.data.bondId +'&bname=' + this.data.bondSimpleName +'&uid=' + this.data.userId
-				wx.navigateTo({
-					url: url
+			Click.check(() => {
+				Authentication.check(() => {
+					let url = '/app/page/ask/ask?bid=' + this.data.bondId +'&bname=' + this.data.bondSimpleName +'&uid=' + this.data.userId
+					wx.navigateTo({
+						url: url,
+						complete: () => {
+							Click.enable()
+						}
+					})
 				})
 			})
 		},
 
 		onAnswer: function (e) {
-			Authentication.check(() => {
-				let askId = e.currentTarget.dataset.id
-				let question = e.currentTarget.dataset.question
-				let url = '/app/page/answer/answer?bid=' + this.data.bondId +'&askid=' + askId + '&question=' + question+ '&uid=' + this.data.userId
-				wx.navigateTo({
-					url: url
+			Click.check(() => {
+				Authentication.check(() => {
+					let askId = e.currentTarget.dataset.id
+					let question = e.currentTarget.dataset.question
+					let url = '/app/page/answer/answer?bid=' + this.data.bondId +'&askid=' + askId + '&question=' + question+ '&uid=' + this.data.userId
+					wx.navigateTo({
+						url: url,
+						complete: () => {
+							Click.enable()
+						}
+					})
 				})
 			})	
 		},

@@ -2,7 +2,7 @@ const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const {getStatus, getType} = require('../../util/type/bond-list')
 const Authentication = require('../../util/authentication/authentication')
-
+const Click = require('../../util/click/click')
 Page({
 	data: {
 		loading: true,
@@ -13,8 +13,22 @@ Page({
 	},
 
 	createQuotation: function () {
-		Authentication.check(() => {
-			wx.navigateTo({url: '/app/page/quotation/quotation'})
+		// let curTime = new Date().getTime()
+		// let lastTime = getApp().globalData.lastClickTime
+		// console.log(curTime, lastTime, curTime - lastTime)
+		// if (curTime - lastTime < 2000) {
+		// 	return
+		// }
+		// getApp().globalData.lastClickTime = curTime
+		Click.check(() => {
+			Authentication.check(() => {
+				wx.navigateTo({
+					url: '/app/page/quotation/quotation',
+					complete: () => {
+						Click.enable()
+					}
+				})
+			})
 		})
 	},
 

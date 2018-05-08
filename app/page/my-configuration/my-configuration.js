@@ -1,6 +1,7 @@
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const Authentication = require('../../util/authentication/authentication')
+const Click = require('../../util/click/click')
 
 const KEY_mobile = 'editMobile'
 const KEY_EDIT_USER_INFO = 'editUserInfo'
@@ -10,8 +11,15 @@ const configurations = [
 		key: KEY_mobile,
 		label: '修改手机',
 		urlFunction: function () {
-			Authentication.check(() => {
-				wx.navigateTo({url: '../mobile-form/mobile-form?type=confirm'})
+			Click.check(() => {
+				Authentication.check(() => {
+					wx.navigateTo({
+						url: '../mobile-form/mobile-form?type=confirm',
+						complete: () => {
+							Click.enable()
+						}
+					})
+				})
 			})
 		},
 		detailText: ''
@@ -20,9 +28,16 @@ const configurations = [
 		key: KEY_EDIT_USER_INFO,
 		label: '修改其他资料',
 		urlFunction: function () {
-			Authentication.check(() => {
-				request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
-					wx.navigateTo({url: `../user-detail-form/user-detail-form?type=${result.retdata.audit ? 'reviewing' : 'renew'}`})
+			Click.check(() => {
+				Authentication.check(() => {
+					request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
+						wx.navigateTo({
+							url: `../user-detail-form/user-detail-form?type=${result.retdata.audit ? 'reviewing' : 'renew'}`,
+							complete: () => {
+								Click.enable()
+							}
+						})
+					})
 				})
 			})
 		},
@@ -82,16 +97,20 @@ Page({
 	},
 
 	openServiceNumbers: function () {
-		let host = this
-		wx.showActionSheet({
-			itemList: ['客服QQ：916273703', '客服电话：0755-86707342'],
-			success: function (res) {
-				res.tapIndex === 0 && ''
-				res.tapIndex === 1 && host.calling()
-			},
-			fail: function (res) {}
+		Click.check(() => {
+			let host = this
+			wx.showActionSheet({
+				itemList: ['客服QQ：916273703', '客服电话：0755-86707342'],
+				success: function (res) {
+					res.tapIndex === 0 && ''
+					res.tapIndex === 1 && host.calling()
+					Click.enable()
+				},
+				fail: function (res) {
+					Click.enable()
+				}
+			})
 		})
-
 	},
 	closeServiceNumbers: function () {
 		this.setData({
