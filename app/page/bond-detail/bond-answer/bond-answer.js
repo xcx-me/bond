@@ -2,7 +2,7 @@
 const { request } = require('../../../util/ajax/ajax')
 const config = require('../../../util/ajax/config')
 const Authentication = require('../../../util/authentication/authentication')
-
+const Click = require('../../../util/click/click')
 Component({
 	options: {
 		multipleSlots: true // 在组件定义时的选项中启用多slot支持
@@ -30,12 +30,17 @@ Component({
    */
   methods: {
 	onThumb: function (e) {
-		Authentication.check(() => {
-			let answerId = e.currentTarget.dataset.id
-			request(config.NEW_BOND.thumbQuestion, {answer_id: answerId}).then((result)=>{
-				this.triggerEvent('thumbEvent')
+		Click.check(() => {
+			Authentication.check(() => {
+				let answerId = e.currentTarget.dataset.id
+				request(config.NEW_BOND.thumbQuestion, {answer_id: answerId}).then((result)=>{
+					this.triggerEvent('thumbEvent')
+					Click.enable()
+				}).catch(()=>{
+					Click.enable()
+				})
 			})
-		})
+		})	
 	}
   }
 })

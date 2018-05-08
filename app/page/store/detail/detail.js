@@ -2,7 +2,7 @@
 var detail =require('../../../util/store/detail.js')
 const { request } = require('../../../util/ajax/ajax')
 const config = require('../../../util/ajax/config')
-
+const Click = require('../../../util/click/click')
 Component({
 	options: {
 	  multipleSlots: true // 在组件定义时的选项中启用多slot支持
@@ -144,8 +144,13 @@ Component({
 
 		doClick () {
 			if (this.data.navigatorUrl) {
-				wx.navigateTo({
-					url: this.data.navigatorUrl
+				Click.check(() => {
+					wx.navigateTo({
+						url: this.data.navigatorUrl,
+						complete: () => {
+							Click.enable()
+						}
+					})
 				})
 			}
 		}

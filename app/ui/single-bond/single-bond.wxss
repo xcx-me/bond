@@ -182,7 +182,7 @@
   height: 230rpx;
 }
 .single-bond-component.admin .bond-info-item-tpl.bond_simple_name {
-  width: calc(100% - 124rpx);
+  width: calc(100% - 164rpx);
 }
 .single-bond-component.admin .bond-info-item-tpl.bond_simple_name .value {
   font-size: 32rpx;
@@ -192,7 +192,7 @@
 .single-bond-component.admin .bond-info-item-tpl.icon-modify,
 .single-bond-component.admin .bond-info-item-tpl.icon-delete {
   float: left;
-  width: 62rpx;
+  width: 82rpx;
   padding: 0;
   height: 60rpx;
   line-height: 60rpx;
