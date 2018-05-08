@@ -4,7 +4,6 @@ module.exports = {
 	check(done) {
 		let curTime = new Date().getTime()
 		let lastTime = this.clickTime
-		console.log(curTime, lastTime, curTime - lastTime)
 		if (curTime - lastTime < 2000) {
 			return
 		}

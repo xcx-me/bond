@@ -13,13 +13,6 @@ Page({
 	},
 
 	createQuotation: function () {
-		// let curTime = new Date().getTime()
-		// let lastTime = getApp().globalData.lastClickTime
-		// console.log(curTime, lastTime, curTime - lastTime)
-		// if (curTime - lastTime < 2000) {
-		// 	return
-		// }
-		// getApp().globalData.lastClickTime = curTime
 		Click.check(() => {
 			Authentication.check(() => {
 				wx.navigateTo({
