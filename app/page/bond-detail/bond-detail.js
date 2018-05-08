@@ -144,7 +144,7 @@ Page({
 	wx.getSystemInfo({
 		success: function(res) {
 			that.setData({
-				winHeight: res.windowHeight - (res.windowWidth / 750 * 80)
+				winHeight: res.windowHeight /*- (res.windowWidth / 750 * 80)*/
 			})
 		}
 	})
