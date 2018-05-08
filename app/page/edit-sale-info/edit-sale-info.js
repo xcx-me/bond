@@ -9,7 +9,6 @@ Page({
 	 */
 	data: {
 		bondId: '',
-		saleInfo: {},
 		fieldList: [
 			{name: 'little_range', label: '小区间(%)', types: [{name:'little_left', formType: 'input', type: 'digit', maxlength:7, 'placeholder': '%'}, {name:'little_right', formType: 'input', type: 'digit', maxlength:7, 'placeholder': '%'}]},
 			{name: 'early_end', label: '提前截标', types:[{name:'early_end', formType: 'input', type: 'number', maxlength:3, 'placeholder': '请输入提前截标',postfix: '分钟'}]},
@@ -18,7 +17,7 @@ Page({
 		isSubmitDisabled: true,
 		isSubmitting: '',
 		loading: true,
-		saveValue: {
+		saleInfo: {
 			little_left: '',
 			little_right: '',
 			early_end: '',
@@ -33,8 +32,7 @@ Page({
 		request(config.NEW_BOND.getSaleInfo, {bond_id: bondId}).then((result)=>{
 			let retData =  result.retdata
 			this.setData({
-				saleInfo: retData,
-				saveValue: {
+				saleInfo: {
 					bond_simple_name: retData.bond_simple_name,
 					little_left: retData.little_left,
 					little_right: retData.little_right,
@@ -48,9 +46,9 @@ Page({
 
 	onInput: function(e) {
 		let value = e.detail.value
-		let saveValue = this.data.saveValue
+		let saleInfo = this.data.saleInfo
 		let name = e.currentTarget.dataset.name
-
+		
 		if (name === 'little_left' || name === 'little_right') {
 			let reg = /^\d{0,2}(\.\d{0,4})?$/g
 			if (reg.test(value)) {
@@ -63,18 +61,18 @@ Page({
 				if (value.indexOf('.') < 0 && value !== '' && value.substring(0, 1) === '0' && value.length === 2) {
 					value = value.substring(1, value.length)
 				}
-				saveValue[name] = value
+				saleInfo[name] = value
 			}
 		}else if (name === 'early_end') {
-            saveValue[name] = parseInt(value, 10)
+			saleInfo[name] = parseInt(value, 10)
         } else {
-            saveValue[name] = value
+			saleInfo[name] = value
         }
 
 		if (value.length > 0) {
 			this.setData({
 				isSubmitDisabled: false,
-				saveValue: saveValue,
+				saleInfo: saleInfo,
 				hightlight: false
 			})
 		}
@@ -82,19 +80,19 @@ Page({
 
 	onCheckboxChange: function(e) {
 		let value = e.detail.value
-		let saveValue = this.data.saveValue
+		let saleInfo = this.data.saleInfo
 		let name = e.currentTarget.dataset.name
-		saveValue[name] = value.join('|')
+		saleInfo[name] = value.join('|')
 		if (value.length > 0) {
 			this.setData({
 				isSubmitDisabled: false,
-				saveValue: saveValue
+				saleInfo: saleInfo
 			})
 		}
 	},
 
 	onFormSubmit: function(e) {
-		let curValue = this.data.saveValue
+		let curValue = this.data.saleInfo
 		if (Number(curValue.little_left) > Number(curValue.little_right) && curValue.little_left !=='') {
 			this.setData({
 				warningShowText: true,
@@ -107,14 +105,22 @@ Page({
 			isSubmitting: true
 		})
 
-		request(config.NEW_BOND.modNewBondDetail, this.data.saveValue, true).then((result) => {
+		request(config.NEW_BOND.modNewBondDetail, this.data.saleInfo, true).then((result) => {
 			this.setData({
 				isSubmitting: false,
 				isSubmitDisabled: true,
-				saveValue: {}
 			})
 			if (String(result.ret) === '0') {
 				toast.showToast('提交成功')
+				this.setData({
+					saleInfo: {
+						bond_simple_name: this.data.saleInfo.bond_simple_name,
+						little_left: '',
+						little_right: '',
+						early_end: '',
+						sale_type: ''
+					}
+				})
 				setTimeout(()=>{
 					wx.navigateBack()
 				}, 1600)

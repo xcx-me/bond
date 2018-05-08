@@ -78,7 +78,7 @@ Component({
 						content: this.data.content,
 						shop_user_id: this.data.userId
 					}, true).then((result)=>{
-						console.log('isASKING...', result)
+						// console.log('isASKING...', result)
 						if(String(result.ret) === '0') {
 							this.onSuccess()
 						} else {
@@ -89,7 +89,7 @@ Component({
 					})
 				} else {
 					request(config.NEW_BOND.answerQuestion, {ask_id: this.data.askId, content: content}, true).then((result) => {
-						console.log('isAnswering...', result)
+						// console.log('isAnswering...', result)
 						if(String(result.ret) === '0') {
 							this.onSuccess()
 						} else {
@@ -126,7 +126,7 @@ Component({
 			this.setData({
 				isSubmitting: false
 			})
-			console.log('onFailed....', result)
+			// console.log('onFailed....', result)
 			if (result && result.ret) {
 				let ret = String(result.ret)
 				if (ret === '-2') {
