@@ -28,7 +28,7 @@
   padding-left: 30rpx;
 }
 .user-detail-form .control-area {
-  margin: 60rpx 0;
+  margin: 60rpx 0rpx;
 }
 .fixed-page {
   position: fixed;
