@@ -1,7 +1,7 @@
 // app/ui/list/bond-list/bond-list.js
 const navigate = require('../../util/navigate/navigate')
 const Authentication = require('../../util/authentication/authentication')
-
+const Click = require('../../util/click/click')
 Component({
   /**
    * 组件的属性列表
@@ -66,31 +66,39 @@ Component({
    */
   methods: {
 	doClickBond: function(e){
-		let {index} = e.currentTarget.dataset
-		let bond = this.data.bondList[index]
-		let {from,uid}= this.data
-		let bondId = ''
-		let bondSimpleName = bond ? bond.bond_simple_name : ''
-		
-		if (from === 'market') {
-			let isQtrade = String(bond.is_qtrade) === '1'
-			let saleList = bond.sale_array
-			if (isQtrade || saleList.length === 1) {
-				uid = saleList[0].user_id
-				bondId = saleList[0].bond_id
+		Click.check(() => {
+			let {index} = e.currentTarget.dataset
+			let bond = this.data.bondList[index]
+			let {from,uid}= this.data
+			let bondId = ''
+			let bondSimpleName = bond ? bond.bond_simple_name : ''
+			
+			if (from === 'market') {
+				let isQtrade = String(bond.is_qtrade) === '1'
+				let saleList = bond.sale_array
+				let saleTotal = saleList.length 
+				if (saleTotal > 0) {
+					if (isQtrade ||  saleTotal === 1) {
+						uid = saleList[0].user_id
+						bondId = saleList[0].bond_id
+					} else {
+						this.triggerEvent('showSaleEvent', {
+							saleList: saleList,
+							bondSimpleName: bondSimpleName
+						})
+						return 
+					}
+				} else {
+					Click.enable()
+					return 
+				}
 			} else {
-				this.triggerEvent('showSaleEvent', {
-					saleList: saleList,
-					bondSimpleName: bondSimpleName
-				})
-				return true
+				uid = this.data.userId
+				bondId = bond.bond_id
 			}
-		} else {
-			uid = this.data.userId
-			bondId = bond.bond_id
-		}
-
-		this.toDetail(from, uid, bondId, bondSimpleName)
+	
+			this.toDetail(from, uid, bondId, bondSimpleName)
+		})	
 	},
 
 	toDetail: function (from, uid, bondId, bondSimpleName) {
@@ -102,21 +110,25 @@ Component({
 	},
 
 	showModifyModal: function (bondSimpleName, bondId) {
-		Authentication.check(() => {
-			let that = this
-			wx.showActionSheet({
-				itemList: ['修改销售信息', '修改债券详情'],
-				success: function(res) {
-					if (res.tapIndex === 0) {
-						that.onModifySaleInfo(bondId)
-					} else if (res.tapIndex === 1) {
-						that.onModifyBondDetail(bondSimpleName)
+		Click.check(() => {
+			Authentication.check(() => {
+				let that = this
+				wx.showActionSheet({
+					itemList: ['修改销售信息', '修改债券详情'],
+					success: function(res) {
+						if (res.tapIndex === 0) {
+							that.onModifySaleInfo(bondId)
+						} else if (res.tapIndex === 1) {
+							that.onModifyBondDetail(bondSimpleName)
+						}
+						Click.enable()
+					},
+					fail: function(res) {
+						Click.enable()
 					}
-				},
-				fail: function(res) {
-				}
+				})
 			})
-		})
+		})	
 	},
 
 	onModifySaleInfo: function(bondId) {
@@ -136,7 +148,9 @@ Component({
 	},
 
 	onDeleteBondEvent: function (e) {
-		this.showDeleteModal(e.detail)
+		Click.check(() => {
+			this.showDeleteModal(e.detail)
+		})
 	},
 
 	showDeleteModal(bondSimpleName) {
@@ -148,10 +162,12 @@ Component({
 				success: function (res) {
 					if (res.confirm) {
 						that.triggerEvent('doDeleteBondEvent', bondSimpleName)
+						Click.enable()
 					}
 
 					if (res.cancel) {
 						that.triggerEvent('doDeleteBondEvent', '')
+						Click.enable()
 					}
 				}
 			}) 

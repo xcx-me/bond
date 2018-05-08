@@ -1,6 +1,7 @@
 // app/ui/store/dynamic/dynamic.js
 const { request } = require('../../../util/ajax/ajax')
 const config = require('../../../util/ajax/config')
+const Click = require('../../../util/click/click')
 let timeId = null
 
 Component({
@@ -65,9 +66,14 @@ Component({
 		},
 
 		navigateToBondDetail(bondId) {
-			let url=`/app/page/bond-detail/bond-detail?bid=${bondId}&uid=0&tid=question`
-			wx.navigateTo({
-				url: url
+			Click.check(() => {
+				let url=`/app/page/bond-detail/bond-detail?bid=${bondId}&uid=0&tid=question`
+				wx.navigateTo({
+					url: url,
+					complete: () => {
+						Click.enable()
+					}
+				})
 			})
 		}
 	}

@@ -2,7 +2,7 @@ const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const {getStatus, getType} = require('../../util/type/bond-list')
 const RedPoint = require('../../util/red-point/red-point')
-
+const Click = require('../../util/click/click')
 Page({
 	data: {
 		loadedStoreRegistered: false,
