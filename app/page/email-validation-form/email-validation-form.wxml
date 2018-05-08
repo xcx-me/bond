@@ -10,18 +10,18 @@
 		<view class='form-section'>
 			<form-viewer-editor descriptors='{{descriptors}}' bind:changeDescriptors='onChangeDescriptors' />
 			<view class='mobile-verification-code-button' bindtap='handleGetMobileVerificationCode'>
-				重发验证码
+				重新发送
 			</view>
 		</view>
 		<view class='control-area'>
-			<qtrade-button label='下一步' bindtap='doSubmit' disabled='{{disabledOfSubmitButton}}' />
+			<qtrade-button label='完成' bindtap='doSubmit' disabled='{{disabledOfSubmitButton}}' />
 		</view>
 	</view>
 
 	<view class='section'>
 		<view class='title'><text class='number-label'>➁</text>点击邮件链接验证帐号</view>
 		<view class='control-area'>
-			<qtrade-button label='下一步' bindtap='verifyEmailComplete' skin='submit-white' />
+			<qtrade-button label='我已点击链接认证' bindtap='verifyEmailComplete' skin='submit-white' />
 		</view>
 	</view>
 </view>
