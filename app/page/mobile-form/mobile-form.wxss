@@ -19,12 +19,13 @@
   right: 0;
   padding: 20rpx;
   height: 48rpx;
+  z-index: 10;
 }
 .mobile-form .form-section .mobile-verification-code-button.disabled {
   color: grey;
 }
 .mobile-form .control-area {
-  margin: 60rpx 0;
+  margin: 60rpx 0rpx;
 }
 .mobile-form .agreement-area {
   font-size: 26rpx;

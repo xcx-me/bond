@@ -109,6 +109,9 @@
   border: 1rpx solid #2196F3;
   border-radius: 38rpx ;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .single-bond-component .bond-info-item-tpl.benefit .value {
   color: #2196F3;

@@ -10,6 +10,9 @@ const stepUrls = [
 module.exports = {
 	check(done) {
 		request(config.USER_REGISTER.getUserStatus, {}).then((result) => {
+			// result.retdata.v = false
+			// result.retdata.reg = 2
+
 			if (!result.retdata.v) {
 				if (result.retdata.reg === 0) {
 					wx.showModal({

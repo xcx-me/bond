@@ -17,6 +17,9 @@
 .auto-complete-text-input-component .label-area.disabled .star {
   color: #888888;
 }
+.auto-complete-text-input-component .input-field {
+  width: 100%;
+}
 .auto-complete-text-input-component .input-field.warning {
   color: orange;
 }

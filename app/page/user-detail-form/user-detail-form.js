@@ -52,7 +52,7 @@ Page({
 	onChangeDescriptorsAfter: function (e) {
 		let descriptors = this.data.descriptors
 		let matchedDescriptor = FormViewerEditorUtil.findDescriptorByFieldName(descriptors, e.detail.fieldName)
-		if (matchedDescriptor.uiType === UiType.TEXT_INPUT) {
+		if (matchedDescriptor.uiType === UiType.TEXT_INPUT || matchedDescriptor.uiType === UiType.AUTO_COMPLETE_TEXT_INPUT ) {
 			matchedDescriptor.hasWarning = false
 		}
 		this.setData({

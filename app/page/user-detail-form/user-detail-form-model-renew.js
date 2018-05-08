@@ -117,7 +117,7 @@ module.exports = class UserDetailFormModelRenew extends UserDetailFormModel {
 				return !StringUtil.isNullOrEmpty(value)
 			},
 			[this.AGENCY_NAME]: (value) => {
-				return !StringUtil.isNullOrEmpty(value.agencyId)
+				return !StringUtil.isNullOrEmpty(value.text)
 			},
 			[this.REAL_NAME]: (value) => {
 				return !StringUtil.isNullOrEmpty(value)
@@ -127,6 +127,9 @@ module.exports = class UserDetailFormModelRenew extends UserDetailFormModel {
 
 	getAdvancedValidators () {
 		return {
+			[this.AGENCY_NAME]: (value) => {
+				return !StringUtil.isNullOrEmpty(value.agencyId)
+			},
 			[this.DESK_PHONE_NUMBER]: (value) => {
 				return StringUtil.isNullOrEmpty(value) || RegexpUtil.isDeskPhoneNumber(value)
 			},
