@@ -116,7 +116,6 @@ Component({
 						sale_name: result.realname,
 						company_simple_name: result.company.simpleName
 					}
-					result.iscomfirmed = 2 // for debug
 					if (result.iscomfirmed === '1') { //已认证
 						this.updateStoreDetail(detail)
 					} else {  // 未认证，获取微信昵称和头像
