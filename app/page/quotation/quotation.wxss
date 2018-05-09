@@ -1,6 +1,5 @@
 
 .send-quote-page {
-	/* padding: 20rpx 20rpx; */
 	background-color:#F1F1F1;
 }
 
@@ -14,8 +13,8 @@
 }
 
 .quotation-form .submit-quotation-btn {
-	width: 80%;
-	margin: 48rpx 0 60rpx;
+	width: 670rpx;
+	margin: 48rpx 0 80rpx;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #2196F3!important;
@@ -35,8 +34,4 @@
 .open-shop-btn-area {
 	display: flex;
 	justify-content:center;
-}
-
-.margin-bottom {
-	margin-bottom: 20rpx;
 }

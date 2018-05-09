@@ -4,6 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  padding-bottom: 80rpx;
 }
 .user-detail-form .notification {
   font-size: 28rpx;
@@ -28,7 +29,7 @@
   padding-left: 30rpx;
 }
 .user-detail-form .control-area {
-  margin: 60rpx 0rpx;
+  margin-top: 60rpx;
 }
 .fixed-page {
   position: relative;
