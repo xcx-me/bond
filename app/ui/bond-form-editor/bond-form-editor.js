@@ -24,7 +24,7 @@ Component({
 
 	data: {
 		formData: JSON.parse(JSON.stringify(formConfig.defaultFormData)),
-		newSimpleName: '',// 解决input输入框在原生输入法下，拼音打字时闪烁(消失)的问题。
+		newSimpleName: '', // 解决input输入框在原生输入法下，拼音打字时闪烁(消失)的问题。
 		ascNameListOpen: false, 
 		simpleNameList: [],
 
@@ -149,7 +149,7 @@ Component({
 		// picker,年月日 + 时分
 		changeDateTime (e) {
 			let formData = this.data.formData
-			formData[e.currentTarget.dataset.inputName] = this.data.dateTimeArray[0][e.detail.value[0]] +'-'+ this.data.dateTimeArray[1][e.detail.value[1]] +'-'+ this.data.dateTimeArray[2][e.detail.value[2]] +' '+ this.data.dateTimeArray[3][e.detail.value[3]] +':'+ this.data.dateTimeArray[4][e.detail.value[4]]
+			formData[e.currentTarget.dataset.inputName] = this.data.dateTimeArray[0][e.detail.value[0]] +'-'+ this.data.dateTimeArray[1][e.detail.value[1]] +'-'+ this.data.dateTimeArray[2][e.detail.value[2]] +' '+ this.data.dateTimeArray[3][e.detail.value[3]] +':'+ this.data.dateTimeArray[4][e.detail.value[4]] +':'+ this.data.dateTimeArray[5][e.detail.value[5]]
 			this.setData({
 				dateTime: e.detail.value,
 				formData: formData
