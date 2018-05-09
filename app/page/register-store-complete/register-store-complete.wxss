@@ -10,7 +10,9 @@
   color: #000000;
 }
 .register-store-complete button {
-  width: 760rpx;
+  width: 670rpx;
+  margin-left: auto;
+  margin-right: auto;
   height: 94rpx;
   line-height: 94rpx;
   margin-top: 60rpx;
