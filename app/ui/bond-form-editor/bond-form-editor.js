@@ -285,7 +285,7 @@ Component({
 					this.triggerEvent('changeValueEvent', resultData)
 				} else {
 					this.setData({
-						formData: formData,
+						formData: resultData,
 
 						enterpriseIndex: -1, // 企业性质
 						issuanceMethodIndex: -1, // 发行方式
@@ -302,7 +302,7 @@ Component({
 						specificOpenFlag: false,
 						specificSelectFlag: converson.parseToObject([])
 					})
-					this.triggerEvent('changeValueEvent', formData)
+					this.triggerEvent('changeValueEvent', JSON.parse(JSON.stringify(formConfig.defaultFormData)))
 				}
 			})
 		},
