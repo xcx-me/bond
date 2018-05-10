@@ -18,23 +18,23 @@ Component({
 	},
 
 	created: function () {
-		console.log('created...')
+		// console.log('created...')
 	},
 
 	attached: function () {
-		console.log('attached...')
+		// console.log('attached...')
 	},
 
 	ready: function () {
-		console.log('ready...')
+		// console.log('ready...')
 	},
 
 	moved: function () {
-		console.log('moved...')
+		// console.log('moved...')
 	},
 
 	detached: function () {
-		console.log('detached...')
+		// console.log('detached...')
 	},
 
 	/**
