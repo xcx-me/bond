@@ -67,6 +67,14 @@ module.exports = class MobileFormModelRenew extends MobileFormModel {
 					})
 					return
 				}
+				if (result.retmsg === '4') {
+					wx.showModal({
+						content: '验证码不正确',
+						confirmColor: '#2196F3',
+						showCancel: false
+					})
+					return
+				}
 			}
 			wx.redirectTo({ url: '../operation-result/operation-result?type=editComplete' })
 		})
