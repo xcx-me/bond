@@ -121,10 +121,10 @@ Page({
 		wx.makePhoneCall({
 			phoneNumber: this.data.serviceNumber,
 			success: function () {
-				console.log("拨打电话成功！")
+				// console.log("拨打电话成功！")
 			},
 			fail: function () {
-				console.log("拨打电话失败！")
+				// console.log("拨打电话失败！")
 			}
 		})
 	},

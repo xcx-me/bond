@@ -54,13 +54,13 @@ function signon (done) {
 	let appletreeKey = wx.getStorageSync(Environment.APPLETREE_KEY)
 
 	if (StringUtil.isNullOrEmpty(appletreeKey)) {
-		console.log('ANTHENTICATION: appletree key is invalid')
+		// console.log('ANTHENTICATION: appletree key is invalid')
 		doLogin(done)
 		return
 	}
 
 	wxPromise.checkSession().then(done).catch((error) => {
-		console.log('ANTHENTICATION: check session failed. Try login again. ')
+		// console.log('ANTHENTICATION: check session failed. Try login again. ')
 		doLogin(done)
 	})
 }
@@ -75,12 +75,12 @@ function getAppletreeKey (code, done) {
 			encryptedData: secret.encryptedData,
 			iv: secret.iv
 		}).then((result) => {
-			console.log('ANTHENTICATION: get appletree key ok')
+			// console.log('ANTHENTICATION: get appletree key ok')
 			wx.setStorageSync(Environment.APPLETREE_KEY, result.retdata.appletree_key)
 			done()
 		})
 	}).catch((error) => {
-		console.log('getUserInfo fail: ', error)
+		// console.log('getUserInfo fail: ', error)
 	})
 }
 
@@ -94,7 +94,7 @@ function showAuthorizeModal(loginResult, done) {
 			res.confirm && wxPromise.openSetting().then(() => {
 				getAppletreeKey(loginResult.code, done)
 			}).catch((error) => {
-				console.log('openSetting fail: ', error)
+				// console.log('openSetting fail: ', error)
 			})
 		}
 	})
@@ -113,7 +113,7 @@ function doLogin (done) {
 				showAuthorizeModal(loginResult, done)
 			})
 		}).catch((error) => {
-			console.log('getSetting fail: ', error)
+			// console.log('getSetting fail: ', error)
 		})
 	})
 }
