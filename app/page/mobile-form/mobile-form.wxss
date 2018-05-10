@@ -12,20 +12,22 @@
   padding-left: 30rpx;
 }
 .mobile-form .form-section .mobile-verification-code-button {
-  font-size: 34rpx;
-  border-left: 1px solid #E5E5E5;
+  z-index: 10;
   position: absolute;
   top: 0rpx;
   right: 0;
-  padding: 20rpx;
-  height: 48rpx;
-  z-index: 10;
+  width: 220rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-left: 1px solid #E5E5E5;
+  font-size: 34rpx;
+  text-align: center;
 }
 .mobile-form .form-section .mobile-verification-code-button.disabled {
   color: grey;
 }
 .mobile-form .control-area {
-  margin: 60rpx 0;
+  margin: 60rpx 0rpx;
 }
 .mobile-form .agreement-area {
   font-size: 26rpx;
