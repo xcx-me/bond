@@ -13,7 +13,7 @@ module.exports = {
 	},
 
 	dequeueDelayedCallbacks: function () {
-		console.log('this.delayedCallbacks.length', this.delayedCallbacks.length)
+		// console.log('this.delayedCallbacks.length', this.delayedCallbacks.length)
 		while (this.delayedCallbacks.length > 0) {
 			let callback = this.delayedCallbacks.shift()
 			callback()

@@ -7,18 +7,11 @@
 			bind:changeFixedPageScroll='_changePageScrollFixed'
 		/>  
 
-		<button class='margin-bottom submit-quotation-btn {{submitQuoteBtnEnable || isSubmitting ? "" : "submit-quote-unenable"}}'
+		<button class='submit-quotation-btn {{submitQuoteBtnEnable || isSubmitting ? "" : "submit-quote-unenable"}}'
 			type='primary' loading='{{isSubmitting}}' disabled='{{!submitQuoteBtnEnable || isSubmitting}}' bindtap='handleSendQuote'>
 			{{isSubmitting ? '正在提交...' : '发布'}}
 		</button>
 
 		<WarningText isShow='{{warningShowText}}' />
-	</view>
-
-	<view class="quotaion-open-shop" wx:else>
-		<view class="open-text">欢迎来QTrade上开通店铺，并发布报价</view>
-		<view class="open-shop-btn-area">
-			<button size="mini" type='primary' bindtap='openMyShop'>立马开店</button>
-		</view>
 	</view>
 </view>

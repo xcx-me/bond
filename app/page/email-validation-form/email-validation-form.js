@@ -45,7 +45,6 @@ Page({
 	},
 
 	setLabelByCondition: function (disabled, counter) {
-		console.log(disabled)
 		this.setData({
 			disabledOfEmailVerificationButton: disabled,
 			labelForSendEmail: disabled ? `${counter}秒后重发` : DAFAULT_LABEL
