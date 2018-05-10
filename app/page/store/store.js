@@ -88,7 +88,7 @@ Page({
 		this.setData({
 			bondListStatus: getStatus.LOADMORE
 		})
-		console.log('onReachBottom.....')
+		// console.log('onReachBottom.....')
 	},
 
 	doShareStore: function (userId) {
