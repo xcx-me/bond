@@ -9,8 +9,8 @@
 		<view class='title'><text class='number-label'>➀</text>邮箱验证码验证帐号</view>
 		<view class='form-section'>
 			<form-viewer-editor descriptors='{{descriptors}}' bind:changeDescriptors='onChangeDescriptors' />
-			<view class='mobile-verification-code-button' bindtap='handleGetMobileVerificationCode'>
-				重新发送
+			<view class='mobile-verification-code-button {{disabledOfEmailVerificationButton ? "disabled" : ""}}' bindtap='handleGetEmailVerificationCode' >
+				{{labelForSendEmail}}
 			</view>
 		</view>
 		<view class='control-area'>

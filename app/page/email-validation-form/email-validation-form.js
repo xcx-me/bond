@@ -5,7 +5,8 @@ const config = require('../../util/ajax/config')
 
 const EMAIL_VALIDATION_CODE = 'emailValidationCode'
 const MAX_LENGTH_OF_MOBILE_VALIDATION_CODE = 4
-
+const PERIOD = 60
+const DAFAULT_LABEL = '重新发送'
 const basicValidators = {
 	[EMAIL_VALIDATION_CODE]: (value) => {
 		return value.length === MAX_LENGTH_OF_MOBILE_VALIDATION_CODE
@@ -30,7 +31,9 @@ Page({
 			},
 		],
 		qq: '',
-		disabledOfSubmitButton: true
+		disabledOfSubmitButton: true,
+		labelForSendEmail: DAFAULT_LABEL,
+		disabledOfEmailVerificationButton: false
 	},
 
 	onChangeDescriptors: function (e) {
@@ -41,8 +44,34 @@ Page({
 		})
 	},
 
-	handleGetMobileVerificationCode: function () {
+	setLabelByCondition: function (disabled, counter) {
+		console.log(disabled)
+		this.setData({
+			disabledOfEmailVerificationButton: disabled,
+			labelForSendEmail: disabled ? `${counter}秒后重发` : DAFAULT_LABEL
+		})
+	},
+
+	updateLabel: function () {
+		this.setLabelByCondition(true, PERIOD)
+		let counter = PERIOD
+		this.timer = setInterval(() => {
+			counter--
+			if (counter === 0) {
+				clearInterval(this.timer)
+				this.timer = undefined
+				counter = PERIOD
+				this.setLabelByCondition(false)
+				return
+			}
+			this.setLabelByCondition(true, counter)
+		}, 1000)
+	},
+
+	handleGetEmailVerificationCode: function () {
 		request(config.USER_REGISTER.resendEmail, {})
+		if (this.data.disabledOfEmailVerificationButton) return
+		this.updateLabel()
 	},
 
 	doSubmit: function () {
