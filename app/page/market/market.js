@@ -264,6 +264,10 @@ Page({
 	 */
 	onShow: function () {
 		if (this.hasHiddenPage) {
+			let lastData = this.data
+			lastData.filterValue.last_timestamp = ''
+			lastData.filterValue.total_left = 0
+			this.setData(lastData)
 			this.getBondList()
 			this.hasHiddenPage = false
 		}
