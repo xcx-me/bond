@@ -64,6 +64,7 @@
 }
 .bond-question .question-list .question-item .question-content .content-text {
   width: calc(100% - 160rpx);
+  word-wrap: break-word;
 }
 .bond-question .question-list .question-item .question-content text {
   line-height: 36rpx;

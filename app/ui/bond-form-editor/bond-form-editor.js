@@ -35,6 +35,10 @@ Component({
 		// 时间
 		dateTimeArray: dateTimePicker.dateTimePicker(_year, 2050, _month, _day).dateTimeArray,
 		dateTime: dateTimePicker.dateTimePicker(_year, 2050, _month, _day).dateTime,
+		columnOfYearAndMonth: {
+			yearColumn: '',
+			monthColumn: ''
+		},
 
 		// 上市地点-多选
 		listingOpenFlag: false,
@@ -162,28 +166,29 @@ Component({
 		},
 
 		bindMultiPickerColumnChange (e) {
+			let columnOfYearAndMonth = this.data.columnOfYearAndMonth
 			let newPickerDateArray = this.data.dateTimeArray
-			// console.log('newPickerDateArray', newPickerDateArray)
 
 			if (e.detail.column === 0) { // when the year column changes, the months column following changes at the same time.
+				columnOfYearAndMonth.yearColumn = e.detail.value
 				if (newPickerDateArray[0][e.detail.value] === String(_year)) {
 					newPickerDateArray[1] = dateTimePicker.getLoopArray(_month, 12) // update months array
 					newPickerDateArray[2] = dateTimePicker.getMonthDay(_year, _month, _day) // update days array
 				} else {
 					newPickerDateArray[1] = dateTimePicker.getLoopArray(1, 12)
 				}
-				// console.log('newPickerDateArray[1]', newPickerDateArray[1])
 			}
 			if (e.detail.column === 1) { // when the months column changes, the days column following changes at the same time.
-				if (newPickerDateArray[1][e.detail.value] === String(_month)) {
+				columnOfYearAndMonth.monthColumn = e.detail.value
+				if (newPickerDateArray[1][e.detail.value] === String(_month) && newPickerDateArray[0][columnOfYearAndMonth.yearColumn] === String(_year)) {
 					newPickerDateArray[2] = dateTimePicker.getMonthDay(_year, _month, _day)
 				} else {
 					newPickerDateArray[2] = dateTimePicker.getMonthDay(_year, newPickerDateArray[1][e.detail.value])
 				}
-				// console.log('newPickerDateArray[2]', newPickerDateArray[2])
 			}
 
 			this.setData({
+				columnOfYearAndMonth: columnOfYearAndMonth,
 				dateTimeArray: newPickerDateArray
 			})
 		},
@@ -352,6 +357,7 @@ Component({
 						ascNameListOpen: true,
 						simpleNameList: nameArray
 					})
+					this.triggerEvent('changeValueEvent', formData)
 					this.triggerEvent('changeFixedPageScroll', true)
 				} else {
 					this.setData({
@@ -359,6 +365,7 @@ Component({
 						ascNameListOpen: false,
 						simpleNameList: []
 					})
+					this.triggerEvent('changeValueEvent', formData)
 					this.triggerEvent('changeFixedPageScroll', false)
 				}
 			})
