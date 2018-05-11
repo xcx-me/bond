@@ -30,6 +30,7 @@ Page({
 		scrollTop: 0
 	},
 
+	isPullDownFreshing: false,
 	bindChangeTab: function (e) {
 		let currentTabId = e.detail.currentItemId
 		this.setData({
@@ -88,7 +89,12 @@ Page({
 				loadingBondList: false,
 				bondList: result.retdata.bond_list
 			})
+			
 		})
+		if (this.isPullDownFreshing) {
+			this.isPullDownFreshing = false
+			wx.stopPullDownRefresh() // 停止下拉刷新
+		}
 	},
 
 	clearStoreDetail: function() {
@@ -103,6 +109,7 @@ Page({
 				storeDetail: result.retdata
 			})
 		})
+		
 	},
 
 	onUpdateQuestionTotalEvent: function (e) {
@@ -110,7 +117,6 @@ Page({
 		this.setData({
 			questionTotal: questionTotal > 99 ?  '99+' : questionTotal
 		})
-		wx.stopPullDownRefresh() // 停止下拉刷新
 	},
 
 	onGetBondSimpleNameEvent: function (e) {
@@ -189,17 +195,15 @@ Page({
 	this.setData({
 		needUpdate: false
 	})
+	this.isPullDownFreshing = true
 	this.getStoreDetail(this.data.uid)
-	this.setData({
-		needUpdate: true
-	})
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-	console.log('onReachBottom.....')
+	// console.log('onReachBottom.....')
   },
 
   /**
