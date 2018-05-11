@@ -6,6 +6,10 @@ const formConfig = require('./form-config/form-config')
 const converson = require('../../util/converson/converson')
 const AutoCompleteTextInputUtil = require('../../ui/form-viewer-editor/auto-complete-text-input/auto-complete-text-input-util')
 
+var _year = new Date().getFullYear()
+var _month = dateTimePicker.withData(new Date().getMonth() + 1)
+var _day = new Date().getDate()
+
 Component({
 	properties: {
 		isEditEntry: { // 是否是编辑债券的入口
@@ -29,8 +33,12 @@ Component({
 		simpleNameList: [],
 
 		// 时间
-		dateTimeArray: dateTimePicker.dateTimePicker(2000, 2050).dateTimeArray,
-		dateTime: dateTimePicker.dateTimePicker(2000, 2050).dateTime,
+		dateTimeArray: dateTimePicker.dateTimePicker(_year, 2050, _month, _day).dateTimeArray,
+		dateTime: dateTimePicker.dateTimePicker(_year, 2050, _month, _day).dateTime,
+		columnOfYearAndMonth: {
+			yearColumn: '',
+			monthColumn: ''
+		},
 
 		// 上市地点-多选
 		listingOpenFlag: false,
@@ -155,6 +163,34 @@ Component({
 				formData: formData
 			});
 			this.triggerEvent('changeValueEvent', formData)
+		},
+
+		bindMultiPickerColumnChange (e) {
+			let columnOfYearAndMonth = this.data.columnOfYearAndMonth
+			let newPickerDateArray = this.data.dateTimeArray
+
+			if (e.detail.column === 0) { // when the year column changes, the months column following changes at the same time.
+				columnOfYearAndMonth.yearColumn = e.detail.value
+				if (newPickerDateArray[0][e.detail.value] === String(_year)) {
+					newPickerDateArray[1] = dateTimePicker.getLoopArray(_month, 12) // update months array
+					newPickerDateArray[2] = dateTimePicker.getMonthDay(_year, _month, _day) // update days array
+				} else {
+					newPickerDateArray[1] = dateTimePicker.getLoopArray(1, 12)
+				}
+			}
+			if (e.detail.column === 1) { // when the months column changes, the days column following changes at the same time.
+				columnOfYearAndMonth.monthColumn = e.detail.value
+				if (newPickerDateArray[1][e.detail.value] === String(_month) && newPickerDateArray[0][columnOfYearAndMonth.yearColumn] === String(_year)) {
+					newPickerDateArray[2] = dateTimePicker.getMonthDay(_year, _month, _day)
+				} else {
+					newPickerDateArray[2] = dateTimePicker.getMonthDay(_year, newPickerDateArray[1][e.detail.value])
+				}
+			}
+
+			this.setData({
+				columnOfYearAndMonth: columnOfYearAndMonth,
+				dateTimeArray: newPickerDateArray
+			})
 		},
 
 		// 上市地点
@@ -321,6 +357,7 @@ Component({
 						ascNameListOpen: true,
 						simpleNameList: nameArray
 					})
+					this.triggerEvent('changeValueEvent', formData)
 					this.triggerEvent('changeFixedPageScroll', true)
 				} else {
 					this.setData({
@@ -328,6 +365,7 @@ Component({
 						ascNameListOpen: false,
 						simpleNameList: []
 					})
+					this.triggerEvent('changeValueEvent', formData)
 					this.triggerEvent('changeFixedPageScroll', false)
 				}
 			})

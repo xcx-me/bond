@@ -21,8 +21,7 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  background: #2196f3;
-  box-shadow: 0rpx 1rpx 10rpx 0px rgba(26, 125, 212, 0.6), 0rpx 1rpx 6rpx 0rpx rgba(87, 107, 149, 0.5);
+  background: #2196F3;
   border-radius: 6rpx;
 }
 .register-store-component button:hover {
