@@ -42,15 +42,5 @@ module.exports = {
 				fail: reject
 			})
 		})
-	},
-
-	authorize: function () {
-		return new Promise((resolve, reject) => {
-			wx.authorize({
-				scope: 'scope.userInfo',
-				success: resolve,
-				fail: reject
-			})
-		})
 	}
 }
