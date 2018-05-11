@@ -6,5 +6,6 @@
 		"OtherBonds": "./other-bonds/other-bonds",
 		"StoreDetail": "../store/detail/detail",
 		"ShareButton": "../../ui/share-button/share-button"
-	}
+	},
+	"enablePullDownRefresh": true
 }

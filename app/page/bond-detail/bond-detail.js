@@ -110,6 +110,7 @@ Page({
 		this.setData({
 			questionTotal: questionTotal > 99 ?  '99+' : questionTotal
 		})
+		wx.stopPullDownRefresh() // 停止下拉刷新
 	},
 
 	onGetBondSimpleNameEvent: function (e) {
@@ -185,14 +186,19 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+	this.setData({
+		needUpdate: false
+	})
+	this.setData({
+		needUpdate: true
+	})
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+	console.log('onReachBottom.....')
   },
 
   /**
