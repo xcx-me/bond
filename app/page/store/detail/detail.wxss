@@ -49,7 +49,12 @@
 }
 .store-header-component .personal-info-pallet .seller-info-tpl .image {
   height: 128rpx;
+  width: 128rpx;
   margin-right: 26rpx;
+}
+.store-header-component .personal-info-pallet .seller-info-tpl .image.open-data-avatar {
+  border-radius: 100%;
+  overflow: hidden;
 }
 .store-header-component .personal-info-pallet .seller-info-tpl .image .face-url {
   width: 128rpx;

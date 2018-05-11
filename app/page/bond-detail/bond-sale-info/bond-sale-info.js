@@ -43,7 +43,7 @@ Component({
    */
   methods: {
 	onEditSaleInfo: function (){
-		console.log('edit...', this.data.bondSaleInfo)
+		// console.log('edit...', this.data.bondSaleInfo)
 	}
   }
 })
