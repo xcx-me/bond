@@ -80,7 +80,6 @@ Component({
 		},
 
 		setUnConfirmedUserInfo: function (detail) {
-			detail.from = 'wx-open-data'
 			detail.sale_name = 'userNickName'
 			detail.face_url = 'userAvatarUrl'
 			detail.company_simple_name = '机构：--'
