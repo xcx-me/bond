@@ -54,66 +54,29 @@ function signon (done) {
 	let appletreeKey = wx.getStorageSync(Environment.APPLETREE_KEY)
 
 	if (StringUtil.isNullOrEmpty(appletreeKey)) {
-		// console.log('ANTHENTICATION: appletree key is invalid')
+		console.log('ANTHENTICATION: appletree key is invalid')
 		doLogin(done)
 		return
 	}
 
 	wxPromise.checkSession().then(done).catch((error) => {
-		// console.log('ANTHENTICATION: check session failed. Try login again. ')
+		console.log('ANTHENTICATION: check session failed. Try login again. ')
 		doLogin(done)
-	})
-}
-
-function getAppletreeKey (code, done) {
-	wxPromise.getUserInfo().then((secret) => {
-		ajax(config.AUTHENTICATION.getAppletreeKey, {
-			code: code,
-			userInfo: JSON.stringify(secret.userInfo),
-			rawData: secret.rawData,
-			signature: secret.signature,
-			encryptedData: secret.encryptedData,
-			iv: secret.iv
-		}).then((result) => {
-			// console.log('ANTHENTICATION: get appletree key ok')
-			wx.setStorageSync(Environment.APPLETREE_KEY, result.retdata.appletree_key)
-			done()
-		})
-	}).catch((error) => {
-		// console.log('getUserInfo fail: ', error)
-	})
-}
-
-function showAuthorizeModal(loginResult, done) {
-	wx.showModal({
-		title: '用户未授权',
-		content: '如需正常使用，请在“设置”中选中“使用我的用户信息”',
-		showCancel: false,
-		confirmColor: '#2196F3',
-		success: function (res) {
-			res.confirm && wxPromise.openSetting().then(() => {
-				getAppletreeKey(loginResult.code, done)
-			}).catch((error) => {
-				// console.log('openSetting fail: ', error)
-			})
-		}
 	})
 }
 
 function doLogin (done) {
 	wxPromise.login().then((loginResult) => {
 		wxPromise.getSetting().then((result) => {
-			if (result.authSetting['scope.userInfo']) {
-				getAppletreeKey(loginResult.code, done)
-				return
-			}
-			wxPromise.authorize().then(() => {
-				getAppletreeKey(loginResult.code, done)
-			}).catch(() => {
-				showAuthorizeModal(loginResult, done)
+			ajax(config.AUTHENTICATION.getAppletreeKey, {
+				code: loginResult.code
+			}).then((result) => {
+				console.log('ANTHENTICATION: get appletree key ok')
+				wx.setStorageSync(Environment.APPLETREE_KEY, result.retdata.appletree_key)
+				done()
 			})
 		}).catch((error) => {
-			// console.log('getSetting fail: ', error)
+			console.log('ANTHENTICATION: getSetting fail: ', error)
 		})
 	})
 }
