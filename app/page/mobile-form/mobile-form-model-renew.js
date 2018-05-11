@@ -53,7 +53,7 @@ module.exports = class MobileFormModelRenew extends MobileFormModel {
 				}
 				if (result.retmsg === '2') {
 					wx.showModal({
-						content: '请使用全新的手机号码',
+						content: '此手机号已被绑定，请重新输入其它手机号',
 						confirmColor: '#2196F3',
 						showCancel: false
 					})
@@ -62,6 +62,14 @@ module.exports = class MobileFormModelRenew extends MobileFormModel {
 				if (result.retmsg === '3') {
 					wx.showModal({
 						content: '该手机号已被其他用户绑定',
+						confirmColor: '#2196F3',
+						showCancel: false
+					})
+					return
+				}
+				if (result.retmsg === '4') {
+					wx.showModal({
+						content: '验证码不正确',
 						confirmColor: '#2196F3',
 						showCancel: false
 					})

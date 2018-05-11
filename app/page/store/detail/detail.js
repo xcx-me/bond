@@ -79,20 +79,12 @@ Component({
 			this.triggerEvent('event', detail)
 		},
 
-		getUserInfo: function (detail) {
-			let that = this
-			wx.getUserInfo({  
-				success: function(res){  
-					let userInfo = res.userInfo
-					detail.sale_name = userInfo.nickName
-					detail.face_url = userInfo.avatarUrl
-					detail.company_simple_name = '机构：--'
-					that.updateStoreDetail(detail)
-				},
-				fail: function (res){
-					that.updateStoreDetail(detail)
-				}
-			})  
+		setUnConfirmedUserInfo: function (detail) {
+			detail.from = 'wx-open-data'
+			detail.sale_name = 'userNickName'
+			detail.face_url = 'userAvatarUrl'
+			detail.company_simple_name = '机构：--'
+			this.updateStoreDetail(detail)
 		},
 
 		getStoreDetail: function (userId) {
@@ -119,24 +111,7 @@ Component({
 					if (result.iscomfirmed === '1') { //已认证
 						this.updateStoreDetail(detail)
 					} else {  // 未认证，获取微信昵称和头像
-						let that = this
-						wx.getSetting({
-							success(res) {
-								if (!res.authSetting['scope.userInfo']) {
-									wx.authorize({
-										scope: 'scope.userInfo',
-										success() {	
-											that.getUserInfo(detail)				
-										},
-										fail() {
-											// console.log('fail', err)
-										}
-									})
-								} else {
-									that.getUserInfo(detail)
-								}
-							}
-						})
+						this.setUnConfirmedUserInfo(detail)
 					}
 				})
 			}
