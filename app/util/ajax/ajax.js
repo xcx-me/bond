@@ -68,6 +68,7 @@ function signon (done) {
 function doLogin (done) {
 	wxPromise.login().then((loginResult) => {
 		wxPromise.getSetting().then((result) => {
+			console.log('getSetting...', result)
 			ajax(config.AUTHENTICATION.getAppletreeKey, {
 				code: loginResult.code
 			}).then((result) => {
