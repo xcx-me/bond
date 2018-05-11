@@ -50,15 +50,12 @@ function signon (done) {
 		done()
 		return
 	}
-	
 	let appletreeKey = wx.getStorageSync(Environment.APPLETREE_KEY)
-
 	if (StringUtil.isNullOrEmpty(appletreeKey)) {
 		console.log('ANTHENTICATION: appletree key is invalid')
 		doLogin(done)
 		return
 	}
-
 	wxPromise.checkSession().then(done).catch((error) => {
 		console.log('ANTHENTICATION: check session failed. Try login again. ')
 		doLogin(done)
@@ -67,17 +64,12 @@ function signon (done) {
 
 function doLogin (done) {
 	wxPromise.login().then((loginResult) => {
-		wxPromise.getSetting().then((result) => {
-			console.log('getSetting...', result)
-			ajax(config.AUTHENTICATION.getAppletreeKey, {
-				code: loginResult.code
-			}).then((result) => {
-				console.log('ANTHENTICATION: get appletree key ok')
-				wx.setStorageSync(Environment.APPLETREE_KEY, result.retdata.appletree_key)
-				done()
-			})
-		}).catch((error) => {
-			console.log('ANTHENTICATION: getSetting fail: ', error)
+		ajax(config.AUTHENTICATION.getAppletreeKey, {
+			code: loginResult.code
+		}).then((result) => {
+			console.log('ANTHENTICATION: get appletree key ok')
+			wx.setStorageSync(Environment.APPLETREE_KEY, result.retdata.appletree_key)
+			done()
 		})
 	})
 }
