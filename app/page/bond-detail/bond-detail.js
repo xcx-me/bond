@@ -189,6 +189,7 @@ Page({
 	this.setData({
 		needUpdate: false
 	})
+	this.getStoreDetail(this.data.uid)
 	this.setData({
 		needUpdate: true
 	})
