@@ -43,7 +43,7 @@ Component({
 	},
 
   	ready: function () {
-		this.getBondDetail()
+		// this.getBondDetail()
   	},
 
   /**
