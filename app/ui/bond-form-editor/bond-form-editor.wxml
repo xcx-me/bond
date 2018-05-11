@@ -113,7 +113,7 @@
 	<view class='closing-time row-item'>
 		<view class='label-area'>截标时间</view>
 		<view class='editor-area'>
-			<picker class='time-picker-area' mode="multiSelector" value="{{dateTime}}" bindchange='changeDateTime' range="{{dateTimeArray}}" data-input-name='bid_end'>
+			<picker class='time-picker-area' mode="multiSelector" value="{{dateTime}}" bindchange='changeDateTime' bindcolumnchange="bindMultiPickerColumnChange" range="{{dateTimeArray}}" data-input-name='bid_end'>
 				<view class='time-select-picker'>
 					{{formData.bid_end}}
 					<span class='calendar-icon'>
