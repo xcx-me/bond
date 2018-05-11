@@ -33,6 +33,7 @@
   padding: 20rpx;
   height: 48rpx;
   z-index: 10;
+  color: #2196F3;
 }
 .email-validation-form .section .form-section .disabled {
   color: grey;
