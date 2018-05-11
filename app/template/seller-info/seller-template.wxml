@@ -1,12 +1,14 @@
 <template name='sellerInfoTpl'>
 	<view class='seller-info-tpl'>
-		<view class='image'>
-			<image class='face-url' src='{{faceUrl === "loading" ? "" : faceUrl || "/app/asset/image/qtrade/icon-default.png"}}' />
+		<view class='image {{faceUrl==="userAvatarUrl" ? "open-data-avatar" : ""}}'>
+			<open-data class='face-url' wx:if='{{faceUrl==="userAvatarUrl"}}' type="userAvatarUrl"></open-data>
+			<image class='face-url'  wx:if='{{faceUrl !=="userAvatarUrl"}}'  src='{{faceUrl === "loading" ? "" : faceUrl || "/app/asset/image/qtrade/icon-default.png"}}' />
 			<!-- <icon hidden class='v-user' wx:if='{{isVUser === "1"}}' style='background: transparent url("{{vUrl}}") no-repeat 0 0; background-size: 100rpx;'/> -->
 			<icon class='zhucheng' wx:if='{{userId !== "qtrade" && isZhuCheng === "2"}}' />
 		</view>
 		<view class='name'>
-			<text class='user-name' wx:if='{{userName}}'>{{userName}}</text>
+			<open-data class='user-name' wx:if='{{userName==="userNickName"}}' type="userNickName"></open-data>
+			<text class='user-name' wx:if='{{userName && userName !=="userNickName" }}'>{{userName}}</text>
 			<text class='under-line' wx:if='{{userName}}'>_</text>
 			<text class='company-name' wx:if='{{companyName}}'>{{companyName}}</text>
 			<text class='book-keeper' wx:if='{{isBookKeeper}}'>(簿记管理员)</text>
