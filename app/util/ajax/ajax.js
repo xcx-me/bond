@@ -5,26 +5,26 @@ const StringUtil = require('../string-util/string-util')
 const wxPromise = require('../wx-promise/wx-promise')
 const Toast = require('../toast/toast')
 
-function centralErrorProcessor (result, resolve, handleErrorByUser) {
+function centralErrorProcessor (data, resolve, handleErrorByUser) {
 	if (handleErrorByUser) {
-		resolve(result.data)
+		resolve(data)
 		return
 	}
-	if (result.data && result.data.hasOwnProperty('ret')) {
-		if (String(result.data.ret) === '0') {
-			resolve(result.data)
+	if (data && data.hasOwnProperty('ret')) {
+		if (String(data.ret) === '0') {
+			resolve(data)
 			return
 		} 
-		if (String(result.data.ret) === '-1' || String(result.data.ret) === '-2') {
-			Toast.showToast(result.data.retmsg)
+		if (String(data.ret) === '-1' || String(data.ret) === '-2') {
+			Toast.showToast(data.retmsg)
 			return
 		}
 		// TODO: The reason we still need below 2 lines of code is
-		// currently we still need to handle this case: String(result.ret) === '-3'.
-		resolve(result.data)
+		// currently we still need to handle this case: String(data.ret) === '-3'.
+		resolve(data)
 		return
 	}
-	resolve(result.data)
+	resolve(data)
 }
 
 function ajax (configuration, data, cookie, handleErrorByUser = false) {
@@ -34,7 +34,7 @@ function ajax (configuration, data, cookie, handleErrorByUser = false) {
 			method: configuration.method,
 			data: data,
 			success: (result) => {
-				centralErrorProcessor(result, resolve, handleErrorByUser)
+				centralErrorProcessor(result.data, resolve, handleErrorByUser)
 			},
 			fail: reject,
 			header: {
@@ -82,7 +82,7 @@ function request (configuration, data, handleErrorByUser = false) {
 	})
 }
 
-function requestUploadFile (url, filePath, success) {
+function requestUploadFile (url, filePath, success, handleErrorByUser = false) {
 	const uploadTask = wx.uploadFile({
 		url: Environment.parseToUrl(url),
 		filePath: filePath,
@@ -91,7 +91,10 @@ function requestUploadFile (url, filePath, success) {
 			'cookie': Environment.parseCookieToString()
 		},
 		formData: {},
-		success: success
+		success: (result) => {
+			// Service [/appletree/upload_card.do] is using old technology, so we need to use JSON.parse() to wrap the result.data. 
+			centralErrorProcessor(JSON.parse(result.data), success, handleErrorByUser)
+		}
 	})
 	return uploadTask
 }
