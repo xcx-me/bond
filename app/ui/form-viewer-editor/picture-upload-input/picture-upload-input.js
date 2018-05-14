@@ -1,9 +1,12 @@
 const {requestUploadFile} = require('../../../util/ajax/ajax')
+import {isValidExtension, toMB} from './file-uploader-util'
 
 const SOURCE_TYPE_CAMERA = 'camera'
 const SOURCE_TYPE_ALBUM = 'album'
 
 const uploadUrl = '/appletree/upload_card.do'
+const extensionList = ['jpeg', 'jpg']
+const maxSizeInMB = 5
 
 Component({
 	/**
@@ -66,15 +69,37 @@ Component({
 				sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
 				sourceType: [sourceType],
 				success: function (res) {
+					let tempFile = res.tempFiles[0]
+
+					if (!isValidExtension(tempFile.path, extensionList)) {
+						wx.showModal({
+							content: '只能上传以下后缀的文件：' + extensionList.join(', '),
+							confirmText: '确定',
+							confirmColor: '#2196F3',
+							showCancel: false
+						})
+						return false
+					}
+
+					if (toMB(tempFile.size) > maxSizeInMB) {
+						wx.showModal({
+							content: `不能上传大于${maxSizeInMB}MB的文件`,
+							confirmText: '确定',
+							confirmColor: '#2196F3',
+							showCancel: false
+						})
+						return false
+					}
+
 					host.triggerEvent('change', {
 						fieldName: host.properties.fieldName,
-						value: res.tempFilePaths[0]
+						value: tempFile.path
 					})
 
-					const uploadTask = requestUploadFile('/appletree/upload_card.do', res.tempFilePaths[0], (res) => {
+					const uploadTask = requestUploadFile('/appletree/upload_card.do', tempFile.path, (result) => {
 						host.triggerEvent('change', {
 							fieldName: host.properties.fieldName,
-							value: JSON.parse(res.data).card_url
+							value: result.card_url
 						})
 						host.setData({
 							// value -1 means to hide the progress number.
