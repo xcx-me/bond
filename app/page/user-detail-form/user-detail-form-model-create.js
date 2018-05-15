@@ -57,6 +57,7 @@ module.exports = class UserDetailFormModelCreate extends UserDetailFormModel {
 				uiType: UiType.TEXT_INPUT,
 				label: 'QQ',
 				value: '',
+				type: 'number',
 				maxLength: 11,
 				mandatory: true,
 				hasWarning: false,
@@ -132,8 +133,17 @@ module.exports = class UserDetailFormModelCreate extends UserDetailFormModel {
 			[this.AGENCY_NAME]: (value) => {
 				return !StringUtil.isNullOrEmpty(value.agencyId)
 			},
+			[this.REAL_NAME]: (value) => {
+				return !RegexpUtil.isEmoji(value)
+			},
 			[this.QQ_NUMBER]: (value) => {
 				return RegexpUtil.isQQNumber(value)
+			},
+			[this.DEPARTMENT_NAME]: (value) => {
+				return !RegexpUtil.isEmoji(value)
+			},
+			[this.POSITION]: (value) => {
+				return !RegexpUtil.isEmoji(value)
 			},
 			[this.DESK_PHONE_NUMBER]: (value) => {
 				return StringUtil.isNullOrEmpty(value) || RegexpUtil.isDeskPhoneNumber(value)

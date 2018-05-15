@@ -57,6 +57,7 @@ module.exports = class UserDetailFormModelReviewing extends UserDetailFormModel 
 				uiType: UiType.TEXT_INPUT,
 				label: 'QQ',
 				value: '',
+				type: 'number',
 				maxLength: 11,
 				disabled: true,
 				mandatory: true,

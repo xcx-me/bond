@@ -57,6 +57,7 @@ module.exports = class UserDetailFormModelRenew extends UserDetailFormModel {
 				uiType: UiType.TEXT_INPUT,
 				label: 'QQ',
 				value: '',
+				type: 'number',
 				maxLength: 11,
 				mandatory: true,
 				disabled: true,
@@ -129,6 +130,15 @@ module.exports = class UserDetailFormModelRenew extends UserDetailFormModel {
 		return {
 			[this.AGENCY_NAME]: (value) => {
 				return !StringUtil.isNullOrEmpty(value.agencyId)
+			},
+			[this.REAL_NAME]: (value) => {
+				return !RegexpUtil.isEmoji(value)
+			},
+			[this.DEPARTMENT_NAME]: (value) => {
+				return !RegexpUtil.isEmoji(value)
+			},
+			[this.POSITION]: (value) => {
+				return !RegexpUtil.isEmoji(value)
 			},
 			[this.DESK_PHONE_NUMBER]: (value) => {
 				return StringUtil.isNullOrEmpty(value) || RegexpUtil.isDeskPhoneNumber(value)
