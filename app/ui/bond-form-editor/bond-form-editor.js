@@ -326,8 +326,10 @@ Component({
 					this.triggerEvent('changeValueEvent', resultData)
 				} else {
 					let formData =  JSON.parse(JSON.stringify(formConfig.defaultFormData))
+					formData.bond_simple_name = bondSimpleName
 					this.setData({
 						formData: formData,
+						newSimpleName: bondSimpleName,
 
 						enterpriseIndex: -1, // 企业性质
 						issuanceMethodIndex: -1, // 发行方式
