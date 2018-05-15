@@ -5,7 +5,7 @@ const SOURCE_TYPE_CAMERA = 'camera'
 const SOURCE_TYPE_ALBUM = 'album'
 
 const uploadUrl = '/appletree/upload_card.do'
-const extensionList = ['jpeg', 'jpg']
+const extensionList = ['jpeg', 'jpg', 'png']
 const maxSizeInMB = 5
 
 Component({
@@ -70,7 +70,6 @@ Component({
 				sourceType: [sourceType],
 				success: function (res) {
 					let tempFile = res.tempFiles[0]
-
 					if (!isValidExtension(tempFile.path, extensionList)) {
 						wx.showModal({
 							content: '只能上传以下后缀的文件：' + extensionList.join(', '),
