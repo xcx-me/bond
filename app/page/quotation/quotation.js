@@ -44,7 +44,7 @@ Page({
 
 	validate (submitData) {
 		let result = true
-		if (Number(submitData.left_benefit) >= Number(submitData.right_benefit)) { // 参考收益
+		if (Number(submitData.left_benefit) >= Number(submitData.right_benefit) || submitData.left_benefit === '') { // 参考收益
 			this.showWraningText('benefit')
 			result = false
 		}
