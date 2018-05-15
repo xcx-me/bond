@@ -17,6 +17,12 @@ const operationResults = {
 		description: '您在电脑端已认证，现已为您快速完成绑定',
 		buttonLabel: '完成'
 	},
+	bindCompleteWithoutVerification: {
+		imagePath: '/app/asset/image/qtrade/binding_success_186.svg',
+		title: '绑定成功',
+		description: '已为您快速绑定，请继续完成后续认证',
+		buttonLabel: '完成'
+	},
 	submissionComplete: {
 		imagePath: '/app/asset/image/qtrade/wait_for_186.svg',
 		title: '提交成功',
