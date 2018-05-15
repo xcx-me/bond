@@ -24,6 +24,9 @@
   padding: 20rpx;
   color: #888888;
 }
+.user-detail-form .description .highlight {
+  color: #E64340;
+}
 .user-detail-form .form-section {
   background-color: white;
   padding-left: 30rpx;

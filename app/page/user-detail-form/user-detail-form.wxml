@@ -4,7 +4,7 @@
 		<image src='../../asset/image/qtrade/attention_orange_32.svg' />
 		<text>{{notificationText}}</text>
 	</view>
-	<view class='description'>加*的选项为必填项</view>
+	<view class='description'>加<text class='highlight'> * </text>的选项为必填项</view>
 	<view class='form-section'>
 		<form-viewer-editor descriptors='{{descriptors}}' bind:changeFixedPageScroll='onChangeFixedPageScroll'
 			bind:changeDescriptors='onChangeDescriptors'
