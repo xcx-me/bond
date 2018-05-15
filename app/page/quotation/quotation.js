@@ -131,6 +131,8 @@ Page({
 			sendQuoteData: detail,
 			submitQuoteBtnEnable: detail.bond_simple_name !=='' && (detail.left_benefit !=='' || detail.right_benefit !=='') && detail.subject_rating !=='' && detail.deadline !=='' && detail.issue_total !==''
 		})
+		// console.log('detail', detail)
+		// console.log('submitQuoteBtnEnable', this.data.submitQuoteBtnEnable)
 	},
 
 	_changeHighLight: function (e) {
