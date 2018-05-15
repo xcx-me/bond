@@ -38,9 +38,13 @@ module.exports = class MobileFormModelCreate extends MobileFormModel {
 			mobile: submissionObject.mobileNumber,
 			code: submissionObject.mobileValidationCode
 		}).then((result) => {
-			result.retdata.is_new
-				? wx.redirectTo({ url: '../user-detail-form/user-detail-form' })
-				: wx.redirectTo({ url: '../operation-result/operation-result?type=bindComplete' })
+			if (result.retdata.is_new) {
+				wx.redirectTo({ url: '../user-detail-form/user-detail-form' })
+				return
+			}
+			result.retdata.v
+				? wx.redirectTo({ url: '../operation-result/operation-result?type=bindComplete' })
+				: wx.redirectTo({ url: '../operation-result/operation-result?type=bindCompleteWithoutVerification' })
 		})
 	}
 
