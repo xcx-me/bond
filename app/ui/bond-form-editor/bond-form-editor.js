@@ -76,7 +76,8 @@ Component({
 	methods: {
 		simpleNameChange: function (e) {
 			let formData = this.data.formData
-			formData.bond_simple_name = e.detail.value
+			formData['bond_simple_name'] = e.detail.value
+
 			this.setData({
 				formData: formData,
 				ascNameListOpen: false
@@ -90,7 +91,6 @@ Component({
 					this.bondSimpleNameAssociate(e.detail.value) // 债券简称列表联想
 				}
 			}, 1000)
-
 			this.triggerEvent('changeValueEvent', formData)
 		},
 
@@ -131,14 +131,13 @@ Component({
 				}
 
 				this.triggerEvent('changeHighLightState', 'issue_total')
-			}else {
+			} else {
 				formData[e.currentTarget.dataset.inputName] = e.detail.value
 			}
 
 			this.setData({
 				formData: formData
 			})
-
 			this.triggerEvent('changeValueEvent', formData)
 		},
 
@@ -148,8 +147,15 @@ Component({
 			if (reg.test(val)) {
 				if (val !== '' && val.substring(0, 1) === '.') {
 					val = ''
-					formData[currentDataSet] = ''
+					// formData[currentDataSet] = ''
 				}
+				val = val.replace(/[^\d.]/g, '')
+				val = val.replace(/\.{2,}/g, '.')
+				val = val.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.')
+				if (val.indexOf('.') < 0 && val !== '' && val.substring(0, 1) === '0' && val.length === 2) {
+					return formData[currentDataSet] = val.substring(1, val.length)
+				}
+
 			 	return	formData[currentDataSet] = val
 			}
 		},
@@ -297,7 +303,6 @@ Component({
 		bondDetailsAssociate: function (bondSimpleName) {
 			request(config.NEW_BOND.associateBond, {bond_simple_name: bondSimpleName}).then((result)=>{
 				let resultData = result.retdata
-
 				if (Object.keys(resultData).length > 0) {
 					resultData.bond_simple_name = bondSimpleName
 					this.setData({
@@ -320,8 +325,9 @@ Component({
 					})
 					this.triggerEvent('changeValueEvent', resultData)
 				} else {
+					let formData =  JSON.parse(JSON.stringify(formConfig.defaultFormData))
 					this.setData({
-						formData: resultData,
+						formData: formData,
 
 						enterpriseIndex: -1, // 企业性质
 						issuanceMethodIndex: -1, // 发行方式
@@ -338,7 +344,7 @@ Component({
 						specificOpenFlag: false,
 						specificSelectFlag: converson.parseToObject([])
 					})
-					this.triggerEvent('changeValueEvent', JSON.parse(JSON.stringify(formConfig.defaultFormData)))
+					this.triggerEvent('changeValueEvent', formData)
 				}
 			})
 		},
