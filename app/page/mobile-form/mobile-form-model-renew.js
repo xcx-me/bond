@@ -112,6 +112,7 @@ module.exports = class MobileFormModelRenew extends MobileFormModel {
 
 	setLabelByCondition (disabled, counter) {
 		this.host.setData({
+			disabledOfMobileVerificationCodeButton: disabled,
 			labelOfMobileVerificationCodeButton: disabled ? `${counter}秒后重发` : DAFAULT_LABEL
 		})
 	}
