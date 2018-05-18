@@ -7,6 +7,7 @@ const config = require('../../util/ajax/config')
 const MobileFormModelCreate = require('./mobile-form-model-create')
 const MobileFormModelConfirm = require('./mobile-form-model-confirm')
 const MobileFormModelRenew = require('./mobile-form-model-renew')
+const CountingLabel = require('../../util/counting-label/counting-label')
 
 const MOBILE_NUMBER = 'mobileNumber'
 const MOBILE_VALIDATION_CODE = 'mobileValidationCode'
@@ -32,7 +33,8 @@ Page({
 	handleGetMobileVerificationCode: function () {
 		if (this.data.disabledOfMobileVerificationCodeButton) return
 		if (this.model.validateMobileFormat(this.data.descriptors)) {
-			this.model.updateLabel()
+			// this.model.updateLabel(this.model.setLabelByCondition)
+			CountingLabel.updateLabel(this, this.model.setLabelByCondition)
 			this.model.getMobileVerificationCode()
 			return
 		}

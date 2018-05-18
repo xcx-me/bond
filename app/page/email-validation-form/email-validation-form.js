@@ -2,10 +2,10 @@ const UiType = require('../../ui/form-viewer-editor/ui-type')
 const FormViewerEditorUtil = require('../../ui/form-viewer-editor/form-viewer-editor-util')
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
+const CountingLabel = require('../../util/counting-label/counting-label')
 
 const EMAIL_VALIDATION_CODE = 'emailValidationCode'
 const MAX_LENGTH_OF_MOBILE_VALIDATION_CODE = 4
-const PERIOD = 60
 const DAFAULT_LABEL = '重新发送'
 const basicValidators = {
 	[EMAIL_VALIDATION_CODE]: (value) => {
@@ -51,26 +51,11 @@ Page({
 		})
 	},
 
-	updateLabel: function () {
-		this.setLabelByCondition(true, PERIOD)
-		let counter = PERIOD
-		this.timer = setInterval(() => {
-			counter--
-			if (counter === 0) {
-				clearInterval(this.timer)
-				this.timer = undefined
-				counter = PERIOD
-				this.setLabelByCondition(false)
-				return
-			}
-			this.setLabelByCondition(true, counter)
-		}, 1000)
-	},
-
 	handleGetEmailVerificationCode: function () {
-		request(config.USER_REGISTER.resendEmail, {})
 		if (this.data.disabledOfEmailVerificationButton) return
-		this.updateLabel()
+		this.setLabelByCondition = this.setLabelByCondition.bind(this)
+		CountingLabel.updateLabel(this, this.setLabelByCondition)
+		request(config.USER_REGISTER.resendEmail, {})
 	},
 
 	doSubmit: function () {
@@ -101,11 +86,7 @@ Page({
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function (options) {
-		// this.setData({
-		// 	descriptors: this.data.descriptors
-		// })
-	},
+	onLoad: function (options) {},
 
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
