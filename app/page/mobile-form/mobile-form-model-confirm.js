@@ -17,9 +17,6 @@ const basicValidators = {
 	}
 }
 
-const PERIOD = 60
-const DAFAULT_LABEL = '获取验证码'
-
 module.exports = class MobileFormModelConfirm extends MobileFormModel {
 	constructor (host, options) {
 		super(host, options)
@@ -53,31 +50,6 @@ module.exports = class MobileFormModelConfirm extends MobileFormModel {
 			disabledOfSubmitButton: !FormViewerEditorUtil.doBasicValidationForAllFields(descriptors, basicValidators)
 		})
 	}
-
-	// TODO: need to extract counting button to a component.
-	updateLabel () {
-		this.setLabelByCondition(true, PERIOD)
-		let counter = PERIOD
-		this.timer = setInterval(() => {
-			counter--
-			if (counter === 0) {
-				clearInterval(this.timer)
-				this.timer = undefined
-				counter = PERIOD
-				this.setLabelByCondition(false)
-				return
-			}
-			this.setLabelByCondition(true, counter)
-		}, 1000)
-	}
-
-	setLabelByCondition (disabled, counter) {
-		this.host.setData({
-			disabledOfMobileVerificationCodeButton: disabled,
-			labelOfMobileVerificationCodeButton: disabled ? `${counter}秒后重发` : DAFAULT_LABEL
-		})
-	}
-	//
 
 	getNavigationBarTitle () {
 		return '验证原手机号'
