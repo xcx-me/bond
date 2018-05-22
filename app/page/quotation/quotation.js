@@ -3,6 +3,7 @@
 const Toast = require('../../util/toast/toast')
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
+const RegexpUtil = require('../../util/regexp-util/regexp-util')
 
 Page({
 	/**
@@ -65,8 +66,7 @@ Page({
 	},
 
 	checkRatingFormat: function (value) {
-		let reg = /^[a-zA-Z]{1,3}[+-]?$/
-		if (reg.test(value)) {
+		if (RegexpUtil.isRating(value)) {
 			return true
 		} else {
 			return false
@@ -74,10 +74,9 @@ Page({
 	},
 
 	checkDeadlineFormat: function (value) {
-		let reg = /(^[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?)([dymDYM]{1}$)|([dymDYM]{1}[+]{1}[a-zA-Z]$)|([dymDYM]{1}[+]{1}[1-9]{1}[0-9]{0,4}([.]+[0-9]{1,2})?[dymDYM]{1}$)/
-		if (reg.test(value)) {
+		if (RegexpUtil.isPublishDeadline(value)) {
 			return true
-		}else {
+		} else {
 			return false
 		}
 	},
@@ -108,11 +107,10 @@ Page({
 					var pages = getCurrentPages(),//获取页面栈
 					currpage = pages[pages.length - 1], //当前页面
 					prevPage = pages[pages.length - 2]; //上一个页面（父页面）
-					// console.log(currpage, prevPage)
 					wx.navigateBack()
 				}, 1500)
 			} else {
-				Toast.showToast(result.retmsg)
+				Toast.showToast('操作失败，请稍候再试')
 				this.setData({
 					isSubmitting: false
 				})
@@ -131,8 +129,6 @@ Page({
 			sendQuoteData: detail,
 			submitQuoteBtnEnable: detail.bond_simple_name !=='' && (detail.left_benefit !=='' || detail.right_benefit !=='') && detail.subject_rating !=='' && detail.deadline !=='' && detail.issue_total !==''
 		})
-		// console.log('detail', detail)
-		// console.log('submitQuoteBtnEnable', this.data.submitQuoteBtnEnable)
 	},
 
 	_changeHighLight: function (e) {
