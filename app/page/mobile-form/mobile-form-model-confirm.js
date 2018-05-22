@@ -2,7 +2,6 @@ const UiType = require('../../ui/form-viewer-editor/ui-type')
 const FormViewerEditorUtil = require('../../ui/form-viewer-editor/form-viewer-editor-util')
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
-const RegexpUtil = require('../../util/regexp-util/regexp-util')
 const MobileFormModel = require('./mobile-form-model')
 
 const MOBILE_NUMBER = 'mobileNumber'
