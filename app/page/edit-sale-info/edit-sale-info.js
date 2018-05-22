@@ -2,6 +2,8 @@
 const { request } = require('../../util/ajax/ajax')
 const config = require('../../util/ajax/config')
 const toast = require('../../util/toast/toast')
+const RegexpUtil = require('../../util/regexp-util/regexp-util')
+
 Page({
 
 	/**
@@ -48,13 +50,10 @@ Page({
 		let value = e.detail.value
 		let saleInfo = this.data.saleInfo
 		let name = e.currentTarget.dataset.name
-		
+
 		if (name === 'little_left' || name === 'little_right') {
-			let reg = /^\d{0,2}(\.\d{0,4})?$/g
-			if (reg.test(value)) {
-				if (value !== '' && value.substring(0, 1) === '.') {
-					value = ''
-				}
+			if (RegexpUtil.isBenifitNumber(value)) {
+				(value !== '') && (value.substring(0, 1) === '.') && (value = '')
 				value = value.replace(/[^\d.]/g, '')
 				value = value.replace(/\.{2,}/g, '.')
 				value = value.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.')
@@ -63,17 +62,20 @@ Page({
 				}
 				saleInfo[name] = value
 			}
-		}else if (name === 'early_end') {
-			saleInfo[name] = parseInt(value, 10)
+		} else if (name === 'early_end') {
+			value !=='' ? saleInfo[name] = parseInt(value, 10) : saleInfo[name] = ''
         } else {
 			saleInfo[name] = value
         }
-
 		if (value.length > 0) {
 			this.setData({
 				isSubmitDisabled: false,
 				saleInfo: saleInfo,
 				hightlight: false
+			})
+		} else {
+			this.setData({
+				isSubmitDisabled: true
 			})
 		}
 	},
@@ -83,7 +85,7 @@ Page({
 		let saleInfo = this.data.saleInfo
 		let name = e.currentTarget.dataset.name
 		saleInfo[name] = value.join('|')
-		if (value.length > 0) {
+		if (value.length > 0 && saleInfo.early_end.length > 0) {
 			this.setData({
 				isSubmitDisabled: false,
 				saleInfo: saleInfo
@@ -93,7 +95,7 @@ Page({
 
 	onFormSubmit: function(e) {
 		let curValue = this.data.saleInfo
-		if (Number(curValue.little_left) >= Number(curValue.little_right) && curValue.little_left !=='') {
+		if ((curValue.little_left !=='' && Number(curValue.little_left) >= Number(curValue.little_right)) || curValue.little_left ==='' || curValue.little_right === '') {
 			this.setData({
 				warningShowText: true,
 				hightlight: true
@@ -101,11 +103,16 @@ Page({
 			return
 		}
 
+		if (curValue.early_end === '') {
+			return
+		}
+
 		this.setData({
 			isSubmitting: true
 		})
-
-		request(config.NEW_BOND.modNewBondDetail, this.data.saleInfo, true).then((result) => {
+		curValue.little_left = Number(curValue.little_left)
+		curValue.little_right = Number(curValue.little_right)
+		request(config.NEW_BOND.modNewBondDetail, curValue, true).then((result) => {
 			this.setData({
 				isSubmitting: false,
 				isSubmitDisabled: true,
@@ -114,7 +121,7 @@ Page({
 				toast.showToast('提交成功')
 				this.setData({
 					saleInfo: {
-						bond_simple_name: this.data.saleInfo.bond_simple_name,
+						bond_simple_name: curValue.bond_simple_name,
 						little_left: '',
 						little_right: '',
 						early_end: '',

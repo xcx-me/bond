@@ -5,6 +5,7 @@ const config = require('../../util/ajax/config')
 const formConfig = require('./form-config/form-config')
 const converson = require('../../util/converson/converson')
 const AutoCompleteTextInputUtil = require('../../ui/form-viewer-editor/auto-complete-text-input/auto-complete-text-input-util')
+const RegexpUtil = require('../../util/regexp-util/regexp-util')
 
 var _year = new Date().getFullYear()
 var _month = dateTimePicker.withData(new Date().getMonth() + 1)
@@ -115,8 +116,7 @@ Component({
 				this.triggerEvent('changeHighLightState', 'deadline')
 			} else if (e.currentTarget.dataset.inputName === 'issue_total') { // 发行量
 				let val = e.detail.value
-				let reg = /^\d{0,5}(\.\d{0,4})?$/g
-				if (reg.test(val)) {
+				if (RegexpUtil.isIssueTotal(val)) {
 					if (val !== '' && val.substring(0, 1) === '.') {
 						val = ''
 						formData[e.currentTarget.dataset.inputName] = ''
@@ -143,11 +143,9 @@ Component({
 
 		benifitValueChange: function(val, currentDataSet) {
 			let formData = this.data.formData
-			let reg = /^\d{0,2}(\.\d{0,4})?$/g
-			if (reg.test(val)) {
+			if (RegexpUtil.isBenifitNumber(val)) {
 				if (val !== '' && val.substring(0, 1) === '.') {
 					val = ''
-					// formData[currentDataSet] = ''
 				}
 				val = val.replace(/[^\d.]/g, '')
 				val = val.replace(/\.{2,}/g, '.')
@@ -298,9 +296,11 @@ Component({
 			this.triggerEvent('changeValueEvent', formData)
 		},
 
-
 		// 获取债券详情
 		bondDetailsAssociate: function (bondSimpleName) {
+			if (RegexpUtil.isEmoji(bondSimpleName)) {
+				return
+			}
 			request(config.NEW_BOND.associateBond, {bond_simple_name: bondSimpleName}).then((result)=>{
 				let resultData = result.retdata
 				if (Object.keys(resultData).length > 0) {
@@ -353,6 +353,9 @@ Component({
 
 		// 债券简称联想
 		bondSimpleNameAssociate: function (curName) {
+			if (RegexpUtil.isEmoji(curName)) {
+				return
+			}
 			request(config.NEW_BOND.associateBondName, {bond_msg: curName}).then((result) => {
 				let resultData = result.retdata.array
 
