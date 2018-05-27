@@ -134,16 +134,16 @@ module.exports = class UserDetailFormModelCreate extends UserDetailFormModel {
 				return !StringUtil.isNullOrEmpty(value.agencyId)
 			},
 			[this.REAL_NAME]: (value) => {
-				return !RegexpUtil.isEmoji(value)
+				return !RegexpUtil.hasEmoji(value)
 			},
 			[this.QQ_NUMBER]: (value) => {
 				return RegexpUtil.isQQNumber(value)
 			},
 			[this.DEPARTMENT_NAME]: (value) => {
-				return !RegexpUtil.isEmoji(value)
+				return !RegexpUtil.hasEmoji(value)
 			},
 			[this.POSITION]: (value) => {
-				return !RegexpUtil.isEmoji(value)
+				return !RegexpUtil.hasEmoji(value)
 			},
 			[this.DESK_PHONE_NUMBER]: (value) => {
 				return StringUtil.isNullOrEmpty(value) || RegexpUtil.isDeskPhoneNumber(value)
