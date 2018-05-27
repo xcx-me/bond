@@ -298,7 +298,7 @@ Component({
 
 		// 获取债券详情
 		bondDetailsAssociate: function (bondSimpleName) {
-			if (RegexpUtil.isEmoji(bondSimpleName)) {
+			if (RegexpUtil.hasEmoji(bondSimpleName)) {
 				return
 			}
 			request(config.NEW_BOND.associateBond, {bond_simple_name: bondSimpleName}).then((result)=>{
@@ -353,7 +353,7 @@ Component({
 
 		// 债券简称联想
 		bondSimpleNameAssociate: function (curName) {
-			if (RegexpUtil.isEmoji(curName)) {
+			if (RegexpUtil.hasEmoji(curName)) {
 				return
 			}
 			request(config.NEW_BOND.associateBondName, {bond_msg: curName}).then((result) => {
